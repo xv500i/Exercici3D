@@ -59,46 +59,14 @@ void cScene::Draw(cData *Data)
 	glEnd();
 	*/
 	if (drawPlayer) {
-		glPushMatrix();
-			glColor3f(0.0f,0.0f,1.0f);
-			glTranslatef(-entityX,-entityY,-entityZ);
-			glRotatef(angle, 0.0f, 1.0f, 0.0f);
-			GLUquadricObj *q = gluNewQuadric();
-			gluSphere(q, 1,16,16);
-			gluDeleteQuadric(q);
-			glDisable(GL_TEXTURE_2D);
-			glColor3f(1.0f,1.0f,1.0f);
-
-			glLineWidth(3.0f);
-			glBegin(GL_LINES);
-
-			glColor3f(1.0f, 0.0f, 0.0f);
-			glVertex3f(100.0f, 0.0f, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
-
-			glColor3f(0.0f, 1.0f, 0.0f);
-			glVertex3f(0.0f, 100.0f, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
-
-			glColor3f(0.0f, 0.0f, 1.0f);
-			glVertex3f(0.0f, 0.0f, 100.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
-
-			glColor3f(1.0f, 1.0f, 1.0f);
-			glEnd();
-
-		glPopMatrix();
-
-		glEnd();
+		go.render();
 	}
 }
 
 bool cScene::Init()
 {
-	entityX=entityZ=0;
-	entityY = 2.5f;
-	angle = 0;
 	drawPlayer = true;
+	go = MobileGameObject();
 	return true;
 }
 
@@ -106,4 +74,33 @@ bool cScene::drawEntity(bool draw)
 {
 	drawPlayer = draw;
 	return drawPlayer;
+}
+
+void cScene::resolveInput(unsigned char *keys)
+{
+	if (keys['w']) {
+		go.moveForward();
+		//Scene.entityX += cos(Scene.angle * 3.1415 / 180.0f)*0.05;
+		//Scene.entityZ += sin(Scene.angle * 3.1415 / 180.0f)*0.05;
+	} else if (keys['s']) {
+		go.moveBackwards();
+		//Scene.entityX -= cos(Scene.angle * 3.1415 / 180.0f)*0.05;
+		//Scene.entityZ -= sin(Scene.angle * 3.1415 / 180.0f)*0.05;
+	}
+	if (keys['q']) {
+		go.moveLeft();
+		//Scene.entityX += cos((Scene.angle - 90) * 3.1415 / 180.0f)*0.05;
+		//Scene.entityZ += sin((Scene.angle - 90) * 3.1415 / 180.0f)*0.05;
+	} else if (keys['e']) {
+		go.moveRight();
+		//Scene.entityX += cos((Scene.angle + 90) * 3.1415 / 180.0f)*0.05;
+		//Scene.entityZ += sin((Scene.angle + 90) * 3.1415 / 180.0f)*0.05;
+	}
+	if (keys['a']) {
+		go.turnLeft();
+		//Scene.angle -= 0.15;
+	} else if (keys['d']) {
+		go.turnRight();
+		//Scene.angle += 0.15;
+	}
 }

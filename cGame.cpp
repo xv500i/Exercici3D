@@ -29,18 +29,25 @@ bool cGame::Init()
 	if(!res) return false;
 	selectedCamera = 2;
 	Scene.Init();
-	debug = true;
+	debug = false;
 	return res;
 }
 
 bool cGame::Loop()
 {
-	bool res=true;
+	int t1, t2;
 
-	res = Process();
-	if(res) Render();
+	t1 = glutGet(GLUT_ELAPSED_TIME);
 
-	return res;
+	bool b = Process();
+	if (b) Render();
+
+	do {
+		t2 = glutGet(GLUT_ELAPSED_TIME);
+	} while (t2 - t1 < 20);
+
+	if (!b) exit(0);
+	return b;
 }
 
 void cGame::Finalize()
@@ -69,26 +76,7 @@ bool cGame::Process()
 	else if(keys['3']) selectedCamera = 3;
 	else if(keys['4']) selectedCamera = 4;
 	else if(keys['5']) selectedCamera = 5;
-	if (keys['w']) {
-		Scene.entityX += cos(Scene.angle * 3.1415 / 180.0f)*0.05;
-		Scene.entityZ += sin(Scene.angle * 3.1415 / 180.0f)*0.05;
-	} else if (keys['s']) {
-		Scene.entityX -= cos(Scene.angle * 3.1415 / 180.0f)*0.05;
-		Scene.entityZ -= sin(Scene.angle * 3.1415 / 180.0f)*0.05;
-	}
-	if (keys['q']) {
-		Scene.entityX += cos((Scene.angle - 90) * 3.1415 / 180.0f)*0.05;
-		Scene.entityZ += sin((Scene.angle - 90) * 3.1415 / 180.0f)*0.05;
-	} else if (keys['e']) {
-		Scene.entityX += cos((Scene.angle + 90) * 3.1415 / 180.0f)*0.05;
-		Scene.entityZ += sin((Scene.angle + 90) * 3.1415 / 180.0f)*0.05;
-	}
-	if (keys['a']) {
-		Scene.angle -= 0.15;
-	} else if (keys['d']) {
-		Scene.angle += 0.15;
-	}
-	
+	Scene.resolveInput(keys);
 	//Game Logic
 	//...
 
@@ -109,12 +97,14 @@ void cGame::Render()
 	float module = 30.0f;
 	switch (selectedCamera) {
 	case 1:
+		/* FIXME
 		eyex = Scene.entityX;
 		eyey = Scene.entityY/2;
 		eyez = Scene.entityZ;
 		centerx = eyex + 5*cos(Scene.angle * 3.1415f / 180.0f);
 		centery = eyey;
-		centerz = eyez + 5*sin(Scene.angle * 3.1415f / 180.0f);;
+		centerz = eyez + 5*sin(Scene.angle * 3.1415f / 180.0f);
+		*/
 		break;
 	case 2:
 		eyex = +module;

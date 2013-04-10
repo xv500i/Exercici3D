@@ -1,7 +1,7 @@
 #pragma once
 
 #include "cData.h"
-
+#include "MobileGameObject.h"
 #define SCENE_WIDTH		16
 #define SCENE_DEPTH		32
 #define SCENE_HEIGHT	 4
@@ -15,11 +15,8 @@ public:
 	bool Init();
 	bool drawEntity(bool draw);
 	void Draw(cData *Data);
-	float entityX;
-	float entityY;
-	float entityZ;
-	float angle;
+	void resolveInput(unsigned char *keys);
 private:
-	
+	MobileGameObject go;
 	bool drawPlayer;
 };
