@@ -104,3 +104,15 @@ void cScene::resolveInput(unsigned char *keys)
 		//Scene.angle += 0.15;
 	}
 }
+
+void cScene::getFirstPersonParameters(float &eyex, float &eyey, float &eyez, float &centerx, float &centery, float &centerz) const
+{
+	// HARDCODED
+	float marginY = 2.0f;
+	eyex = go.getXPosition();
+	eyey = go.getYPosition() + marginY;
+	eyez = go.getZPosition();
+	centerx = eyex + 5*cos(go.getYAngle() * 3.1415f / 180.0f);
+	centery = eyey;
+	centerz = eyez + 5*sin(go.getYAngle() * 3.1415f / 180.0f);
+}

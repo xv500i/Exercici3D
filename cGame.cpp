@@ -97,6 +97,7 @@ void cGame::Render()
 	float module = 30.0f;
 	switch (selectedCamera) {
 	case 1:
+		Scene.getFirstPersonParameters(eyex,eyey,eyez,centerx,centery,centerz);
 		/* FIXME
 		eyex = Scene.entityX;
 		eyey = Scene.entityY/2;

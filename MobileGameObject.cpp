@@ -41,12 +41,12 @@ void MobileGameObject::moveBackwards()
 
 void MobileGameObject::moveLeft()
 {
-	setXPosition( getXPosition() + velocity*cos((getYAngle() + 90.f) * 3.1415f / 180.0f));
-	setZPosition( getZPosition() + velocity*sin((getYAngle() + 90.f) * 3.1415f / 180.0f));
+	setXPosition( getXPosition() + velocity*cos((getYAngle() - 90.f) * 3.1415f / 180.0f));
+	setZPosition( getZPosition() + velocity*sin((getYAngle() - 90.f) * 3.1415f / 180.0f));
 }
 
 void MobileGameObject::moveRight()
 {
-	setXPosition( getXPosition() + velocity*cos((getYAngle() - 90.f) * 3.1415f / 180.0f));
-	setZPosition( getZPosition() + velocity*sin((getYAngle() - 90.f) * 3.1415f / 180.0f));
+	setXPosition( getXPosition() + velocity*cos((getYAngle() + 90.f) * 3.1415f / 180.0f));
+	setZPosition( getZPosition() + velocity*sin((getYAngle() + 90.f) * 3.1415f / 180.0f));
 }

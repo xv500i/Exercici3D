@@ -16,6 +16,7 @@ public:
 	bool drawEntity(bool draw);
 	void Draw(cData *Data);
 	void resolveInput(unsigned char *keys);
+	void getFirstPersonParameters(float &eyex, float &eyey, float &eyez, float &centerx, float &centery, float &centerz) const;
 private:
 	MobileGameObject go;
 	bool drawPlayer;
