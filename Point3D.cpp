@@ -1,8 +1,8 @@
 #include "Point3D.h"
 
-Point3D::Point3D(void)
+Point3D::Point3D(void) : x(0.0f),y(0.0f),z(0.0f)
 {
-	x = y = z = 0.0f;
+
 }
 
 Point3D::Point3D(float x, float y, float z) : x(x), y(y), z(z)
@@ -30,9 +30,16 @@ float Point3D::getZ() const
 	return z;
 }
 
-Point3D Point3D::operator+(const Point3D &p) const
+Point3D Point3D::operator+=(const Vector3D &p)
 {
-	return Point3D(x+p.x, y+p.y,z+p.z);
+	increment(p.getX(), p.getY(), p.getZ());
+	return *this;
+}
+
+Point3D Point3D::operator-=(const Vector3D &p)
+{
+	increment(-p.getX(), -p.getY(), -p.getZ());
+	return *this;
 }
 
 void Point3D::increment(float ix, float iy, float iz)
