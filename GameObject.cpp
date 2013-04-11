@@ -50,7 +50,7 @@ void GameObject::render() const
 	glPushMatrix();
 		glColor3f(0.0f,0.0f,1.0f);
 		glTranslatef(pos.getX(),pos.getY(),pos.getZ());
-		glRotatef(yAngle, 0.0f, 1.0f, 0.0f);
+		glRotatef(-yAngle, 0.0f, 1.0f, 0.0f);
 		GLUquadricObj *q = gluNewQuadric();
 		gluSphere(q, 1,16,16);
 		gluDeleteQuadric(q);
