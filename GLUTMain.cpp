@@ -5,57 +5,70 @@
 //Delete console
 #pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 
-cGame Game;
+cGame game;
 
-void AppRender()
+
+void appRender()
 {
-	Game.Render();
+	game.render();
 }
-void AppKeyboard(unsigned char key, int x, int y)
+
+void appKeyboard(unsigned char key, int x, int y)
 {
-	Game.ReadKeyboard(key,x,y,true);
+	game.readKeyboard(key, x, y, true);
 }
-void AppKeyboardUp(unsigned char key, int x, int y)
+
+void appKeyboardUp(unsigned char key, int x, int y)
 {
-	Game.ReadKeyboard(key,x,y,false);
+	game.readKeyboard(key, x, y, false);
 }
-void AppSpecialKeys(int key, int x, int y)
+
+void appSpecialKeys(int key, int x, int y)
 {
-	Game.ReadKeyboard(key,x,y,true);
+	game.readKeyboard(key, x, y, true);
 }
-void AppSpecialKeysUp(int key, int x, int y)
+
+void appSpecialKeysUp(int key, int x, int y)
 {
-	Game.ReadKeyboard(key,x,y,false);
+	game.readKeyboard(key, x, y, false);
 }
-void AppMouse(int button, int state, int x, int y)
+
+void appMouseButtons(int button, int state, int x, int y)
 {
-	Game.ReadMouse(button,state,x,y);
+	game.readMouse(button, state, x, y);
 }
-void AppIdle()
+
+void appMousePosition(int x, int y)
 {
-	if(!Game.Loop()) exit(0);
+	game.readMouse(-1, -1, x, y);
+}
+
+void appIdle()
+{
+	if (!game.loop()) exit(0);
 }
 
 void main(int argc, char** argv)
 {
-	int res_x,res_y,pos_x,pos_y;
+	int res_x, res_y, pos_x, pos_y;
 
-	//GLUT initialization
+	// GLUT initialization
 	glutInit(&argc, argv);
 
-	//RGBA with double buffer
+	// RGBA with double buffer
 	glutInitDisplayMode(GLUT_RGBA | GLUT_ALPHA | GLUT_DOUBLE);
 
-	//Create centered window
+	// Create centered window
 	res_x = glutGet(GLUT_SCREEN_WIDTH);
 	res_y = glutGet(GLUT_SCREEN_HEIGHT);
-	pos_x = (res_x>>1)-(SCREEN_WIDTH>>1);
-	pos_y = (res_y>>1)-(SCREEN_HEIGHT>>1);
+	pos_x = (res_x>>1) - (SCREEN_WIDTH>>1);
+	pos_y = (res_y>>1) - (SCREEN_HEIGHT>>1);
 	
-	glutInitWindowPosition(pos_x,pos_y);
-	glutInitWindowSize(SCREEN_WIDTH,SCREEN_HEIGHT);
+	glutInitWindowPosition(pos_x, pos_y);
+	glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	glutCreateWindow("My Awesome 3D Game!");
 
+	// Full Screen
 	/*glutGameModeString("800x600:32");
 	glutEnterGameMode();*/
 
@@ -63,16 +76,18 @@ void main(int argc, char** argv)
 	//glutSetCursor(GLUT_CURSOR_NONE);
 
 	//Register callback functions
-	glutDisplayFunc(AppRender);			
-	glutKeyboardFunc(AppKeyboard);		
-	glutKeyboardUpFunc(AppKeyboardUp);	
-	glutSpecialFunc(AppSpecialKeys);	
-	glutSpecialUpFunc(AppSpecialKeysUp);
-	glutMouseFunc(AppMouse);
-	glutIdleFunc(AppIdle);
+	glutDisplayFunc(appRender);			
+	glutKeyboardFunc(appKeyboard);		
+	glutKeyboardUpFunc(appKeyboardUp);	
+	glutSpecialFunc(appSpecialKeys);	
+	glutSpecialUpFunc(appSpecialKeysUp);
+	glutMouseFunc(appMouseButtons);
+	glutMotionFunc(appMousePosition);
+	glutPassiveMotionFunc(appMousePosition);
+	glutIdleFunc(appIdle);
 
 	//Game initializations
-	Game.Init();
+	game.init();
 
 	//Application loop
 	glutMainLoop();	

@@ -4,7 +4,7 @@
 MobileGameObject::MobileGameObject(void) : GameObject()
 {
 	velocity = 0.5f;
-	turnAnglePerStep = 0.4f;
+	turnAnglePerStep = 1.0f;
 }
 
 

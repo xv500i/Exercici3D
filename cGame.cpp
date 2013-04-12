@@ -5,15 +5,15 @@
 cGame::cGame(void) {}
 cGame::~cGame(void){}
 
-bool cGame::Init()
+bool cGame::init()
 {
 	bool res=true;
 
 	//Graphics initialization
-	glClearColor(0.0f,0.0f,0.0f,0.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(45.0,(float)SCREEN_WIDTH/(float)SCREEN_HEIGHT,0.1,100);
+	gluPerspective(45.0, (float)SCREEN_WIDTH/(float)SCREEN_HEIGHT, 0.1, 100);
 	glMatrixMode(GL_MODELVIEW);
 	
 	glEnable(GL_DEPTH_TEST);
@@ -29,18 +29,18 @@ bool cGame::Init()
 	if(!res) return false;
 	selectedCamera = 2;
 	Scene.Init();
-	debug = false;
+	debug = true;
 	return res;
 }
 
-bool cGame::Loop()
+bool cGame::loop()
 {
 	int t1, t2;
 
 	t1 = glutGet(GLUT_ELAPSED_TIME);
 
-	bool b = Process();
-	if (b) Render();
+	bool b = process();
+	if (b) render();
 
 	do {
 		t2 = glutGet(GLUT_ELAPSED_TIME);
@@ -50,33 +50,37 @@ bool cGame::Loop()
 	return b;
 }
 
-void cGame::Finalize()
+void cGame::finalize()
 {
 }
+
 
 //Input
-void cGame::ReadKeyboard(unsigned char key, int x, int y, bool press)
+void cGame::readKeyboard(unsigned char key, int x, int y, bool press)
 {
-	keys[key] = press;
+	input.setKeyState(key, press);
 }
 
-void cGame::ReadMouse(int button, int state, int x, int y)
+void cGame::readMouse(int button, int state, int x, int y) 
 {
+	if (button == -1) input.setMousePosition(x, y);
+	else input.setMouseButtonState(button, state);
 }
+
 
 //Process
-bool cGame::Process()
+bool cGame::process()
 {
 	bool res=true;
 	
 	//Process Input
-	if(keys[27])	res=false;
-	if(keys['1']) selectedCamera = 1;
-	else if(keys['2']) selectedCamera = 2;
-	else if(keys['3']) selectedCamera = 3;
-	else if(keys['4']) selectedCamera = 4;
-	else if(keys['5']) selectedCamera = 5;
-	Scene.resolveInput(keys);
+	if (input.keyIsDown(27))	res=false;
+	if (input.keyIsDown('1'))	selectedCamera = 1;
+	if (input.keyIsDown('2'))	selectedCamera = 2;
+	if (input.keyIsDown('3'))	selectedCamera = 3;
+	if (input.keyIsDown('4'))	selectedCamera = 4;
+	if (input.keyIsDown('5'))	selectedCamera = 5;
+	Scene.resolveInput(input);
 	//Game Logic
 	//...
 
@@ -84,20 +88,21 @@ bool cGame::Process()
 }
 
 //Output
-void cGame::Render()
+void cGame::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	
-	float eyex, eyey, eyez, centerx, centery, centerz, upx, upy, upz;
-	upx = upz = 0.0f;
-	upy = 1.0f;
-	eyey = 20.0f;
-	centerx = centery = centerz = 0.0f;
+	float eyeX, eyeY, eyeZ;
+	camera.setUpVector(0.0f, 1.0f, 0.0f);
+	camera.setReferencePoint(0.0f, 0.0f, 0.0f);
+
+	eyeY = 20.0f;
 	float module = 30.0f;
 	switch (selectedCamera) {
 	case 1:
-		Scene.getFirstPersonParameters(eyex,eyey,eyez,centerx,centery,centerz);
+		//Scene.getFirstPersonParameters(eyex,eyey,eyez,centerx,centery,centerz);
 		/* FIXME
 		eyex = Scene.entityX;
 		eyey = Scene.entityY/2;
@@ -108,47 +113,24 @@ void cGame::Render()
 		*/
 		break;
 	case 2:
-		eyex = +module;
-		eyez = 0;
+		eyeX = module;
+		eyeZ = 0;
 		break;
 	case 3:
-		eyex = 0;
-		eyez = +module;
+		eyeX = 0;
+		eyeZ = module;
 		break;
 	case 4:
-		eyex = -module;
-		eyez = 0;
-		
+		eyeX = -module;
+		eyeZ = 0;
 		break;
 	case 5:
-		eyex = 0;
-		eyez = -module;
+		eyeX = 0;
+		eyeZ = -module;
 		break;
 	}
-
-	gluLookAt(eyex, eyey, eyez, centerx, centery, centerz, upx, upy, upz);
-
-	if (debug) {
-		glLineWidth(3.0f);
-		glBegin(GL_LINES);
-
-		glColor3f(1.0f, 0.0f, 0.0f);
-		glVertex3f(10000.0f, 0.0f, 0.0f);
-		glVertex3f(0.0f, 0.0f, 0.0f);
-
-		glColor3f(0.0f, 1.0f, 0.0f);
-		glVertex3f(0.0f, 10000.0f, 0.0f);
-		glVertex3f(0.0f, 0.0f, 0.0f);
-
-		glColor3f(0.0f, 0.0f, 1.0f);
-		glVertex3f(0.0f, 0.0f, 10000.0f);
-		glVertex3f(0.0f, 0.0f, 0.0f);
-
-		glColor3f(1.0f, 1.0f, 1.0f);
-
-		glEnd();
-		
-	}
+	camera.setEyePosition(eyeX, eyeY, eyeZ);
+	camera.use();
 
 	Scene.drawEntity(selectedCamera != 1);
 	Scene.Draw(&Data);

@@ -2,6 +2,8 @@
 
 #include "cData.h"
 #include "MobileGameObject.h"
+#include "InputHandler.h"
+
 #define SCENE_WIDTH		16
 #define SCENE_DEPTH		32
 #define SCENE_HEIGHT	 4
@@ -15,7 +17,7 @@ public:
 	bool Init();
 	bool drawEntity(bool draw);
 	void Draw(cData *Data);
-	void resolveInput(unsigned char *keys);
+	void resolveInput(InputHandler &input);
 	void getFirstPersonParameters(float &eyex, float &eyey, float &eyez, float &centerx, float &centery, float &centerz) const;
 private:
 	MobileGameObject go;

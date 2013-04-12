@@ -14,9 +14,32 @@ void cScene::Draw(cData *Data)
 		  tw = SCENE_WIDTH/4.0f,
 		  th = SCENE_HEIGHT/4.0f;
 
-	glEnable(GL_TEXTURE_2D);
 	
-	glBindTexture(GL_TEXTURE_2D,Data->GetID(IMG_WALL));
+	// DRAW SCENE AXIS
+	glPushMatrix();
+		glLineWidth(3.0f);
+		glBegin(GL_LINES);
+			// X Axis --> RED
+			glColor3f(1.0f, 0.0f, 0.0f);
+			glVertex3f(100.0f, 0.0f, 0.0f);
+			glVertex3f(0.0f, 0.0f, 0.0f);
+
+			// Y Axis --> GREEN
+			glColor3f(0.0f, 1.0f, 0.0f);
+			glVertex3f(0.0f, 100.0f, 0.0f);
+			glVertex3f(0.0f, 0.0f, 0.0f);
+
+			// Z Axis --> BLUE
+			glColor3f(0.0f, 0.0f, 1.0f);
+			glVertex3f(0.0f, 0.0f, 100.0f);
+			glVertex3f(0.0f, 0.0f, 0.0f);
+		glEnd();
+	glPopMatrix();
+
+	// DRAW ROOM
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, Data->GetID(IMG_WALL));
 	glBegin(GL_QUADS);
 		// Front Face
 		glTexCoord2f(0.0f, 0.0f); glVertex3f(-w, -h,  d);
@@ -58,6 +81,8 @@ void cScene::Draw(cData *Data)
 		glTexCoord2f(  tw,   td); glVertex3f( w,  h, -d);
 	glEnd();
 	*/
+	
+	// DRAW SPHERE
 	if (drawPlayer) {
 		go.render();
 	}
@@ -76,30 +101,30 @@ bool cScene::drawEntity(bool draw)
 	return drawPlayer;
 }
 
-void cScene::resolveInput(unsigned char *keys)
+void cScene::resolveInput(InputHandler &input)
 {
-	if (keys['w']) {
+	if (input.keyIsDown(input.getKey(MOVE_FORWARD))) {
 		go.moveForward();
 		//Scene.entityX += cos(Scene.angle * 3.1415 / 180.0f)*0.05;
 		//Scene.entityZ += sin(Scene.angle * 3.1415 / 180.0f)*0.05;
-	} else if (keys['s']) {
+	} else if (input.keyIsDown(input.getKey(MOVE_BACKWARD))) {
 		go.moveBackwards();
 		//Scene.entityX -= cos(Scene.angle * 3.1415 / 180.0f)*0.05;
 		//Scene.entityZ -= sin(Scene.angle * 3.1415 / 180.0f)*0.05;
 	}
-	if (keys['q']) {
+	if (input.keyIsDown(input.getKey(MOVE_LEFT))) {
 		go.moveLeft();
 		//Scene.entityX += cos((Scene.angle - 90) * 3.1415 / 180.0f)*0.05;
 		//Scene.entityZ += sin((Scene.angle - 90) * 3.1415 / 180.0f)*0.05;
-	} else if (keys['e']) {
+	} else if (input.keyIsDown(input.getKey(MOVE_RIGHT))) {
 		go.moveRight();
 		//Scene.entityX += cos((Scene.angle + 90) * 3.1415 / 180.0f)*0.05;
 		//Scene.entityZ += sin((Scene.angle + 90) * 3.1415 / 180.0f)*0.05;
 	}
-	if (keys['a']) {
+	if (input.keyIsDown(input.getKey(ROTATE_LEFT))) {
 		go.turnLeft();
 		//Scene.angle -= 0.15;
-	} else if (keys['d']) {
+	} else if (input.keyIsDown(input.getKey(ROTATE_RIGHT))) {
 		go.turnRight();
 		//Scene.angle += 0.15;
 	}
