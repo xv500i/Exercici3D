@@ -1,4 +1,9 @@
-*.vcxproj
-*.vcxproj.user
-*.suo
-*.sdf
+# Compiled Object files
+*
+!*.cpp
+!*.h
+!*.hpp
+!*.png
+!*.txt
+!*.mp3
+!gl/
