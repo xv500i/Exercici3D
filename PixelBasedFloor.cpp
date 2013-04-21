@@ -25,27 +25,31 @@ void PixelBasedFloor::render() const
 	float factor = maxHeight - minHeigth;
 	glBegin(GL_QUADS);
 	for (int i = 0; i < getPixelsHeigth(); i++) {
+		float auxX = initialX;
 		for (int j = 0; j < getPixelsWidth(); j++) {
+			if ((j+i)%2 == 0) glColor3f(1.0f, 0.0f, 0.0f);
+			else glColor3f(0.0f, 1.0f, 0.0f);
 			// FIXME textura
-			glVertex3f(initialX, points[i][j]*factor, initialZ);
-			glVertex3f(initialX+distanceBetweenPixels, points[i][j+1]*factor, initialZ);
-			glVertex3f(initialX+distanceBetweenPixels, points[i+1][j+1]*factor, initialZ+distanceBetweenPixels);
-			glVertex3f(initialX, points[i+1][j]*factor, initialZ+distanceBetweenPixels);
-			initialX += distanceBetweenPixels;
-			initialZ += distanceBetweenPixels;
+			glVertex3f(auxX, points[i][j]*factor, initialZ);
+			glVertex3f(auxX+distanceBetweenPixels, points[i][j+1]*factor, initialZ);
+			glVertex3f(auxX+distanceBetweenPixels, points[i+1][j+1]*factor, initialZ+distanceBetweenPixels);
+			glVertex3f(auxX, points[i+1][j]*factor, initialZ+distanceBetweenPixels);
+			auxX += distanceBetweenPixels;
+			
 		}
+		initialZ += distanceBetweenPixels;
 	}
 	glEnd();
 }
 
 int PixelBasedFloor::getPixelsWidth() const
 {
-	return (points.size() > 0 ? points[0].size() : 0);
+	return (points.size() > 0 ? points[0].size()-1 : 0);
 }
 	
 int PixelBasedFloor::getPixelsHeigth() const
 {
-	return points.size();
+	return points.size()-1;
 }
 
 float PixelBasedFloor::getDistanceBetweenPixels() const

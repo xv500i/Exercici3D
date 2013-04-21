@@ -134,7 +134,7 @@ void cGame::render()
 	camera.use();
 
 	Scene.drawEntity(selectedCamera != 1);
-	Scene.Draw(&Data);
-
+	//Scene.Draw(&Data);
+	pbf->render();
 	glutSwapBuffers();
 }
