@@ -1,0 +1,15 @@
+#ifndef GAMESTATE_H
+#define GAMESTATE_H
+
+enum GameState {
+	PLAYING, 
+	MAIN_MENU, 
+	PAUSE_MENU, 
+	GAMEOVER_MENU, 
+	INSTRUCTIONS_MENU,
+	NEXT_LEVEL_MENU,
+	CONGRATS_MENU,
+	EXIT
+};
+
+#endif
