@@ -2,13 +2,14 @@
 #include "Globals.h"
 #include <cmath>
 
+
 cGame::cGame(void) {}
 cGame::~cGame(void){}
 
 bool cGame::init()
 {
 	bool res=true;
-
+	pbf = new PixelBasedFloor("mapa.png", 0.0f, 0.0f);
 	//Graphics initialization
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glMatrixMode(GL_PROJECTION);

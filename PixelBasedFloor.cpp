@@ -31,6 +31,8 @@ void PixelBasedFloor::render() const
 			glVertex3f(initialX+distanceBetweenPixels, points[i][j+1]*factor, initialZ);
 			glVertex3f(initialX+distanceBetweenPixels, points[i+1][j+1]*factor, initialZ+distanceBetweenPixels);
 			glVertex3f(initialX, points[i+1][j]*factor, initialZ+distanceBetweenPixels);
+			initialX += distanceBetweenPixels;
+			initialZ += distanceBetweenPixels;
 		}
 	}
 	glEnd();
