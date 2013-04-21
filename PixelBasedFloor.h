@@ -6,7 +6,7 @@ class PixelBasedFloor
 {
 public:
 	PixelBasedFloor(void);
-	PixelBasedFloor(char *filename, float centerX, float centerZ, float distanceBetweenPixels = 1.0f, float maxHeight = 5.0f, float minHeigth = 0.0f);
+	PixelBasedFloor(char *filename, float centerX, float centerZ, float distanceBetweenPixels = 2.0f, float maxHeight = 2.0f, float minHeigth = 0.0f);
 	~PixelBasedFloor(void);
 	void render() const;
 	int getPixelsWidth() const;

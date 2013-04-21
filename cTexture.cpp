@@ -2,6 +2,7 @@
 #include "cTexture.h"
 #include "corona.h"
 #include "Globals.h"
+#include <random>
 
 cTexture::cTexture(void) {}
 cTexture::~cTexture(void){}
@@ -84,6 +85,7 @@ bool cTexture::getMapPixelsHeight(char *filename, std::vector< std::vector<float
 	width  = img->getWidth();
 	height = img->getHeight();
 
+	srand (3218551);
 	pixels = std::vector< std::vector<float> >(height, std::vector<float>(width));
 	byte *p = (byte*) img->getPixels();
 	for (int i = 0; i < height; i++) {
@@ -95,7 +97,7 @@ bool cTexture::getMapPixelsHeight(char *filename, std::vector< std::vector<float
 			if (components == 4) p++;
 			float maxValue = 256;
 			float value = (red/maxValue)/3 + (green/maxValue)/3 + (blue/maxValue)/3;
-			pixels[i][j] = value;
+			pixels[i][j] = ((float) rand()) / (float) RAND_MAX; // BETWEEN 0 AND 1
 		}
 	}
 	return true;
