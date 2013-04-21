@@ -61,7 +61,7 @@ void cTexture::GetSize(int *w,int *h)
 	*h = height;
 }
 
-bool cTexture::getMapPixelsHeight(char *filename, std::vector< std::vector<float> > &pixels, int type = GL_RGB)
+bool cTexture::getMapPixelsHeight(char *filename, std::vector< std::vector<float> > &pixels, int type)
 {
 	corona::Image* img;
 	int components;
@@ -86,8 +86,8 @@ bool cTexture::getMapPixelsHeight(char *filename, std::vector< std::vector<float
 
 	pixels = std::vector< std::vector<float> >(height, std::vector<float>(width));
 	byte *p = (byte*) img->getPixels();
-	for (unsigned int i = 0; i < height; i++) {
-		for (unsigned int j = 0; j < width; j++) {
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
 			unsigned int red = (unsigned int) *p++;
 			unsigned int green = (unsigned int) *p++;
 			unsigned int blue = (unsigned int) *p++;
@@ -98,5 +98,5 @@ bool cTexture::getMapPixelsHeight(char *filename, std::vector< std::vector<float
 			pixels[i][j] = value;
 		}
 	}
-
+	return true;
 }
