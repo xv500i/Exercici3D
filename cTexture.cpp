@@ -97,7 +97,7 @@ bool cTexture::getMapPixelsHeight(char *filename, std::vector< std::vector<float
 			if (components == 4) p++;
 			float maxValue = 256;
 			float value = (red/maxValue)/3 + (green/maxValue)/3 + (blue/maxValue)/3;
-			pixels[i][j] = ((float) rand()) / (float) RAND_MAX; // BETWEEN 0 AND 1
+			pixels[i][j] = value;//((float) rand()) / (float) RAND_MAX; // BETWEEN 0 AND 1
 		}
 	}
 	return true;

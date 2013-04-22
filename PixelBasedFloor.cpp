@@ -9,7 +9,7 @@ PixelBasedFloor::PixelBasedFloor(char *filename, float centerX, float centerZ, f
 	: centerX(centerX), centerZ(centerZ), distanceBetweenPixels(distanceBetweenPixels), maxHeight(maxHeight), minHeigth(minHeigth)
 {
 	cTexture *tex = new cTexture();
-	tex->getMapPixelsHeight(filename, points, GL_RGB);
+	tex->getMapPixelsHeight(filename, points, GL_RGBA);
 	delete tex;
 }
 
