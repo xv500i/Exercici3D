@@ -9,7 +9,7 @@ cGame::~cGame(void){}
 bool cGame::init()
 {
 	bool res=true;
-	pbf = new PixelBasedFloor("mapa.png", 0.0f, 0.0f);
+	
 	//Graphics initialization
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glMatrixMode(GL_PROJECTION);
@@ -81,7 +81,7 @@ bool cGame::process()
 	if (input.keyIsDown('3'))	selectedCamera = 3;
 	if (input.keyIsDown('4'))	selectedCamera = 4;
 	if (input.keyIsDown('5'))	selectedCamera = 5;
-	Scene.resolveInput(input);
+	Scene.update(input);
 	//Game Logic
 	//...
 
@@ -134,7 +134,7 @@ void cGame::render()
 	camera.use();
 
 	Scene.drawEntity(selectedCamera != 1);
-	//Scene.Draw(&Data);
-	pbf->render();
+	Scene.Draw(&Data);
+	
 	glutSwapBuffers();
 }

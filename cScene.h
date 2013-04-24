@@ -3,6 +3,7 @@
 #include "cData.h"
 #include "MobileGameObject.h"
 #include "InputHandler.h"
+#include "PixelBasedFloor.h"
 
 #define SCENE_WIDTH		16
 #define SCENE_DEPTH		32
@@ -17,9 +18,10 @@ public:
 	bool Init();
 	bool drawEntity(bool draw);
 	void Draw(cData *Data);
-	void resolveInput(InputHandler &input);
+	void update(InputHandler &input);
 	void getFirstPersonParameters(float &eyex, float &eyey, float &eyez, float &centerx, float &centery, float &centerz) const;
 private:
 	MobileGameObject go;
 	bool drawPlayer;
+	PixelBasedFloor *pbf;
 };

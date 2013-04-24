@@ -1,5 +1,6 @@
 #include "PixelBasedFloor.h"
 #include "cTexture.h"
+#include <iostream>
 
 PixelBasedFloor::PixelBasedFloor(void)
 {
@@ -20,9 +21,12 @@ PixelBasedFloor::~PixelBasedFloor(void)
 void PixelBasedFloor::render() const
 {
 	//TODO
-	float initialZ = -(distanceBetweenPixels * ( (float)getPixelsWidth() / 2));
-	float initialX = -(distanceBetweenPixels * ( (float)getPixelsHeigth() / 2));
+	float initialX = -(distanceBetweenPixels * ( (float)getPixelsWidth() / 2));
+	float initialZ = -(distanceBetweenPixels * ( (float)getPixelsHeigth() / 2));
 	float factor = maxHeight - minHeigth;
+	glPushMatrix();
+	glRotatef(90.0, 0.0f, 1.0f, 0.0f);
+	glScalef(-1.0f, 1.0f, 1.0f);
 	glBegin(GL_QUADS);
 	for (int i = 0; i < getPixelsHeigth(); i++) {
 		float auxX = initialX;
@@ -40,6 +44,7 @@ void PixelBasedFloor::render() const
 		initialZ += distanceBetweenPixels;
 	}
 	glEnd();
+	glPopMatrix();
 }
 
 int PixelBasedFloor::getPixelsWidth() const
@@ -59,6 +64,26 @@ float PixelBasedFloor::getDistanceBetweenPixels() const
 
 float PixelBasedFloor::getHeightAt(float x, float z)
 {
-	// FIXME
-	return 0.0f;
+	float fx = x/distanceBetweenPixels + (points.size()/2);
+	float fz = z/distanceBetweenPixels + (points[0].size()/2);
+	unsigned int roundedX = (unsigned int)fx;
+	unsigned int roundedZ = (unsigned int)fz;
+	unsigned int i = max( min (roundedX , points.size()-1), 0);
+	unsigned int j = max( min (roundedZ , points[0].size()-1), 0);
+	float factor =  (maxHeight - minHeigth);
+	float res = minHeigth + points[i][j] * factor;
+	// interpolar
+	//x
+	if (i < points.size() - 1) {
+		float decimalX = fx - roundedX;
+		float heigthDelta = (points[i+1][j] - points[i][j])*factor;
+		res += heigthDelta * decimalX;
+	}
+	//y
+	if (j < points[0].size() - 1) {
+		float decimalZ = fz - roundedZ;
+		float heigthDelta = (points[i][j+1] - points[i][j])*factor;
+		res += heigthDelta * decimalZ;
+	}
+	return res;
 }

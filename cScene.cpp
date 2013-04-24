@@ -1,5 +1,6 @@
 #include "cScene.h"
 #include "Globals.h"
+#include <iostream>
 
 cScene::cScene(void) {}
 cScene::~cScene(void){}
@@ -35,7 +36,7 @@ void cScene::Draw(cData *Data)
 			glVertex3f(0.0f, 0.0f, 0.0f);
 		glEnd();
 	glPopMatrix();
-
+	/*
 	// DRAW ROOM
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glEnable(GL_TEXTURE_2D);
@@ -71,6 +72,7 @@ void cScene::Draw(cData *Data)
 		glTexCoord2f(0.0f, 0.0f); glVertex3f( w, -h,  d);
 		glTexCoord2f(  tw, 0.0f); glVertex3f(-w, -h,  d);
 	glEnd();
+	*/
 	/*
 	glBindTexture(GL_TEXTURE_2D,Data->GetID(IMG_ROOF));
 	glBegin(GL_QUADS);
@@ -81,7 +83,7 @@ void cScene::Draw(cData *Data)
 		glTexCoord2f(  tw,   td); glVertex3f( w,  h, -d);
 	glEnd();
 	*/
-	
+	pbf->render();
 	// DRAW SPHERE
 	if (drawPlayer) {
 		go.render();
@@ -92,6 +94,7 @@ bool cScene::Init()
 {
 	drawPlayer = true;
 	go = MobileGameObject();
+	pbf = new PixelBasedFloor("mapa.png", 0.0f, 0.0f, 0.20f);
 	return true;
 }
 
@@ -101,7 +104,7 @@ bool cScene::drawEntity(bool draw)
 	return drawPlayer;
 }
 
-void cScene::resolveInput(InputHandler &input)
+void cScene::update(InputHandler &input)
 {
 	if (input.keyIsDown(input.getKey(MOVE_FORWARD))) {
 		go.moveForward();
@@ -128,6 +131,8 @@ void cScene::resolveInput(InputHandler &input)
 		go.turnRight();
 		//Scene.angle += 0.15;
 	}
+	float test = pbf->getHeightAt(go.getXPosition(), go.getZPosition());
+	go.setYPosition(test);
 }
 
 void cScene::getFirstPersonParameters(float &eyex, float &eyey, float &eyez, float &centerx, float &centery, float &centerz) const

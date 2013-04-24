@@ -4,7 +4,6 @@
 #include "cData.h"
 #include "InputHandler.h"
 #include "Camera.h"
-#include "PixelBasedFloor.h"
 
 #define SCREEN_WIDTH	800
 #define SCREEN_HEIGHT	600
@@ -18,7 +17,7 @@ private:
 	cData Data;
 	bool debug;
 	int selectedCamera;
-	PixelBasedFloor *pbf;
+	
 
 public:
 	cGame(void);
