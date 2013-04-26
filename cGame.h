@@ -4,6 +4,8 @@
 #include "cData.h"
 #include "InputHandler.h"
 #include "Camera.h"
+#include "GameState.h"
+#include "GameMenu.h"
 
 #define SCREEN_WIDTH	800
 #define SCREEN_HEIGHT	600
@@ -15,9 +17,19 @@ private:
 	Camera camera;
 	cScene Scene;
 	cData Data;
+	GameData dataBona;			/* Game data */
 	bool debug;
 	int selectedCamera;
 	
+	GameState gameState;	/* Game state */
+
+	/* Game menus */
+	GameMenu mainMenu;
+	GameMenu instructionsMenu;
+	GameMenu pauseMenu;
+	GameMenu gameOverMenu;
+	GameMenu congratsMenu;
+	GameMenu nextLevelMenu;
 
 public:
 	cGame(void);
@@ -33,4 +45,5 @@ public:
 	bool process();
 	//Output
 	void render();
+	void encapsulateDrawing();
 };

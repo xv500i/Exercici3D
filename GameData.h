@@ -41,7 +41,7 @@ public:
 	const static int GAMEOVER_INDEX = 3;
 	const static int QUIT_INDEX = 4;
 	const static int START_INDEX = 5;
-	const static int HELP_INDEX = 6;
+	const static int HELP_TEX_INDEX = 6;
 	const static int RESTART_INDEX = 7;
 	const static int RETURN_INDEX = 8;
 	const static int CURSOR_INDEX = 9;

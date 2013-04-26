@@ -68,8 +68,9 @@ void GameMenu::render(GameData *data)
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	// FIXME glOrtho(0, OutZone::GAME_WIDTH, 0, OutZone::GAME_HEIGHT, -3.0f, 1.0f);
+	glOrtho(0, 800, 0, 600, -3.0f, 1.0f);
 	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 	int tex;
 	switch(type) {
 	case 'm':
@@ -112,7 +113,7 @@ void GameMenu::render(GameData *data)
 			tex = GameData::START_INDEX;
 			break;
 		case INSTRUCTIONS:
-			tex = GameData::HELP_INDEX;
+			tex = GameData::HELP_TEX_INDEX;
 			break;
 		case NEXT_LEVEL:
 			tex = GameData::NEXT_LEVEL_INDEX;
