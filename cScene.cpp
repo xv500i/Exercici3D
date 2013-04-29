@@ -142,7 +142,9 @@ void cScene::update(InputHandler &input)
 		go.turnRight();
 		//Scene.angle += 0.15;
 	}
+	go.update();
 	float test = pbf->getHeightAt(go.getXPosition(), go.getZPosition());
+	// FIXME I'M FAMOUS
 	go.setYPosition(test);
 }
 

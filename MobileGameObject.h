@@ -1,5 +1,6 @@
 #pragma once
 #include "gameobject.h"
+#include "Vector3D.h"
 class MobileGameObject :
 	public GameObject
 {
@@ -14,7 +15,11 @@ public:
 	void turnLeft();
 	void turnRight();
 private:
-	float velocity;
+	float maxAcceleration;
+	float friction;
+	float maxVelocity;
+	Vector3D velocity;
+	Vector3D acceleration;
 	float turnAnglePerStep;
 };
 

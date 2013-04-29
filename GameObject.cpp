@@ -50,7 +50,8 @@ void GameObject::render() const
 	glPushMatrix();
 		glDisable(GL_TEXTURE_2D);
 		glColor3f(1.0f,1.0f,1.0f);
-		glTranslatef(pos.getX(),pos.getY(),pos.getZ());
+		// FIXME HARDCODED : radius
+		glTranslatef(pos.getX(),pos.getY() + 1.0f,pos.getZ());
 		glRotatef(-yAngle, 0.0f, 1.0f, 0.0f);
 		GLUquadricObj *q = gluNewQuadric();
 		gluSphere(q, 1,16,16);
