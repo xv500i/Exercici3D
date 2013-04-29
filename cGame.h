@@ -1,7 +1,7 @@
 #pragma once
 
 #include "cScene.h"
-#include "cData.h"
+//#include "cData.h"
 #include "InputHandler.h"
 #include "Camera.h"
 #include "GameState.h"
@@ -16,7 +16,7 @@ private:
 	InputHandler input;
 	Camera camera;
 	cScene Scene;
-	cData Data;
+	//cData Data;
 	GameData dataBona;			/* Game data */
 	bool debug;
 	int selectedCamera;

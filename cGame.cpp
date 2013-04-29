@@ -22,14 +22,14 @@ bool cGame::init()
 	glEnable(GL_ALPHA_TEST);
 
 	//Scene initialization
+	/*
 	res = Data.LoadImage(IMG_WALL,"wall.png",GL_RGBA);
 	if(!res) return false;
 	res = Data.LoadImage(IMG_FLOOR,"floor.png",GL_RGBA);
 	if(!res) return false;
 	res = Data.LoadImage(IMG_ROOF,"roof.png",GL_RGBA);
 	if(!res) return false;
-	selectedCamera = 2;
-
+	*/
 	if (!dataBona.loadTextures()) return false;
 	if (!dataBona.loadTileSheets()) return false;
 	if (!dataBona.loadSprites()) return false;
@@ -44,7 +44,7 @@ bool cGame::init()
 	congratsMenu.createCongrats();
 	nextLevelMenu.createLevelCompleted();
 	debug = true;
-
+	selectedCamera = 2;
 	dataBona.playSound(GameData::INTRO_THEME_INDEX);
 	return res;
 }
@@ -289,5 +289,6 @@ void cGame::encapsulateDrawing()
 	camera.use();
 
 	Scene.drawEntity(selectedCamera != 1);
-	Scene.Draw(&Data);
+	Scene.render(dataBona);
+	//Scene.Draw(&Data);
 }

@@ -5,6 +5,7 @@
 cScene::cScene(void) {}
 cScene::~cScene(void){}
 
+/*
 void cScene::Draw(cData *Data)
 {
 	float d  = SCENE_DEPTH/2.0f,
@@ -83,6 +84,16 @@ void cScene::Draw(cData *Data)
 		glTexCoord2f(  tw,   td); glVertex3f( w,  h, -d);
 	glEnd();
 	*/
+/*
+	pbf->render();
+	// DRAW SPHERE
+	if (drawPlayer) {
+		go.render();
+	}
+}
+*/
+void cScene::render(GameData &gd)
+{
 	pbf->render();
 	// DRAW SPHERE
 	if (drawPlayer) {

@@ -33,11 +33,13 @@ bool GameData::loadTextures()
 /* Tile Sheets */
 bool GameData::loadTileSheets()
 {
+	/*
 	const char* filenames[NUM_TILESHEETS] = {"Level1Tileset", "Level2Tileset", "Level3Tileset"};
 	for (unsigned int i = 0; i < tileSheets.size(); i++) {
 		bool b = tileSheets[i].load(filenames[i], TILESHEET_EXT);
 		if (!b) return false;
 	}
+	*/
 	return true;
 }
 
@@ -75,11 +77,13 @@ void GameData::getTileSheetTileOffset(int tileSheetIndex, float *offsetX, float 
 /* Sprites */
 bool GameData::loadSprites()
 {
+	/*
 	const char* filenames[NUM_SPRITES] = {"Player1", "Player2", "Fire", "Fire2", "Alien1", "Bullet", "LifeHUD", "SingleShotWeapon", "ThreeShotWeapon", "FiveShotWeapon", "Flamethrower", "FirstAidKit", "WeaponHUD", "Alien2", "Alien3", "Spider1", "Spider2", "Explosion", "boss", "tentacle_piece", "tentacle_base", "tentacle_weapon", "Victory", "DeathWall", "BulletExplosion"};
 	for (unsigned int i = 0; i < sprites.size(); i++) {
 		bool b = sprites[i].load(filenames[i], SPRITE_EXT);
 		if (!b) return false;
 	}
+	*/
 	return true;
 }
 
