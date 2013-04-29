@@ -14,7 +14,15 @@ public:
 	void moveRight();
 	void turnLeft();
 	void turnRight();
+	bool jump();
+	void floorReached();
+	void render() const;
+	void clearYVelocity();
 private:
+	float gravity;
+	bool footOnGround;
+	float jumpAcceleration;
+	float jumpImpulse;
 	float maxAcceleration;
 	float friction;
 	float maxVelocity;

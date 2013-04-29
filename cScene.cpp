@@ -142,10 +142,22 @@ void cScene::update(InputHandler &input)
 		go.turnRight();
 		//Scene.angle += 0.15;
 	}
+	// HARDCODED arreglar input
+	if (input.keyIsDown(' ')) {
+		go.jump();
+	}
 	go.update();
 	float test = pbf->getHeightAt(go.getXPosition(), go.getZPosition());
 	// FIXME I'M FAMOUS
-	go.setYPosition(test);
+	if (test >= go.getYPosition() ) {
+		// FOOT ON GROUND
+		go.floorReached();
+		go.clearYVelocity();
+	} else {
+		// FLYING FREE
+		
+	}
+	go.setYPosition( max( test, go.getYPosition() ));
 }
 
 void cScene::getFirstPersonParameters(float &eyex, float &eyey, float &eyez, float &centerx, float &centery, float &centerz) const

@@ -17,6 +17,8 @@ public:
 	void render() const;
 	float getYAngle() const;
 	void setYAngle(float newYAngle);
+	bool getDrawAxis() const;
+	void setDrawAxis(bool b);
 private:
 	static bool drawAxis;
 	Point3D pos;

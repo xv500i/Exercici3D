@@ -99,3 +99,13 @@ void GameObject::setZPosition(float v)
 {
 	pos.setZ(v);
 }
+
+bool GameObject::getDrawAxis() const
+{
+	return drawAxis;
+}
+
+void GameObject::setDrawAxis(bool b)
+{
+	drawAxis = b;
+}
