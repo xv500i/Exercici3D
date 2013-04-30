@@ -15,6 +15,7 @@ public:
 	void setY(float v);
 	void setZ(float v);
 	void increment(float ix, float iy, float iz);
+	float distanceTo(const Point3D &p) const;
 private:
 	float x;
 	float y;

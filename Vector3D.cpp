@@ -74,10 +74,9 @@ Vector3D Vector3D::rotate(float alfa, float beta)
 	return Vector3D();
 }
 
-Vector3D Vector3D::vectorialProduct(const Vector3D &v) const
+Vector3D& Vector3D::vectorialProduct(const Vector3D &v) const
 {
-	//FIXME
-	return Vector3D();
+	return Vector3D( y*v.z - z*v.y, z*v.x - x*v.z, x*v.y - y*v.x);
 }
 
 float Vector3D::getX() const

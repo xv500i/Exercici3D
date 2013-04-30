@@ -1,4 +1,6 @@
 #include "Point3D.h"
+#include "Vector3D.h"
+#include <cmath>
 
 Point3D::Point3D(void) : x(0.0f),y(0.0f),z(0.0f)
 {
@@ -62,4 +64,10 @@ void Point3D::setY(float v)
 void Point3D::setZ(float v)
 {
 	z = v;
+}
+
+float Point3D::distanceTo(const Point3D &p) const
+{
+	Vector3D aux = Vector3D(x-p.x, y-p.y, z-p.z);
+	return aux.getModule();
 }

@@ -8,6 +8,7 @@ GameObject::GameObject(void)
 	pos = Point3D();
 	yAngle = 0.0f;
 	movementState = STATIC;
+	bc = new BoundingCilinder(0.0f, 0.0f, 0.0f, 2.0f, 1.0f);
 }
 
 
@@ -51,10 +52,12 @@ void GameObject::render() const
 		glDisable(GL_TEXTURE_2D);
 		glColor3f(1.0f,1.0f,1.0f);
 		// FIXME HARDCODED : radius
+
 		glTranslatef(pos.getX(),pos.getY() + 1.0f,pos.getZ());
 		glRotatef(-yAngle, 0.0f, 1.0f, 0.0f);
 		GLUquadricObj *q = gluNewQuadric();
 		gluSphere(q, 1,16,16);
+
 		gluDeleteQuadric(q);
 		glColor3f(1.0f,1.0f,1.0f);
 
@@ -78,6 +81,7 @@ void GameObject::render() const
 			glEnd();
 		}
 	glPopMatrix();
+	glEnable(GL_TEXTURE_2D);
 }
 
 void GameObject::setYAngle(float newYAngle)
@@ -87,16 +91,19 @@ void GameObject::setYAngle(float newYAngle)
 
 void GameObject::setXPosition(float v)
 {
+	bc->setCenterX(v);
 	pos.setX(v);
 }
 
 void GameObject::setYPosition(float v)
 {
+	bc->setCenterY(v);
 	pos.setY(v);
 }
 
 void GameObject::setZPosition(float v)
 {
+	bc->setCenterZ(v);
 	pos.setZ(v);
 }
 
@@ -108,4 +115,20 @@ bool GameObject::getDrawAxis() const
 void GameObject::setDrawAxis(bool b)
 {
 	drawAxis = b;
+}
+
+void GameObject::renderBoundingCilinder() const
+{
+	GLUquadricObj *cylinder = gluNewQuadric();
+	
+	glColor3f(1.0f,1.0f,1.0f);
+	glPushMatrix();
+	glTranslatef(bc->getX() ,bc->getY(), bc->getZ());
+	glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
+	// FIXME perque no trenqui la esfera
+	gluQuadricDrawStyle(cylinder, GLU_LINE);
+	gluCylinder(cylinder, bc->getRadius(), bc->getRadius(), bc->getHeight(), 8, 2);
+	glPopMatrix();
+	gluDeleteQuadric(cylinder);
+
 }

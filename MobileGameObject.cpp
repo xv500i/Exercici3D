@@ -5,7 +5,7 @@
 MobileGameObject::MobileGameObject(void) : GameObject()
 {
 	maxVelocity = 0.9f;
-	maxAcceleration = 0.1f;
+	maxAcceleration = 0.05f;
 	friction = 0.95f;
 	turnAnglePerStep = 5.0f;
 	velocity = Vector3D();
@@ -117,8 +117,9 @@ void MobileGameObject::floorReached()
 
 void MobileGameObject::render() const
 {
+	glDisable(GL_TEXTURE_2D);
 	glPushMatrix();
-		glDisable(GL_TEXTURE_2D);
+		
 		if (footOnGround) {
 			glColor3f(0.0f,1.0f,0.0f);
 		} else {
@@ -128,11 +129,16 @@ void MobileGameObject::render() const
 		glTranslatef(getXPosition(),getYPosition() + 1.0f,getZPosition());
 		glRotatef(-getYAngle(), 0.0f, 1.0f, 0.0f);
 		GLUquadricObj *q = gluNewQuadric();
-		gluSphere(q, 1,16,16);
+		gluSphere(q, 1.0f,16,16);
 		gluDeleteQuadric(q);
+		
+	glPopMatrix();
 		glColor3f(1.0f,1.0f,1.0f);
-
 		if (getDrawAxis()) {
+
+			glPushMatrix();
+			glTranslatef(getXPosition(), getYPosition(), getZPosition());
+			glRotatef(-getYAngle(), 0.0f, 1.0f, 0.0f);
 			glLineWidth(3.0f);
 			glBegin(GL_LINES);
 
@@ -150,8 +156,11 @@ void MobileGameObject::render() const
 
 			glColor3f(1.0f, 1.0f, 1.0f);
 			glEnd();
+			glPopMatrix();
 		}
-	glPopMatrix();
+	
+	renderBoundingCilinder();
+	glEnable(GL_TEXTURE_2D);
 }
 
 void MobileGameObject::clearYVelocity()

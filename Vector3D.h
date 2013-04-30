@@ -14,7 +14,7 @@ public:
 	Vector3D operator/=(float factor);
 	Vector3D normalize();
 	Vector3D rotate(float alfa, float beta);
-	Vector3D vectorialProduct(const Vector3D &v) const;
+	Vector3D& vectorialProduct(const Vector3D &v) const;
 	float getX() const;
 	float getY() const;
 	float getZ() const;

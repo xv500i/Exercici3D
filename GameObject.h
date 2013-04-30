@@ -1,5 +1,6 @@
 #pragma once
 #include "MovementState.h"
+#include "BoundingCilinder.h"
 #include "Point3D.h"
 class GameObject
 {
@@ -19,10 +20,12 @@ public:
 	void setYAngle(float newYAngle);
 	bool getDrawAxis() const;
 	void setDrawAxis(bool b);
+	void renderBoundingCilinder() const;
 private:
 	static bool drawAxis;
 	Point3D pos;
 	float yAngle;
 	MovementState movementState;
+	BoundingCilinder *bc;
 };
 

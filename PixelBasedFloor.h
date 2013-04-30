@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "Vector3D.h"
 
 class PixelBasedFloor
 {
@@ -13,6 +14,7 @@ public:
 	int getPixelsHeigth() const;
 	float getDistanceBetweenPixels() const;
 	float getHeightAt(float x, float z);
+	void getPerpendicularVector(Vector3D &v, float x, float y);
 private:
 	std::vector< std::vector<float> > points;
 	float distanceBetweenPixels;

@@ -20,6 +20,7 @@ PixelBasedFloor::~PixelBasedFloor(void)
 
 void PixelBasedFloor::render() const
 {
+	glDisable(GL_TEXTURE_2D);
 	//TODO
 	float initialX = -(distanceBetweenPixels * ( (float)getPixelsWidth() / 2));
 	float initialZ = -(distanceBetweenPixels * ( (float)getPixelsHeigth() / 2));
@@ -45,6 +46,7 @@ void PixelBasedFloor::render() const
 	}
 	glEnd();
 	glPopMatrix();
+	glEnable(GL_TEXTURE_2D);
 }
 
 int PixelBasedFloor::getPixelsWidth() const
@@ -86,4 +88,22 @@ float PixelBasedFloor::getHeightAt(float x, float z)
 		res += heigthDelta * decimalZ;
 	}
 	return res;
+}
+
+void PixelBasedFloor::getPerpendicularVector(Vector3D &v, float x, float y)
+{
+	float fx = x/distanceBetweenPixels + (points.size()/2);
+	float fz = z/distanceBetweenPixels + (points[0].size()/2);
+	unsigned int roundedX = (unsigned int)fx;
+	unsigned int roundedZ = (unsigned int)fz;
+	unsigned int i = max( min (roundedX , points.size()-1), 0);
+	unsigned int j = max( min (roundedZ , points[0].size()-1), 0);
+	v = Vector3D();
+	if (i < points.size() - 1) {
+		
+	}
+	//y
+	if (j < points[0].size() - 1) {
+		
+	}
 }
