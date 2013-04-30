@@ -108,9 +108,9 @@ bool cScene::Init()
 	pbf = new PixelBasedFloor("mapa.png", 0.0f, 0.0f, 0.20f);
 
 	/* TEST VECTOR */
-	Vector3D v = Vector3D(1,0,0);
-	Vector3D u = Vector3D(0,1,1);
-	Vector3D *w = v.vectorialProduct(u);
+	//Vector3D v = Vector3D(1,-2,2);
+	//Vector3D u = Vector3D(-4,2,-2);
+	//Vector3D *w = v.vectorialProduct(u);
 
 	return true;
 }
