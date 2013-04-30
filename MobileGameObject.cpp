@@ -4,9 +4,9 @@
 
 MobileGameObject::MobileGameObject(void) : GameObject()
 {
-	maxVelocity = 0.9f;
+	maxVelocity = 0.5f;
 	maxAcceleration = 0.05f;
-	friction = 0.95f;
+	friction = 0.98f;
 	turnAnglePerStep = 5.0f;
 	velocity = Vector3D();
 	acceleration = Vector3D();
@@ -26,13 +26,16 @@ void MobileGameObject::update(Vector3D &inclination)
 	GameObject::update();
 	this->inclination = inclination;
 	this->inclination.normalize();
-	this->inclination*=10.0f;
+	this->inclination*=100.0f;
 	// acceleration does not take in account gravity, which is calculated apart!
 	if (acceleration.getModule() > maxAcceleration) {
 		// restrict maximum acceleration
 		acceleration.normalize();
 		acceleration *= maxAcceleration;
 	}
+	// inclination of the terrain
+	//acceleration.setX( acceleration.getX() + inclination.getX());
+	//acceleration.setZ( acceleration.getZ() + inclination.getZ());
 	// gravity here: Gravity < 0 !
 	acceleration.setY(gravity);
 	velocity += acceleration;
@@ -49,6 +52,11 @@ void MobileGameObject::update(Vector3D &inclination)
 	}
 	velocity *= friction;
 	velocity.setY(velocityY);
+
+	// inclination of the terrain
+	velocity.setX( velocity.getX() + inclination.getX());
+	velocity.setZ( velocity.getZ() + inclination.getZ());
+
 	setXPosition( getXPosition() + velocity.getX() );
 	setZPosition( getZPosition() + velocity.getZ() );
 	setYPosition( getYPosition() + velocity.getY() );

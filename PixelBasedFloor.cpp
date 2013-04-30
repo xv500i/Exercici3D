@@ -103,7 +103,7 @@ void PixelBasedFloor::getPerpendicularVector(Vector3D &v, float x, float z)
 	float A = points[i][j];
 	float B = points[i+1][j];
 	float C = points[i][j+1];
-	Vector3D v1 = Vector3D(distanceBetweenPixels, B - A, 0);
-	Vector3D v2 = Vector3D(distanceBetweenPixels, 0, C - A);
+	Vector3D v2 = Vector3D(distanceBetweenPixels, B - A, 0);
+	Vector3D v1 = Vector3D(0, C - A, distanceBetweenPixels);
 	v = *v1.vectorialProduct(v2);
 }
