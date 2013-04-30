@@ -106,6 +106,12 @@ bool cScene::Init()
 	drawPlayer = true;
 	go = MobileGameObject();
 	pbf = new PixelBasedFloor("mapa.png", 0.0f, 0.0f, 0.20f);
+
+	/* TEST VECTOR */
+	Vector3D v = Vector3D(1,0,0);
+	Vector3D u = Vector3D(0,1,1);
+	Vector3D *w = v.vectorialProduct(u);
+
 	return true;
 }
 
@@ -146,7 +152,9 @@ void cScene::update(InputHandler &input)
 	if (input.keyIsDown(' ')) {
 		go.jump();
 	}
-	go.update();
+	Vector3D inclination;
+	pbf->getPerpendicularVector( inclination, go.getXPosition(), go.getZPosition());
+	go.update(inclination);
 	float test = pbf->getHeightAt(go.getXPosition(), go.getZPosition());
 	// FIXME I'M FAMOUS
 	if (test >= go.getYPosition() ) {

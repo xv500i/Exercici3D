@@ -21,9 +21,12 @@ MobileGameObject::~MobileGameObject(void)
 {
 }
 
-void MobileGameObject::update()
+void MobileGameObject::update(Vector3D &inclination)
 {
 	GameObject::update();
+	this->inclination = inclination;
+	this->inclination.normalize();
+	this->inclination*=10.0f;
 	// acceleration does not take in account gravity, which is calculated apart!
 	if (acceleration.getModule() > maxAcceleration) {
 		// restrict maximum acceleration
@@ -55,6 +58,8 @@ void MobileGameObject::update()
 	acceleration.setX(0.0f);
 	acceleration.setY(0.0f);
 	acceleration.setZ(0.0f);
+
+	
 }
 
 void MobileGameObject::turnLeft()
@@ -143,15 +148,15 @@ void MobileGameObject::render() const
 			glBegin(GL_LINES);
 
 			glColor3f(1.0f, 0.0f, 0.0f);
-			glVertex3f(100.0f, 0.0f, 0.0f);
+			glVertex3f(5.0f, 0.0f, 0.0f);
 			glVertex3f(0.0f, 0.0f, 0.0f);
 
 			glColor3f(0.0f, 1.0f, 0.0f);
-			glVertex3f(0.0f, 100.0f, 0.0f);
+			glVertex3f(0.0f, 5.0f, 0.0f);
 			glVertex3f(0.0f, 0.0f, 0.0f);
 
 			glColor3f(0.0f, 0.0f, 1.0f);
-			glVertex3f(0.0f, 0.0f, 100.0f);
+			glVertex3f(0.0f, 0.0f, 5.0f);
 			glVertex3f(0.0f, 0.0f, 0.0f);
 
 			glColor3f(1.0f, 1.0f, 1.0f);
@@ -160,6 +165,15 @@ void MobileGameObject::render() const
 		}
 	
 	renderBoundingCilinder();
+
+	glDisable(GL_TEXTURE_2D);
+	glBegin(GL_LINES);
+	
+	glVertex3f(getXPosition(), getYPosition(), getZPosition());
+	glVertex3f(getXPosition()+inclination.getX(), getYPosition()+inclination.getY(), getZPosition()+inclination.getZ());
+	glEnd();
+	glEnable(GL_TEXTURE_2D);
+
 	glEnable(GL_TEXTURE_2D);
 }
 

@@ -7,7 +7,7 @@ class MobileGameObject :
 public:
 	MobileGameObject(void);
 	~MobileGameObject(void);
-	void update();
+	void update(Vector3D &inclination);
 	void moveForward();
 	void moveBackwards();
 	void moveLeft();
@@ -28,6 +28,7 @@ private:
 	float maxVelocity;
 	Vector3D velocity;
 	Vector3D acceleration;
+	Vector3D inclination;
 	float turnAnglePerStep;
 };
 

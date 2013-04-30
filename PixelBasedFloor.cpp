@@ -1,6 +1,7 @@
 #include "PixelBasedFloor.h"
 #include "cTexture.h"
 #include <iostream>
+#include "Vector3D.h"
 
 PixelBasedFloor::PixelBasedFloor(void)
 {
@@ -90,20 +91,19 @@ float PixelBasedFloor::getHeightAt(float x, float z)
 	return res;
 }
 
-void PixelBasedFloor::getPerpendicularVector(Vector3D &v, float x, float y)
+void PixelBasedFloor::getPerpendicularVector(Vector3D &v, float x, float z)
 {
 	float fx = x/distanceBetweenPixels + (points.size()/2);
 	float fz = z/distanceBetweenPixels + (points[0].size()/2);
 	unsigned int roundedX = (unsigned int)fx;
 	unsigned int roundedZ = (unsigned int)fz;
-	unsigned int i = max( min (roundedX , points.size()-1), 0);
-	unsigned int j = max( min (roundedZ , points[0].size()-1), 0);
+	unsigned int i = max( min (roundedX , points.size()-2), 0);
+	unsigned int j = max( min (roundedZ , points[0].size()-2), 0);
 	v = Vector3D();
-	if (i < points.size() - 1) {
-		
-	}
-	//y
-	if (j < points[0].size() - 1) {
-		
-	}
+	float A = points[i][j];
+	float B = points[i+1][j];
+	float C = points[i][j+1];
+	Vector3D v1 = Vector3D(distanceBetweenPixels, B - A, 0);
+	Vector3D v2 = Vector3D(distanceBetweenPixels, 0, C - A);
+	v = *v1.vectorialProduct(v2);
 }
