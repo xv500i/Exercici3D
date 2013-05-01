@@ -1,6 +1,8 @@
 #include "cGame.h"
 #include "Globals.h"
 #include <cmath>
+#include <time.h>
+#include <random>
 
 
 cGame::cGame(void) {}
@@ -9,6 +11,9 @@ cGame::~cGame(void){}
 bool cGame::init()
 {
 	bool res=true;
+
+	// Random seed
+	srand((unsigned)time(0));
 	
 	//Graphics initialization
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);

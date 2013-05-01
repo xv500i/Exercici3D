@@ -1,6 +1,8 @@
 #include "cScene.h"
 #include "Globals.h"
 #include <iostream>
+// FIXME:
+#include "GuardPathState.h"
 
 cScene::cScene(void) {}
 cScene::~cScene(void){}
@@ -99,6 +101,9 @@ void cScene::render(GameData &gd)
 	if (drawPlayer) {
 		go.render();
 	}
+	for (unsigned int i = 0; i < enemies.size(); i++) {
+		enemies[i].render();
+	}
 }
 
 bool cScene::Init()
@@ -111,7 +116,25 @@ bool cScene::Init()
 	//Vector3D v = Vector3D(1,-2,2);
 	//Vector3D u = Vector3D(-4,2,-2);
 	//Vector3D *w = v.vectorialProduct(u);
-
+	std::vector<GuardPathState> *v = new std::vector<GuardPathState>(4);
+	v->at(0) = GuardPathState(0.2f, 0.0f, 30);
+	v->at(1) = GuardPathState(0.0f, 0.2f, 30);
+	v->at(2) = GuardPathState(-0.2f, 0.0f, 30);
+	v->at(3) = GuardPathState(0.0f, -0.2f, 30);
+	std::vector<GuardPathState> *v2 = new std::vector<GuardPathState>(2);
+	v2->at(0) = GuardPathState(0.2f, 0.2f, 20);
+	v2->at(1) = GuardPathState(-0.2f, -0.2f, 20);
+	enemies = std::vector<Enemy>(4);
+	enemies[0] = Enemy(STATIC_PURSUER);
+	enemies[1] = Enemy(RANDOM);
+	enemies[2] = Enemy(PATH);
+	enemies[3] = Enemy(PATH_PURSUER);
+	enemies[0].setXPosition(15.0f);enemies[0].setZPosition(15.0f);
+	enemies[1].setXPosition(-15.0f);enemies[1].setZPosition(-15.0f);
+	enemies[3].setXPosition(15.0f);enemies[3].setZPosition(-15.0f);
+	enemies[3].setGuardState(*v2);
+	enemies[2].setXPosition(-15.0f);enemies[2].setZPosition(15.0f);
+	enemies[2].setGuardState(*v);
 	return true;
 }
 
@@ -166,6 +189,11 @@ void cScene::update(InputHandler &input)
 		
 	}
 	go.setYPosition( max( test, go.getYPosition() ));
+	for (unsigned int i = 0; i < enemies.size(); i++) {
+		pbf->getPerpendicularVector( inclination, enemies[i].getXPosition(), enemies[i].getZPosition());
+		enemies[i].update(inclination, go.getXPosition(), go.getZPosition());
+		enemies[i].setYPosition(pbf->getHeightAt(enemies[i].getXPosition(), enemies[i].getZPosition()));
+	}
 }
 
 void cScene::getFirstPersonParameters(float &eyex, float &eyey, float &eyez, float &centerx, float &centery, float &centerz) const

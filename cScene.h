@@ -5,6 +5,8 @@
 #include "MobileGameObject.h"
 #include "InputHandler.h"
 #include "PixelBasedFloor.h"
+#include "Enemy.h"
+#include <vector>
 
 #define SCENE_WIDTH		16
 #define SCENE_DEPTH		32
@@ -26,4 +28,5 @@ private:
 	MobileGameObject go;
 	bool drawPlayer;
 	PixelBasedFloor *pbf;
+	std::vector<Enemy> enemies;
 };

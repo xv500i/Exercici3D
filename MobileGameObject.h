@@ -18,6 +18,8 @@ public:
 	void floorReached();
 	void render() const;
 	void clearYVelocity();
+	void setXVelocity(float v);
+	void setZVelocity(float v);
 private:
 	float gravity;
 	bool footOnGround;

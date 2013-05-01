@@ -189,3 +189,13 @@ void MobileGameObject::clearYVelocity()
 {
 	velocity.setY(0.0f);
 }
+
+void MobileGameObject::setXVelocity(float v)
+{
+	velocity.setX(v);
+}
+
+void MobileGameObject::setZVelocity(float v)
+{
+	velocity.setZ(v);
+}
