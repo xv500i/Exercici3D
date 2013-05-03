@@ -4,6 +4,7 @@
 
 #include <gl/glut.h>
 #include <corona.h>
+#include <vector>
 
 
 class Texture
@@ -20,6 +21,7 @@ public:
 	/* Loading */
 	bool load(const char *filename, const char *ext, int type = GL_RGBA, int wraps = GL_REPEAT, 
 			  int wrapt = GL_REPEAT, int magf = GL_NEAREST, int minf = GL_NEAREST, bool mipmap = false);
+	bool getMapPixelsHeight(char *filename, std::vector<std::vector<float>> &points, int type);
 
 	/* Getters */
 	int getID();

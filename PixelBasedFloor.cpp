@@ -1,7 +1,8 @@
 #include "PixelBasedFloor.h"
-#include "cTexture.h"
+#include "Texture.h"
 #include <iostream>
 #include "Vector3D.h"
+#include "Globals.h"
 
 PixelBasedFloor::PixelBasedFloor(void)
 {
@@ -10,7 +11,7 @@ PixelBasedFloor::PixelBasedFloor(void)
 PixelBasedFloor::PixelBasedFloor(char *filename, float centerX, float centerZ, float distanceBetweenPixels, float maxHeight, float minHeigth)
 	: centerX(centerX), centerZ(centerZ), distanceBetweenPixels(distanceBetweenPixels), maxHeight(maxHeight), minHeigth(minHeigth)
 {
-	cTexture *tex = new cTexture();
+	Texture *tex = new Texture();
 	tex->getMapPixelsHeight(filename, points, GL_RGBA);
 	delete tex;
 }
