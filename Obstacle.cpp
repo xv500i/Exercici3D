@@ -23,10 +23,5 @@ Obstacle::Obstacle(Point3D &center, float height, float radius, ObstacleType typ
 	
 void Obstacle::render() const
 {
-
-}
-
-void Obstacle::update()
-{
-
+	// TODO BILLBOARD
 }
