@@ -104,6 +104,9 @@ void cScene::render(GameData &gd)
 	for (unsigned int i = 0; i < enemies.size(); i++) {
 		enemies[i].render();
 	}
+	for (unsigned int i = 0; i < obstacles.size(); i++) {
+		obstacles[i].render();
+	}
 }
 
 bool cScene::Init()
@@ -135,6 +138,11 @@ bool cScene::Init()
 	enemies[3].setGuardState(*v2);
 	enemies[2].setXPosition(-15.0f);enemies[2].setZPosition(15.0f);
 	enemies[2].setGuardState(*v);
+
+	obstacles = std::vector<Obstacle>(3);
+	obstacles[0] = Obstacle(7.0, 5.0, 7.0, 5.0, 1.0, TREE);
+	obstacles[1] = Obstacle(-7.0, 5.0, 7.0, 5.0, 1.0, TREE);
+	obstacles[2] = Obstacle(7.0, 5.0, -7.0, 5.0, 1.0, TREE);
 	return true;
 }
 

@@ -132,3 +132,8 @@ void GameObject::renderBoundingCilinder() const
 	gluDeleteQuadric(cylinder);
 
 }
+
+BoundingCilinder* GameObject::getBoundingCilinder()
+{
+	return bc;
+}

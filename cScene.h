@@ -7,6 +7,7 @@
 #include "PixelBasedFloor.h"
 #include "Enemy.h"
 #include <vector>
+#include "Obstacle.h"
 
 #define SCENE_WIDTH		16
 #define SCENE_DEPTH		32
@@ -29,4 +30,5 @@ private:
 	bool drawPlayer;
 	PixelBasedFloor *pbf;
 	std::vector<Enemy> enemies;
+	std::vector<Obstacle> obstacles;
 };

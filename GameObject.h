@@ -21,6 +21,7 @@ public:
 	bool getDrawAxis() const;
 	void setDrawAxis(bool b);
 	void renderBoundingCilinder() const;
+	BoundingCilinder* getBoundingCilinder();
 private:
 	static bool drawAxis;
 	Point3D pos;
