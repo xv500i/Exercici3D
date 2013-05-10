@@ -112,7 +112,7 @@ void cScene::render(GameData &gd)
 bool cScene::Init()
 {
 	drawPlayer = true;
-	go = MobileGameObject();
+	go = Player();
 	pbf = new PixelBasedFloor("mapa.png", 0.0f, 0.0f, 0.20f);
 
 	/* TEST VECTOR */

@@ -23,6 +23,7 @@ public:
 	void setXVelocity(float v);
 	void setZVelocity(float v);
 private:
+	void tractarColisions(std::vector<GameObject*> &objects);
 	float gravity;
 	bool footOnGround;
 	float jumpAcceleration;

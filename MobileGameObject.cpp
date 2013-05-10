@@ -200,3 +200,8 @@ void MobileGameObject::setZVelocity(float v)
 {
 	velocity.setZ(v);
 }
+
+void MobileGameObject::tractarColisions(std::vector<GameObject*> &objects)
+{
+
+}

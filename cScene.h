@@ -2,7 +2,7 @@
 
 #include "GameData.h"
 //#include "cData.h"
-#include "MobileGameObject.h"
+#include "Player.h"
 #include "InputHandler.h"
 #include "PixelBasedFloor.h"
 #include "Enemy.h"
@@ -26,7 +26,7 @@ public:
 	void update(InputHandler &input);
 	void getFirstPersonParameters(float &eyex, float &eyey, float &eyez, float &centerx, float &centery, float &centerz) const;
 private:
-	MobileGameObject go;
+	Player go;
 	bool drawPlayer;
 	PixelBasedFloor *pbf;
 	std::vector<Enemy> enemies;
