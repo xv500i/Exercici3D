@@ -14,7 +14,7 @@ Player::~Player(void)
 void Player::render(GameData *data) const 
 {
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, 1);
+	glBindTexture(GL_TEXTURE_2D, data->getTextureID(GameData::PLAYER_TEXTURE_INDEX));
 	glPushMatrix();
 		
 		glTranslatef(getXPosition(),getYPosition() + 1.0f,getZPosition());
@@ -22,7 +22,7 @@ void Player::render(GameData *data) const
 
 		GLUquadricObj *q = gluNewQuadric();
 		gluQuadricOrientation(q, GLU_OUTSIDE);
-		gluQuadricTexture(q, GL_FALSE);
+		gluQuadricTexture(q, GL_TRUE);
 		gluSphere(q, 1.0f,16,16);
 		
 		gluDeleteQuadric(q);
