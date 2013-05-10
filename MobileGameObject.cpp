@@ -208,12 +208,19 @@ void MobileGameObject::tractarColisions(std::vector<GameObject*> &objects)
 		GameObject* go = *it;
 		// different object
 		if (getId() != go->getId()) {
-			
+			switch (go->getType()) {
+				if (go->getBoundingCilinder()->isCollisioningWith(*getBoundingCilinder()));
+			case 'g':
+				break;
+			case 'e':
+				break;
+			case 'm':
+				break;
+			case 'p':
+				break;
+			case 'o':
+				break;
+			}
 		}
 	}
-}
-
-void MobileGameObject::collideWith(GameObject* go)
-{
-
 }
