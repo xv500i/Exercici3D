@@ -2,6 +2,8 @@
 #include "MovementState.h"
 #include "BoundingCilinder.h"
 #include "Point3D.h"
+#include "GameData.h"
+
 class GameObject
 {
 public:
@@ -15,7 +17,7 @@ public:
 	void setYPosition(float v);
 	void setZPosition(float v);
 	void update();
-	void render() const;
+	void render(GameData *data) const;
 	float getYAngle() const;
 	void setYAngle(float newYAngle);
 	bool getDrawAxis() const;

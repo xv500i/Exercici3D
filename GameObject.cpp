@@ -49,7 +49,7 @@ void GameObject::update()
 
 }
 
-void GameObject::render() const
+void GameObject::render(GameData *data) const
 {
 	glPushMatrix();
 		glDisable(GL_TEXTURE_2D);

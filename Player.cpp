@@ -14,7 +14,7 @@ Player::~Player(void)
 void Player::render(GameData *data) const 
 {
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, 
+	glBindTexture(GL_TEXTURE_2D, 1);
 	glPushMatrix();
 		
 		glTranslatef(getXPosition(),getYPosition() + 1.0f,getZPosition());

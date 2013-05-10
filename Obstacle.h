@@ -13,7 +13,7 @@ public:
 	Obstacle(void);
 	Obstacle(float x, float y, float z, float height, float radius, ObstacleType type);
 	~Obstacle(void);
-	void render() const;
+	void render(GameData *data) const;
 private:
 	ObstacleType type;
 };

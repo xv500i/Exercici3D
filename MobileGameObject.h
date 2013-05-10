@@ -18,7 +18,7 @@ public:
 	void turnRight();
 	bool jump();
 	void floorReached();
-	void render() const;
+	void render(GameData *data) const;
 	void clearYVelocity();
 	void setXVelocity(float v);
 	void setZVelocity(float v);

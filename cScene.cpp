@@ -99,13 +99,13 @@ void cScene::render(GameData &gd)
 	pbf->render();
 	// DRAW SPHERE
 	if (drawPlayer) {
-		go.render();
+		go.render(&gd);
 	}
 	for (unsigned int i = 0; i < enemies.size(); i++) {
-		enemies[i].render();
+		enemies[i].render(&gd);
 	}
 	for (unsigned int i = 0; i < obstacles.size(); i++) {
-		obstacles[i].render();
+		obstacles[i].render(&gd);
 	}
 }
 

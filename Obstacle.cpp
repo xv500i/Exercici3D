@@ -24,7 +24,7 @@ Obstacle::Obstacle(float x, float y, float z, float height, float radius, Obstac
 	bc->setRadius(radius);
 }
 	
-void Obstacle::render() const
+void Obstacle::render(GameData *data) const
 {
 	// TODO BILLBOARD
 	glPushMatrix();

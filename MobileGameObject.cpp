@@ -130,7 +130,7 @@ void MobileGameObject::floorReached()
 	footOnGround = true;
 }
 
-void MobileGameObject::render() const
+void MobileGameObject::render(GameData *data) const
 {
 	glDisable(GL_TEXTURE_2D);
 	glPushMatrix();
