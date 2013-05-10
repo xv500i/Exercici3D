@@ -14,6 +14,7 @@ MobileGameObject::MobileGameObject(void) : GameObject()
 	jumpImpulse = false;
 	gravity = -0.25f;
 	jumpAcceleration = 2.0f;
+	type = 'm';
 }
 
 
@@ -21,7 +22,7 @@ MobileGameObject::~MobileGameObject(void)
 {
 }
 
-void MobileGameObject::update(Vector3D &inclination)
+void MobileGameObject::update(Vector3D &inclination, std::vector<GameObject*> &objects)
 {
 	GameObject::update();
 	this->inclination = inclination;
@@ -67,7 +68,7 @@ void MobileGameObject::update(Vector3D &inclination)
 	acceleration.setY(0.0f);
 	acceleration.setZ(0.0f);
 
-	
+	// colisions
 }
 
 void MobileGameObject::turnLeft()

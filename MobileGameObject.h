@@ -1,13 +1,15 @@
 #pragma once
 #include "gameobject.h"
 #include "Vector3D.h"
+#include <vector>
+
 class MobileGameObject :
 	public GameObject
 {
 public:
 	MobileGameObject(void);
 	~MobileGameObject(void);
-	void update(Vector3D &inclination);
+	void update(Vector3D &inclination, std::vector<GameObject*> &objects);
 	void moveForward();
 	void moveBackwards();
 	void moveLeft();

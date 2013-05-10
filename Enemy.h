@@ -24,7 +24,7 @@ public:
 	Enemy(void);
 	Enemy(EnemyType et);
 	~Enemy(void);
-	void update(Vector3D &inclination, float x, float z);
+	void update(Vector3D &inclination, std::vector<GameObject*> &objects, float x, float z);
 	void setGuardState(std::vector<GuardPathState> &gps);
 private:
 	std::vector<GuardPathState> guard;

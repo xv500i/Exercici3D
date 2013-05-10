@@ -22,11 +22,16 @@ public:
 	void setDrawAxis(bool b);
 	void renderBoundingCilinder() const;
 	BoundingCilinder* getBoundingCilinder();
+	int getId();
 private:
+	static int idCounter;
+	int id;
 	static bool drawAxis;
 	Point3D pos;
 	float yAngle;
 	MovementState movementState;
 	BoundingCilinder *bc;
+protected:
+	char type;
 };
 

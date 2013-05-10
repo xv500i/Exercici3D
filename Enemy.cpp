@@ -60,7 +60,7 @@ Enemy::~Enemy(void)
 {
 }
 
-void Enemy::update(Vector3D &inclination, float x, float z)
+void Enemy::update(Vector3D &inclination, std::vector<GameObject*> &objects, float x, float z)
 {
 	/* IA */
 	Vector3D direction;
@@ -126,7 +126,7 @@ void Enemy::update(Vector3D &inclination, float x, float z)
 		}
 		break;
 	}
-	MobileGameObject::update(inclination);
+	MobileGameObject::update(inclination, objects);
 }
 
 void Enemy::setGuardState(std::vector<GuardPathState> &gps)

@@ -2,9 +2,12 @@
 #include "gl\glut.h"
 
 bool GameObject::drawAxis = true;
+int GameObject::idCounter = 0;
 
 GameObject::GameObject(void)
 {
+	id = idCounter++;
+	type = 'g';
 	pos = Point3D();
 	yAngle = 0.0f;
 	movementState = STATIC;
@@ -136,4 +139,9 @@ void GameObject::renderBoundingCilinder() const
 BoundingCilinder* GameObject::getBoundingCilinder()
 {
 	return bc;
+}
+
+int GameObject::getId()
+{
+	return id;
 }
