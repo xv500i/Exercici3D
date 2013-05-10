@@ -14,9 +14,10 @@ Player::~Player(void)
 void Player::render(GameData *data) const 
 {
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, data->getTextureID(GameData::PLAYER_TEXTURE_INDEX));
+	
 	glPushMatrix();
-		
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glBindTexture(GL_TEXTURE_2D, data->getTextureID(GameData::PLAYER_TEXTURE_INDEX));
 		glTranslatef(getXPosition(),getYPosition() + 1.0f,getZPosition());
 		glRotatef(-getYAngle(), 0.0f, 1.0f, 0.0f);
 
