@@ -145,3 +145,8 @@ int GameObject::getId()
 {
 	return id;
 }
+
+char GameObject::getType()
+{
+	return type;
+}

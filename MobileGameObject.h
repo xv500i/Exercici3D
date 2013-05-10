@@ -24,6 +24,7 @@ public:
 	void setZVelocity(float v);
 private:
 	void tractarColisions(std::vector<GameObject*> &objects);
+	void collideWith(GameObject* go);
 	float gravity;
 	bool footOnGround;
 	float jumpAcceleration;

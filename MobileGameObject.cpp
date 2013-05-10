@@ -69,6 +69,7 @@ void MobileGameObject::update(Vector3D &inclination, std::vector<GameObject*> &o
 	acceleration.setZ(0.0f);
 
 	// colisions
+	tractarColisions(objects);
 }
 
 void MobileGameObject::turnLeft()
@@ -202,6 +203,17 @@ void MobileGameObject::setZVelocity(float v)
 }
 
 void MobileGameObject::tractarColisions(std::vector<GameObject*> &objects)
+{
+	for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
+		GameObject* go = *it;
+		// different object
+		if (getId() != go->getId()) {
+			
+		}
+	}
+}
+
+void MobileGameObject::collideWith(GameObject* go)
 {
 
 }

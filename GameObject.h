@@ -23,6 +23,7 @@ public:
 	void renderBoundingCilinder() const;
 	BoundingCilinder* getBoundingCilinder();
 	int getId();
+	char getType();
 private:
 	static int idCounter;
 	int id;
