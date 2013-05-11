@@ -53,8 +53,8 @@ float BoundingCilinder::getZ() const
 bool BoundingCilinder::isCollisioningWith(const BoundingCilinder &bc)
 {
 	//            this a sota de bc                     bc sota de this
-	if (center.getY() + h  < bc.center.getY() || center.getY() > bc.center.getY()) return false;
-	else if (center.distanceTo(bc.center) <= r + bc.r) return false;
+	if (center.getY() + h  < bc.center.getY() || center.getY() > bc.center.getY() + bc.getHeight()) return false;
+	else if (center.distanceTo(bc.center) >= r + bc.r) return false;
 	return true;
 }
 

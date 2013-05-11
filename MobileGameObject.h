@@ -22,6 +22,7 @@ public:
 	void clearYVelocity();
 	void setXVelocity(float v);
 	void setZVelocity(float v);
+	void setYVelocity(float v);
 private:
 	void tractarColisions(std::vector<GameObject*> &objects);
 	float gravity;

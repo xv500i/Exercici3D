@@ -208,8 +208,10 @@ void MobileGameObject::tractarColisions(std::vector<GameObject*> &objects)
 		GameObject* go = *it;
 		// different object
 		if (getId() != go->getId()) {
-			switch (go->getType()) {
-				if (go->getBoundingCilinder()->isCollisioningWith(*getBoundingCilinder()));
+			if (go->getBoundingCilinder()->isCollisioningWith(*getBoundingCilinder())) {
+					jump();
+			}
+			switch (go->getType()) {	
 			case 'g':
 				break;
 			case 'e':
@@ -223,4 +225,9 @@ void MobileGameObject::tractarColisions(std::vector<GameObject*> &objects)
 			}
 		}
 	}
+}
+
+void MobileGameObject::setYVelocity(float v)
+{
+	velocity.setY(v);
 }

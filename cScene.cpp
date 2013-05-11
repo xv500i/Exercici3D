@@ -156,10 +156,11 @@ void cScene::update(InputHandler &input)
 {
 	// vector with all objects
 	std::vector<GameObject*> objects = std::vector<GameObject*>();
-	objects.reserve(1+enemies.size());
+	objects.reserve(1+enemies.size()+obstacles.size());
 	objects.push_back(&go);
 	for(unsigned int i = 0; i < enemies.size(); i++) objects.push_back(&enemies[i]);
-
+	for(unsigned int i = 0; i < obstacles.size(); i++) objects.push_back(&obstacles[i]);
+	
 	if (input.keyIsDown(input.getKey(MOVE_FORWARD))) {
 		go.moveForward();
 		//Scene.entityX += cos(Scene.angle * 3.1415 / 180.0f)*0.05;
