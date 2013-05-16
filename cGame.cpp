@@ -35,10 +35,10 @@ bool cGame::init()
 	res = Data.LoadImage(IMG_ROOF,"roof.png",GL_RGBA);
 	if(!res) return false;
 	*/
-	if (!dataBona.loadTextures()) return false;
-	if (!dataBona.loadTileSheets()) return false;
-	if (!dataBona.loadSprites()) return false;
-	if (!dataBona.loadSounds()) return false;
+	if (!data.loadTextures()) return false;
+	if (!data.loadTileSheets()) return false;
+	if (!data.loadSprites()) return false;
+	if (!data.loadSounds()) return false;
 
 	Scene.Init();
 	gameState = MAIN_MENU;
@@ -50,7 +50,7 @@ bool cGame::init()
 	nextLevelMenu.createLevelCompleted();
 	debug = true;
 	selectedCamera = 2;
-	dataBona.playSound(GameData::INTRO_THEME_INDEX);
+	data.playSound(GameData::INTRO_THEME_INDEX);
 	return res;
 }
 
@@ -103,36 +103,23 @@ bool cGame::process()
 	MenuOption m;
 	switch(gameState) {
 	case PLAYING:
+		
 		if (input.keyIsDown('p')) gameState = PAUSE_MENU;
 		else {
-			/*
-			scene.resolveInput(input);
-			scene.update(&data, &viewport);
-			if (scene.playerHasLost()) {
-				gameState = GAMEOVER_MENU;
-				data.stopSound(GameData::JUNGLE_THEME_INDEX);
-				data.stopSound(GameData::BOSS_THEME_INDEX);
-				data.playSound(GameData::GAME_OVER_INDEX);
-			}
-			else if (scene.playerHasWon()) {
-				data.stopSound(GameData::JUNGLE_THEME_INDEX);
-				data.stopSound(GameData::BOSS_THEME_INDEX);
-				if (scene.gameFinished()) {
-					gameState = CONGRATS_MENU;
-					data.playSound(GameData::ENDING_THEME_INDEX);
-				} else {
-					gameState = NEXT_LEVEL_MENU;
-					
-					data.playSound(GameData::STAGE_CLEAR_INDEX);
-				}
-			}*/
-			if (input.keyIsDown(27))	res=false;
+			
+			//if (input.keyIsDown(27))	res=false;
 			if (input.keyIsDown('1'))	selectedCamera = 1;
 			if (input.keyIsDown('2'))	selectedCamera = 2;
 			if (input.keyIsDown('3'))	selectedCamera = 3;
 			if (input.keyIsDown('4'))	selectedCamera = 4;
 			if (input.keyIsDown('5'))	selectedCamera = 5;
 			Scene.update(input);
+		}
+		if (Scene.playerIsDead()) gameState = GAMEOVER_MENU;
+		else if (Scene.isLevelCompleted()) {
+			bool end = Scene.isLastLevel();
+			if(!end) gameState = GAMEOVER_MENU; // seguent nivell
+			else gameState = NEXT_LEVEL_MENU; // fi del joc
 		}
 		break;
 
@@ -143,10 +130,10 @@ bool cGame::process()
 
 		m = mainMenu.getSelected();
 		if (m == START) {
-			dataBona.stopSound(GameData::INTRO_THEME_INDEX);
+			data.stopSound(GameData::INTRO_THEME_INDEX);
 			gameState = PLAYING;
-			//viewport.init(0.0f, GAME_HEIGHT, GAME_WIDTH, GAME_HEIGHT);
-			//scene.changeLevel(1, &data, &viewport);		// From the main menu, we start the first level
+			// init and start first lvl
+			Scene.loadLevel(1);
 		}
 		else if (m == INSTRUCTIONS) gameState = INSTRUCTIONS_MENU;
 		else if (m == QUIT) gameState = EXIT;
@@ -172,8 +159,8 @@ bool cGame::process()
 		if (m == RESTART) gameState = PLAYING;
 		else if (m == TO_MAIN_MENU) {
 			gameState = MAIN_MENU;
-			dataBona.stopSound(GameData::JUNGLE_THEME_INDEX);
-			dataBona.stopSound(GameData::BOSS_THEME_INDEX);
+			data.stopSound(GameData::JUNGLE_THEME_INDEX);
+			data.stopSound(GameData::BOSS_THEME_INDEX);
 		}
 		else if (m == QUIT) gameState = EXIT;
 		pauseMenu.update();
@@ -185,8 +172,10 @@ bool cGame::process()
 		else if (input.keyIsDown(' ')) gameOverMenu.enterPressed();
 	
 		m = gameOverMenu.getSelected();
-		if (m == TO_MAIN_MENU) gameState = MAIN_MENU;
-		else if (m == QUIT) gameState = EXIT;
+		if (m == TO_MAIN_MENU) {
+			data.stopSound(GameData::GAME_OVER_INDEX);
+			gameState = MAIN_MENU;
+		} else if (m == QUIT) gameState = EXIT;
 		gameOverMenu.update();
 		break;
 	case CONGRATS_MENU:
@@ -196,7 +185,7 @@ bool cGame::process()
 		m = congratsMenu.getSelected();
 		if (m == TO_MAIN_MENU) {
 			gameState = MAIN_MENU;
-			if (dataBona.isSoundPlaying(GameData::ENDING_THEME_INDEX) )dataBona.stopSound(GameData::ENDING_THEME_INDEX);
+			if (data.isSoundPlaying(GameData::ENDING_THEME_INDEX) )data.stopSound(GameData::ENDING_THEME_INDEX);
 		}
 		else if (m == QUIT) {
 			gameState = EXIT;
@@ -209,10 +198,9 @@ bool cGame::process()
 		else if (input.keyIsDown(' ')) nextLevelMenu.enterPressed();
 		m = nextLevelMenu.getSelected();
 		if (m == NEXT_LEVEL) {
-			/*
-			scene.changeToNextLevel(&data, &viewport);
-			*/
-			dataBona.stopSound(GameData::STAGE_CLEAR_INDEX);
+			// init and start next lvl
+			Scene.nextLevel();
+			data.stopSound(GameData::STAGE_CLEAR_INDEX);
 			gameState = PLAYING;
 		}
 		else if (m == TO_MAIN_MENU) {
@@ -242,12 +230,12 @@ void cGame::render()
 		glLoadIdentity();
 		encapsulateDrawing(); break;
 	case MAIN_MENU:			
-		mainMenu.render(&dataBona); break;
-	case PAUSE_MENU:		pauseMenu.render(&dataBona); break;
-	case GAMEOVER_MENU:		gameOverMenu.render(&dataBona); break;
-	case INSTRUCTIONS_MENU:	instructionsMenu.render(&dataBona); break;
-	case NEXT_LEVEL_MENU:	nextLevelMenu.render(&dataBona); break;
-	case CONGRATS_MENU:		congratsMenu.render(&dataBona); break;
+		mainMenu.render(&data); break;
+	case PAUSE_MENU:		pauseMenu.render(&data); break;
+	case GAMEOVER_MENU:		gameOverMenu.render(&data); break;
+	case INSTRUCTIONS_MENU:	instructionsMenu.render(&data); break;
+	case NEXT_LEVEL_MENU:	nextLevelMenu.render(&data); break;
+	case CONGRATS_MENU:		congratsMenu.render(&data); break;
 	}
 	
 	glutSwapBuffers();
@@ -294,6 +282,6 @@ void cGame::encapsulateDrawing()
 	camera.use();
 
 	Scene.drawEntity(selectedCamera != 1);
-	Scene.render(dataBona);
+	Scene.render(data);
 	//Scene.Draw(&Data);
 }

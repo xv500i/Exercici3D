@@ -25,6 +25,11 @@ public:
 	void render(GameData &gd);
 	void update(InputHandler &input);
 	void getFirstPersonParameters(float &eyex, float &eyey, float &eyez, float &centerx, float &centery, float &centerz) const;
+	bool playerIsDead();
+	void loadLevel(int lvl);
+	void nextLevel();
+	bool isLevelCompleted();
+	bool isLastLevel();
 private:
 	Player go;
 	bool drawPlayer;

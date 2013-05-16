@@ -61,3 +61,9 @@ void Player::render(GameData *data) const
 		glVertex3f(getXPosition()+inclination.getX(), getYPosition()+inclination.getY(), getZPosition()+inclination.getZ());
 	glEnd();*/
 }
+
+bool Player::isDead()
+{
+	// FIXME: Natxo aqui has de definir quan el jugador esta mort i cal saltar al game over
+	return false;
+}

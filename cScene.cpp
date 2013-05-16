@@ -222,3 +222,30 @@ void cScene::getFirstPersonParameters(float &eyex, float &eyey, float &eyez, flo
 	centery = eyey;
 	centerz = eyez + 5*sin(go.getYAngle() * 3.1415f / 180.0f);
 }
+
+bool cScene::playerIsDead()
+{
+	return go.isDead();
+}
+
+void cScene::loadLevel(int lvl)
+{
+	// FIXME: natxo aqui has de poder carregar desde 0 el nivell que et demani
+}
+
+void cScene::nextLevel()
+{
+	// FIXME: aqui fas servir la funcio de dalt o com vulguis
+}
+
+bool cScene::isLevelCompleted()
+{
+	// FIXME: aqui vull saber quan el nivell actual s'ha completat i cal passar a la pantalla de next level
+	return false;
+}
+
+bool cScene::isLastLevel()
+{
+	// aqui simplement mira si el current level es el ultim
+	return false;
+}

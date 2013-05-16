@@ -17,7 +17,7 @@ private:
 	Camera camera;
 	cScene Scene;
 	//cData Data;
-	GameData dataBona;			/* Game data */
+	GameData data;			/* Game data */
 	bool debug;
 	int selectedCamera;
 	

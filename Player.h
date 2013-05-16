@@ -10,5 +10,6 @@ public:
 	~Player(void);
 
 	void render(GameData *data) const;
+	bool isDead();
 };
 
