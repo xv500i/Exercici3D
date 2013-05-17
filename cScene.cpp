@@ -98,6 +98,25 @@ void cScene::render(GameData &gd)
 {
 	pbf->render(&gd);
 	// DRAW SPHERE
+	glEnable(GL_TEXTURE_2D);
+	
+	glPushMatrix();
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glBindTexture(GL_TEXTURE_2D, gd.getTextureID(GameData::LANDSCAPE_TEXTURE_INDEX));
+		//glTranslatef(getXPosition(),getYPosition() + 1.0f,getZPosition());
+		glRotatef(landscapeRot, 0.0f, 1.0f, 0.0f);
+		glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+
+		GLUquadricObj *q = gluNewQuadric();
+		gluQuadricOrientation(q, GLU_OUTSIDE);
+		gluQuadricTexture(q, GL_TRUE);
+		gluSphere(q, 40.0f,16,16);
+		
+		gluDeleteQuadric(q);
+		
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+
 	if (drawPlayer) {
 		go.render(&gd);
 	}
@@ -113,7 +132,8 @@ bool cScene::Init()
 {
 	drawPlayer = true;
 	go = Player();
-	pbf = new PixelBasedFloor("mapa.png", 0.0f, 0.0f, 1.0f);
+	landscapeRot = 0.0f;
+	pbf = new PixelBasedFloor("mapa.png", 0.0f, 0.0f, 0.15f);
 
 	/* TEST VECTOR */
 	//Vector3D v = Vector3D(1,-2,2);
@@ -155,6 +175,7 @@ bool cScene::drawEntity(bool draw)
 void cScene::update(InputHandler &input)
 {
 	// vector with all objects
+	landscapeRot += 0.05;
 	std::vector<GameObject*> objects = std::vector<GameObject*>();
 	objects.reserve(1+enemies.size()+obstacles.size());
 	objects.push_back(&go);
