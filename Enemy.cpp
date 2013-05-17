@@ -17,6 +17,7 @@ Enemy::Enemy(void)
 Enemy::Enemy(EnemyType et)
 	: MobileGameObject()
 {
+	type = 'e';
 	switch (et) {
 	case STATIC_PURSUER:
 		/* initialize first guard! */
@@ -144,13 +145,15 @@ void Enemy::tractarColisions(std::vector<GameObject*> &objects)
 		// different object
 		if (getId() != go->getId()) {
 			if (go->getBoundingCilinder()->isCollisioningWith(*getBoundingCilinder())) {
-			
+				MobileGameObject *mgo;
 				switch (go->getType()) {	
 				case 'g':
 				
 					break;
 				case 'e':
 					// sliding
+					mgo = (MobileGameObject *) (go);
+					mgo->sliding(this);
 					sliding(go);
 					break;
 				case 'm':
@@ -160,6 +163,8 @@ void Enemy::tractarColisions(std::vector<GameObject*> &objects)
 					// TODO restar vida i fer invulnerable el player
 					// sliding
 					sliding(go);
+					mgo = (MobileGameObject *) (go);
+					mgo->sliding(this);
 					break;
 				case 'o':
 					// sliding

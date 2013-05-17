@@ -23,6 +23,8 @@ public:
 	void setXVelocity(float v);
 	void setZVelocity(float v);
 	void setYVelocity(float v);
+	void sliding(GameObject *go);
+
 
 private:
 	virtual void tractarColisions(std::vector<GameObject*> &objects);
@@ -37,8 +39,5 @@ private:
 	Vector3D acceleration;
 	Vector3D inclination;
 	float turnAnglePerStep;
-
-protected:
-	void sliding(GameObject *go);
 };
 

@@ -76,13 +76,17 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 		// different object
 		if (getId() != go->getId()) {
 			if (go->getBoundingCilinder()->isCollisioningWith(*getBoundingCilinder())) {
+				MobileGameObject * mgo;
 				switch (go->getType()) {	
 				case 'g':
 				
 					break;
 				case 'e':
+					// TODO Damage player and make it invul
 					// sliding
 					sliding(go);
+					mgo = (MobileGameObject *) (go);
+					mgo->sliding(this);
 					jump();
 					break;
 				case 'm':

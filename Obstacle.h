@@ -11,10 +11,10 @@ class Obstacle :
 {
 public:
 	Obstacle(void);
-	Obstacle(float x, float y, float z, float height, float radius, ObstacleType type);
+	Obstacle(float x, float y, float z, float height, float radius, ObstacleType obsType);
 	~Obstacle(void);
 	void render(GameData *data) const;
 private:
-	ObstacleType type;
+	ObstacleType obsType;
 };
 

@@ -4,7 +4,7 @@
 Obstacle::Obstacle(void)
 	: GameObject()
 {
-	GameObject::type = 'o';
+	type = 'o';
 }
 
 
@@ -13,8 +13,8 @@ Obstacle::~Obstacle(void)
 
 }
 
-Obstacle::Obstacle(float x, float y, float z, float height, float radius, ObstacleType type)
-	: type(type)
+Obstacle::Obstacle(float x, float y, float z, float height, float radius, ObstacleType obsType)
+	: GameObject(), obsType(obsType)
 {
 	setXPosition(x);
 	setYPosition(y);
@@ -22,7 +22,7 @@ Obstacle::Obstacle(float x, float y, float z, float height, float radius, Obstac
 	BoundingCilinder *bc = getBoundingCilinder();
 	bc->setHeight(height);
 	bc->setRadius(radius);
-	GameObject::type = 'o';
+	type = 'o';
 }
 	
 void Obstacle::render(GameData *data) const
