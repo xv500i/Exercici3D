@@ -29,6 +29,16 @@ bool GameData::loadTextures()
 	return true;
 }
 
+int GameData::getTextureID(int textureIndex)
+{
+	return textures[textureIndex].getID();
+}
+
+int GameData::getTextureSizeInPixels(int textureIndex, int *width, int *height)
+{
+	textures[textureIndex].getSizeInPixels(width, height);
+}
+
 
 /* Tile Sheets */
 bool GameData::loadTileSheets()
@@ -46,11 +56,6 @@ bool GameData::loadTileSheets()
 int GameData::getTileSheetID(int tileSheetIndex)
 {
 	return tileSheets[tileSheetIndex].getID();
-}
-
-int GameData::getTextureID(int textureIndex)
-{
-	return textures[textureIndex].getID();
 }
 
 void GameData::getTileSheetSizeInPixels(int tileSheetIndex, int *width, int *height)

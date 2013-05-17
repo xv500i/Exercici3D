@@ -112,6 +112,7 @@ public:
 	/* Textures */
 	bool loadTextures();
 	int getTextureID(int textureIndex);
+	int getTextureSizeInPixels(int textureIndex, int *width, int *height);
 
 	/* Tile Sheets */
 	bool loadTileSheets();
