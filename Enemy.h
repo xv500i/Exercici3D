@@ -26,6 +26,7 @@ public:
 	~Enemy(void);
 	void update(Vector3D &inclination, std::vector<GameObject*> &objects, float x, float z);
 	void setGuardState(std::vector<GuardPathState> &gps);
+
 private:
 	std::vector<GuardPathState> guard;
 	int guardIndex;
@@ -33,5 +34,8 @@ private:
 	bool pursue;
 	float detectionDistance;
 	float pursueVelocity;
+
+protected:
+	virtual void tractarColisions(std::vector<GameObject*> &objects);
 };
 

@@ -4,6 +4,7 @@
 
 Player::Player(void)
 {
+	type = 'p';
 }
 
 
@@ -66,4 +67,39 @@ bool Player::isDead()
 {
 	// FIXME: Natxo aqui has de definir quan el jugador esta mort i cal saltar al game over
 	return false;
+}
+
+void Player::tractarColisions(std::vector<GameObject*> &objects)
+{
+	for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
+		GameObject* go = *it;
+		// different object
+		if (getId() != go->getId()) {
+			if (go->getBoundingCilinder()->isCollisioningWith(*getBoundingCilinder())) {
+				switch (go->getType()) {	
+				case 'g':
+				
+					break;
+				case 'e':
+					// sliding
+					sliding(go);
+					jump();
+					break;
+				case 'm':
+				
+					break;
+				case 'p':
+				
+					break;
+				case 'o':
+					// sliding
+					sliding(go);
+					break;
+				case 'i':
+					// TODO recollir 
+					break;
+				}
+			}
+		}
+	}
 }

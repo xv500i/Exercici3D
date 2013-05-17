@@ -34,7 +34,8 @@ void MobileGameObject::update(Vector3D &inclination, std::vector<GameObject*> &o
 		acceleration.normalize();
 		acceleration *= maxAcceleration;
 	}
-	// inclination of the terrain
+	
+	
 	//acceleration.setX( acceleration.getX() + inclination.getX());
 	//acceleration.setZ( acceleration.getZ() + inclination.getZ());
 	// gravity here: Gravity < 0 !
@@ -58,18 +59,21 @@ void MobileGameObject::update(Vector3D &inclination, std::vector<GameObject*> &o
 	velocity.setX( velocity.getX() + inclination.getX());
 	velocity.setZ( velocity.getZ() + inclination.getZ());
 
+	// colisions aqui perque modifiquen la velocitat
+	tractarColisions(objects);
+
+	// moure fisicament
 	setXPosition( getXPosition() + velocity.getX() );
 	setZPosition( getZPosition() + velocity.getZ() );
 	setYPosition( getYPosition() + velocity.getY() );
-	// Friction
+	
 	
 	// clear accelerations
 	acceleration.setX(0.0f);
 	acceleration.setY(0.0f);
 	acceleration.setZ(0.0f);
 
-	// colisions
-	tractarColisions(objects);
+	
 }
 
 void MobileGameObject::turnLeft()
@@ -204,30 +208,53 @@ void MobileGameObject::setZVelocity(float v)
 
 void MobileGameObject::tractarColisions(std::vector<GameObject*> &objects)
 {
+	// plantilla
+	/*
 	for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
 		GameObject* go = *it;
 		// different object
 		if (getId() != go->getId()) {
-			if (go->getBoundingCilinder()->isCollisioningWith(*getBoundingCilinder())) {
-					jump();
-			}
+			//if (go->getBoundingCilinder()->isCollisioningWith(*getBoundingCilinder())) {
+			//		jump();
+			//}
 			switch (go->getType()) {	
 			case 'g':
+				
 				break;
 			case 'e':
+				
 				break;
 			case 'm':
+				
 				break;
 			case 'p':
+				
 				break;
 			case 'o':
+				
+				break;
+			case 'i':
+
 				break;
 			}
 		}
 	}
+	*/
 }
 
 void MobileGameObject::setYVelocity(float v)
 {
 	velocity.setY(v);
+}
+
+void MobileGameObject::sliding(GameObject *go)
+{
+	Vector3D directVector = Vector3D(go->getXPosition() - getXPosition(), 0, go->getZPosition() - getZPosition());
+	//Vector3D up = Vector3D(0.0f, 1.0f, 0.0f);
+	//Vector3D perpendicularDirection = *directVector.vectorialProduct(up);
+	//Vector3D finalVelocity;
+	directVector.normalize();
+	directVector*=5.0f;
+	setXVelocity(directVector.getX());
+	setZVelocity(directVector.getZ());
 }

@@ -4,7 +4,7 @@
 Obstacle::Obstacle(void)
 	: GameObject()
 {
-
+	GameObject::type = 'o';
 }
 
 

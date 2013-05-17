@@ -11,6 +11,7 @@ Enemy::Enemy(void)
 	pursue = true;
 	detectionDistance = 15.0f;
 	pursueVelocity = 0.25f;
+	type = 'e';
 }
 
 Enemy::Enemy(EnemyType et)
@@ -134,4 +135,41 @@ void Enemy::setGuardState(std::vector<GuardPathState> &gps)
 	guard = gps;
 	guardIndex = 0;
 	guard[guardIndex].initialize();
+}
+
+void Enemy::tractarColisions(std::vector<GameObject*> &objects)
+{
+	for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
+		GameObject* go = *it;
+		// different object
+		if (getId() != go->getId()) {
+			if (go->getBoundingCilinder()->isCollisioningWith(*getBoundingCilinder())) {
+			
+				switch (go->getType()) {	
+				case 'g':
+				
+					break;
+				case 'e':
+					// sliding
+					sliding(go);
+					break;
+				case 'm':
+				
+					break;
+				case 'p':
+					// TODO restar vida i fer invulnerable el player
+					// sliding
+					sliding(go);
+					break;
+				case 'o':
+					// sliding
+					sliding(go);
+					break;
+				case 'i':
+					// TODO recollir i fer desapareixer
+					break;
+				}
+			}
+		}
+	}
 }

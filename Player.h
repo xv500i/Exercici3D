@@ -11,5 +11,8 @@ public:
 
 	void render(GameData *data) const;
 	bool isDead();
+
+protected:
+	virtual void tractarColisions(std::vector<GameObject*> &objects);
 };
 
