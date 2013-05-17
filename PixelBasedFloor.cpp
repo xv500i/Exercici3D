@@ -32,8 +32,10 @@ void PixelBasedFloor::render(GameData *data) const
 	
 	int texWidth, texHeight;
 	data->getTextureSizeInPixels(GameData::LEVEL1_TEXTURE_INDEX, &texWidth, &texHeight);
-	float offsetS = distanceBetweenPixels/(float)texWidth;
-	float offsetT = distanceBetweenPixels/(float)texHeight;
+	float widhtInPixelsPerStep = (float)texWidth/(float)getPixelsWidth();
+	float heightInPixelsPerStep = (float)texHeight/(float)getPixelsHeigth();
+	float offsetS = widhtInPixelsPerStep/(float)texWidth;
+	float offsetT = heightInPixelsPerStep/(float)texHeight;
 
 	glPushMatrix();
 		glColor3f(1.0f, 1.0f, 1.0f);
