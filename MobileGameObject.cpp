@@ -253,8 +253,6 @@ void MobileGameObject::sliding(GameObject *go)
 	//Vector3D up = Vector3D(0.0f, 1.0f, 0.0f);
 	//Vector3D perpendicularDirection = *directVector.vectorialProduct(up);
 	//Vector3D finalVelocity;
-	directVector.normalize();
-	directVector*=5.0f;
 	setXVelocity(directVector.getX());
 	setZVelocity(directVector.getZ());
 }
