@@ -4,16 +4,16 @@
 
 MobileGameObject::MobileGameObject(void) : GameObject()
 {
-	maxVelocity = 0.5f;
-	maxAcceleration = 0.05f;
-	friction = 0.98f;
+	maxVelocity = 2.0f;
+	maxAcceleration = 0.1f;
+	friction = 0.90f;
 	turnAnglePerStep = 5.0f;
 	velocity = Vector3D();
 	acceleration = Vector3D();
 	footOnGround = false;
 	jumpImpulse = false;
 	gravity = -0.25f;
-	jumpAcceleration = 2.0f;
+	jumpAcceleration = 1.5f;
 	type = 'm';
 }
 
@@ -27,7 +27,7 @@ void MobileGameObject::update(Vector3D &inclination, std::vector<GameObject*> &o
 	GameObject::update();
 	this->inclination = inclination;
 	this->inclination.normalize();
-	this->inclination*=100.0f;
+	this->inclination*=0.0f;
 	// acceleration does not take in account gravity, which is calculated apart!
 	if (acceleration.getModule() > maxAcceleration) {
 		// restrict maximum acceleration
@@ -43,7 +43,7 @@ void MobileGameObject::update(Vector3D &inclination, std::vector<GameObject*> &o
 	velocity += acceleration;
 	float velocityY = velocity.getY();
 	if (jumpImpulse) {
-		velocityY += jumpAcceleration;
+		velocityY = jumpAcceleration;
 		jumpImpulse = false;
 	}
 	velocity.setY(0.0f);
@@ -56,8 +56,8 @@ void MobileGameObject::update(Vector3D &inclination, std::vector<GameObject*> &o
 	velocity.setY(velocityY);
 
 	// inclination of the terrain
-	velocity.setX( velocity.getX() + inclination.getX());
-	velocity.setZ( velocity.getZ() + inclination.getZ());
+	velocity.setX( velocity.getX() + this->inclination.getX());
+	velocity.setZ( velocity.getZ() + this->inclination.getZ());
 
 	// colisions aqui perque modifiquen la velocitat
 	tractarColisions(objects);
@@ -257,4 +257,9 @@ void MobileGameObject::sliding(GameObject *go)
 	directVector*=v.getModule();
 	setXVelocity(-directVector.getX());
 	setZVelocity(-directVector.getZ());
+}
+
+Vector3D MobileGameObject::getInclination() const
+{
+	return inclination;
 }

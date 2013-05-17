@@ -133,7 +133,7 @@ bool cScene::Init()
 	drawPlayer = true;
 	go = Player();
 	landscapeRot = 0.0f;
-	pbf = new PixelBasedFloor("mapa.png", 0.0f, 0.0f, 0.15f);
+	pbf = new PixelBasedFloor("mapa.png", 0.0f, 0.0f, 2.0f);
 
 	/* TEST VECTOR */
 	//Vector3D v = Vector3D(1,-2,2);
@@ -158,11 +158,11 @@ bool cScene::Init()
 	enemies[3].setGuardState(*v2);
 	enemies[2].setXPosition(-15.0f);enemies[2].setZPosition(15.0f);
 	enemies[2].setGuardState(*v);
-
+	enemies.clear();
 	obstacles = std::vector<Obstacle>(3);
-	obstacles[0] = Obstacle(7.0, 5.0, 7.0, 5.0, 1.0, TREE);
-	obstacles[1] = Obstacle(-7.0, 5.0, 7.0, 5.0, 1.0, TREE);
-	obstacles[2] = Obstacle(7.0, 5.0, -7.0, 5.0, 1.0, TREE);
+	obstacles[0] = Obstacle(7.0, 5.0, 7.0, 8.0, 1.0, TREE);
+	obstacles[1] = Obstacle(-7.0, 5.0, 7.0, 8.0, 1.0, TREE);
+	obstacles[2] = Obstacle(7.0, 5.0, -7.0, 8.0, 1.0, TREE);
 	return true;
 }
 

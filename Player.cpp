@@ -30,7 +30,7 @@ void Player::render(GameData *data) const
 		gluDeleteQuadric(q);
 		
 	glPopMatrix();
-
+	glDisable(GL_TEXTURE_2D);
 	glColor3f(1.0f,1.0f,1.0f);
 	if (getDrawAxis()) {
 		glPushMatrix();
@@ -55,12 +55,12 @@ void Player::render(GameData *data) const
 		glPopMatrix();
 	}
 	
-	//renderBoundingCilinder();
-
-	/*glBegin(GL_LINES);
+	renderBoundingCilinder();
+	Vector3D inclination = getInclination();
+	glBegin(GL_LINES);
 		glVertex3f(getXPosition(), getYPosition(), getZPosition());
 		glVertex3f(getXPosition()+inclination.getX(), getYPosition()+inclination.getY(), getZPosition()+inclination.getZ());
-	glEnd();*/
+	glEnd();
 }
 
 bool Player::isDead()
