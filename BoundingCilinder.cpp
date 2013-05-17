@@ -54,7 +54,11 @@ bool BoundingCilinder::isCollisioningWith(const BoundingCilinder &bc)
 {
 	//            this a sota de bc                     bc sota de this
 	if (center.getY() + h  < bc.center.getY() || center.getY() > bc.center.getY() + bc.getHeight()) return false;
-	else if (center.distanceTo(bc.center) >= r + bc.r) return false;
+	Point3D myCenter = center;
+	myCenter.setY(0.0f);
+	Point3D otherCenter = bc.center;
+	otherCenter.setY(0.0f);
+	if (myCenter.distanceTo(otherCenter) >= r + bc.r) return false;
 	return true;
 }
 
