@@ -1,8 +1,10 @@
+
 #include "PixelBasedFloor.h"
 #include "Texture.h"
 #include <iostream>
 #include "Vector3D.h"
 #include "Globals.h"
+
 
 PixelBasedFloor::PixelBasedFloor(void)
 {
@@ -20,35 +22,49 @@ PixelBasedFloor::~PixelBasedFloor(void)
 {
 }
 
-void PixelBasedFloor::render() const
+void PixelBasedFloor::render(GameData *data) const
 {
-	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);
 	//TODO
 	float initialX = -(distanceBetweenPixels * ( (float)getPixelsWidth() / 2));
 	float initialZ = -(distanceBetweenPixels * ( (float)getPixelsHeigth() / 2));
 	float factor = maxHeight - minHeigth;
+	
+	float offsetS = 1.0/(float)getPixelsWidth();
+	float offsetT = 1.0/(float)getPixelsHeigth();
+
 	glPushMatrix();
-	glRotatef(90.0, 0.0f, 1.0f, 0.0f);
-	glScalef(-1.0f, 1.0f, 1.0f);
-	glBegin(GL_QUADS);
-	for (int i = 0; i < getPixelsHeigth(); i++) {
-		float auxX = initialX;
-		for (int j = 0; j < getPixelsWidth(); j++) {
-			if ((j+i)%2 == 0) glColor3f(1.0f, 0.0f, 0.0f);
-			else glColor3f(0.0f, 1.0f, 0.0f);
-			// FIXME textura
-			glVertex3f(auxX, points[i][j]*factor, initialZ);
-			glVertex3f(auxX+distanceBetweenPixels, points[i][j+1]*factor, initialZ);
-			glVertex3f(auxX+distanceBetweenPixels, points[i+1][j+1]*factor, initialZ+distanceBetweenPixels);
-			glVertex3f(auxX, points[i+1][j]*factor, initialZ+distanceBetweenPixels);
-			auxX += distanceBetweenPixels;
-			
-		}
-		initialZ += distanceBetweenPixels;
-	}
-	glEnd();
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glBindTexture(GL_TEXTURE_2D, data->getTextureID(GameData::LEVEL1_TEXTURE_INDEX));
+		glRotatef(90.0, 0.0f, 1.0f, 0.0f);
+		glScalef(-1.0f, 1.0f, 1.0f);
+		glBegin(GL_QUADS);
+			for (int i = 0; i < getPixelsHeigth(); i++) {
+				float auxX = initialX;
+				for (int j = 0; j < getPixelsWidth(); j++) {
+					//if ((j+i)%2 == 0) glColor3f(1.0f, 0.0f, 0.0f);
+					//else glColor3f(0.0f, 1.0f, 0.0f);
+					float s = offsetS*(float)j;
+					float t = offsetT*(float)i;
+
+					glTexCoord2f(s, t + offsetT);
+					glVertex3f(auxX, points[i][j]*factor, initialZ);
+
+					glTexCoord2f(s + offsetS, t + offsetT);
+					glVertex3f(auxX+distanceBetweenPixels, points[i][j+1]*factor, initialZ);
+
+					glTexCoord2f(s + offsetS, t);
+					glVertex3f(auxX+distanceBetweenPixels, points[i+1][j+1]*factor, initialZ+distanceBetweenPixels);
+
+					glTexCoord2f(s, t);
+					glVertex3f(auxX, points[i+1][j]*factor, initialZ+distanceBetweenPixels);
+					
+					auxX += distanceBetweenPixels;
+				}
+				initialZ += distanceBetweenPixels;
+			}
+		glEnd();
 	glPopMatrix();
-	glEnable(GL_TEXTURE_2D);
 }
 
 int PixelBasedFloor::getPixelsWidth() const

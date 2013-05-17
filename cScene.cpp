@@ -96,7 +96,7 @@ void cScene::Draw(cData *Data)
 */
 void cScene::render(GameData &gd)
 {
-	pbf->render();
+	pbf->render(&gd);
 	// DRAW SPHERE
 	if (drawPlayer) {
 		go.render(&gd);
