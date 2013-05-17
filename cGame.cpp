@@ -65,7 +65,7 @@ bool cGame::loop()
 
 	do {
 		t2 = glutGet(GLUT_ELAPSED_TIME);
-	} while (t2 - t1 < 20);
+	} while (t2 - t1 < 33);
 
 	if (!b) exit(0);
 	return b;
@@ -249,7 +249,7 @@ void cGame::encapsulateDrawing()
 	camera.setUpVector(0.0f, 1.0f, 0.0f);
 	camera.setReferencePoint(0.0f, 0.0f, 0.0f);
 
-	eyeY = 20.0f;
+	eyeY = 15.0f;
 	float module = 30.0f;
 	switch (selectedCamera) {
 	case 1:

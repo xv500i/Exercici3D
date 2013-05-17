@@ -12,7 +12,7 @@ class GameData
 {
 private:
 	/* Textures */
-	const static int NUM_TEXTURES = 17;		// TOCHANGE: modificar depenent del numero de textures carregades
+	const static int NUM_TEXTURES = 18;		// TOCHANGE: modificar depenent del numero de textures carregades
 	const static char* TEXTURE_EXT;
 	
 	/* TileSheets */
@@ -52,6 +52,7 @@ public:
 	const static int LEVEL_COMPLETED_INDEX = 14;
 	const static int PLAYER_TEXTURE_INDEX = 15;
 	const static int LEVEL1_TEXTURE_INDEX = 16;
+	const static int LANDSCAPE_TEXTURE_INDEX = 17;
 	
 
 	/* TileSheet indexes */		// TOCHANGE: afegir indexs de tots els tile sheets carregats

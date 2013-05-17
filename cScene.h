@@ -36,4 +36,5 @@ private:
 	PixelBasedFloor *pbf;
 	std::vector<Enemy> enemies;
 	std::vector<Obstacle> obstacles;
+	float landscapeRot;
 };
