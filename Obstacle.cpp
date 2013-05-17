@@ -22,6 +22,7 @@ Obstacle::Obstacle(float x, float y, float z, float height, float radius, Obstac
 	BoundingCilinder *bc = getBoundingCilinder();
 	bc->setHeight(height);
 	bc->setRadius(radius);
+	GameObject::type = 'o';
 }
 	
 void Obstacle::render(GameData *data) const

@@ -113,7 +113,7 @@ bool cScene::Init()
 {
 	drawPlayer = true;
 	go = Player();
-	pbf = new PixelBasedFloor("mapa.png", 0.0f, 0.0f, 0.20f);
+	pbf = new PixelBasedFloor("mapa.png", 0.0f, 0.0f, 0.2f);
 
 	/* TEST VECTOR */
 	//Vector3D v = Vector3D(1,-2,2);

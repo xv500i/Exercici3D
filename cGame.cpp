@@ -113,6 +113,8 @@ bool cGame::process()
 			if (input.keyIsDown('3'))	selectedCamera = 3;
 			if (input.keyIsDown('4'))	selectedCamera = 4;
 			if (input.keyIsDown('5'))	selectedCamera = 5;
+			if (input.keyIsDown('z')) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);  
+			else if (input.keyIsDown('x')) glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			Scene.update(input);
 		}
 		if (Scene.playerIsDead()) gameState = GAMEOVER_MENU;
