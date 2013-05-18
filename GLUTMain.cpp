@@ -1,11 +1,11 @@
 
 #include "Globals.h"
-#include "cGame.h"
+#include "Game.h"
 
 //Delete console
 //#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 
-cGame game;
+Game game;
 
 
 void appRender()

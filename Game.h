@@ -1,7 +1,6 @@
 #pragma once
 
-#include "cScene.h"
-//#include "cData.h"
+#include "Scene.h"
 #include "InputHandler.h"
 #include "Camera.h"
 #include "GameState.h"
@@ -10,12 +9,12 @@
 #define SCREEN_WIDTH	800
 #define SCREEN_HEIGHT	600
 
-class cGame
+class Game
 {
 private:
 	InputHandler input;
 	Camera camera;
-	cScene Scene;
+	Scene Scene;
 	//cData Data;
 	GameData data;			/* Game data */
 	bool debug;
@@ -32,8 +31,8 @@ private:
 	GameMenu nextLevelMenu;
 
 public:
-	cGame(void);
-	virtual ~cGame(void);
+	Game(void);
+	virtual ~Game(void);
 
 	bool init();
 	bool loop();

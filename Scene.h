@@ -13,11 +13,11 @@
 #define SCENE_DEPTH		32
 #define SCENE_HEIGHT	 4
 
-class cScene
+class Scene
 {
 public:
-	cScene(void);
-	virtual ~cScene(void);
+	Scene(void);
+	virtual ~Scene(void);
 
 	bool Init();
 	bool drawEntity(bool draw);

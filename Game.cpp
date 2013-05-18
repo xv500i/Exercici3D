@@ -1,14 +1,14 @@
-#include "cGame.h"
+#include "Game.h"
 #include "Globals.h"
 #include <cmath>
 #include <time.h>
 #include <random>
 
 
-cGame::cGame(void) {}
-cGame::~cGame(void){}
+Game::Game(void) {}
+Game::~Game(void){}
 
-bool cGame::init()
+bool Game::init()
 {
 	bool res=true;
 
@@ -54,7 +54,7 @@ bool cGame::init()
 	return res;
 }
 
-bool cGame::loop()
+bool Game::loop()
 {
 	int t1, t2;
 
@@ -71,18 +71,18 @@ bool cGame::loop()
 	return b;
 }
 
-void cGame::finalize()
+void Game::finalize()
 {
 }
 
 
 //Input
-void cGame::readKeyboard(unsigned char key, int x, int y, bool press)
+void Game::readKeyboard(unsigned char key, int x, int y, bool press)
 {
 	input.setKeyState(key, press);
 }
 
-void cGame::readMouse(int button, int state, int x, int y) 
+void Game::readMouse(int button, int state, int x, int y) 
 {
 	if (button == -1) input.setMousePosition(x, y);
 	else input.setMouseButtonState(button, state);
@@ -90,7 +90,7 @@ void cGame::readMouse(int button, int state, int x, int y)
 
 
 //Process
-bool cGame::process()
+bool Game::process()
 {
 	bool res=true;
 	
@@ -216,7 +216,7 @@ bool cGame::process()
 }
 
 //Output
-void cGame::render()
+void Game::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//glMatrixMode(GL_MODELVIEW);
@@ -243,7 +243,7 @@ void cGame::render()
 	glutSwapBuffers();
 }
 
-void cGame::encapsulateDrawing()
+void Game::encapsulateDrawing()
 {	
 	float eyeX, eyeY, eyeZ;
 	camera.setUpVector(0.0f, 1.0f, 0.0f);

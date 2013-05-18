@@ -1,11 +1,11 @@
-#include "cScene.h"
+#include "Scene.h"
 #include "Globals.h"
 #include <iostream>
 // FIXME:
 #include "GuardPathState.h"
 
-cScene::cScene(void) {}
-cScene::~cScene(void){}
+Scene::Scene(void) {}
+Scene::~Scene(void){}
 
 /*
 void cScene::Draw(cData *Data)
@@ -94,7 +94,7 @@ void cScene::Draw(cData *Data)
 	}
 }
 */
-void cScene::render(GameData &gd)
+void Scene::render(GameData &gd)
 {
 	pbf->render(&gd);
 	// DRAW SPHERE
@@ -128,7 +128,7 @@ void cScene::render(GameData &gd)
 	}
 }
 
-bool cScene::Init()
+bool Scene::Init()
 {
 	drawPlayer = true;
 	go = Player();
@@ -165,13 +165,13 @@ bool cScene::Init()
 	return true;
 }
 
-bool cScene::drawEntity(bool draw)
+bool Scene::drawEntity(bool draw)
 {
 	drawPlayer = draw;
 	return drawPlayer;
 }
 
-void cScene::update(InputHandler &input)
+void Scene::update(InputHandler &input)
 {
 	// vector with all objects
 	landscapeRot += 0.05;
@@ -231,7 +231,7 @@ void cScene::update(InputHandler &input)
 	}
 }
 
-void cScene::getFirstPersonParameters(float &eyex, float &eyey, float &eyez, float &centerx, float &centery, float &centerz) const
+void Scene::getFirstPersonParameters(float &eyex, float &eyey, float &eyez, float &centerx, float &centery, float &centerz) const
 {
 	// HARDCODED
 	float marginY = 2.0f;
@@ -243,28 +243,28 @@ void cScene::getFirstPersonParameters(float &eyex, float &eyey, float &eyez, flo
 	centerz = eyez + 5*sin(go.getYAngle() * 3.1415f / 180.0f);
 }
 
-bool cScene::playerIsDead()
+bool Scene::playerIsDead()
 {
 	return go.isDead();
 }
 
-void cScene::loadLevel(int lvl)
+void Scene::loadLevel(int lvl)
 {
 	// FIXME: natxo aqui has de poder carregar desde 0 el nivell que et demani
 }
 
-void cScene::nextLevel()
+void Scene::nextLevel()
 {
 	// FIXME: aqui fas servir la funcio de dalt o com vulguis
 }
 
-bool cScene::isLevelCompleted()
+bool Scene::isLevelCompleted()
 {
 	// FIXME: aqui vull saber quan el nivell actual s'ha completat i cal passar a la pantalla de next level
 	return false;
 }
 
-bool cScene::isLastLevel()
+bool Scene::isLastLevel()
 {
 	// aqui simplement mira si el current level es el ultim
 	return false;
