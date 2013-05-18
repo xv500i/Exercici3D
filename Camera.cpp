@@ -3,7 +3,7 @@
 #include <gl/glut.h>
 
 
-Camera::Camera(void) : eyeX(0.0f), eyeY(0.0f), eyeZ(0.0f), centerX(1.0f), centerY(0.0f), centerZ(0.0f), upX(0.0f), upY(0.0f), upZ(0.0f) {}
+Camera::Camera(void) : eyeX(1.0f), eyeY(0.0f), eyeZ(0.0f), centerX(0.0f), centerY(0.0f), centerZ(0.0f), upX(0.0f), upY(1.0f), upZ(0.0f) {}
 
 Camera::~Camera(void) {}
 

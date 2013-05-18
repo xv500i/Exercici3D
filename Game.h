@@ -2,7 +2,7 @@
 
 #include "Scene.h"
 #include "InputHandler.h"
-#include "Camera.h"
+#include "FreeCamera.h"
 #include "GameState.h"
 #include "GameMenu.h"
 
@@ -13,7 +13,7 @@ class Game
 {
 private:
 	InputHandler input;
-	Camera camera;
+	FreeCamera camera;
 	Scene Scene;
 	//cData Data;
 	GameData data;			/* Game data */

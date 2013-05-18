@@ -11,7 +11,7 @@ private:
 
 public:
 	FirstPersonCamera(void);
-	~FirstPersonCamera(void);
+	virtual ~FirstPersonCamera(void);
 
 	/* Use the camera (gluLookAt) */
 	void use();

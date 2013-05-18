@@ -106,13 +106,15 @@ bool Game::process()
 		
 		if (input.keyIsDown('p')) gameState = PAUSE_MENU;
 		else {
-			
+
 			//if (input.keyIsDown(27))	res=false;
 			if (input.keyIsDown('1'))	selectedCamera = 1;
 			if (input.keyIsDown('2'))	selectedCamera = 2;
 			if (input.keyIsDown('3'))	selectedCamera = 3;
 			if (input.keyIsDown('4'))	selectedCamera = 4;
 			if (input.keyIsDown('5'))	selectedCamera = 5;
+
+
 			if (input.keyIsDown('z')) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);  
 			else if (input.keyIsDown('x')) glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			Scene.update(input);
@@ -281,6 +283,18 @@ void Game::encapsulateDrawing()
 		break;
 	}
 	camera.setEyePosition(eyeX, eyeY, eyeZ);
+
+	// TODO: MOURE D'AQUI
+	// Free Camera			
+	/*float panX = 0.0f;
+	float panY = 0.0f;
+	float panZ = 0.0f;
+	if (input.keyIsDown('o')) panZ += 1.0f;
+	if (input.keyIsDown('l')) panZ -= 1.0f;
+	if (input.keyIsDown('k')) panX -= 1.0f;
+	if (input.keyIsDown('ñ')) panX += 1.0f;
+	camera.pan(panX, panY, panZ);*/
+
 	camera.use();
 
 	Scene.drawEntity(selectedCamera != 1);
