@@ -1,3 +1,4 @@
+
 #include "Game.h"
 #include "Globals.h"
 #include <cmath>
@@ -6,11 +7,12 @@
 
 
 Game::Game(void) {}
-Game::~Game(void){}
+Game::~Game(void) {}
+
 
 bool Game::init()
 {
-	bool res=true;
+	bool res = true;
 
 	// Random seed
 	srand((unsigned)time(0));
@@ -26,31 +28,27 @@ bool Game::init()
 	glAlphaFunc(GL_GREATER, 0.05f);
 	glEnable(GL_ALPHA_TEST);
 
-	//Scene initialization
-	/*
-	res = Data.LoadImage(IMG_WALL,"wall.png",GL_RGBA);
-	if(!res) return false;
-	res = Data.LoadImage(IMG_FLOOR,"floor.png",GL_RGBA);
-	if(!res) return false;
-	res = Data.LoadImage(IMG_ROOF,"roof.png",GL_RGBA);
-	if(!res) return false;
-	*/
+	// Data loading
 	if (!data.loadTextures()) return false;
 	if (!data.loadTileSheets()) return false;
 	if (!data.loadSprites()) return false;
 	if (!data.loadSounds()) return false;
 
+	// Scene initialization
 	Scene.Init();
 	gameState = MAIN_MENU;
+
+	// Menu creation
 	mainMenu.createMain();
 	instructionsMenu.createInstructions();
 	pauseMenu.createPause();
 	gameOverMenu.createGameOver();
 	congratsMenu.createCongrats();
 	nextLevelMenu.createLevelCompleted();
+	
 	debug = true;
-	selectedCamera = 2;
 	data.playSound(GameData::INTRO_THEME_INDEX);
+
 	return res;
 }
 
@@ -65,7 +63,7 @@ bool Game::loop()
 
 	do {
 		t2 = glutGet(GLUT_ELAPSED_TIME);
-	} while (t2 - t1 < 33);
+	} while (t2 - t1 < 1000/FRAMERATE);
 
 	if (!b) exit(0);
 	return b;
@@ -92,41 +90,38 @@ void Game::readMouse(int button, int state, int x, int y)
 //Process
 bool Game::process()
 {
-	bool res=true;
-	
-	//Process Input
-	
-	
-	//Game Logic
-	//...
+	bool res = true;
 
 	MenuOption m;
 	switch(gameState) {
+	/* PLAYING */
 	case PLAYING:
 		
 		if (input.keyIsDown('p')) gameState = PAUSE_MENU;
 		else {
+			// Active camera
+			if (input.keyIsDown('1')) camera.setActiveCamera(FREE);
+			if (input.keyIsDown('2')) camera.setActiveCamera(STATIC1);
+			if (input.keyIsDown('3')) camera.setActiveCamera(STATIC2);
+			if (input.keyIsDown('4')) camera.setActiveCamera(STATIC3);
+			if (input.keyIsDown('5')) camera.setActiveCamera(STATIC4);
 
-			//if (input.keyIsDown(27))	res=false;
-			if (input.keyIsDown('1'))	selectedCamera = 1;
-			if (input.keyIsDown('2'))	selectedCamera = 2;
-			if (input.keyIsDown('3'))	selectedCamera = 3;
-			if (input.keyIsDown('4'))	selectedCamera = 4;
-			if (input.keyIsDown('5'))	selectedCamera = 5;
-
-
+			// Polygon Mode
 			if (input.keyIsDown('z')) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);  
 			else if (input.keyIsDown('x')) glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			
+			// Scene update
 			Scene.update(input);
 		}
 		if (Scene.playerIsDead()) gameState = GAMEOVER_MENU;
 		else if (Scene.isLevelCompleted()) {
 			bool end = Scene.isLastLevel();
-			if(!end) gameState = GAMEOVER_MENU; // seguent nivell
-			else gameState = NEXT_LEVEL_MENU; // fi del joc
+			if (!end) gameState = GAMEOVER_MENU;	// Game end
+			else gameState = NEXT_LEVEL_MENU;		// Next level
 		}
 		break;
 
+	/* MENUS */ 
 	case MAIN_MENU:
 		if (input.keyIsDown('s')) mainMenu.downPressed();
 		else if (input.keyIsDown('w')) mainMenu.upPressed();
@@ -182,6 +177,7 @@ bool Game::process()
 		} else if (m == QUIT) gameState = EXIT;
 		gameOverMenu.update();
 		break;
+
 	case CONGRATS_MENU:
 		if (input.keyIsDown('s')) congratsMenu.downPressed();
 		else if (input.keyIsDown('w')) congratsMenu.upPressed();
@@ -196,6 +192,7 @@ bool Game::process()
 		}
 		congratsMenu.update();
 		break;
+
 	case NEXT_LEVEL_MENU:
 		if (input.keyIsDown('s')) nextLevelMenu.downPressed();
 		else if (input.keyIsDown('w')) nextLevelMenu.upPressed();
@@ -232,7 +229,13 @@ void Game::render()
 		gluPerspective(45.0, (float)SCREEN_WIDTH/(float)SCREEN_HEIGHT, 0.1, 100);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		encapsulateDrawing(); break;
+		
+		/* Drawing */
+		camera.useActiveCamera();
+		Scene.drawEntity(true);
+		Scene.render(data);
+		
+		break;
 	case MAIN_MENU:			
 		mainMenu.render(&data); break;
 	case PAUSE_MENU:		pauseMenu.render(&data); break;
@@ -245,7 +248,7 @@ void Game::render()
 	glutSwapBuffers();
 }
 
-void Game::encapsulateDrawing()
+/*void Game::encapsulateDrawing()
 {	
 	float eyeX, eyeY, eyeZ;
 	camera.setUpVector(0.0f, 1.0f, 0.0f);
@@ -253,17 +256,17 @@ void Game::encapsulateDrawing()
 
 	eyeY = 15.0f;
 	float module = 30.0f;
-	switch (selectedCamera) {
-	case 1:
+	switch (selectedCamera) {*/
+	/*case 1:
 		//Scene.getFirstPersonParameters(eyex,eyey,eyez,centerx,centery,centerz);
-		/* FIXME
+		 FIXME
 		eyex = Scene.entityX;
 		eyey = Scene.entityY/2;
 		eyez = Scene.entityZ;
 		centerx = eyex + 5*cos(Scene.angle * 3.1415f / 180.0f);
 		centery = eyey;
 		centerz = eyez + 5*sin(Scene.angle * 3.1415f / 180.0f);
-		*/
+		
 		break;
 	case 2:
 		eyeX = module;
@@ -282,7 +285,7 @@ void Game::encapsulateDrawing()
 		eyeZ = -module;
 		break;
 	}
-	camera.setEyePosition(eyeX, eyeY, eyeZ);
+	camera.setEyePosition(eyeX, eyeY, eyeZ);*/
 
 	// TODO: MOURE D'AQUI
 	// Free Camera			
@@ -295,9 +298,9 @@ void Game::encapsulateDrawing()
 	if (input.keyIsDown('ñ')) panX += 1.0f;
 	camera.pan(panX, panY, panZ);*/
 
-	camera.use();
+	/*camera.use();
 
 	Scene.drawEntity(selectedCamera != 1);
 	Scene.render(data);
 	//Scene.Draw(&Data);
-}
+}*/

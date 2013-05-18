@@ -20,4 +20,5 @@ void ThirdPersonCamera::use()
 	glTranslatef(0.0f, 0.0f, -5.0f);
 	glTranslatef(centerX, centerY, centerZ);
 	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 }

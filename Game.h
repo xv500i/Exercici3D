@@ -2,7 +2,7 @@
 
 #include "Scene.h"
 #include "InputHandler.h"
-#include "FreeCamera.h"
+#include "CameraHandler.h"
 #include "GameState.h"
 #include "GameMenu.h"
 
@@ -12,13 +12,15 @@
 class Game
 {
 private:
+	const static int FRAMERATE = 30;
+
 	InputHandler input;
-	FreeCamera camera;
+	CameraHandler camera;
+	//FreeCamera camera;
 	Scene Scene;
-	//cData Data;
 	GameData data;			/* Game data */
 	bool debug;
-	int selectedCamera;
+	//int selectedCamera;
 	
 	GameState gameState;	/* Game state */
 
