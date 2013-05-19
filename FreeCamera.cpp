@@ -7,6 +7,7 @@ FreeCamera::FreeCamera(void) {}
 FreeCamera::~FreeCamera(void) {}
 
 
+/* Panning */
 void FreeCamera::pan(float panX, float panY, float panZ)
 {
 	float eyeX, eyeY, eyeZ;
@@ -22,5 +23,5 @@ void FreeCamera::pan(float panX, float panY, float panZ)
 	centerZ += panZ;
 
 	setEyePosition(eyeX, eyeY, eyeZ);
-	setReferencePoint(eyeX, eyeY, eyeZ);
+	setReferencePoint(centerX, centerY, centerZ);
 }

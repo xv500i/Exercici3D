@@ -41,10 +41,16 @@ public:
 	/* Reset all cameras */
 	void resetDefaults();
 
-	/* Set active camera */
-	void setActiveCamera(CameraType newActiveCamera);
+	/* Free camera */
+	void panFreeCamera(float panX, float panY, float panZ);
 
 	/* Use the camera */
 	void useActiveCamera();
+
+	/* Get active camera */
+	CameraType getActiveCamera();
+
+	/* Set active camera */
+	void setActiveCamera(CameraType newActiveCamera);
 };
 

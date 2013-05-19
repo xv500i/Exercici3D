@@ -106,6 +106,18 @@ bool Game::process()
 			if (input.keyIsDown('4')) camera.setActiveCamera(STATIC3);
 			if (input.keyIsDown('5')) camera.setActiveCamera(STATIC4);
 
+			// Free camera
+			if (camera.getActiveCamera() == FREE) {
+				float panX = 0.0f;
+				float panY = 0.0f;
+				float panZ = 0.0f;
+				if (input.keyIsDown('o')) panX += 1.0f;
+				if (input.keyIsDown('l')) panX -= 1.0f;
+				if (input.keyIsDown('k')) panZ -= 1.0f;
+				if (input.keyIsDown('ñ')) panZ += 1.0f;
+				camera.panFreeCamera(panX, panY, panZ);
+			}
+			
 			// Polygon Mode
 			if (input.keyIsDown('z')) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);  
 			else if (input.keyIsDown('x')) glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
