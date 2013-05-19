@@ -42,7 +42,7 @@ public:
 	void resetDefaults();
 
 	/* Free camera */
-	void panFreeCamera(float panX, float panY, float panZ);
+	void panFreeCamera(float panX, float panZ);
 
 	/* Use the camera */
 	void useActiveCamera();

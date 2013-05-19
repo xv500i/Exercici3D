@@ -6,7 +6,7 @@ const float CameraHandler::STATIC_CAMERA_EYEY = 15.0f;
 const float CameraHandler::STATIC_CAMERA_EYEXZ = 30.0f;
 
 
-CameraHandler::CameraHandler(void) : activeCamera(CameraType::FREE)
+CameraHandler::CameraHandler(void) : activeCamera(FREE)
 {
 	resetDefaults();
 }
@@ -28,9 +28,9 @@ void CameraHandler::resetDefaults()
 }
 
 /* Free camera */
-void CameraHandler::panFreeCamera(float panX, float panY, float panZ)
+void CameraHandler::panFreeCamera(float panX, float panZ)
 {
-	freeCamera.pan(panX, panY, panZ);
+	freeCamera.pan(panX, panZ);
 }
 
 /* Use the camera */

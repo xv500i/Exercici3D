@@ -109,13 +109,12 @@ bool Game::process()
 			// Free camera
 			if (camera.getActiveCamera() == FREE) {
 				float panX = 0.0f;
-				float panY = 0.0f;
 				float panZ = 0.0f;
 				if (input.keyIsDown('o')) panX += 1.0f;
 				if (input.keyIsDown('l')) panX -= 1.0f;
 				if (input.keyIsDown('k')) panZ -= 1.0f;
 				if (input.keyIsDown('ñ')) panZ += 1.0f;
-				camera.panFreeCamera(panX, panY, panZ);
+				camera.panFreeCamera(panX, panZ);
 			}
 			
 			// Polygon Mode
