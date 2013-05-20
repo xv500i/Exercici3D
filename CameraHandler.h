@@ -16,9 +16,11 @@ enum CameraType {
 	STATIC4
 };
 
+
 class CameraHandler
 {
 private:
+	/* Static cameras position */
 	const static float STATIC_CAMERA_EYEY;
 	const static float STATIC_CAMERA_EYEXZ;
 
@@ -44,6 +46,9 @@ public:
 	/* Free camera */
 	void panFreeCamera(float panX, float panZ);
 	void rotateFreeCamera(float angle);
+
+	/* Third Person camera */
+	void updateThirdPersonCamera(float centerX, float centerY, float centerZ, float xzAngle);
 
 	/* Use the camera */
 	void useActiveCamera();

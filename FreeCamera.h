@@ -8,7 +8,7 @@
 class FreeCamera : public Camera
 {
 private:
-	float xzAngle;
+	float xzAngle;	/* Angle that determines the direction on the xz plan */
 
 public:
 	FreeCamera(void);

@@ -3,22 +3,27 @@
 #include "Globals.h"
 
 
-ThirdPersonCamera::ThirdPersonCamera(void) {}
+const float ThirdPersonCamera::Y_OFFSET = 15.0f;
+const float ThirdPersonCamera::XZ_OFFSET = 30.0f;
+
+
+ThirdPersonCamera::ThirdPersonCamera(void) : xzAngle(0.0f) {}
 
 ThirdPersonCamera::~ThirdPersonCamera(void) {}
 
 
-void ThirdPersonCamera::use()
+/* Setters */
+void ThirdPersonCamera::setXZDirection(float newXZAngle)
 {
-	// TODO: NO ESTA ACABAT
+	xzAngle = newXZAngle;
+
 	float centerX, centerY, centerZ;
 	getReferencePoint(centerX, centerY, centerZ);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glRotatef(45.0f, 1.0f, 0.0f, 0.0f);
-	glTranslatef(0.0f, 0.0f, -5.0f);
-	glTranslatef(centerX, centerY, centerZ);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	// CHANGE (sin and cos)
+	float eyeX = centerX + XZ_OFFSET;
+	float eyeY = centerY + Y_OFFSET;
+	float eyeZ = centerZ;
+
+	setEyePosition(eyeX, eyeY, eyeZ);
 }

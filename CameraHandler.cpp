@@ -40,6 +40,14 @@ void CameraHandler::rotateFreeCamera(float angle)
 }
 
 
+/* Third Person camera */
+void CameraHandler::updateThirdPersonCamera(float centerX, float centerY, float centerZ, float xzAngle)
+{
+	thirdPersonCamera.setReferencePoint(centerX, centerY, centerZ);
+	thirdPersonCamera.setXZDirection(xzAngle);
+}
+
+
 /* Use the camera */
 void CameraHandler::useActiveCamera()
 {
