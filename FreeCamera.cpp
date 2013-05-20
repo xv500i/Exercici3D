@@ -18,10 +18,8 @@ void FreeCamera::pan(float panX, float panZ)
 	getEyePosition(eyeX, eyeY, eyeZ);
 	getReferencePoint(centerX, centerY, centerZ);
 
-	// TODO: TEST
-	float deltaX = panX*cos(xzAngle*(float)M_PI/180.0f) + panZ*sin(xzAngle*(float)M_PI/180.0f);
-	float deltaZ = panZ*cos(xzAngle*(float)M_PI/180.0f) + panX*sin(xzAngle*(float)M_PI/180.0f);
-
+	float deltaX = panX*cos(degreesToRadians(xzAngle)) + panZ*cos(degreesToRadians(xzAngle + 90.0f));
+	float deltaZ = panX*sin(degreesToRadians(xzAngle)) + panZ*sin(degreesToRadians(xzAngle + 90.0f));
 	eyeX += deltaX;
 	centerX += deltaX;
 	eyeZ += deltaZ;
@@ -34,11 +32,14 @@ void FreeCamera::pan(float panX, float panZ)
 /* Rotating */
 void FreeCamera::rotate(float angle)
 {
+	float eyeX, eyeY, eyeZ;
 	float centerX, centerY, centerZ;
+	getEyePosition(eyeX, eyeY, eyeZ);
 	getReferencePoint(centerX, centerY, centerZ);
 
-	centerX += cos(degreesToRadians(xzAngle + angle)) - cos(degreesToRadians(angle));
-	centerZ += sin(degreesToRadians(xzAngle + angle)) - sin(degreesToRadians(angle));
+	float distance = distance2D(eyeX, eyeZ, centerX, centerZ);
+	centerX += distance*(cos(degreesToRadians(xzAngle + angle)) - cos(degreesToRadians(xzAngle)));
+	centerZ += distance*(sin(degreesToRadians(xzAngle + angle)) - sin(degreesToRadians(xzAngle)));
 	xzAngle += angle;
 
 	setReferencePoint(centerX, centerY, centerZ);
