@@ -1,8 +1,6 @@
 
 #pragma once
 
-#include <gl/glut.h>
-
 
 enum Key {
 	MOVE_FORWARD,
@@ -12,6 +10,7 @@ enum Key {
 	ROTATE_LEFT,
 	ROTATE_RIGHT,
 };
+
 
 class InputHandler
 {

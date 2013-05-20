@@ -27,6 +27,7 @@ void CameraHandler::resetDefaults()
 	freeCamera.setEyePosition(-STATIC_CAMERA_EYEXZ, STATIC_CAMERA_EYEY, 0.0f);
 }
 
+
 /* Free camera */
 void CameraHandler::panFreeCamera(float panX, float panZ)
 {
@@ -37,6 +38,7 @@ void CameraHandler::rotateFreeCamera(float angle)
 {
 	freeCamera.rotate(angle);
 }
+
 
 /* Use the camera */
 void CameraHandler::useActiveCamera()
@@ -53,11 +55,13 @@ void CameraHandler::useActiveCamera()
 	}
 }
 
+
 /* Get active camera */
 CameraType CameraHandler::getActiveCamera()
 {
 	return activeCamera;
 }
+
 
 /* Set active camera */
 void CameraHandler::setActiveCamera(CameraType newActiveCamera)

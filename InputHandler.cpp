@@ -1,5 +1,6 @@
 
 #include "InputHandler.h"
+#include <gl/glut.h>
 
 
 InputHandler::InputHandler(void)

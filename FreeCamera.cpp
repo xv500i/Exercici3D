@@ -29,6 +29,7 @@ void FreeCamera::pan(float panX, float panZ)
 	setReferencePoint(centerX, centerY, centerZ);
 }
 
+
 /* Rotating */
 void FreeCamera::rotate(float angle)
 {
