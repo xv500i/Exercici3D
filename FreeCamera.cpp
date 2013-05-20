@@ -2,6 +2,7 @@
 #include "FreeCamera.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include "Utility.h"
 
 
 FreeCamera::FreeCamera(void) : xzAngle(0.0f) {}
@@ -33,5 +34,12 @@ void FreeCamera::pan(float panX, float panZ)
 /* Rotating */
 void FreeCamera::rotate(float angle)
 {
+	float centerX, centerY, centerZ;
+	getReferencePoint(centerX, centerY, centerZ);
 
+	centerX += cos(degreesToRadians(xzAngle + angle)) - cos(degreesToRadians(angle));
+	centerZ += sin(degreesToRadians(xzAngle + angle)) - sin(degreesToRadians(angle));
+	xzAngle += angle;
+
+	setReferencePoint(centerX, centerY, centerZ);
 }

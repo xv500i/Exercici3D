@@ -33,6 +33,11 @@ void CameraHandler::panFreeCamera(float panX, float panZ)
 	freeCamera.pan(panX, panZ);
 }
 
+void CameraHandler::rotateFreeCamera(float angle)
+{
+	freeCamera.rotate(angle);
+}
+
 /* Use the camera */
 void CameraHandler::useActiveCamera()
 {

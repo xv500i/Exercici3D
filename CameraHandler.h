@@ -43,6 +43,7 @@ public:
 
 	/* Free camera */
 	void panFreeCamera(float panX, float panZ);
+	void rotateFreeCamera(float angle);
 
 	/* Use the camera */
 	void useActiveCamera();
