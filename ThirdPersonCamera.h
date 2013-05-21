@@ -17,7 +17,9 @@ public:
 	ThirdPersonCamera(void);
 	virtual ~ThirdPersonCamera(void);
 
+	/* Update */
+	void update();
+
 	/* Setters */
 	void setXZDirection(float newXZAngle);
 };
-

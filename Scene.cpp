@@ -171,7 +171,7 @@ bool Scene::drawEntity(bool draw)
 	return drawPlayer;
 }
 
-void Scene::update(InputHandler &input)
+void Scene::update(InputHandler &input, CameraHandler &camera)
 {
 	// vector with all objects
 	landscapeRot += 0.05;
@@ -229,6 +229,11 @@ void Scene::update(InputHandler &input)
 		enemies[i].update(inclination, objects, go.getXPosition(), go.getZPosition());
 		enemies[i].setYPosition(pbf->getHeightAt(enemies[i].getXPosition(), enemies[i].getZPosition()));
 	}
+
+	// Third person camera
+	Point3D playerPos = go.getPosition();
+	float xzAngle = go.getYAngle();
+	camera.updateThirdPersonCamera(playerPos.getX(), playerPos.getY(), playerPos.getZ(), xzAngle);
 }
 
 void Scene::getFirstPersonParameters(float &eyex, float &eyey, float &eyez, float &centerx, float &centery, float &centerz) const

@@ -4,6 +4,7 @@
 //#include "cData.h"
 #include "Player.h"
 #include "InputHandler.h"
+#include "CameraHandler.h"
 #include "PixelBasedFloor.h"
 #include "Enemy.h"
 #include <vector>
@@ -23,7 +24,7 @@ public:
 	bool drawEntity(bool draw);
 	//void Draw(cData *Data);
 	void render(GameData &gd);
-	void update(InputHandler &input);
+	void update(InputHandler &input, CameraHandler &camera);
 	void getFirstPersonParameters(float &eyex, float &eyey, float &eyez, float &centerx, float &centery, float &centerz) const;
 	bool playerIsDead();
 	void loadLevel(int lvl);

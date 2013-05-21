@@ -1,50 +1,62 @@
+
 #pragma once
 
-#include "Scene.h"
 #include "InputHandler.h"
 #include "CameraHandler.h"
+#include "MenuHandler.h"
+#include "Scene.h"
 #include "GameState.h"
 #include "GameMenu.h"
 
-#define SCREEN_WIDTH	800
-#define SCREEN_HEIGHT	600
 
 class Game
 {
 private:
+	/* Game desired framerate */
 	const static int FRAMERATE = 30;
 
-	InputHandler input;
-	CameraHandler camera;
-	//FreeCamera camera;
-	Scene Scene;
+	InputHandler input;		/* Input handler */
+	MenuHandler menus;		/* Menu handler */
+	CameraHandler camera;	/* Camera handler */
 	GameData data;			/* Game data */
-	bool debug;
-	//int selectedCamera;
-	
 	GameState gameState;	/* Game state */
+	Scene scene;			/* The scene */
 
 	/* Game menus */
-	GameMenu mainMenu;
+	/*GameMenu mainMenu;
 	GameMenu instructionsMenu;
 	GameMenu pauseMenu;
 	GameMenu gameOverMenu;
 	GameMenu congratsMenu;
-	GameMenu nextLevelMenu;
+	GameMenu nextLevelMenu;*/
+
+	bool debug;
 
 public:
+	/* Game screen size */
+	const static int SCREEN_WIDTH = 800;
+	const static int SCREEN_HEIGHT = 600;
+
 	Game(void);
 	virtual ~Game(void);
 
+	/* Game initialization */
 	bool init();
+
+	/* Game loop */
 	bool loop();
+
+	/* Game finalization */
 	void finalize();
-	//Input
+	
+	/* Input */
 	void readKeyboard(unsigned char key, int x, int y, bool press);
 	void readMouse(int button, int state, int x, int y);
-	//Process
+	
+	/* Process */
 	bool process();
-	//Output
+	
+	/* Render */
 	void render();
 	void encapsulateDrawing();
 };

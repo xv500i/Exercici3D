@@ -7,7 +7,6 @@
 
 
 enum CameraType {
-	FIRST_PERSON,
 	THIRD_PERSON,
 	FREE,
 	STATIC1,
@@ -24,7 +23,6 @@ private:
 	const static float STATIC_CAMERA_EYEY;
 	const static float STATIC_CAMERA_EYEXZ;
 
-	//FirstPersonCamera firstPersonCamera;	// NOT USED
 	ThirdPersonCamera thirdPersonCamera;	/* Third person camera (the game actual camera) */
 	FreeCamera freeCamera;					/* Free camera for debuging purposes */
 	

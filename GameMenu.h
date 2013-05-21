@@ -15,7 +15,7 @@ public:
 	void createMain();
 	void createPause();
 	void createInstructions();
-	void render(GameData *data);
+	void render(GameData &data);
 	void update();
 	void upPressed();
 	void downPressed();

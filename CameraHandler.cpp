@@ -45,6 +45,7 @@ void CameraHandler::updateThirdPersonCamera(float centerX, float centerY, float 
 {
 	thirdPersonCamera.setReferencePoint(centerX, centerY, centerZ);
 	thirdPersonCamera.setXZDirection(xzAngle);
+	thirdPersonCamera.update();
 }
 
 
@@ -52,7 +53,6 @@ void CameraHandler::updateThirdPersonCamera(float centerX, float centerY, float 
 void CameraHandler::useActiveCamera()
 {
 	switch (activeCamera) {
-	//case FIRST_PERSON:  firstPersonCamera.use(); break;
 	case THIRD_PERSON:	thirdPersonCamera.use(); break;
 	case FREE:			freeCamera.use(); break;
 	case STATIC1:		staticCamera1.use(); break;

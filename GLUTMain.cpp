@@ -61,11 +61,11 @@ void main(int argc, char** argv)
 	// Create centered window
 	res_x = glutGet(GLUT_SCREEN_WIDTH);
 	res_y = glutGet(GLUT_SCREEN_HEIGHT);
-	pos_x = (res_x>>1) - (SCREEN_WIDTH>>1);
-	pos_y = (res_y>>1) - (SCREEN_HEIGHT>>1);
+	pos_x = (res_x>>1) - (Game::SCREEN_WIDTH>>1);
+	pos_y = (res_y>>1) - (Game::SCREEN_HEIGHT>>1);
 	
 	glutInitWindowPosition(pos_x, pos_y);
-	glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	glutInitWindowSize(Game::SCREEN_WIDTH, Game::SCREEN_HEIGHT);
 	glutCreateWindow("My Awesome 3D Game!");
 
 	// Full Screen
