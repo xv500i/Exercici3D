@@ -58,5 +58,4 @@ public:
 	
 	/* Render */
 	void render();
-	void encapsulateDrawing();
 };

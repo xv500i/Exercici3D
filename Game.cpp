@@ -40,12 +40,6 @@ bool Game::init()
 	gameState = MAIN_MENU;
 
 	// Menu creation
-	/*mainMenu.createMain();
-	instructionsMenu.createInstructions();
-	pauseMenu.createPause();
-	gameOverMenu.createGameOver();
-	congratsMenu.createCongrats();
-	nextLevelMenu.createLevelCompleted();*/
 	menus.createMenus();
 	
 	debug = true;
@@ -101,11 +95,11 @@ bool Game::process()
 	/* PLAYING */
 	case PLAYING:
 		menu = false;
-		if (input.keyIsDown('p')) gameState = PAUSE_MENU;
+		if (input.keyIsDown('p')) gameState = PAUSE_MENU;	// TODO: afegir a l'inputHandler
 		else {
-			// Active camera
-			if (input.keyIsDown('1')) camera.setActiveCamera(FREE);
-			if (input.keyIsDown('2')) camera.setActiveCamera(THIRD_PERSON);
+			// Active camera --> TODO: deixar canviar nomes en mode debug
+			if (input.keyIsDown('1')) camera.setActiveCamera(THIRD_PERSON);
+			if (input.keyIsDown('2')) camera.setActiveCamera(FREE);
 			if (input.keyIsDown('3')) camera.setActiveCamera(STATIC1);
 			if (input.keyIsDown('4')) camera.setActiveCamera(STATIC2);
 			if (input.keyIsDown('5')) camera.setActiveCamera(STATIC3);
@@ -113,6 +107,9 @@ bool Game::process()
 
 			// Free camera
 			if (camera.getActiveCamera() == FREE) {
+
+				// TODO: canviar per camera.resolveFreeCameraInput(input);
+
 				float panX = 0.0f;
 				float panZ = 0.0f;
 				float angle = 0.0f;
