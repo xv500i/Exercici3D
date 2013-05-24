@@ -1,7 +1,7 @@
 
 #include "Game.h"
 #include "Globals.h"
-#include <math.h>
+#include <cmath>
 #include <time.h>
 #include <random>
 

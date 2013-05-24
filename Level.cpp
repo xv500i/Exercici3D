@@ -1,6 +1,6 @@
 
 #include "Level.h"
-#include <math.h>
+#include <cmath>
 
 
 Level::Level(void) {}

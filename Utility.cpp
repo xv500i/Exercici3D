@@ -1,5 +1,7 @@
 
 #include "Utility.h"
+#define _USE_MATH_DEFINES
+#include <cmath>
 
 
 float radiansToDegrees(float angleInRadians)

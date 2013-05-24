@@ -1,7 +1,10 @@
+
 #include "Player.h"
-#include "Globals.h"
+#include <gl/glut.h>
 #include <iostream>
 #include <cmath>
+
+
 Player::Player(void)
 {
 	type = 'p';
@@ -10,10 +13,7 @@ Player::Player(void)
 	rotZ = 0.0f;
 }
 
-
-Player::~Player(void)
-{
-}
+Player::~Player(void) {}
 
 void Player::render(GameData &data) const 
 {

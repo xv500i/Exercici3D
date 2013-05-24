@@ -2,8 +2,6 @@
 #include "Scene.h"
 #include <gl/glut.h>
 #include <iostream>
-// FIXME:
-#include "GuardPathState.h"
 
 
 Scene::Scene(void) {}
