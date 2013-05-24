@@ -25,11 +25,10 @@ Obstacle::Obstacle(float x, float y, float z, float height, float radius, Obstac
 	type = 'o';
 }
 	
-void Obstacle::render(GameData *data) const
+void Obstacle::render(GameData &data) const
 {
 	// TODO BILLBOARD
 	glPushMatrix();
-		glDisable(GL_TEXTURE_2D);
 		glColor3f(1.0f,1.0f,1.0f);
 		// FIXME HARDCODED : radius
 
@@ -44,6 +43,4 @@ void Obstacle::render(GameData *data) const
 
 	glPopMatrix();
 	renderBoundingCilinder();
-	glEnable(GL_TEXTURE_2D);
-	
 }

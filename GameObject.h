@@ -17,7 +17,7 @@ public:
 	void setYPosition(float v);
 	void setZPosition(float v);
 	void update();
-	void render(GameData *data) const;
+	void render(GameData &data) const;
 	float getYAngle() const;
 	void setYAngle(float newYAngle);
 	bool getDrawAxis() const;

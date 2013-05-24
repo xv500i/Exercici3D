@@ -134,9 +134,8 @@ void MobileGameObject::floorReached()
 	footOnGround = true;
 }
 
-void MobileGameObject::render(GameData *data) const
+void MobileGameObject::render(GameData &data) const
 {
-	glDisable(GL_TEXTURE_2D);
 	glPushMatrix();
 		
 		if (footOnGround) {
@@ -180,15 +179,10 @@ void MobileGameObject::render(GameData *data) const
 	
 	renderBoundingCilinder();
 
-	glDisable(GL_TEXTURE_2D);
 	glBegin(GL_LINES);
-	
-	glVertex3f(getXPosition(), getYPosition(), getZPosition());
-	glVertex3f(getXPosition()+inclination.getX(), getYPosition()+inclination.getY(), getZPosition()+inclination.getZ());
+		glVertex3f(getXPosition(), getYPosition(), getZPosition());
+		glVertex3f(getXPosition()+inclination.getX(), getYPosition()+inclination.getY(), getZPosition()+inclination.getZ());
 	glEnd();
-	glEnable(GL_TEXTURE_2D);
-
-	glEnable(GL_TEXTURE_2D);
 }
 
 void MobileGameObject::clearYVelocity()

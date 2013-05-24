@@ -9,7 +9,7 @@ public:
 	Player(void);
 	~Player(void);
 
-	void render(GameData *data) const;
+	void render(GameData &data) const;
 	bool isDead();
 	void update(Vector3D &inclination, std::vector<GameObject*> &objects);
 	void resetRot();

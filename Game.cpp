@@ -36,7 +36,7 @@ bool Game::init()
 	if (!data.loadSounds()) return false;
 
 	// Scene initialization
-	scene.Init();
+	scene.init();
 
 	// Menu creation
 	menus.createMenus();
@@ -101,7 +101,8 @@ bool Game::process()
 			
 			// Scene update	
 			if (input.keyIsDown('r')) scene.resetRot();
-			scene.update(input, camera);
+			scene.resolveInput(input);
+			scene.update(camera);
 		}
 		/* GAMEPLAY */
 		if (scene.playerIsDead()) gameState = GAMEOVER_MENU;	// Game end (lose)

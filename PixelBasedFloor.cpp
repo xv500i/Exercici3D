@@ -22,10 +22,8 @@ PixelBasedFloor::~PixelBasedFloor(void)
 {
 }
 
-void PixelBasedFloor::render(GameData *data) const
+void PixelBasedFloor::render(GameData &data) const
 {
-	glEnable(GL_TEXTURE_2D);
-
 	// Map coordinates
 	float initialX = -(distanceBetweenPixels * ( (float)getPixelsWidth() / 2));
 	float initialZ = -(distanceBetweenPixels * ( (float)getPixelsHeigth() / 2));
@@ -34,13 +32,14 @@ void PixelBasedFloor::render(GameData *data) const
 	// Texture coordinates
 	int texWidth, texHeight;
 	float s, t;
-	data->getTextureSizeInPixels(GameData::LEVEL1_TEXTURE_INDEX, &texWidth, &texHeight);
+	data.getTextureSizeInPixels(GameData::LEVEL1_TEXTURE_INDEX, &texWidth, &texHeight);
 	float offsetS = 1.0f/(float)getPixelsWidth();
 	float offsetT = 1.0f/(float)getPixelsHeigth();
 	
+	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
 		glColor3f(1.0f, 1.0f, 1.0f);
-		glBindTexture(GL_TEXTURE_2D, data->getTextureID(GameData::LEVEL1_TEXTURE_INDEX));
+		glBindTexture(GL_TEXTURE_2D, data.getTextureID(GameData::LEVEL1_TEXTURE_INDEX));
 		glRotatef(90.0, 0.0f, 1.0f, 0.0f);
 		glScalef(-1.0f, 1.0f, 1.0f);
 		glBegin(GL_QUADS);
@@ -69,6 +68,7 @@ void PixelBasedFloor::render(GameData *data) const
 			}
 		glEnd();
 	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
 }
 
 int PixelBasedFloor::getPixelsWidth() const

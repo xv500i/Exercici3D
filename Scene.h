@@ -1,44 +1,47 @@
+
 #pragma once
 
+#include <vector>
 #include "GameData.h"
-#include "Player.h"
 #include "InputHandler.h"
 #include "CameraHandler.h"
+#include "Player.h"
 #include "HUD.h"
-#include "PixelBasedFloor.h"
-#include "Enemy.h"
-#include <vector>
-#include "Obstacle.h"
+#include "Level.h"
 
-#define SCENE_WIDTH		16
-#define SCENE_DEPTH		32
-#define SCENE_HEIGHT	 4
 
 class Scene
 {
+private:
+	const static int NUM_LEVELS = 3;
+
+	HUD hud;		/* HUD (player life & items) */
+	Player player;	/* The player */
+	Level level;	/* The level */
+	
+	int currentLevel;
+
+	bool drawPlayer;
+
 public:
 	Scene(void);
 	virtual ~Scene(void);
 
-	bool Init();
+	/* Scene initialization */
+	bool init();
+
+	/* Update */
+	void resolveInput(InputHandler &input);
+	void update(CameraHandler &camera);
+
+	/* Render */
+	void render(GameData &data);
+
 	bool drawEntity(bool draw);
-	//void Draw(cData *Data);
-	void render(GameData &gd);
-	void update(InputHandler &input, CameraHandler &camera);
-	void getFirstPersonParameters(float &eyex, float &eyey, float &eyez, float &centerx, float &centery, float &centerz) const;
 	bool playerIsDead();
-	void loadLevel(int lvl);
+	void loadLevel(int levelNumber);
 	void nextLevel();
 	bool isLevelCompleted();
 	bool isLastLevel();
 	void resetRot();
-private:
-	Player go;
-	bool drawPlayer;
-	PixelBasedFloor *pbf;
-	std::vector<Enemy> enemies;
-	std::vector<Obstacle> obstacles;
-	float landscapeRot;
-
-	HUD hud;
 };

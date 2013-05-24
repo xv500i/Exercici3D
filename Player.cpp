@@ -15,13 +15,12 @@ Player::~Player(void)
 {
 }
 
-void Player::render(GameData *data) const 
+void Player::render(GameData &data) const 
 {
 	glEnable(GL_TEXTURE_2D);
-	
 	glPushMatrix();
 		glColor3f(1.0f, 1.0f, 1.0f);
-		glBindTexture(GL_TEXTURE_2D, data->getTextureID(GameData::PLAYER_TEXTURE_INDEX));
+		glBindTexture(GL_TEXTURE_2D, data.getTextureID(GameData::PLAYER_TEXTURE_INDEX));
 		glTranslatef(getXPosition(),getYPosition() + 1.0f,getZPosition());
 		//glRotatef(-getYAngle(), 0.0f, 1.0f, 0.0f);
 		//glRotatef(rotZ, 0.0f , 180.0f * sin( rotX * 3.1415 / 180.0f ) / 3.1415, 180.0f * cos( rotX * 3.1415 / 180.0f ) / 3.1415);
@@ -53,9 +52,9 @@ void Player::render(GameData *data) const
 			glEnd();
 
 		gluDeleteQuadric(q);
-		
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
+
 	glColor3f(1.0f,1.0f,1.0f);
 	if (getDrawAxis()) {
 		glPushMatrix();

@@ -5,7 +5,9 @@
 
 HUDElement::HUDElement() {}
 
-HUDElement::HUDElement(int x, int y, int width, int height, int textureIndex) : x(x), y(y), width(width), height(height), textureIndex(textureIndex) {}
+HUDElement::HUDElement(int x, int y, int width, int height, int textureIndex) 
+	: x(x), y(y), width(width), height(height), textureIndex(textureIndex) 
+{}
 
 HUDElement::~HUDElement(void) {}
 
@@ -13,8 +15,9 @@ HUDElement::~HUDElement(void) {}
 /* Render */
 void HUDElement::render(GameData &data)
 {
-	glBindTexture(GL_TEXTURE_2D, data.getTextureID(textureIndex));
+	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
+		glBindTexture(GL_TEXTURE_2D, data.getTextureID(textureIndex));
 		glBegin(GL_QUADS);
 			// Top-left
 			glTexCoord2f(0.0f, 0.0f);
@@ -30,6 +33,7 @@ void HUDElement::render(GameData &data)
 			glVertex2i(x, y + height);
 		glEnd();
 	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
 }
 
 

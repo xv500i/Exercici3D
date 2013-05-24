@@ -49,10 +49,9 @@ void GameObject::update()
 
 }
 
-void GameObject::render(GameData *data) const
+void GameObject::render(GameData &data) const
 {
 	glPushMatrix();
-		glDisable(GL_TEXTURE_2D);
 		glColor3f(1.0f,1.0f,1.0f);
 		// FIXME HARDCODED : radius
 
@@ -84,7 +83,6 @@ void GameObject::render(GameData *data) const
 			glEnd();
 		}
 	glPopMatrix();
-	glEnable(GL_TEXTURE_2D);
 }
 
 void GameObject::setYAngle(float newYAngle)
