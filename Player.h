@@ -11,8 +11,13 @@ public:
 
 	void render(GameData *data) const;
 	bool isDead();
-
+	void update(Vector3D &inclination, std::vector<GameObject*> &objects);
+	void resetRot();
 protected:
 	virtual void tractarColisions(std::vector<GameObject*> &objects);
+
+private:
+	float rotX;
+	float rotZ;
 };
 

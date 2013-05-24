@@ -104,7 +104,7 @@ bool Game::process()
 			if (input.keyIsDown('4')) camera.setActiveCamera(STATIC2);
 			if (input.keyIsDown('5')) camera.setActiveCamera(STATIC3);
 			if (input.keyIsDown('6')) camera.setActiveCamera(STATIC4);
-
+			if (input.keyIsDown('r')) scene.resetRot();
 			// Free camera
 			if (camera.getActiveCamera() == FREE) {
 

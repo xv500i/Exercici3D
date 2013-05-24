@@ -1,10 +1,11 @@
 #include "Player.h"
 #include "Globals.h"
 
-
 Player::Player(void)
 {
 	type = 'p';
+	rotX = 0.0f;
+	rotZ = 0.0f;
 }
 
 
@@ -20,7 +21,12 @@ void Player::render(GameData *data) const
 		glColor3f(1.0f, 1.0f, 1.0f);
 		glBindTexture(GL_TEXTURE_2D, data->getTextureID(GameData::PLAYER_TEXTURE_INDEX));
 		glTranslatef(getXPosition(),getYPosition() + 1.0f,getZPosition());
-		glRotatef(-getYAngle(), 0.0f, 1.0f, 0.0f);
+		//glRotatef(-getYAngle(), 0.0f, 1.0f, 0.0f);
+		//glRotatef(rotZ, 0.0f , 180.0f * sin( rotX * 3.1415 / 180.0f ) / 3.1415, 180.0f * cos( rotX * 3.1415 / 180.0f ) / 3.1415);
+		glRotatef(rotZ, 0.0f, 0.0f, 1.0f);
+		glRotatef(rotX, 1.0f, 0.0f, 0.0f);
+		
+		
 
 		GLUquadricObj *q = gluNewQuadric();
 		gluQuadricOrientation(q, GLU_OUTSIDE);
@@ -106,4 +112,22 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 			}
 		}
 	}
+}
+
+void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects)
+{
+	float initialX = getXPosition();
+	float initialZ = getZPosition();
+	MobileGameObject::update(inclination, objects);
+	float finalX = getXPosition();
+	float finalZ = getZPosition();
+	//                                     2 *   pi    * r
+	rotX += (finalZ - initialZ) * 360.0 / (2 * 3.1415f * 1);
+	rotZ -= (finalX - initialX) * 360.0 / (2 * 3.1415f * 1);
+}
+
+void Player::resetRot()
+{
+	rotZ = 0.0f;
+	rotX = 0.0f;
 }
