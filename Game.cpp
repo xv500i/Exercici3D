@@ -130,6 +130,7 @@ bool Game::process()
 		case START_GAME:
 			gameState = PLAYING;
 			data.stopAllSounds();
+			data.playSound(GameData::JUNGLE_THEME_INDEX);
 			scene.loadLevel(1);		// Start first level
 			break;
 		case RESTART_GAME: 

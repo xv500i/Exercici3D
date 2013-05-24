@@ -50,8 +50,8 @@ void CameraHandler::resolveFreeCameraInput(InputHandler &input)
 	if (input.keyIsDown(input.getKey(CAMERA_MOVE_BACKWARD))) panX -= 1.0f;
 	if (input.keyIsDown(input.getKey(CAMERA_MOVE_LEFT)))	 panZ -= 1.0f;
 	if (input.keyIsDown(input.getKey(CAMERA_MOVE_RIGHT)))	 panZ += 1.0f;
-	if (input.keyIsDown(input.getKey(CAMERA_ROTATE_LEFT)))	 angle -= 1.0f;
-	if (input.keyIsDown(input.getKey(CAMERA_ROTATE_RIGHT)))  angle += 1.0f;
+	if (input.keyIsDown(input.getKey(CAMERA_ROTATE_LEFT)))	 angle -= 3.0f;
+	if (input.keyIsDown(input.getKey(CAMERA_ROTATE_RIGHT)))  angle += 3.0f;
 	panFreeCamera(panX, panZ);
 	rotateFreeCamera(angle);
 }
