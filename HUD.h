@@ -9,8 +9,8 @@ class HUD
 {
 private:
 	const static int MAX_LIFE = 3;
-	const static int LIFE_ELEMENT_SIZE = 32;
-	const static int ITEM_ELEMENT_SIZE = 32;
+	const static int LIFE_ELEMENT_SIZE = 48;
+	const static int ITEM_ELEMENT_SIZE = 48;
 
 	std::vector<HUDElement> playerLife;
 	std::vector<HUDElement> playerItems;
