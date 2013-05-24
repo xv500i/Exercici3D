@@ -25,21 +25,19 @@ PixelBasedFloor::~PixelBasedFloor(void)
 void PixelBasedFloor::render(GameData *data) const
 {
 	glEnable(GL_TEXTURE_2D);
-	//TODO
+
+	// Map coordinates
 	float initialX = -(distanceBetweenPixels * ( (float)getPixelsWidth() / 2));
 	float initialZ = -(distanceBetweenPixels * ( (float)getPixelsHeigth() / 2));
 	float factor = maxHeight - minHeigth;
 	
+	// Texture coordinates
 	int texWidth, texHeight;
+	float s, t;
 	data->getTextureSizeInPixels(GameData::LEVEL1_TEXTURE_INDEX, &texWidth, &texHeight);
-	float widhtInPixelsPerStep = (float)texWidth/(float)getPixelsWidth();
-	float heightInPixelsPerStep = (float)texHeight/(float)getPixelsHeigth();
-	float offsetS = widhtInPixelsPerStep/(float)texWidth;
-	float offsetT = heightInPixelsPerStep/(float)texHeight;
+	float offsetS = 1.0f/(float)getPixelsWidth();
+	float offsetT = 1.0f/(float)getPixelsHeigth();
 	
-	/*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);*/
-
 	glPushMatrix();
 		glColor3f(1.0f, 1.0f, 1.0f);
 		glBindTexture(GL_TEXTURE_2D, data->getTextureID(GameData::LEVEL1_TEXTURE_INDEX));
@@ -49,25 +47,20 @@ void PixelBasedFloor::render(GameData *data) const
 			for (int i = 0; i < getPixelsHeigth(); i++) {
 				float auxX = initialX;
 				for (int j = 0; j < getPixelsWidth(); j++) {
-					//if ((j+i)%2 == 0) glColor3f(1.0f, 0.0f, 0.0f);
-					//else glColor3f(0.0f, 1.0f, 0.0f);
-					float s = offsetS*(float)j;
-					float t = offsetT*(float)i;
-					/*float s = (float)i/(float)getPixelsHeigth();
-					float t = (float)j/(float)getPixelsWidth();
-					float offsetS = 1.0/(float)getPixelsHeigth();
-					float offsetT = 1.0/(float)getPixelsWidth();*/
+					s = offsetS*(float)j;
+					t = offsetT*(float)i;
 
-					glTexCoord2f(s, t + offsetT);
-					glVertex3f(auxX, points[i][j]*factor, initialZ);
-
-					glTexCoord2f(s + offsetS, t + offsetT);
-					glVertex3f(auxX+distanceBetweenPixels, points[i][j+1]*factor, initialZ);
-
-					glTexCoord2f(s + offsetS, t);
-					glVertex3f(auxX+distanceBetweenPixels, points[i+1][j+1]*factor, initialZ+distanceBetweenPixels);
-
+					// Top-left
 					glTexCoord2f(s, t);
+					glVertex3f(auxX, points[i][j]*factor, initialZ);
+					// Top-right
+					glTexCoord2f(s + offsetS, t);
+					glVertex3f(auxX+distanceBetweenPixels, points[i][j+1]*factor, initialZ);
+					// Bottom-right
+					glTexCoord2f(s + offsetS, t + offsetT);
+					glVertex3f(auxX+distanceBetweenPixels, points[i+1][j+1]*factor, initialZ+distanceBetweenPixels);
+					// Bottom-left
+					glTexCoord2f(s, t + offsetT);
 					glVertex3f(auxX, points[i+1][j]*factor, initialZ+distanceBetweenPixels);
 					
 					auxX += distanceBetweenPixels;
