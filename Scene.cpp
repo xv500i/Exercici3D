@@ -110,7 +110,7 @@ void Scene::render(GameData &gd)
 		GLUquadricObj *q = gluNewQuadric();
 		gluQuadricOrientation(q, GLU_OUTSIDE);
 		gluQuadricTexture(q, GL_TRUE);
-		gluSphere(q, 40.0f,16,16);
+		gluSphere(q, 120.0f,16,16);
 		
 		gluDeleteQuadric(q);
 		

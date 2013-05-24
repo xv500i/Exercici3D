@@ -22,7 +22,7 @@ bool Game::init()
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(45.0, (float)SCREEN_WIDTH/(float)SCREEN_HEIGHT, 0.1, 100);
+	gluPerspective(45.0, (float)SCREEN_WIDTH/(float)SCREEN_HEIGHT, 0.1, 10000);
 	glMatrixMode(GL_MODELVIEW);
 	
 	glEnable(GL_DEPTH_TEST);
@@ -192,7 +192,7 @@ void Game::render()
 	if (gameState == PLAYING) {
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		gluPerspective(45.0, (float)SCREEN_WIDTH/(float)SCREEN_HEIGHT, 0.1, 100);
+		gluPerspective(45.0, (float)SCREEN_WIDTH/(float)SCREEN_HEIGHT, 0.1, 10000);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		
