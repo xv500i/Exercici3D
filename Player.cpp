@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Globals.h"
 #include <iostream>
+#include <cmath>
 Player::Player(void)
 {
 	type = 'p';
@@ -24,9 +25,9 @@ void Player::render(GameData *data) const
 		glTranslatef(getXPosition(),getYPosition() + 1.0f,getZPosition());
 		//glRotatef(-getYAngle(), 0.0f, 1.0f, 0.0f);
 		//glRotatef(rotZ, 0.0f , 180.0f * sin( rotX * 3.1415 / 180.0f ) / 3.1415, 180.0f * cos( rotX * 3.1415 / 180.0f ) / 3.1415);
-		glRotatef(rotZ, 0.0f, 1.0f , 0.0f);
-		glRotatef(rotX, 1.0f, 0.0f, 0.0f);
-		
+		glRotatef(rotZ, 0.0f, 0.0f , 1.0f);
+		glRotatef(rotX, cos(rotZ * 3.1415 / 180.0f) , -sin(rotZ * 3.1415 / 180.0f), 0.0f);
+		std::cout << "Angles" << cos(rotZ * 3.1415 / 180.0f) << ' ' << -sin(rotZ * 3.1415 / 180.0f) << std::endl;
 		
 
 		GLUquadricObj *q = gluNewQuadric();
