@@ -151,7 +151,6 @@ bool Game::process()
 		}
 		menus.updateActiveMenu();
 	}
-
 	return gameState != EXIT;
 }
 
