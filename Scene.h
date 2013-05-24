@@ -31,6 +31,7 @@ public:
 	void nextLevel();
 	bool isLevelCompleted();
 	bool isLastLevel();
+	void resetRot();
 private:
 	Player go;
 	bool drawPlayer;

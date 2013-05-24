@@ -285,3 +285,8 @@ bool Scene::isLastLevel()
 	// aqui simplement mira si el current level es el ultim
 	return false;
 }
+
+void Scene::resetRot()
+{
+	go.resetRot();
+}
