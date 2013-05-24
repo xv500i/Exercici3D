@@ -14,13 +14,36 @@ InputHandler::~InputHandler(void) {}
 /* Reset key defaults */
 void InputHandler::resetDefaults()
 {
-	// Movement keys
-	moveForwardKey = DEFAULT_MOVEFORWARD_KEY;
-	moveBackwardKey = DEFAULT_MOVEBACKWARD_KEY;
-	rotateLeftKey = DEFAULT_ROTATELEFT_KEY;
-	rotateRightKey = DEFAULT_ROTATERIGHT_KEY;
-	moveLeftKey = DEFAULT_MOVELEFT_KEY;
-	moveRightKey = DEFAULT_MOVERIGHT_KEY; 
+	/* Player movement */
+	keyMap[MOVE_FORWARD] = DEFAULT_MOVE_FORWARD_KEY;
+	keyMap[MOVE_BACKWARD] = DEFAULT_MOVE_BACKWARD_KEY;
+	keyMap[ROTATE_LEFT] = DEFAULT_ROTATE_LEFT_KEY;
+	keyMap[ROTATE_RIGHT] = DEFAULT_ROTATE_RIGHT_KEY;
+	keyMap[MOVE_LEFT] = DEFAULT_MOVE_LEFT_KEY;
+	keyMap[MOVE_RIGHT] = DEFAULT_MOVE_RIGHT_KEY; 
+	keyMap[JUMP] = DEFAULT_JUMP_KEY;
+	/* Menu */
+	keyMap[MENU_UP] = DEFAULT_MENU_UP_KEY;
+	keyMap[MENU_DOWN] = DEFAULT_MENU_DOWN_KEY;
+	keyMap[MENU_SELECTION] = DEFAULT_MENU_SELECTION_KEY;
+	keyMap[SHOW_PAUSE_MENU] = DEFAULT_PAUSE_MENU_KEY;
+	/* Camera selection */
+	keyMap[THIRD_PERSON_CAMERA] = DEFAULT_THIRD_PERSON_CAMERA_KEY;
+	keyMap[FREE_CAMERA] = DEFAULT_FREE_CAMERA_KEY;
+	keyMap[STATIC1_CAMERA] = DEFAULT_STATIC1_CAMERA_KEY;
+	keyMap[STATIC2_CAMERA] = DEFAULT_STATIC2_CAMERA_KEY;
+	keyMap[STATIC3_CAMERA] = DEFAULT_STATIC3_CAMERA_KEY;
+	keyMap[STATIC4_CAMERA] = DEFAULT_STATIC4_CAMERA_KEY;
+	/* Free camera movement */
+	keyMap[CAMERA_MOVE_FORWARD] = DEFAULT_CAMERA_MOVE_FORWARD_KEY;
+	keyMap[CAMERA_MOVE_BACKWARD] = DEFAULT_CAMERA_MOVE_BACKWARD_KEY;
+	keyMap[CAMERA_MOVE_LEFT] = DEFAULT_CAMERA_MOVE_LEFT_KEY;
+	keyMap[CAMERA_MOVE_RIGHT] = DEFAULT_CAMERA_MOVE_RIGHT_KEY;
+	keyMap[CAMERA_ROTATE_LEFT] = DEFAULT_CAMERA_ROTATE_LEFT_KEY;
+	keyMap[CAMERA_ROTATE_RIGHT] = DEFAULT_CAMERA_ROTATE_RIGHT_KEY;
+	/* Polygon mode */
+	keyMap[WIREFRAME_MODE] = DEFAULT_WIREFRAME_MODE_KEY;
+	keyMap[FILL_MODE] = DEFAULT_FILL_MODE_KEY;
 }
 
 
@@ -73,26 +96,10 @@ void InputHandler::getMousePosition(int &x, int &y)
 /* Key configuration */
 unsigned char InputHandler::getKey(Key key)
 {
-	switch (key) {
-	case MOVE_FORWARD:		return moveForwardKey;
-	case MOVE_BACKWARD:		return moveBackwardKey;
-	case ROTATE_LEFT:		return rotateLeftKey;
-	case ROTATE_RIGHT:		return rotateRightKey;
-	case MOVE_LEFT:			return moveLeftKey;
-	case MOVE_RIGHT:		return moveRightKey;
-	default: return -1;
-	}
+	return keyMap[key];
 }
 
 void InputHandler::setKey(Key key, unsigned char newKeyValue)
 {
-	switch (key) {
-	case MOVE_FORWARD:		moveForwardKey = newKeyValue;
-	case MOVE_BACKWARD:		moveBackwardKey = newKeyValue;
-	case ROTATE_LEFT:		rotateLeftKey = newKeyValue;
-	case ROTATE_RIGHT:		rotateRightKey = newKeyValue;
-	case MOVE_LEFT:			moveLeftKey = newKeyValue;
-	case MOVE_RIGHT:		moveRightKey = newKeyValue;
-	default: break;
-	}
+	keyMap[key] = newKeyValue;
 }

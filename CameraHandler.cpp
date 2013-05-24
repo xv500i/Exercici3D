@@ -28,7 +28,34 @@ void CameraHandler::resetDefaults()
 }
 
 
+/* Input */
+void CameraHandler::resolveInput(InputHandler &input)
+{
+	if (input.keyIsDown(input.getKey(THIRD_PERSON_CAMERA))) setActiveCamera(THIRD_PERSON);
+	else if (input.keyIsDown(input.getKey(FREE_CAMERA)))	setActiveCamera(FREE);
+	else if (input.keyIsDown(input.getKey(STATIC1_CAMERA))) setActiveCamera(STATIC1);
+	else if (input.keyIsDown(input.getKey(STATIC2_CAMERA))) setActiveCamera(STATIC2);
+	else if (input.keyIsDown(input.getKey(STATIC3_CAMERA))) setActiveCamera(STATIC3);
+	else if (input.keyIsDown(input.getKey(STATIC4_CAMERA))) setActiveCamera(STATIC4);
+}
+
+
 /* Free camera */
+void CameraHandler::resolveFreeCameraInput(InputHandler &input)
+{		
+	float panX = 0.0f;
+	float panZ = 0.0f;
+	float angle = 0.0f;
+	if (input.keyIsDown(input.getKey(CAMERA_MOVE_FORWARD)))	 panX += 1.0f;
+	if (input.keyIsDown(input.getKey(CAMERA_MOVE_BACKWARD))) panX -= 1.0f;
+	if (input.keyIsDown(input.getKey(CAMERA_MOVE_LEFT)))	 panZ -= 1.0f;
+	if (input.keyIsDown(input.getKey(CAMERA_MOVE_RIGHT)))	 panZ += 1.0f;
+	if (input.keyIsDown(input.getKey(CAMERA_ROTATE_LEFT)))	 angle -= 1.0f;
+	if (input.keyIsDown(input.getKey(CAMERA_ROTATE_RIGHT)))  angle += 1.0f;
+	panFreeCamera(panX, panZ);
+	rotateFreeCamera(angle);
+}
+
 void CameraHandler::panFreeCamera(float panX, float panZ)
 {
 	freeCamera.pan(panX, panZ);

@@ -22,10 +22,9 @@ void MenuHandler::createMenus()
 /* Input */
 void MenuHandler::resolveActiveMenuInput(InputHandler &input)
 {
-	// TODO: afegir tecles a inputHandler
-	if (input.keyIsDown('s')) activeMenu->downPressed();
-	else if (input.keyIsDown('w')) activeMenu->upPressed();
-	else if (input.keyIsDown(' ')) activeMenu->enterPressed();
+	if (input.keyIsDown(input.getKey(MENU_DOWN))) activeMenu->downPressed();
+	else if (input.keyIsDown(input.getKey(MENU_UP))) activeMenu->upPressed();
+	else if (input.keyIsDown(input.getKey(MENU_SELECTION))) activeMenu->enterPressed();
 }
 
 

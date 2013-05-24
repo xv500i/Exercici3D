@@ -4,6 +4,7 @@
 #include "FirstPersonCamera.h"
 #include "ThirdPersonCamera.h"
 #include "FreeCamera.h"
+#include "InputHandler.h"
 
 
 enum CameraType {
@@ -41,7 +42,11 @@ public:
 	/* Reset all cameras */
 	void resetDefaults();
 
+	/* Input */
+	void resolveInput(InputHandler &input);
+
 	/* Free camera */
+	void resolveFreeCameraInput(InputHandler &input);
 	void panFreeCamera(float panX, float panZ);
 	void rotateFreeCamera(float angle);
 

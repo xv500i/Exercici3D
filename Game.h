@@ -22,14 +22,6 @@ private:
 	GameState gameState;	/* Game state */
 	Scene scene;			/* The scene */
 
-	/* Game menus */
-	/*GameMenu mainMenu;
-	GameMenu instructionsMenu;
-	GameMenu pauseMenu;
-	GameMenu gameOverMenu;
-	GameMenu congratsMenu;
-	GameMenu nextLevelMenu;*/
-
 	bool debug;
 
 public:

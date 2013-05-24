@@ -1,7 +1,7 @@
 
 #include "Game.h"
 #include "Globals.h"
-#include <cmath>
+#include <math.h>
 #include <time.h>
 #include <random>
 
@@ -37,11 +37,11 @@ bool Game::init()
 
 	// Scene initialization
 	scene.Init();
-	gameState = MAIN_MENU;
 
 	// Menu creation
 	menus.createMenus();
 	
+	gameState = MAIN_MENU;
 	debug = true;
 	data.playSound(GameData::INTRO_THEME_INDEX);
 
@@ -53,12 +53,10 @@ bool Game::init()
 bool Game::loop()
 {
 	int t1, t2;
-
 	t1 = glutGet(GLUT_ELAPSED_TIME);
 
 	bool b = process();
 	if (b) render();
-
 	do {
 		t2 = glutGet(GLUT_ELAPSED_TIME);
 	} while (t2 - t1 < 1000/FRAMERATE);
@@ -88,70 +86,45 @@ void Game::readMouse(int button, int state, int x, int y)
 /* Process */
 bool Game::process()
 {
-	bool menu = true;
-	MenuOption m;
-
-	switch(gameState) {
 	/* PLAYING */
-	case PLAYING:
-		menu = false;
-		if (input.keyIsDown('p')) gameState = PAUSE_MENU;	// TODO: afegir a l'inputHandler
+	if (gameState == PLAYING) {
+		if (input.keyIsDown(input.getKey(SHOW_PAUSE_MENU))) gameState = PAUSE_MENU;
 		else {
-			// Active camera --> TODO: deixar canviar nomes en mode debug
-			if (input.keyIsDown('1')) camera.setActiveCamera(THIRD_PERSON);
-			if (input.keyIsDown('2')) camera.setActiveCamera(FREE);
-			if (input.keyIsDown('3')) camera.setActiveCamera(STATIC1);
-			if (input.keyIsDown('4')) camera.setActiveCamera(STATIC2);
-			if (input.keyIsDown('5')) camera.setActiveCamera(STATIC3);
-			if (input.keyIsDown('6')) camera.setActiveCamera(STATIC4);
-			if (input.keyIsDown('r')) scene.resetRot();
+			// Active camera
+			camera.resolveInput(input);
 			// Free camera
-			if (camera.getActiveCamera() == FREE) {
-
-				// TODO: canviar per camera.resolveFreeCameraInput(input);
-
-				float panX = 0.0f;
-				float panZ = 0.0f;
-				float angle = 0.0f;
-				if (input.keyIsDown('i')) panX += 1.0f;
-				if (input.keyIsDown('k')) panX -= 1.0f;
-				if (input.keyIsDown('j')) panZ -= 1.0f;
-				if (input.keyIsDown('l')) panZ += 1.0f;
-				if (input.keyIsDown('u')) angle -= 1.0f;
-				if (input.keyIsDown('o')) angle += 1.0f;
-				camera.panFreeCamera(panX, panZ);
-				camera.rotateFreeCamera(angle);
-			}
+			if (camera.getActiveCamera() == FREE) camera.resolveFreeCameraInput(input);
 			
 			// Polygon Mode
-			if (input.keyIsDown('z')) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);  
-			else if (input.keyIsDown('x')) glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			if (input.keyIsDown(input.getKey(WIREFRAME_MODE))) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);  
+			else if (input.keyIsDown(input.getKey(FILL_MODE))) glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			
-			// Scene update
+			// Scene update	
+			if (input.keyIsDown('r')) scene.resetRot();
 			scene.update(input, camera);
 		}
+		/* GAMEPLAY */
 		if (scene.playerIsDead()) gameState = GAMEOVER_MENU;	// Game end (lose)
 		else if (scene.isLevelCompleted()) {
 			bool end = scene.isLastLevel();
 			if (!end) gameState = CONGRATS_MENU;	// Game end (win)
 			else gameState = NEXT_LEVEL_MENU;		// Next level
 		}
-		break;
-
-	/* MENUS */ 
-	case MAIN_MENU:			menus.setActiveMenu(MAIN); menu = true; break;
-	case INSTRUCTIONS_MENU: menus.setActiveMenu(INSTRUCTIONS); menu = true; break;
-	case PAUSE_MENU:		menus.setActiveMenu(PAUSE); menu = true; break;
-	case GAMEOVER_MENU:		menus.setActiveMenu(GAME_OVER); menu = true; break;
-	case CONGRATS_MENU:		menus.setActiveMenu(CONGRATULATIONS); menu = true; break;
-	case NEXT_LEVEL_MENU:	menus.setActiveMenu(NEXT_LEVEL); menu = true; break;
-	default: break;
 	}
+	/* MENUS */ 
+	else {
+		switch (gameState) {
+		case MAIN_MENU:			menus.setActiveMenu(MAIN); break;
+		case INSTRUCTIONS_MENU: menus.setActiveMenu(INSTRUCTIONS); break;
+		case PAUSE_MENU:		menus.setActiveMenu(PAUSE); break;
+		case GAMEOVER_MENU:		menus.setActiveMenu(GAME_OVER); break;
+		case CONGRATS_MENU:		menus.setActiveMenu(CONGRATULATIONS); break;
+		case NEXT_LEVEL_MENU:	menus.setActiveMenu(NEXT_LEVEL); break;
+		default: break;
+		}
 
-	if (menu) {
 		menus.resolveActiveMenuInput(input);
-		m = menus.getActiveMenuSelected();
-
+		MenuOption m = menus.getActiveMenuSelected();
 		// Change the game state depending on the selected option
 		switch (m) {
 		case START_GAME:
@@ -173,7 +146,8 @@ bool Game::process()
 		case RESTART_GAME: gameState = PLAYING; break;
 		case TO_NEXT_LEVEL:
 			scene.nextLevel();
-			data.stopSound(GameData::STAGE_CLEAR_INDEX);
+			// TODO: data.stopAllSounds();
+			//data.stopSound(GameData::STAGE_CLEAR_INDEX);
 			gameState = PLAYING;
 			break;
 		default: break;
@@ -184,7 +158,7 @@ bool Game::process()
 	return gameState != EXIT;
 }
 
-//Output
+/* Render */
 void Game::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
