@@ -12,15 +12,15 @@ class GameData
 {
 private:
 	/* Textures */
-	const static int NUM_TEXTURES = 18;		// TOCHANGE: modificar depenent del numero de textures carregades
+	const static int NUM_TEXTURES = 20;		// TOCHANGE: modificar depenent del numero de textures carregades
 	const static char* TEXTURE_EXT;
 	
 	/* TileSheets */
-	const static int NUM_TILESHEETS = /*3;*/ 0;
+	const static int NUM_TILESHEETS = 0;
 	const static char* TILESHEET_EXT;
 
 	/* Sprites */
-	const static int NUM_SPRITES = /*25;*/ 0;		// TOCHANGE: modificar depenent del numero de sprites carregats
+	const static int NUM_SPRITES = 0;
 	const static char* SPRITE_EXT;
 
 	/* Sounds */
@@ -53,6 +53,8 @@ public:
 	const static int PLAYER_TEXTURE_INDEX = 15;
 	const static int LEVEL1_TEXTURE_INDEX = 16;
 	const static int LANDSCAPE_TEXTURE_INDEX = 17;
+	const static int LIFEFULL_HUD_TEXTURE_INDEX = 18;
+	const static int LIFEEMPTY_HUD_TEXTURE_INDEX = 19;
 	
 
 	/* TileSheet indexes */		// TOCHANGE: afegir indexs de tots els tile sheets carregats
@@ -106,6 +108,7 @@ public:
 	const static int PLAYER_SCREAM_INDEX = 11;
 	const static int EXPLOSION_INDEX = 12;
 	const static int CLANK_INDEX = 13;
+
 
 	GameData(void);
 	~GameData(void);

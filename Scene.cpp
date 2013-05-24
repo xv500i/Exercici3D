@@ -126,6 +126,10 @@ void Scene::render(GameData &gd)
 	for (unsigned int i = 0; i < obstacles.size(); i++) {
 		obstacles[i].render(&gd);
 	}
+
+	// HUD (S'ha de fer l'ultim!!)
+	// TODO HARDCODED
+	hud.render(gd, 800, 600);
 }
 
 bool Scene::Init()
@@ -162,6 +166,9 @@ bool Scene::Init()
 	obstacles[0] = Obstacle(7.0, 5.0, 7.0, 8.0, 1.0, TREE);
 	obstacles[1] = Obstacle(-7.0, 5.0, 7.0, 8.0, 1.0, TREE);
 	obstacles[2] = Obstacle(7.0, 5.0, -7.0, 8.0, 1.0, TREE);
+
+	// TODO HARDCODED
+	hud.load(800, 600);
 	return true;
 }
 
@@ -234,6 +241,10 @@ void Scene::update(InputHandler &input, CameraHandler &camera)
 	Point3D playerPos = go.getPosition();
 	float xzAngle = go.getYAngle();
 	camera.updateThirdPersonCamera(playerPos.getX(), playerPos.getY(), playerPos.getZ(), xzAngle);
+
+	// HUD
+	// TODO HARDCODED
+	hud.update(3);
 }
 
 void Scene::getFirstPersonParameters(float &eyex, float &eyey, float &eyez, float &centerx, float &centery, float &centerz) const

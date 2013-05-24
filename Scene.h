@@ -1,10 +1,10 @@
 #pragma once
 
 #include "GameData.h"
-//#include "cData.h"
 #include "Player.h"
 #include "InputHandler.h"
 #include "CameraHandler.h"
+#include "HUD.h"
 #include "PixelBasedFloor.h"
 #include "Enemy.h"
 #include <vector>
@@ -38,4 +38,6 @@ private:
 	std::vector<Enemy> enemies;
 	std::vector<Obstacle> obstacles;
 	float landscapeRot;
+
+	HUD hud;
 };
