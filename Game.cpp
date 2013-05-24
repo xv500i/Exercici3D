@@ -154,6 +154,7 @@ bool Game::process()
 	return gameState != EXIT;
 }
 
+
 /* Render */
 void Game::render()
 {
