@@ -141,5 +141,6 @@ public:
 	bool loadSounds();
 	void playSound(int soundIndex);
 	void stopSound(int soundIndex);
+	void stopAllSounds();
 	bool isSoundPlaying(int soundIndex);
 };

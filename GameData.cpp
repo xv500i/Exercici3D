@@ -144,7 +144,9 @@ void GameData::getSpriteFrameInfo(int spriteInstanceIndex, SpriteAction action, 
 /* Sounds */
 bool GameData::loadSounds()
 {
-	const char* filenames[NUM_SOUNDS] = {"Jungle_Theme", "Boss_Battle", "Title_Theme", "Game_Over", "gun", "flamer", "Stage_Clear", "Ending_Theme", "roar", "enemy_hit", "player_hit", "scream", "explosion", "clank"};
+	const char* filenames[NUM_SOUNDS] = {"Jungle_Theme", "Boss_Battle", "Title_Theme", "Game_Over", "gun", "flamer", 
+										 "Stage_Clear", "Ending_Theme", "roar", "enemy_hit", "player_hit", "scream", 
+										 "explosion", "clank"};
 	const bool loop[NUM_SOUNDS] = {true, true, false, false, false, false, false, false, false, false, false, false, false, false};
 	const float volumes[NUM_SOUNDS] = {1.0f, 1.0f, 1.0f, 1.0f, 0.3f, 0.8f, 1.0f, 1.0f, 0.8f, 1.5f, 1.0f, 1.0f, 2.8f, 1.4f};
 	for (unsigned int i = 0; i < sounds.size(); i++) {
@@ -162,6 +164,13 @@ void GameData::playSound(int soundIndex)
 void GameData::stopSound(int soundIndex)
 {
 	if (sounds[soundIndex].isPlaying()) sounds[soundIndex].stop();
+}
+
+void GameData::stopAllSounds()
+{
+	for (unsigned int i = 0; i < sounds.size(); i++) {
+		if (sounds[i].isPlaying()) sounds[i].stop();
+	}
 }
 
 bool GameData::isSoundPlaying(int soundIndex)

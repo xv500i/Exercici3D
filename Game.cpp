@@ -128,28 +128,25 @@ bool Game::process()
 		// Change the game state depending on the selected option
 		switch (m) {
 		case START_GAME:
-			// TODO: data.stopAllSounds();
-			//data.stopSound(GameData::INTRO_THEME_INDEX);
 			gameState = PLAYING;
+			data.stopAllSounds();
 			scene.loadLevel(1);		// Start first level
+			break;
+		case RESTART_GAME: 
+			gameState = PLAYING; 
+			data.stopAllSounds();
+			break;
+		case TO_MAIN_MENU: 
+			gameState = MAIN_MENU; 
+			data.stopAllSounds();
+			break;
+		case TO_NEXT_LEVEL:
+			gameState = PLAYING;
+			data.stopAllSounds();
+			scene.nextLevel();
 			break;
 		case SHOW_INSTRUCTIONS: gameState = INSTRUCTIONS_MENU; break;
 		case QUIT_GAME: gameState = EXIT; break;
-		case TO_MAIN_MENU: 
-			// TODO: data.stopAllSounds();
-			//data.stopSound(GameData::JUNGLE_THEME_INDEX);
-			//data.stopSound(GameData::BOSS_THEME_INDEX);
-			//data.stopSound(GameData::GAME_OVER_INDEX);
-			//if (data.isSoundPlaying(GameData::ENDING_THEME_INDEX) )data.stopSound(GameData::ENDING_THEME_INDEX);
-			gameState = MAIN_MENU; 
-			break;
-		case RESTART_GAME: gameState = PLAYING; break;
-		case TO_NEXT_LEVEL:
-			scene.nextLevel();
-			// TODO: data.stopAllSounds();
-			//data.stopSound(GameData::STAGE_CLEAR_INDEX);
-			gameState = PLAYING;
-			break;
 		default: break;
 		}
 		menus.updateActiveMenu();
