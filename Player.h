@@ -19,5 +19,6 @@ protected:
 private:
 	float rotX;
 	float rotZ;
+	float rotY;
 };
 

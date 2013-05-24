@@ -1,10 +1,11 @@
 #include "Player.h"
 #include "Globals.h"
-
+#include <iostream>
 Player::Player(void)
 {
 	type = 'p';
 	rotX = 0.0f;
+	rotY = 0.0f;
 	rotZ = 0.0f;
 }
 
@@ -23,7 +24,7 @@ void Player::render(GameData *data) const
 		glTranslatef(getXPosition(),getYPosition() + 1.0f,getZPosition());
 		//glRotatef(-getYAngle(), 0.0f, 1.0f, 0.0f);
 		//glRotatef(rotZ, 0.0f , 180.0f * sin( rotX * 3.1415 / 180.0f ) / 3.1415, 180.0f * cos( rotX * 3.1415 / 180.0f ) / 3.1415);
-		glRotatef(rotZ, 0.0f, 0.0f, 1.0f);
+		glRotatef(rotZ, 0.0f, 1.0f , 0.0f);
 		glRotatef(rotX, 1.0f, 0.0f, 0.0f);
 		
 		
@@ -33,6 +34,23 @@ void Player::render(GameData *data) const
 		gluQuadricTexture(q, GL_TRUE);
 		gluSphere(q, 1.0f,16,16);
 		
+		glLineWidth(3.0f);
+			glBegin(GL_LINES);
+				glColor3f(1.0f, 0.0f, 0.0f);
+				glVertex3f(5.0f, 0.0f, 0.0f);
+				glVertex3f(0.0f, 0.0f, 0.0f);
+
+				glColor3f(0.0f, 1.0f, 0.0f);
+				glVertex3f(0.0f, 5.0f, 0.0f);
+				glVertex3f(0.0f, 0.0f, 0.0f);
+
+				glColor3f(0.0f, 0.0f, 1.0f);
+				glVertex3f(0.0f, 0.0f, 5.0f);
+				glVertex3f(0.0f, 0.0f, 0.0f);
+
+				glColor3f(1.0f, 1.0f, 1.0f);
+			glEnd();
+
 		gluDeleteQuadric(q);
 		
 	glPopMatrix();
@@ -124,10 +142,13 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects)
 	//                                     2 *   pi    * r
 	rotX += (finalZ - initialZ) * 360.0 / (2 * 3.1415f * 1);
 	rotZ -= (finalX - initialX) * 360.0 / (2 * 3.1415f * 1);
+
+	std::cout << rotX << ' ' << rotZ << std::endl;
 }
 
 void Player::resetRot()
 {
 	rotZ = 0.0f;
 	rotX = 0.0f;
+	rotY = 0.0f;
 }
