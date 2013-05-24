@@ -36,6 +36,9 @@ void PixelBasedFloor::render(GameData *data) const
 	float heightInPixelsPerStep = (float)texHeight/(float)getPixelsHeigth();
 	float offsetS = widhtInPixelsPerStep/(float)texWidth;
 	float offsetT = heightInPixelsPerStep/(float)texHeight;
+	
+	/*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);*/
 
 	glPushMatrix();
 		glColor3f(1.0f, 1.0f, 1.0f);
@@ -50,6 +53,10 @@ void PixelBasedFloor::render(GameData *data) const
 					//else glColor3f(0.0f, 1.0f, 0.0f);
 					float s = offsetS*(float)j;
 					float t = offsetT*(float)i;
+					/*float s = (float)i/(float)getPixelsHeigth();
+					float t = (float)j/(float)getPixelsWidth();
+					float offsetS = 1.0/(float)getPixelsHeigth();
+					float offsetT = 1.0/(float)getPixelsWidth();*/
 
 					glTexCoord2f(s, t + offsetT);
 					glVertex3f(auxX, points[i][j]*factor, initialZ);
