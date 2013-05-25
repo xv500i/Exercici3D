@@ -12,6 +12,9 @@ Player::Player(void)
 	rotZ = 0.0f;
 	life = MAX_LIFE;
 	ticsInvul = 0;
+	expansionState = NO_EXPANDED;
+	ticsExpansion = 0;
+	jumping = false;
 }
 
 Player::~Player(void) {}
@@ -24,6 +27,26 @@ void Player::render(GameData &data) const
 		glColor3f(1.0f, 1.0f, 1.0f);
 		glBindTexture(GL_TEXTURE_2D, data.getTextureID(GameData::PLAYER_TEXTURE_INDEX));
 		glTranslatef(getXPosition(),getYPosition() + 1.0f,getZPosition());
+
+		float scaleOffset = 0.3;
+		float init = ticsExpansion;
+		float max = MAX_TICS_EXPANSION;
+		float interpolation = scaleOffset * init / max; // pertany a [0,1]  0->fi animacio, 1->inici animacio
+		switch (expansionState){
+		case EXPANDING_VERTICAL:
+			glScalef(1.0f - interpolation, 1.0f + interpolation, 1.0f - interpolation);
+			break;
+		case UNEXPANDING_VERTICAL:
+			glScalef(1.0f + interpolation, 1.0f - interpolation, 1.0f + interpolation);
+			break;
+		case EXPANDING_HORIZONTAL:
+			glScalef(1.3f, 0.7f, 1.3f);
+			break;
+		case UNEXPANDING_HORIZONTAL:
+			glScalef(1.0f, 1.0f, 1.0f);
+			break;
+		}
+
 		glRotatef(-rotY, 0.0f, 1.0f , 0.0f);
 		glRotatef(-rotX, 0.0f , 0.0f, 1.0f);
 		
@@ -143,6 +166,37 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects)
 {
 	if (ticsInvul > 0) ticsInvul--;
+	if (ticsExpansion > 0) ticsExpansion--;
+
+	/* Expansion */
+	switch (expansionState) {
+	case NO_EXPANDED:
+		break;
+	case EXPANDING_HORIZONTAL:
+		if (ticsExpansion <= 0) {
+			ticsExpansion = MAX_TICS_EXPANSION;
+			expansionState = UNEXPANDING_HORIZONTAL;
+		}
+		break;
+	case UNEXPANDING_HORIZONTAL:
+		if (ticsExpansion <= 0) {
+			ticsExpansion = 0;
+			expansionState = NO_EXPANDED;
+		}
+		break;
+	case EXPANDING_VERTICAL:
+		if (ticsExpansion <= 0) {
+			ticsExpansion = MAX_TICS_EXPANSION;
+			expansionState = UNEXPANDING_VERTICAL;
+		}
+		break;
+	case UNEXPANDING_VERTICAL:
+		if (ticsExpansion <= 0) {
+			ticsExpansion = 0;
+			expansionState = NO_EXPANDED;
+		}
+		break;
+	}
 
 	float initialX = getXPosition();
 	float initialZ = getZPosition();
@@ -160,4 +214,26 @@ void Player::resetRot()
 	rotZ = 0.0f;
 	rotX = 0.0f;
 	rotY = 0.0f;
+}
+
+bool Player::jump()
+{
+	bool jumped = MobileGameObject::jump();
+	if (jumped) {
+		jumping = true;
+		expansionState = EXPANDING_VERTICAL;
+		ticsExpansion = MAX_TICS_EXPANSION;
+	}
+	return jumped;
+}
+
+void Player::floorReached()
+{
+	if (jumping) {
+		jumping = false;
+		expansionState = EXPANDING_HORIZONTAL;
+		ticsExpansion = MAX_TICS_EXPANSION;
+	}
+	
+	MobileGameObject::floorReached();
 }

@@ -122,11 +122,12 @@ void MobileGameObject::moveRight()
 
 bool MobileGameObject::jump()
 {
+	bool hasJumped = footOnGround;
 	if (footOnGround) {
 		footOnGround = false;
 		jumpImpulse = true;
 	}
-	return footOnGround;
+	return hasJumped;
 }
 
 void MobileGameObject::floorReached()
