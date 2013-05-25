@@ -16,7 +16,7 @@ bool Scene::init()
 	currentLevel = 1;
 
 	// TODO HARDCODED
-	hud.load(800, 600);
+	hud.load(800, 600, Player::MAX_LIFE);
 	return true;
 }
 
@@ -47,8 +47,7 @@ void Scene::update(CameraHandler &camera)
 	camera.updateThirdPersonCamera(playerPos.getX(), playerPos.getY(), playerPos.getZ(), xzAngle);
 
 	// HUD
-	// TODO HARDCODED --> ha de ser hud.update(player.getLife())
-	hud.update(3);
+	hud.update(player.getLife());
 }
 
 
@@ -82,6 +81,7 @@ bool Scene::playerIsDead()
 
 void Scene::loadLevel(int levelNumber)
 {
+	player = Player();
 	level.load(levelNumber);
 	currentLevel = levelNumber;
 }

@@ -11,12 +11,15 @@ Player::Player(void)
 	rotX = 0.0f;
 	rotY = 0.0f;
 	rotZ = 0.0f;
+	life = MAX_LIFE;
+	ticsInvul = 0;
 }
 
 Player::~Player(void) {}
 
 void Player::render(GameData &data) const 
 {
+	if (ticsInvul%8 > 3) return;
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
 		glColor3f(1.0f, 1.0f, 1.0f);
@@ -87,10 +90,15 @@ void Player::render(GameData &data) const
 	glEnd();
 }
 
+
+int Player::getLife()
+{
+	return life;
+}
+
 bool Player::isDead()
 {
-	// FIXME: Natxo aqui has de definir quan el jugador esta mort i cal saltar al game over
-	return false;
+	return life == 0;
 }
 
 void Player::tractarColisions(std::vector<GameObject*> &objects)
@@ -106,7 +114,11 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 				
 					break;
 				case 'e':
-					// TODO Damage player and make it invul
+					// Player HIT
+					if (life > 0 && ticsInvul == 0) {
+						life--;
+						ticsInvul = MAX_TICS_INVUL;
+					}
 					// sliding
 					sliding(go);
 					mgo = (MobileGameObject *) (go);
@@ -134,6 +146,8 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 
 void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects)
 {
+	if (ticsInvul > 0) ticsInvul--;
+
 	float initialX = getXPosition();
 	float initialZ = getZPosition();
 	MobileGameObject::update(inclination, objects);

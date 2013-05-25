@@ -1,6 +1,7 @@
 
 #include "ThirdPersonCamera.h"
 #include <gl/glut.h>
+#include <cmath>
 #include "Utility.h"
 
 

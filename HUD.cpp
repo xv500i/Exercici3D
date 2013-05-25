@@ -8,14 +8,12 @@ HUD::~HUD(void) {}
 
 
 /* Loading */
-bool HUD::load(int screenWidth, int screenHeigth)
+bool HUD::load(int screenWidth, int screenHeigth, int maxLife)
 {
 	// HUD Life
-	int x = 0;
-	int y = 0;
-	playerLife = std::vector<HUDElement>(MAX_LIFE);
-	for (unsigned i = 0; i < MAX_LIFE; i++) {
-		playerLife[i] = HUDElement(x + i*LIFE_ELEMENT_SIZE, y, LIFE_ELEMENT_SIZE, LIFE_ELEMENT_SIZE, GameData::LIFEFULL_HUD_TEXTURE_INDEX);
+	playerLife = std::vector<HUDElement>(maxLife);
+	for (int i = 0; i < maxLife; i++) {
+		playerLife[i] = HUDElement(i*LIFE_ELEMENT_SIZE, 0, LIFE_ELEMENT_SIZE, LIFE_ELEMENT_SIZE, GameData::LIFEFULL_HUD_TEXTURE_INDEX);
 	}
 	return true;
 }
