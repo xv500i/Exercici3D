@@ -7,7 +7,7 @@ int GameObject::idCounter = 0;
 GameObject::GameObject(void)
 {
 	id = idCounter++;
-	type = 'g';
+	type = OBJECT;
 	pos = Point3D();
 	yAngle = 0.0f;
 	movementState = STATIC;
@@ -144,7 +144,7 @@ int GameObject::getId()
 	return id;
 }
 
-char GameObject::getType()
+ObjectType GameObject::getType()
 {
 	return type;
 }

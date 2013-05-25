@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Obstacle.h"
+#include "ItemObject.h"
 #include "Landscape.h"
 #include "GameData.h"
 
@@ -16,6 +17,7 @@ private:
 	PixelBasedFloor map;				/* The level map */
 	std::vector<Enemy> enemies;			/* Vector with all the enemies of the level */
 	std::vector<Obstacle> obstacles;	/* Vector with all the obstacles of the level */
+	std::vector<ItemObject> items;		/* Vector with all the items of the level */
 	Landscape landscape;
 
 	/* Loading of different levels */

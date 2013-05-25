@@ -51,6 +51,13 @@ void Level::loadFirstLevel()
 	obstacles[0] = Obstacle(7.0, 5.0, 7.0, 8.0, 1.0, TREE);
 	obstacles[1] = Obstacle(-7.0, 5.0, 7.0, 8.0, 1.0, TREE);
 	obstacles[2] = Obstacle(7.0, 5.0, -7.0, 8.0, 1.0, TREE);
+	items = std::vector<ItemObject>(3);
+	items[0] = ItemObject(false);
+	items[0].setXPosition(10.0f); items[0].setYPosition(5.5f); items[0].setZPosition(10.0f);
+	items[1] = ItemObject(false);
+	items[1].setXPosition(10.0f); items[1].setYPosition(5.5f); items[1].setZPosition(-10.0f);
+	items[2] = ItemObject(false);
+	items[2].setXPosition(-10.0f); items[2].setYPosition(5.5f); items[2].setZPosition(-10.0f);
 }
 
 void Level::loadSecondLevel()
@@ -69,13 +76,15 @@ void Level::loadThirdLevel()
 /* Update */
 void Level::update(Player &player)
 {
-	landscape.update();
 	// Vector with all the objects 
 	std::vector<GameObject*> objects = std::vector<GameObject*>();
-	objects.reserve(1 + enemies.size() + obstacles.size());
+	objects.reserve(1 + enemies.size() + obstacles.size() + items.size());
 	objects.push_back(&player);
 	for(unsigned int i = 0; i < enemies.size(); i++) objects.push_back(&enemies[i]);
 	for(unsigned int i = 0; i < obstacles.size(); i++) objects.push_back(&obstacles[i]);
+	for(unsigned int i = 0; i < items.size(); i++) {
+		if (!items[i].isPickedUp()) objects.push_back(&items[i]);
+	}
 
 	Vector3D inclination;
 	map.getPerpendicularVector(inclination, player.getXPosition(), player.getZPosition());
@@ -91,11 +100,19 @@ void Level::update(Player &player)
 		// FLYING FREE	
 	}
 	player.setYPosition(std::max(test, player.getYPosition()));
+
+	// Enemies
 	for (unsigned int i = 0; i < enemies.size(); i++) {
 		map.getPerpendicularVector(inclination, enemies[i].getXPosition(), enemies[i].getZPosition());
 		enemies[i].update(inclination, objects, player.getXPosition(), player.getZPosition());
 		enemies[i].setYPosition(map.getHeightAt(enemies[i].getXPosition(), enemies[i].getZPosition()));
 	}
+
+	// Items
+	for (unsigned int i = 0; i < items.size(); i++) items[i].update();
+
+	// Landscape
+	landscape.update();
 }
 
 
@@ -105,5 +122,6 @@ void Level::render(GameData &data)
 	map.render(data);
 	for (unsigned int i = 0; i < enemies.size(); i++) enemies[i].render(data);
 	for (unsigned int i = 0; i < obstacles.size(); i++) obstacles[i].render(data);
+	for (unsigned int i = 0; i < items.size(); i++) items[i].render();
 	landscape.render(data);
 }

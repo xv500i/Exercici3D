@@ -2,6 +2,7 @@
 #include "Player.h"
 #include <gl/glut.h>
 #include <cmath>
+#include "ItemObject.h"
 
 int Player::MAX_TICS_EXPANSION_VERTICAL = 4;
 int Player::MAX_TICS_EXPANSION_HORIZONTAL = 3;
@@ -10,7 +11,7 @@ int Player::MAX_TICS_UNEXPANSION_HORIZONTAL = 2;
 
 Player::Player(void)
 {
-	type = 'p';
+	type = PLAYER;
 	rotX = 0.0f;
 	rotY = 0.0f;
 	rotZ = 0.0f;
@@ -139,17 +140,15 @@ bool Player::isDead()
 
 void Player::tractarColisions(std::vector<GameObject*> &objects)
 {
-	for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
+	for (std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
 		GameObject* go = *it;
 		// different object
 		if (getId() != go->getId()) {
 			if (go->getBoundingCilinder()->isCollisioningWith(*getBoundingCilinder())) {
-				MobileGameObject * mgo;
+				MobileGameObject *mgo;
+				ItemObject *io;
 				switch (go->getType()) {	
-				case 'g':
-				
-					break;
-				case 'e':
+				case ENEMY:
 					// Player HIT
 					if (life > 0 && ticsInvul == 0) {
 						life--;
@@ -161,19 +160,22 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 					mgo->sliding(this);
 					jump();
 					break;
-				case 'm':
-				
-					break;
-				case 'p':
-				
-					break;
-				case 'o':
-					// sliding
+				case OBSTACLE:
 					sliding(go);
 					break;
-				case 'i':
-					// TODO recollir 
+				case ENERGY:
+					// TODO recollir
+					io = (ItemObject *)go;
+					io->pickUp();
 					break;
+				case MEDIKIT:
+					if (life < MAX_LIFE) life++;
+					io = (ItemObject *)go;
+					io->pickUp();
+					break;
+				case OBJECT: break;
+				case MOBILEOBJECT: break;
+				case PLAYER: break;
 				}
 			}
 		}

@@ -1,10 +1,23 @@
-#pragma once
-#include "gameobject.h"
-class ItemObject :
-	public GameObject
-{
-public:
-	ItemObject(void);
-	~ItemObject(void);
-};
 
+#pragma once
+
+#include "GameObject.h"
+
+
+class ItemObject : public GameObject
+{
+private:
+	bool pickedUp;
+
+public:
+	ItemObject();
+	ItemObject(bool energy);
+	virtual ~ItemObject(void);
+
+	/* Render */
+	void render();
+
+	/* Pick up */
+	void pickUp();
+	bool isPickedUp();
+};

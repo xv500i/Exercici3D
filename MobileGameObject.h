@@ -3,8 +3,7 @@
 #include "Vector3D.h"
 #include <vector>
 
-class MobileGameObject :
-	public GameObject
+class MobileGameObject : public GameObject
 {
 public:
 	MobileGameObject(void);

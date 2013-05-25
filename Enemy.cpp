@@ -11,13 +11,13 @@ Enemy::Enemy(void)
 	pursue = true;
 	detectionDistance = 15.0f;
 	pursueVelocity = 0.25f;
-	type = 'e';
+	type = ENEMY;
 }
 
 Enemy::Enemy(EnemyType et)
 	: MobileGameObject()
 {
-	type = 'e';
+	type = ENEMY;
 	switch (et) {
 	case STATIC_PURSUER:
 		/* initialize first guard! */
@@ -147,31 +147,33 @@ void Enemy::tractarColisions(std::vector<GameObject*> &objects)
 			if (go->getBoundingCilinder()->isCollisioningWith(*getBoundingCilinder())) {
 				MobileGameObject *mgo;
 				switch (go->getType()) {	
-				case 'g':
+				case OBJECT:
 				
 					break;
-				case 'e':
+				case ENEMY:
 					// sliding
 					mgo = (MobileGameObject *) (go);
 					mgo->sliding(this);
 					sliding(go);
 					break;
-				case 'm':
+				case MOBILEOBJECT:
 				
 					break;
-				case 'p':
+				case PLAYER:
 					// TODO restar vida i fer invulnerable el player
 					// sliding
 					sliding(go);
 					mgo = (MobileGameObject *) (go);
 					mgo->sliding(this);
 					break;
-				case 'o':
+				case OBSTACLE:
 					// sliding
 					sliding(go);
 					break;
-				case 'i':
+				case ENERGY:	
 					// TODO recollir i fer desapareixer
+					break;
+				case MEDIKIT:
 					break;
 				}
 			}

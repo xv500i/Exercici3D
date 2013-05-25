@@ -4,6 +4,18 @@
 #include "Point3D.h"
 #include "GameData.h"
 
+
+enum ObjectType {
+	OBJECT,
+	MOBILEOBJECT,
+	OBSTACLE,
+	PLAYER,
+	ENEMY,
+	MEDIKIT,
+	ENERGY
+};
+
+
 class GameObject
 {
 public:
@@ -25,7 +37,7 @@ public:
 	void renderBoundingCilinder() const;
 	BoundingCilinder* getBoundingCilinder();
 	int getId();
-	char getType();
+	ObjectType getType();
 private:
 	static int idCounter;
 	int id;
@@ -35,6 +47,6 @@ private:
 	MovementState movementState;
 	BoundingCilinder *bc;
 protected:
-	char type;
+	ObjectType type;
 };
 
