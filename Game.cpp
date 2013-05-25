@@ -105,11 +105,19 @@ bool Game::process()
 			scene.update(camera);
 		}
 		/* GAMEPLAY */
-		if (scene.playerIsDead()) gameState = GAMEOVER_MENU;	// Game end (lose)
-		else if (scene.isLevelCompleted()) {
+		if (scene.playerIsDead()) {
+			gameState = GAMEOVER_MENU;	// Game end (lose)
+			data.stopAllSounds();
+			data.playSound(GameData::GAME_OVER_INDEX);
+		} else if (scene.isLevelCompleted()) {
 			bool end = scene.isLastLevel();
-			if (!end) gameState = CONGRATS_MENU;	// Game end (win)
-			else gameState = NEXT_LEVEL_MENU;		// Next level
+			if (!end) {
+				gameState = CONGRATS_MENU;	// Game end (win)
+				data.playSound(GameData::ENDING_THEME_INDEX);
+			} else {
+				gameState = NEXT_LEVEL_MENU;		// Next level
+				data.playSound(GameData::STAGE_CLEAR_INDEX);
+			}
 		}
 	}
 	/* MENUS */ 
@@ -127,6 +135,7 @@ bool Game::process()
 		menus.resolveActiveMenuInput(input);
 		MenuOption m = menus.getActiveMenuSelected();
 		// Change the game state depending on the selected option
+		bool notInstructions = gameState != INSTRUCTIONS_MENU;
 		switch (m) {
 		case START_GAME:
 			gameState = PLAYING;
@@ -136,11 +145,15 @@ bool Game::process()
 			break;
 		case RESTART_GAME: 
 			gameState = PLAYING; 
-			data.stopAllSounds();
+			//data.stopAllSounds();
 			break;
-		case TO_MAIN_MENU: 
-			gameState = MAIN_MENU; 
-			data.stopAllSounds();
+		case TO_MAIN_MENU:
+			
+			gameState = MAIN_MENU;
+			if (notInstructions) {
+				data.stopAllSounds();
+				data.playSound(GameData::INTRO_THEME_INDEX);
+			}
 			break;
 		case TO_NEXT_LEVEL:
 			gameState = PLAYING;
