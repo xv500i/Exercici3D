@@ -14,7 +14,7 @@ bool Scene::init()
 {
 	drawPlayer = true;
 	currentLevel = 1;
-
+	isCurrentLevelCompleted = false;
 	// TODO HARDCODED
 	hud.load(800, 600, Player::MAX_LIFE);
 	return true;
@@ -32,6 +32,7 @@ void Scene::resolveInput(InputHandler &input)
 	if (input.keyIsDown(input.getKey(ROTATE_LEFT)))		   player.turnLeft();
 	else if (input.keyIsDown(input.getKey(ROTATE_RIGHT)))  player.turnRight();
 	if (input.keyIsDown(input.getKey(JUMP)))			   player.jump();
+	if (input.keyIsDown('n'))							   isCurrentLevelCompleted = true;
 }
 
 

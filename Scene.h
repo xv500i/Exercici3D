@@ -18,6 +18,7 @@ private:
 	HUD hud;		/* HUD (player life & items) */
 	Player player;	/* The player */
 	Level level;	/* The level */
+	bool isCurrentLevelCompleted;
 	
 	int currentLevel;
 
