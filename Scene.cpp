@@ -48,7 +48,7 @@ void Scene::update(CameraHandler &camera)
 	camera.updateThirdPersonCamera(playerPos.getX(), playerPos.getY(), playerPos.getZ(), xzAngle);
 
 	// HUD
-	hud.update(player.getLife());
+	hud.update(player.getLife(), player.getEnergy());
 }
 
 
@@ -62,8 +62,7 @@ void Scene::render(GameData &data)
 	if (drawPlayer) player.render(data);
 	
 	// HUD (It must be the last render)
-	// TODO HARDCODED
-	hud.render(data, 800, 600);
+	hud.render(data);
 }
 
 

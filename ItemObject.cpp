@@ -19,7 +19,8 @@ void ItemObject::render()
 	if (pickedUp) return;
 	Point3D pos = getPosition();
 	glPushMatrix();
-		glColor3f(0.0f, 1.0f, 0.0f);
+		if (type == MEDIKIT) glColor3f(0.0f, 1.0f, 0.0f);
+		else if (type == ENERGY) glColor3f(0.0f, 0.0f, 1.0f);
 		glTranslatef(pos.getX(), pos.getY() + 1.0f, pos.getZ());
 		GLUquadricObj *q = gluNewQuadric();
 		gluSphere(q, 0.5, 16, 16);

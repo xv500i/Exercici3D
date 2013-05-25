@@ -17,6 +17,7 @@ Player::Player(void)
 	rotZ = 0.0f;
 	life = MAX_LIFE;
 	ticsInvul = 0;
+	energy = 0;
 	expansionState = NO_EXPANDED;
 	ticsExpansion = 0;
 	jumping = false;
@@ -128,6 +129,7 @@ void Player::render(GameData &data) const
 }
 
 
+/* Player health */
 int Player::getLife()
 {
 	return life;
@@ -137,6 +139,14 @@ bool Player::isDead()
 {
 	return life == 0;
 }
+
+
+/* Player energy */
+int Player::getEnergy()
+{
+	return energy;
+}
+
 
 void Player::tractarColisions(std::vector<GameObject*> &objects)
 {
@@ -164,7 +174,7 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 					sliding(go);
 					break;
 				case ENERGY:
-					// TODO recollir
+					energy++;
 					io = (ItemObject *)go;
 					io->pickUp();
 					break;

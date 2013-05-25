@@ -26,8 +26,13 @@ private:
 	float rotZ;
 	float rotY;
 
+	/* Player health */
 	int life;
 	int ticsInvul;
+
+	/* Player energy */
+	int energy;
+
 	int ticsExpansion;
 	ExpansionState expansionState;
 	bool jumping;
@@ -39,10 +44,19 @@ public:
 	Player(void);
 	~Player(void);
 
+	/* Update */
+	void update(Vector3D &inclination, std::vector<GameObject*> &objects);
+
+	/* Render */
 	void render(GameData &data) const;
+
+	/* Player health */
 	int getLife();
 	bool isDead();
-	void update(Vector3D &inclination, std::vector<GameObject*> &objects);
+
+	/* Player energy */
+	int getEnergy();
+
 	void resetRot();
 	bool jump();
 	void floorReached();

@@ -56,7 +56,7 @@ void Level::loadFirstLevel()
 	items[0].setXPosition(10.0f); items[0].setYPosition(5.5f); items[0].setZPosition(10.0f);
 	items[1] = ItemObject(false);
 	items[1].setXPosition(10.0f); items[1].setYPosition(5.5f); items[1].setZPosition(-10.0f);
-	items[2] = ItemObject(false);
+	items[2] = ItemObject(true);
 	items[2].setXPosition(-10.0f); items[2].setYPosition(5.5f); items[2].setZPosition(-10.0f);
 }
 
