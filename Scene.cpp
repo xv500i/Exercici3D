@@ -84,6 +84,7 @@ void Scene::loadLevel(int levelNumber)
 {
 	player = Player();
 	level.load(levelNumber);
+	isCurrentLevelCompleted = false;
 	currentLevel = levelNumber;
 }
 
@@ -95,7 +96,7 @@ void Scene::nextLevel()
 bool Scene::isLevelCompleted()
 {
 	// FIXME: aqui vull saber quan el nivell actual s'ha completat i cal passar a la pantalla de next level
-	return false;
+	return isCurrentLevelCompleted;
 }
 
 bool Scene::isLastLevel()

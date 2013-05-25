@@ -111,11 +111,13 @@ bool Game::process()
 			data.playSound(GameData::GAME_OVER_INDEX);
 		} else if (scene.isLevelCompleted()) {
 			bool end = scene.isLastLevel();
-			if (!end) {
+			if (end) {
 				gameState = CONGRATS_MENU;	// Game end (win)
+				data.stopAllSounds();
 				data.playSound(GameData::ENDING_THEME_INDEX);
 			} else {
 				gameState = NEXT_LEVEL_MENU;		// Next level
+				data.stopAllSounds();
 				data.playSound(GameData::STAGE_CLEAR_INDEX);
 			}
 		}
