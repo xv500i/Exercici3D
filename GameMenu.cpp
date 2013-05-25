@@ -94,7 +94,7 @@ void GameMenu::render(GameData &data)
 	}
 	paint(data.getTextureID(tex), 400, 530, 450, 150);
 	float xi = 400;
-	float yi = 450.0f;
+	float yi = 420.0f;
 	float w = 200;
 	float h = 50;
 	float margin = 30.f;
@@ -126,7 +126,7 @@ void GameMenu::render(GameData &data)
 		float cw = 100;
 		float ch = 100;
 		float cx = xi - w/2 - cw/2;
-		float cy = 450.0f - currentOption*(h+margin);
+		float cy = 420.0f - currentOption*(h+margin);
 		
 		paint(data.getTextureID(GameData::CURSOR_INDEX), cx, cy, cw, ch);
 	}
