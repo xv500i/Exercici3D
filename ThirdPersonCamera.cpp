@@ -5,8 +5,8 @@
 #include "Utility.h"
 
 
-const float ThirdPersonCamera::Y_OFFSET = 10.0f;
-const float ThirdPersonCamera::XZ_OFFSET = -15.0f;
+const float ThirdPersonCamera::Y_OFFSET = 7.0f;
+const float ThirdPersonCamera::XZ_OFFSET = -25.0f;
 
 
 ThirdPersonCamera::ThirdPersonCamera(void) : xzAngle(0.0f) {}

@@ -56,11 +56,13 @@ void Level::loadFirstLevel()
 void Level::loadSecondLevel()
 {
 	// TODO SEGON NIVELL
+	landscape = Landscape(GameData::ICESCAPE_TEXTURE_INDEX);
 }
 
 void Level::loadThirdLevel()
 {
 	// TODO TERCER NIVELL
+	landscape = Landscape(GameData::SPACESCAPE_TEXTURE_INDEX);
 }
 
 
