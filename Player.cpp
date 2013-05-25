@@ -1,7 +1,6 @@
 
 #include "Player.h"
 #include <gl/glut.h>
-#include <iostream>
 #include <cmath>
 
 
@@ -25,11 +24,8 @@ void Player::render(GameData &data) const
 		glColor3f(1.0f, 1.0f, 1.0f);
 		glBindTexture(GL_TEXTURE_2D, data.getTextureID(GameData::PLAYER_TEXTURE_INDEX));
 		glTranslatef(getXPosition(),getYPosition() + 1.0f,getZPosition());
-		//glRotatef(-getYAngle(), 0.0f, 1.0f, 0.0f);
-		//glRotatef(rotZ, 0.0f , 180.0f * sin( rotX * 3.1415 / 180.0f ) / 3.1415, 180.0f * cos( rotX * 3.1415 / 180.0f ) / 3.1415);
-		glRotatef(rotZ, 0.0f, 0.0f , 1.0f);
-		glRotatef(rotX, cos(rotZ * 3.1415 / 180.0f) , -sin(rotZ * 3.1415 / 180.0f), 0.0f);
-		std::cout << "Angles" << cos(rotZ * 3.1415 / 180.0f) << ' ' << -sin(rotZ * 3.1415 / 180.0f) << std::endl;
+		glRotatef(-rotY, 0.0f, 1.0f , 0.0f);
+		glRotatef(-rotX, 0.0f , 0.0f, 1.0f);
 		
 
 		GLUquadricObj *q = gluNewQuadric();
@@ -153,11 +149,10 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects)
 	MobileGameObject::update(inclination, objects);
 	float finalX = getXPosition();
 	float finalZ = getZPosition();
-	//                                     2 *   pi    * r
-	rotX += (finalZ - initialZ) * 360.0 / (2 * 3.1415f * 1);
-	rotZ -= (finalX - initialX) * 360.0 / (2 * 3.1415f * 1);
-
-	std::cout << rotX << ' ' << rotZ << std::endl;
+	float incZ = (finalZ - initialZ);//     2 *   pi    * r
+	float incX = (finalX - initialX);
+	rotX += sqrt(incZ*incZ + incX*incX) * 360.0 / (2 * 3.1415f * 1);
+	rotY = atan2(incZ, incX) * 180.0f / 3.1415f;
 }
 
 void Player::resetRot()
