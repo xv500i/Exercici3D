@@ -2,6 +2,7 @@
 #pragma once
 
 #include "GameObject.h"
+#include "GameData.h"
 
 
 class ItemObject : public GameObject
@@ -15,7 +16,7 @@ public:
 	virtual ~ItemObject(void);
 
 	/* Render */
-	void render();
+	void render(GameData &data);
 
 	/* Pick up */
 	void pickUp();

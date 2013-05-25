@@ -9,6 +9,7 @@ enum ObjectType {
 	OBJECT,
 	MOBILEOBJECT,
 	OBSTACLE,
+	ALTAR,
 	PLAYER,
 	ENEMY,
 	MEDIKIT,

@@ -3,6 +3,7 @@
 #include <gl/glut.h>
 #include <cmath>
 #include "ItemObject.h"
+#include "Altar.h"
 
 int Player::MAX_TICS_EXPANSION_VERTICAL = 4;
 int Player::MAX_TICS_EXPANSION_HORIZONTAL = 3;
@@ -157,6 +158,7 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 			if (go->getBoundingCilinder()->isCollisioningWith(*getBoundingCilinder())) {
 				MobileGameObject *mgo;
 				ItemObject *io;
+				Altar *altar;
 				switch (go->getType()) {	
 				case ENEMY:
 					// Player HIT
@@ -182,6 +184,14 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 					if (life < MAX_LIFE) life++;
 					io = (ItemObject *)go;
 					io->pickUp();
+					break;
+				case ALTAR:
+					altar = (Altar *)go;
+					if (energy >= 1 && !altar->isActive()) {
+						energy--;
+						altar->activate();
+					}
+					sliding(go);
 					break;
 				case OBJECT: break;
 				case MOBILEOBJECT: break;

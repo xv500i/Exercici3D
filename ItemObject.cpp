@@ -14,7 +14,7 @@ ItemObject::~ItemObject(void) {}
 
 
 /* Render */
-void ItemObject::render()
+void ItemObject::render(GameData &data)
 {
 	if (pickedUp) return;
 	Point3D pos = getPosition();
