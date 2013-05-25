@@ -3,6 +3,10 @@
 #include <gl/glut.h>
 #include <cmath>
 
+int Player::MAX_TICS_EXPANSION_VERTICAL = 4;
+int Player::MAX_TICS_EXPANSION_HORIZONTAL = 3;
+int Player::MAX_TICS_UNEXPANSION_VERTICAL = 2;
+int Player::MAX_TICS_UNEXPANSION_HORIZONTAL = 2;
 
 Player::Player(void)
 {
@@ -28,22 +32,35 @@ void Player::render(GameData &data) const
 		glBindTexture(GL_TEXTURE_2D, data.getTextureID(GameData::PLAYER_TEXTURE_INDEX));
 		glTranslatef(getXPosition(),getYPosition() + 1.0f,getZPosition());
 
-		float scaleOffset = 0.3;
+		float scaleOffsetVertical = 0.4;
+		float scaleOffsetHorizontal = 0.2;
 		float init = ticsExpansion;
-		float max = MAX_TICS_EXPANSION;
-		float interpolation = scaleOffset * init / max; // pertany a [0,1]  0->fi animacio, 1->inici animacio
+		float max;
+		float interpolation; 
 		switch (expansionState){
 		case EXPANDING_VERTICAL:
-			glScalef(1.0f - interpolation, 1.0f + interpolation, 1.0f - interpolation);
+			//          1.0 -> 0.7          1.0 -> 1.3            1.0 -> 0.7
+			max = MAX_TICS_EXPANSION_VERTICAL;
+			interpolation = scaleOffsetVertical * init / max; // pertany a [0,scaleOffset]  0->fi animacio, 1->inici animacio
+			glScalef(0.7f + interpolation, 1.3f - interpolation, 0.7f + interpolation);
 			break;
 		case UNEXPANDING_VERTICAL:
-			glScalef(1.0f + interpolation, 1.0f - interpolation, 1.0f + interpolation);
+			//          0.7 -> 1.0          1.3 -> 1.0            0.7 -> 1.0
+			max = MAX_TICS_UNEXPANSION_VERTICAL;
+			interpolation = scaleOffsetVertical * init / max; // pertany a [0,scaleOffset]  0->fi animacio, 1->inici animacio
+			glScalef(1.0f - interpolation, 1.0f + interpolation, 1.0f - interpolation);
 			break;
 		case EXPANDING_HORIZONTAL:
-			glScalef(1.3f, 0.7f, 1.3f);
+			//          1.0 -> 1.3          1.0 -> 0.7            1.0 -> 1.3
+			max = MAX_TICS_EXPANSION_HORIZONTAL;
+			interpolation = scaleOffsetHorizontal * init / max; // pertany a [0,scaleOffset]  0->fi animacio, 1->inici animacio
+			glScalef(1.3f - interpolation, 0.7f + interpolation, 1.3f - interpolation);
 			break;
 		case UNEXPANDING_HORIZONTAL:
-			glScalef(1.0f, 1.0f, 1.0f);
+			//          1.3 -> 1.0          0.7 -> 1.0            1.3 -> 1.0
+			max = MAX_TICS_UNEXPANSION_HORIZONTAL;
+			interpolation = scaleOffsetHorizontal * init / max; // pertany a [0,scaleOffset]  0->fi animacio, 1->inici animacio
+			glScalef(1.0f + interpolation, 1.0f - interpolation, 1.0f + interpolation);
 			break;
 		}
 
@@ -174,7 +191,7 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects)
 		break;
 	case EXPANDING_HORIZONTAL:
 		if (ticsExpansion <= 0) {
-			ticsExpansion = MAX_TICS_EXPANSION;
+			ticsExpansion = MAX_TICS_UNEXPANSION_HORIZONTAL;
 			expansionState = UNEXPANDING_HORIZONTAL;
 		}
 		break;
@@ -186,7 +203,7 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects)
 		break;
 	case EXPANDING_VERTICAL:
 		if (ticsExpansion <= 0) {
-			ticsExpansion = MAX_TICS_EXPANSION;
+			ticsExpansion = MAX_TICS_UNEXPANSION_VERTICAL;
 			expansionState = UNEXPANDING_VERTICAL;
 		}
 		break;
@@ -222,7 +239,7 @@ bool Player::jump()
 	if (jumped) {
 		jumping = true;
 		expansionState = EXPANDING_VERTICAL;
-		ticsExpansion = MAX_TICS_EXPANSION;
+		ticsExpansion = MAX_TICS_EXPANSION_VERTICAL;
 	}
 	return jumped;
 }
@@ -232,7 +249,7 @@ void Player::floorReached()
 	if (jumping) {
 		jumping = false;
 		expansionState = EXPANDING_HORIZONTAL;
-		ticsExpansion = MAX_TICS_EXPANSION;
+		ticsExpansion = MAX_TICS_EXPANSION_HORIZONTAL;
 	}
 	
 	MobileGameObject::floorReached();

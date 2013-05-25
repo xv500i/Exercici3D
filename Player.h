@@ -16,7 +16,11 @@ class Player : public MobileGameObject
 {
 private:
 	const static int MAX_TICS_INVUL = 50;
-	const static int MAX_TICS_EXPANSION = 5;
+	static int MAX_TICS_EXPANSION_VERTICAL;
+	static int MAX_TICS_EXPANSION_HORIZONTAL;
+	static int MAX_TICS_UNEXPANSION_VERTICAL;
+	static int MAX_TICS_UNEXPANSION_HORIZONTAL;
+
 
 	float rotX;
 	float rotZ;
