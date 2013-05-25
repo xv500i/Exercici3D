@@ -69,6 +69,7 @@ void Level::loadThirdLevel()
 /* Update */
 void Level::update(Player &player)
 {
+	landscape.update();
 	// Vector with all the objects 
 	std::vector<GameObject*> objects = std::vector<GameObject*>();
 	objects.reserve(1 + enemies.size() + obstacles.size());
