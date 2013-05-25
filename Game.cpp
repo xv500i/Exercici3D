@@ -138,6 +138,7 @@ bool Game::process()
 		MenuOption m = menus.getActiveMenuSelected();
 		// Change the game state depending on the selected option
 		bool notInstructions = gameState != INSTRUCTIONS_MENU;
+		int level = scene.getCurrentLevel();
 		switch (m) {
 		case START_GAME:
 			gameState = PLAYING;
@@ -161,6 +162,13 @@ bool Game::process()
 			gameState = PLAYING;
 			data.stopAllSounds();
 			scene.nextLevel();
+			if (level == 1) {
+				// current level = 2
+				data.playSound(GameData::SNOW_FIELD_THEME);
+			} else {
+				// current level = 3
+				data.playSound(GameData::BOSS_THEME_INDEX);
+			}
 			break;
 		case SHOW_INSTRUCTIONS: gameState = INSTRUCTIONS_MENU; break;
 		case QUIT_GAME: gameState = EXIT; break;

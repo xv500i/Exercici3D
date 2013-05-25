@@ -108,3 +108,8 @@ void Scene::resetRot()
 {
 	player.resetRot();
 }
+
+int Scene::getCurrentLevel()
+{
+	return currentLevel;
+}

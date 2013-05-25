@@ -45,4 +45,5 @@ public:
 	bool isLevelCompleted();
 	bool isLastLevel();
 	void resetRot();
+	int getCurrentLevel();
 };
