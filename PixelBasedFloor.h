@@ -9,7 +9,7 @@ class PixelBasedFloor
 {
 public:
 	PixelBasedFloor(void);
-	PixelBasedFloor(char *filename, float centerX, float centerZ, float distanceBetweenPixels = 0.2f, float maxHeight = 6.0f, float minHeigth = 0.0f);
+	PixelBasedFloor(char *filename, float centerX, float centerZ, float distanceBetweenPixels = 2.0f, float maxHeight = 10.0f, float minHeigth = 0.0f);
 	~PixelBasedFloor(void);
 	void render(GameData &data) const;
 	int getPixelsWidth() const;
