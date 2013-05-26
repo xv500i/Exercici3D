@@ -50,9 +50,11 @@ void Level::loadFirstLevel()
 	items[3].setXPosition(70.0f); items[3].setYPosition(map.getHeightAt(70,0)); items[3].setZPosition(0.0f);
 
 	// Altars
-	altars = std::vector<Altar>(2);
-	altars[0].setXPosition(25.0f); altars[0].setYPosition(map.getHeightAt(25,15)); altars[0].setZPosition(15.0f);
-	altars[1].setXPosition(35.0f); altars[1].setYPosition(map.getHeightAt(35,50)); altars[1].setZPosition(50.0f);
+	altars = std::vector<Altar>(4);
+	altars[0].setXPosition(70.0f); altars[0].setYPosition(map.getHeightAt(70,70)); altars[0].setZPosition(70.0f);
+	altars[1].setXPosition(70.0f); altars[1].setYPosition(map.getHeightAt(70,-70)); altars[1].setZPosition(-70.0f);
+	altars[2].setXPosition(-70.0f); altars[2].setYPosition(map.getHeightAt(-70,70)); altars[2].setZPosition(70.0f);
+	altars[3].setXPosition(-70.0f); altars[3].setYPosition(map.getHeightAt(-70,-70)); altars[3].setZPosition(-70.0f);
 }
 
 void Level::loadSecondLevel()
