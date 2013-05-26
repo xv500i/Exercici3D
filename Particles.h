@@ -2,6 +2,7 @@
 #pragma once
 
 #include <vector>
+#include "GameData.h"
 
 
 struct Particle {
@@ -14,7 +15,7 @@ class Particles
 {
 private:
 	const static int PARTICLE = 10;			// Displaylist identifier
-	const static int NUM_PARTICLES = 200;
+	const static int NUM_PARTICLES = 50;
 
 	Particle particles[NUM_PARTICLES];
 	std::vector<int> textures;
@@ -38,5 +39,5 @@ public:
 	void update();
 
 	/* Render */
-	void render();
+	void render(GameData &data);
 };
