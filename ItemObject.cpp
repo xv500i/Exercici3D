@@ -22,7 +22,20 @@ void ItemObject::update()
 {
 	if (type == ENERGY) {
 		if (!particlesCreated) {
-			particles.createParticleCylinder(getXPosition(), getZPosition(), getYPosition() - 1.0f, 1.0f);
+			// Texture preparation
+			std::vector<int> textures = std::vector<int>(4);
+			textures[0] = GameData::ENERGY_PARTICLE_1_INDEX;
+			textures[1] = GameData::ENERGY_PARTICLE_2_INDEX;
+			textures[2] = GameData::ENERGY_PARTICLE_3_INDEX;
+			textures[3] = GameData::ENERGY_PARTICLE_4_INDEX;
+			std::vector<int> masks = std::vector<int>(4);
+			masks[0] = GameData::ENERGY_PARTICLE_MASK_1_INDEX;
+			masks[1] = GameData::ENERGY_PARTICLE_MASK_2_INDEX;
+			masks[2] = GameData::ENERGY_PARTICLE_MASK_3_INDEX;
+			masks[3] = GameData::ENERGY_PARTICLE_MASK_4_INDEX;
+
+			// Particle creation 
+			particles.createParticleCylinder(getXPosition(), getZPosition(), getYPosition() - 1.0f, 1.0f, textures, masks);
 			particlesCreated = true;
 		}
 		particles.update();

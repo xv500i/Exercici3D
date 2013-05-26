@@ -39,7 +39,7 @@ void Particles::createParticleCylinder(float centerX, float centerZ, float initi
 		particles[i].vz = 0.0f;
 
 		// Particle y movement: random
-		particles[i].vy = (float)(rand()%250 + 50)/100.0f;
+		particles[i].vy = (float)(rand()%50)/100.0f;
 	}
 }
 
@@ -68,7 +68,10 @@ void Particles::update()
 void Particles::render()
 {
 	for (unsigned int i = 0; i < NUM_PARTICLES; i++) {
-		int textureIndex = rand()%textures.size();
+		int textureIndex = 0;
+		if (textures.size() > 0) textureIndex = rand()%textures.size();
+		else return;
+		glEnable(GL_TEXTURE_2D);
 		glPushMatrix();
 			glColor3f(1.0f, 1.0f, 1.0f);
 			glTranslatef(particles[i].x, particles[i].y, particles[i].z);
@@ -83,7 +86,9 @@ void Particles::render()
 			glBindTexture (GL_TEXTURE_2D, textures[textureIndex]);
 			glCallList(PARTICLE);
 			glEnable(GL_DEPTH_TEST);
+			glDisable(GL_BLEND);
 		glPopMatrix();
+		glDisable(GL_TEXTURE_2D);
 	}
 }
 
@@ -94,13 +99,13 @@ void Particles::createParticle()
 	glNewList(PARTICLE, GL_COMPILE);
 		glBegin(GL_QUADS);
 			glTexCoord2f(0.0f, 0.0f);
-			glVertex3f(-0.025f, 0.0, -0.025f);
+			glVertex3f(0.0f, -0.1f, -0.1f);
 			glTexCoord2f(1.0f, 0.0f);
-			glVertex3f(0.025f, 0.0f, -0.025f);
+			glVertex3f(0.0f, 0.1f, -0.1f);
 			glTexCoord2f(1.0f, 1.0f);
-			glVertex3f(0.025f, 0.0f, 0.025f);
+			glVertex3f(0.0f, 0.1f, 0.1f);
 			glTexCoord2f(0.0f, 1.0f);
-			glVertex3f(-0.025f, 0.0f, 0.025f);
+			glVertex3f(0.0f, -0.1f, 0.1f);
 		glEnd();
 	glEndList();
 }

@@ -14,7 +14,7 @@ class Particles
 {
 private:
 	const static int PARTICLE = 10;			// Displaylist identifier
-	const static int NUM_PARTICLES = 500;
+	const static int NUM_PARTICLES = 200;
 
 	Particle particles[NUM_PARTICLES];
 	std::vector<int> textures;
