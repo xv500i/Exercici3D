@@ -46,7 +46,7 @@ void ItemObject::render(GameData &data)
 		glColor3f(1.0f,1.0f,1.0f);
 	glPopMatrix();
 
-	if (type = ENERGY) particles.render();
+	if (type == ENERGY) particles.render();
 
 	if (DEBUG) renderBoundingCilinder();
 }
