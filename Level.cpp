@@ -40,7 +40,7 @@ void Level::loadFirstLevel()
 	obstacles[3] = Obstacle(-10.0, map.getHeightAt(10,-10), -10.0, 11.0, 2.0, TREE);
 
 	for(int i = 0; i < 4; i++) {
-		obstacles[4+i] = Obstacle(60.0, map.getHeightAt(60,60+i*4), 60.0+i*4, 11.0, 2.0, TREE); 
+		obstacles[4+i] = Obstacle(50.0, map.getHeightAt(50,64+i*4), 64.0+i*4, 11.0, 2.0, TREE); 
 	}
 	for(int i = 0; i < 4; i++);
 	for(int i = 0; i < 4; i++);
