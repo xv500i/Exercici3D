@@ -45,32 +45,32 @@ void Level::loadFirstLevel()
 	enemies[1] = Enemy(RANDOM);
 	enemies[2] = Enemy(PATH);
 	enemies[3] = Enemy(PATH_PURSUER);
-	enemies[0].setXPosition(15.0f);enemies[0].setZPosition(15.0f);
-	enemies[1].setXPosition(-15.0f);enemies[1].setZPosition(-15.0f);
-	enemies[3].setXPosition(15.0f);enemies[3].setZPosition(-15.0f);
+	enemies[0].setXPosition(15.0f);enemies[0].setZPosition(15.0f);enemies[0].setYPosition(map.getHeightAt(15,15));
+	enemies[1].setXPosition(-15.0f);enemies[1].setZPosition(-15.0f);enemies[1].setYPosition(map.getHeightAt(-15,-15));
+	enemies[3].setXPosition(15.0f);enemies[3].setZPosition(-15.0f);enemies[3].setYPosition(map.getHeightAt(15,-15));
 	enemies[3].setGuardState(*v2);
-	enemies[2].setXPosition(-15.0f);enemies[2].setZPosition(15.0f);
+	enemies[2].setXPosition(-15.0f);enemies[2].setZPosition(15.0f);enemies[2].setYPosition(map.getHeightAt(-15,15));
 	enemies[2].setGuardState(*v);
 
 	// Obstacles
 	obstacles = std::vector<Obstacle>(3);
-	obstacles[0] = Obstacle(7.0, 5.0, 7.0, 8.0, 1.0, TREE);
-	obstacles[1] = Obstacle(-7.0, 5.0, 7.0, 8.0, 1.0, TREE);
-	obstacles[2] = Obstacle(7.0, 5.0, -7.0, 8.0, 1.0, TREE);
+	obstacles[0] = Obstacle(7.0, map.getHeightAt(7,7), 7.0, 8.0, 1.0, TREE);
+	obstacles[1] = Obstacle(-7.0, map.getHeightAt(-7,7), 7.0, 8.0, 1.0, TREE);
+	obstacles[2] = Obstacle(7.0, map.getHeightAt(7,-7), -7.0, 8.0, 1.0, TREE);
 
 	// Items
 	items = std::vector<ItemObject>(3);
 	items[0] = ItemObject(false);
-	items[0].setXPosition(10.0f); items[0].setYPosition(5.5f); items[0].setZPosition(10.0f);
+	items[0].setXPosition(10.0f); items[0].setYPosition(map.getHeightAt(10,10)); items[0].setZPosition(10.0f);
 	items[1] = ItemObject(true);
-	items[1].setXPosition(10.0f); items[1].setYPosition(5.5f); items[1].setZPosition(-10.0f);
+	items[1].setXPosition(10.0f); items[1].setYPosition(map.getHeightAt(10,-10)); items[1].setZPosition(-10.0f);
 	items[2] = ItemObject(true);
-	items[2].setXPosition(-10.0f); items[2].setYPosition(5.5f); items[2].setZPosition(-10.0f);
+	items[2].setXPosition(-10.0f); items[2].setYPosition(map.getHeightAt(-10,-10)); items[2].setZPosition(-10.0f);
 
 	// Altars
 	altars = std::vector<Altar>(2);
-	altars[0].setXPosition(25.0f); altars[0].setYPosition(5.0f); altars[0].setZPosition(15.0f);
-	altars[1].setXPosition(35.0f); altars[1].setYPosition(5.0f); altars[1].setZPosition(50.0f);
+	altars[0].setXPosition(25.0f); altars[0].setYPosition(map.getHeightAt(25,15)); altars[0].setZPosition(15.0f);
+	altars[1].setXPosition(35.0f); altars[1].setYPosition(map.getHeightAt(35,50)); altars[1].setZPosition(50.0f);
 }
 
 void Level::loadSecondLevel()
