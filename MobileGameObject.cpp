@@ -17,7 +17,7 @@ MobileGameObject::MobileGameObject(void) : GameObject()
 	footOnGround = false;
 	jumpImpulse = false;
 	gravity = -0.25f;
-	jumpAcceleration = 1.5f;
+	jumpAcceleration = 2.0f;
 	type = MOBILEOBJECT;
 }
 

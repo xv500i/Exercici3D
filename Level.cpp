@@ -23,8 +23,6 @@ void Level::load(int level)
 /* Loading of different levels */
 void Level::loadFirstLevel()
 {
-	// TODO PRIMER NIVELL
-
 	// Landscape
 	landscape = Landscape(GameData::LANDSCAPE_TEXTURE_INDEX);
 
@@ -36,9 +34,9 @@ void Level::loadFirstLevel()
 
 	// Obstacles
 	obstacles = std::vector<Obstacle>(3);
-	obstacles[0] = Obstacle(7.0, map.getHeightAt(7,7), 7.0, 8.0, 1.0, TREE);
-	obstacles[1] = Obstacle(-7.0, map.getHeightAt(-7,7), 7.0, 8.0, 1.0, TREE);
-	obstacles[2] = Obstacle(7.0, map.getHeightAt(7,-7), -7.0, 8.0, 1.0, TREE);
+	obstacles[0] = Obstacle(7.0, map.getHeightAt(7,7), 7.0, 11.0, 1.0, TREE);
+	obstacles[1] = Obstacle(-7.0, map.getHeightAt(-7,7), 7.0, 11.0, 1.0, TREE);
+	obstacles[2] = Obstacle(7.0, map.getHeightAt(7,-7), -7.0, 11.0, 1.0, TREE);
 
 	// Items
 	items = std::vector<ItemObject>(4);
