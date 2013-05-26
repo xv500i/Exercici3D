@@ -1,5 +1,9 @@
+
 #include "GameObject.h"
-#include "gl\glut.h"
+#include <gl\glut.h>
+// DEBUG
+#include "Globals.h"
+
 
 bool GameObject::drawAxis = true;
 int GameObject::idCounter = 0;
@@ -63,23 +67,23 @@ void GameObject::render(GameData &data) const
 		gluDeleteQuadric(q);
 		glColor3f(1.0f,1.0f,1.0f);
 
-		if (drawAxis) {
+		if (DEBUG) {
+			// Axis
 			glLineWidth(3.0f);
 			glBegin(GL_LINES);
+				glColor3f(1.0f, 0.0f, 0.0f);
+				glVertex3f(100.0f, 0.0f, 0.0f);
+				glVertex3f(0.0f, 0.0f, 0.0f);
 
-			glColor3f(1.0f, 0.0f, 0.0f);
-			glVertex3f(100.0f, 0.0f, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
+				glColor3f(0.0f, 1.0f, 0.0f);
+				glVertex3f(0.0f, 100.0f, 0.0f);
+				glVertex3f(0.0f, 0.0f, 0.0f);
 
-			glColor3f(0.0f, 1.0f, 0.0f);
-			glVertex3f(0.0f, 100.0f, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
+				glColor3f(0.0f, 0.0f, 1.0f);
+				glVertex3f(0.0f, 0.0f, 100.0f);
+				glVertex3f(0.0f, 0.0f, 0.0f);
 
-			glColor3f(0.0f, 0.0f, 1.0f);
-			glVertex3f(0.0f, 0.0f, 100.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
-
-			glColor3f(1.0f, 1.0f, 1.0f);
+				glColor3f(1.0f, 1.0f, 1.0f);
 			glEnd();
 		}
 	glPopMatrix();

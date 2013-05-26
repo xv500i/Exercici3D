@@ -1,5 +1,9 @@
+
 #include "Obstacle.h"
-#include "gl\glut.h"
+#include <gl\glut.h>
+// DEBUG
+#include "Globals.h"
+
 
 Obstacle::Obstacle(void)
 	: GameObject()
@@ -38,9 +42,7 @@ void Obstacle::render(GameData &data) const
 
 		gluDeleteQuadric(q);
 		glColor3f(1.0f,1.0f,1.0f);
-
-		
-
 	glPopMatrix();
-	renderBoundingCilinder();
+
+	if (DEBUG) renderBoundingCilinder();
 }

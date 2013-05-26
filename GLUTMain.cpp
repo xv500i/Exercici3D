@@ -1,5 +1,5 @@
 
-#include "Globals.h"
+#include <gl/glut.h>
 #include "Game.h"
 
 //Delete console

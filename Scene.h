@@ -18,18 +18,16 @@ private:
 	HUD hud;		/* HUD (player life & items) */
 	Player player;	/* The player */
 	Level level;	/* The level */
-	bool isCurrentLevelCompleted;
 	
 	int currentLevel;
-
-	bool drawPlayer;
+	bool isCurrentLevelCompleted;
 
 public:
 	Scene(void);
 	virtual ~Scene(void);
 
 	/* Scene initialization */
-	bool init();
+	bool init(int screenWidth, int screenHeight);
 
 	/* Update */
 	void resolveInput(InputHandler &input);
@@ -38,7 +36,6 @@ public:
 	/* Render */
 	void render(GameData &data);
 
-	bool drawEntity(bool draw);
 	bool playerIsDead();
 	void loadLevel(int levelNumber);
 	void nextLevel();

@@ -1,6 +1,6 @@
 
 #include "Game.h"
-#include "Globals.h"
+#include <gl/glut.h>
 #include <cmath>
 #include <time.h>
 #include <random>
@@ -36,7 +36,7 @@ bool Game::init()
 	if (!data.loadSounds()) return false;
 
 	// Scene initialization
-	scene.init();
+	scene.init(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	// Menu creation
 	menus.createMenus();
@@ -106,17 +106,18 @@ bool Game::process()
 		}
 		/* GAMEPLAY */
 		if (scene.playerIsDead()) {
-			gameState = GAMEOVER_MENU;	// Game end (lose)
+			gameState = GAMEOVER_MENU;			// Game end (lose)
 			data.stopAllSounds();
 			data.playSound(GameData::GAME_OVER_INDEX);
-		} else if (scene.isLevelCompleted()) {
-			bool end = scene.isLastLevel();
-			if (end) {
-				gameState = CONGRATS_MENU;	// Game end (win)
+		} 
+		else if (scene.isLevelCompleted()) {
+			if (scene.isLastLevel()) {
+				gameState = CONGRATS_MENU;		// Game end (win)
 				data.stopAllSounds();
 				data.playSound(GameData::ENDING_THEME_INDEX);
-			} else {
-				gameState = NEXT_LEVEL_MENU;		// Next level
+			}
+			else {
+				gameState = NEXT_LEVEL_MENU;	// Next level
 				data.stopAllSounds();
 				data.playSound(GameData::STAGE_CLEAR_INDEX);
 			}
@@ -151,7 +152,6 @@ bool Game::process()
 			//data.stopAllSounds();
 			break;
 		case TO_MAIN_MENU:
-			
 			gameState = MAIN_MENU;
 			if (notInstructions) {
 				data.stopAllSounds();
@@ -194,7 +194,6 @@ void Game::render()
 		
 		/* Drawing */
 		camera.useActiveCamera();
-		scene.drawEntity(true);
 		scene.render(data);
 	}
 	else menus.renderActiveMenu(data);

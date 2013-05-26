@@ -4,6 +4,9 @@
 #include <cmath>
 #include "ItemObject.h"
 #include "Altar.h"
+// DEBUG
+#include "Globals.h"
+
 
 int Player::MAX_TICS_EXPANSION_VERTICAL = 4;
 int Player::MAX_TICS_EXPANSION_HORIZONTAL = 3;
@@ -28,12 +31,12 @@ Player::~Player(void) {}
 
 void Player::render(GameData &data) const 
 {
-	if (ticsInvul%8 > 3) return;
+	if (ticsInvul%6 > 2) return;
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
 		glColor3f(1.0f, 1.0f, 1.0f);
 		glBindTexture(GL_TEXTURE_2D, data.getTextureID(GameData::PLAYER_TEXTURE_INDEX));
-		glTranslatef(getXPosition(),getYPosition() + 1.0f,getZPosition());
+		glTranslatef(getXPosition(), getYPosition() + 1.0f, getZPosition());
 
 		float scaleOffsetVertical = 0.4;
 		float scaleOffsetHorizontal = 0.2;
@@ -70,13 +73,14 @@ void Player::render(GameData &data) const
 		glRotatef(-rotY, 0.0f, 1.0f , 0.0f);
 		glRotatef(-rotX, 0.0f , 0.0f, 1.0f);
 		
-
 		GLUquadricObj *q = gluNewQuadric();
 		gluQuadricOrientation(q, GLU_OUTSIDE);
 		gluQuadricTexture(q, GL_TRUE);
 		gluSphere(q, 1.0f,16,16);
-		
-		glLineWidth(3.0f);
+		gluDeleteQuadric(q);
+
+		if (DEBUG) {
+			glLineWidth(3.0f);
 			glBegin(GL_LINES);
 				glColor3f(1.0f, 0.0f, 0.0f);
 				glVertex3f(5.0f, 0.0f, 0.0f);
@@ -92,13 +96,13 @@ void Player::render(GameData &data) const
 
 				glColor3f(1.0f, 1.0f, 1.0f);
 			glEnd();
-
-		gluDeleteQuadric(q);
+		}
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
 	glColor3f(1.0f,1.0f,1.0f);
-	if (getDrawAxis()) {
+	if (DEBUG) {
+		// Axis
 		glPushMatrix();
 			glTranslatef(getXPosition(), getYPosition(), getZPosition());
 			glRotatef(-getYAngle(), 0.0f, 1.0f, 0.0f);
@@ -119,14 +123,17 @@ void Player::render(GameData &data) const
 				glColor3f(1.0f, 1.0f, 1.0f);
 			glEnd();
 		glPopMatrix();
+
+		// Bounding cylinder
+		renderBoundingCilinder();
+
+		// Inclination line
+		Vector3D inclination = getInclination();
+		glBegin(GL_LINES);
+			glVertex3f(getXPosition(), getYPosition(), getZPosition());
+			glVertex3f(getXPosition()+inclination.getX(), getYPosition()+inclination.getY(), getZPosition()+inclination.getZ());
+		glEnd();
 	}
-	
-	renderBoundingCilinder();
-	Vector3D inclination = getInclination();
-	glBegin(GL_LINES);
-		glVertex3f(getXPosition(), getYPosition(), getZPosition());
-		glVertex3f(getXPosition()+inclination.getX(), getYPosition()+inclination.getY(), getZPosition()+inclination.getZ());
-	glEnd();
 }
 
 

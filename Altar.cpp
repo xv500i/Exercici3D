@@ -1,4 +1,7 @@
+
 #include "Altar.h"
+// DEBUG
+#include "Globals.h"
 
 
 Altar::Altar(void) : GameObject() 
@@ -42,7 +45,7 @@ void Altar::render(GameData &data)
 		glColor3f(1.0f, 1.0f, 1.0f);
 	glPopMatrix();
 
-	renderBoundingCilinder();
+	if (DEBUG) renderBoundingCilinder();
 }
 
 

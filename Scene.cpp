@@ -2,6 +2,8 @@
 #include "Scene.h"
 #include <gl/glut.h>
 #include <iostream>
+// DEBUG
+#include "Globals.h"
 
 
 Scene::Scene(void) {}
@@ -10,13 +12,11 @@ Scene::~Scene(void) {}
 
 
 /* Scene initialization */
-bool Scene::init()
+bool Scene::init(int screenWidth, int screenHeight)
 {
-	drawPlayer = true;
 	currentLevel = 1;
 	isCurrentLevelCompleted = false;
-	// TODO HARDCODED
-	hud.load(800, 600, Player::MAX_LIFE);
+	hud.load(screenWidth, screenHeight, Player::MAX_LIFE);
 	return true;
 }
 
@@ -32,7 +32,14 @@ void Scene::resolveInput(InputHandler &input)
 	if (input.keyIsDown(input.getKey(ROTATE_LEFT)))		   player.turnLeft();
 	else if (input.keyIsDown(input.getKey(ROTATE_RIGHT)))  player.turnRight();
 	if (input.keyIsDown(input.getKey(JUMP)))			   player.jump();
-	if (input.keyIsDown('n'))							   isCurrentLevelCompleted = true;
+
+	// Next level (automatic)
+	if (input.keyIsDown('n')) isCurrentLevelCompleted = true;
+
+	// Enable/disable debug mode
+	if (input.keyIsDown('m')) {
+		DEBUG = !DEBUG;
+	}
 }
 
 
@@ -59,19 +66,12 @@ void Scene::render(GameData &data)
 	level.render(data);
 
 	// Player
-	if (drawPlayer) player.render(data);
+	player.render(data);
 	
 	// HUD (It must be the last render)
 	hud.render(data);
 }
 
-
-
-bool Scene::drawEntity(bool draw)
-{
-	drawPlayer = draw;
-	return drawPlayer;
-}
 
 
 bool Scene::playerIsDead()

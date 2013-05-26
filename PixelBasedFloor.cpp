@@ -3,7 +3,8 @@
 #include "Texture.h"
 #include <iostream>
 #include "Vector3D.h"
-#include "Globals.h"
+#include <gl/glut.h>
+#include <windows.h>
 
 
 PixelBasedFloor::PixelBasedFloor(void)
@@ -92,8 +93,8 @@ float PixelBasedFloor::getHeightAt(float x, float z)
 	float fz = z/distanceBetweenPixels + (points[0].size()/2);
 	unsigned int roundedX = (unsigned int)fx;
 	unsigned int roundedZ = (unsigned int)fz;
-	unsigned int i = max( min (roundedX , points.size()-1), 0);
-	unsigned int j = max( min (roundedZ , points[0].size()-1), 0);
+	unsigned int i = max( min(roundedX , points.size()-1), 0);
+	unsigned int j = max( min(roundedZ , points[0].size()-1), 0);
 	float factor =  (maxHeight - minHeigth);
 	float res = minHeigth + points[i][j] * factor;
 	// interpolar

@@ -2,7 +2,7 @@
 #include "Texture.h"
 #include <iostream>
 #include <sstream>
-#include "Globals.h"
+#include <Windows.h>
 
 
 Texture::Texture(void) {}

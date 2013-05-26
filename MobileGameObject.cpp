@@ -1,6 +1,10 @@
+
 #include "MobileGameObject.h"
 #include <cmath>
-#include "gl\glut.h"
+#include <gl\glut.h>
+// DEBUG
+#include "Globals.h"
+
 
 MobileGameObject::MobileGameObject(void) : GameObject()
 {
@@ -138,7 +142,6 @@ void MobileGameObject::floorReached()
 void MobileGameObject::render(GameData &data) const
 {
 	glPushMatrix();
-		
 		if (footOnGround) {
 			glColor3f(0.0f,1.0f,0.0f);
 		} else {
@@ -150,40 +153,41 @@ void MobileGameObject::render(GameData &data) const
 		GLUquadricObj *q = gluNewQuadric();
 		gluSphere(q, 1.0f,16,16);
 		gluDeleteQuadric(q);
-		
 	glPopMatrix();
-		glColor3f(1.0f,1.0f,1.0f);
-		if (getDrawAxis()) {
 
-			glPushMatrix();
+	glColor3f(1.0f,1.0f,1.0f);
+	if (DEBUG) {
+		// Axis
+		glPushMatrix();
 			glTranslatef(getXPosition(), getYPosition(), getZPosition());
 			glRotatef(-getYAngle(), 0.0f, 1.0f, 0.0f);
 			glLineWidth(3.0f);
 			glBegin(GL_LINES);
+				glColor3f(1.0f, 0.0f, 0.0f);
+				glVertex3f(5.0f, 0.0f, 0.0f);
+				glVertex3f(0.0f, 0.0f, 0.0f);
 
-			glColor3f(1.0f, 0.0f, 0.0f);
-			glVertex3f(5.0f, 0.0f, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
+				glColor3f(0.0f, 1.0f, 0.0f);
+				glVertex3f(0.0f, 5.0f, 0.0f);
+				glVertex3f(0.0f, 0.0f, 0.0f);
 
-			glColor3f(0.0f, 1.0f, 0.0f);
-			glVertex3f(0.0f, 5.0f, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
+				glColor3f(0.0f, 0.0f, 1.0f);
+				glVertex3f(0.0f, 0.0f, 5.0f);
+				glVertex3f(0.0f, 0.0f, 0.0f);
 
-			glColor3f(0.0f, 0.0f, 1.0f);
-			glVertex3f(0.0f, 0.0f, 5.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
-
-			glColor3f(1.0f, 1.0f, 1.0f);
+				glColor3f(1.0f, 1.0f, 1.0f);
 			glEnd();
-			glPopMatrix();
-		}
-	
-	renderBoundingCilinder();
+		glPopMatrix();
 
-	glBegin(GL_LINES);
-		glVertex3f(getXPosition(), getYPosition(), getZPosition());
-		glVertex3f(getXPosition()+inclination.getX(), getYPosition()+inclination.getY(), getZPosition()+inclination.getZ());
-	glEnd();
+		// Bounding cylinder
+		renderBoundingCilinder();
+
+		// Inclination line
+		glBegin(GL_LINES);
+			glVertex3f(getXPosition(), getYPosition(), getZPosition());
+			glVertex3f(getXPosition()+inclination.getX(), getYPosition()+inclination.getY(), getZPosition()+inclination.getZ());
+		glEnd();
+	}
 }
 
 void MobileGameObject::clearYVelocity()

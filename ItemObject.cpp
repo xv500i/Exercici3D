@@ -1,4 +1,7 @@
+
 #include "ItemObject.h"
+// DEBUG
+#include "Globals.h"
 
 
 ItemObject::ItemObject() : GameObject() {}
@@ -28,6 +31,8 @@ void ItemObject::render(GameData &data)
 
 		glColor3f(1.0f,1.0f,1.0f);
 	glPopMatrix();
+
+	if (DEBUG) renderBoundingCilinder();
 }
 
 
