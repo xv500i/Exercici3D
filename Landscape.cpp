@@ -30,7 +30,7 @@ void Landscape::render(GameData &data)
 		GLUquadricObj *q = gluNewQuadric();
 		gluQuadricOrientation(q, GLU_OUTSIDE);
 		gluQuadricTexture(q, GL_TRUE);
-		gluSphere(q, 200.0f, 16, 16);
+		gluSphere(q, 240.0f, 16, 16);
 		gluDeleteQuadric(q);
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
