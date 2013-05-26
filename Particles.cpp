@@ -11,7 +11,7 @@ Particles::~Particles(void) {}
 
 
 /* Creation */
-void Particles::createParticleCylinder(float centerX, float centerZ, float initialY, float radius)
+void Particles::createParticleCylinder(float centerX, float centerZ, float initialY, float radius, std::vector<int> textures, std::vector<int> masks)
 {
 	// Display list
 	createParticle();
@@ -24,6 +24,8 @@ void Particles::createParticleCylinder(float centerX, float centerZ, float initi
 	this->initialY = initialY;
 	this->centerZ = centerZ;
 	this->radius = radius;
+	this->textures = textures;
+	this->masks = masks;
 
 	for (unsigned int i = 0; i < NUM_PARTICLES; i++) {
 		// Particles starting position: randomly distributed in a circle with center in (centerX, initialY, centerZ)
@@ -66,10 +68,21 @@ void Particles::update()
 void Particles::render()
 {
 	for (unsigned int i = 0; i < NUM_PARTICLES; i++) {
+		int textureIndex = rand()%textures.size();
 		glPushMatrix();
 			glColor3f(1.0f, 1.0f, 1.0f);
 			glTranslatef(particles[i].x, particles[i].y, particles[i].z);
+
+			glDisable(GL_DEPTH_TEST);
+			glEnable(GL_BLEND);
+			glBlendFunc (GL_DST_COLOR, GL_ZERO);
+			glBindTexture (GL_TEXTURE_2D, masks[textureIndex]);
 			glCallList(PARTICLE);
+
+			glBlendFunc (GL_ONE, GL_ONE);
+			glBindTexture (GL_TEXTURE_2D, textures[textureIndex]);
+			glCallList(PARTICLE);
+			glEnable(GL_DEPTH_TEST);
 		glPopMatrix();
 	}
 }
@@ -80,9 +93,13 @@ void Particles::createParticle()
 {
 	glNewList(PARTICLE, GL_COMPILE);
 		glBegin(GL_QUADS);
+			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(-0.025f, 0.0, -0.025f);
+			glTexCoord2f(1.0f, 0.0f);
 			glVertex3f(0.025f, 0.0f, -0.025f);
+			glTexCoord2f(1.0f, 1.0f);
 			glVertex3f(0.025f, 0.0f, 0.025f);
+			glTexCoord2f(0.0f, 1.0f);
 			glVertex3f(-0.025f, 0.0f, 0.025f);
 		glEnd();
 	glEndList();

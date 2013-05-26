@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include <vector>
+
 
 struct Particle {
 	float x, y, z;		/* Particle initial position */
@@ -11,10 +13,12 @@ struct Particle {
 class Particles
 {
 private:
-	const static int PARTICLE = 10;	// Displaylist identifier
+	const static int PARTICLE = 10;			// Displaylist identifier
 	const static int NUM_PARTICLES = 500;
 
 	Particle particles[NUM_PARTICLES];
+	std::vector<int> textures;
+	std::vector<int> masks;
 
 	/* Particle cylinder */
 	float centerX, initialY, centerZ;
@@ -28,7 +32,7 @@ public:
 	virtual ~Particles(void);
 
 	/* Creation */
-	void createParticleCylinder(float centerX, float centerZ, float initialY, float radius);
+	void createParticleCylinder(float centerX, float centerZ, float initialY, float radius, std::vector<int> textures, std::vector<int> masks);
 
 	/* Update */
 	void update();
