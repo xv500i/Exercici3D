@@ -12,7 +12,7 @@ class GameData
 {
 private:
 	/* Textures */
-	const static int NUM_TEXTURES = 23;		// TOCHANGE: modificar depenent del numero de textures carregades
+	const static int NUM_TEXTURES = 31;		// TOCHANGE: modificar depenent del numero de textures carregades
 	const static char* TEXTURE_EXT;
 	
 	/* TileSheets */
@@ -58,6 +58,14 @@ public:
 	const static int SPACESCAPE_TEXTURE_INDEX = 20;
 	const static int ICESCAPE_TEXTURE_INDEX = 21;
 	const static int ENERGY_HUD_TEXTURE_INDEX = 22;
+	const static int ENERGY_PARTICLE_1_INDEX = 23;
+	const static int ENERGY_PARTICLE_2_INDEX = 24;
+	const static int ENERGY_PARTICLE_3_INDEX = 25;
+	const static int ENERGY_PARTICLE_4_INDEX = 26;
+	const static int ENERGY_PARTICLE_MASK_1_INDEX = 27;
+	const static int ENERGY_PARTICLE_MASK_2_INDEX = 28;
+	const static int ENERGY_PARTICLE_MASK_3_INDEX = 29;
+	const static int ENERGY_PARTICLE_MASK_4_INDEX = 30;
 	
 
 	/* TileSheet indexes */		// TOCHANGE: afegir indexs de tots els tile sheets carregats

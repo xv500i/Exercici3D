@@ -24,7 +24,9 @@ bool GameData::loadTextures()
 	const char* filenames[NUM_TEXTURES] = {"title", "instructions", "pause", "gameover", "button_quit", "button_start", 
 										   "button_help", "button_restart", "button_mainmenu", "cursor", "lantern", "manual", 
 										   "congrats", "button_next_level", "level_completed", "BallTexture", "hecatomb", 
-										   "landscape", "LifeFull", "LifeEmpty", "spacescape", "icescape", "Energy"};
+										   "landscape", "LifeFull", "LifeEmpty", "spacescape", "icescape", "Energy",
+										   "EnergyParticle1", "EnergyParticle2", "EnergyParticle3", "EnergyParticle4",
+										   "EnergyParticleMask1", "EnergyParticleMask2", "EnergyParticleMask3", "EnergyParticleMask4"};
 	for (unsigned int i = 0; i < textures.size(); i++) {
 		bool b = textures[i].load(filenames[i], TEXTURE_EXT);
 		if (!b) return false;
