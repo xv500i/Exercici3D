@@ -20,7 +20,7 @@ ItemObject::~ItemObject(void) {}
 /* Update */
 void ItemObject::update()
 {
-	if (type = ENERGY) {
+	if (type == ENERGY) {
 		if (!particlesCreated) {
 			particles.createParticleCylinder(getXPosition(), getZPosition(), getYPosition() - 1.0f, 1.0f);
 			particlesCreated = true;
