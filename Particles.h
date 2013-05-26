@@ -11,6 +11,7 @@ struct Particle {
 class Particles
 {
 private:
+	const static int PARTICLE = 10;	// Displaylist identifier
 	const static int NUM_PARTICLES = 500;
 
 	Particle particles[NUM_PARTICLES];
@@ -18,6 +19,9 @@ private:
 	/* Particle cylinder */
 	float centerX, initialY, centerZ;
 	float radius;
+
+	/* Displaylist creation */
+	void createParticle();
 
 public:
 	Particles(void);

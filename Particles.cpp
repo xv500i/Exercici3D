@@ -13,6 +13,9 @@ Particles::~Particles(void) {}
 /* Creation */
 void Particles::createParticleCylinder(float centerX, float centerZ, float initialY, float radius)
 {
+	// Display list
+	createParticle();
+
 	// Random seed
 	srand((unsigned)time(0));
 
@@ -66,18 +69,21 @@ void Particles::render()
 		glPushMatrix();
 			glColor3f(1.0f, 1.0f, 1.0f);
 			glTranslatef(particles[i].x, particles[i].y, particles[i].z);
-
-			//GLUquadricObj *q = gluNewQuadric();
-			//gluSphere(q, 0.025, 2, 2);
-			//gluDeleteQuadric(q);
-
-			glBegin(GL_QUADS);
-				glVertex3f(-0.025f, 0.0f, -0.025f);
-				glVertex3f(0.025f, 0.0f, -0.025f);
-				glVertex3f(0.025f, 0.0f, 0.025f);
-				glVertex3f(-0.025f, 0.0f, 0.025f);
-			glEnd();
-
+			glCallList(PARTICLE);
 		glPopMatrix();
 	}
+}
+
+
+/* Displaylist creation */
+void Particles::createParticle()
+{
+	glNewList(PARTICLE, GL_COMPILE);
+		glBegin(GL_QUADS);
+			glVertex3f(-0.025f, 0.0, -0.025f);
+			glVertex3f(0.025f, 0.0f, -0.025f);
+			glVertex3f(0.025f, 0.0f, 0.025f);
+			glVertex3f(-0.025f, 0.0f, 0.025f);
+		glEnd();
+	glEndList();
 }
