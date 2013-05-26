@@ -33,10 +33,21 @@ void Level::loadFirstLevel()
 	enemies = std::vector<Enemy>(0);
 
 	// Obstacles
-	obstacles = std::vector<Obstacle>(3);
-	obstacles[0] = Obstacle(7.0, map.getHeightAt(7,7), 7.0, 11.0, 1.0, TREE);
-	obstacles[1] = Obstacle(-7.0, map.getHeightAt(-7,7), 7.0, 11.0, 1.0, TREE);
-	obstacles[2] = Obstacle(7.0, map.getHeightAt(7,-7), -7.0, 11.0, 1.0, TREE);
+	obstacles = std::vector<Obstacle>(4 + 4);
+	obstacles[0] = Obstacle(10.0, map.getHeightAt(10,10), 10.0, 11.0, 2.0, TREE);
+	obstacles[1] = Obstacle(-10.0, map.getHeightAt(-10,10), 10.0, 11.0, 2.0, TREE);
+	obstacles[2] = Obstacle(10.0, map.getHeightAt(10,-10), -10.0, 11.0, 2.0, TREE);
+	obstacles[3] = Obstacle(-10.0, map.getHeightAt(10,-10), -10.0, 11.0, 2.0, TREE);
+
+	for(int i = 0; i < 4; i++) {
+		obstacles[4+i] = Obstacle(60.0, map.getHeightAt(60,60+i*4), 60.0+i*4, 11.0, 2.0, TREE); 
+	}
+	for(int i = 0; i < 4; i++);
+	for(int i = 0; i < 4; i++);
+	for(int i = 0; i < 4; i++);
+	for(int i = 0; i < 4; i++);
+	for(int i = 0; i < 4; i++);
+	for(int i = 0; i < 4; i++);
 
 	// Items
 	items = std::vector<ItemObject>(4);
