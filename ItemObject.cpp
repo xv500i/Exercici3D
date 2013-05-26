@@ -11,9 +11,23 @@ ItemObject::ItemObject(bool energy) : GameObject()
 	if (energy) type = ENERGY;
 	else type = MEDIKIT;
 	pickedUp = false;
+	particlesCreated = false;
 }
 
 ItemObject::~ItemObject(void) {}
+
+
+/* Update */
+void ItemObject::update()
+{
+	if (type = ENERGY) {
+		if (!particlesCreated) {
+			particles.createParticleCylinder(getXPosition(), getZPosition(), getYPosition() - 1.0f, 1.0f);
+			particlesCreated = true;
+		}
+		particles.update();
+	}
+}
 
 
 /* Render */
@@ -31,6 +45,8 @@ void ItemObject::render(GameData &data)
 
 		glColor3f(1.0f,1.0f,1.0f);
 	glPopMatrix();
+
+	if (type = ENERGY) particles.render();
 
 	if (DEBUG) renderBoundingCilinder();
 }
