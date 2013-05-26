@@ -67,9 +67,16 @@ void Particles::render()
 			glColor3f(1.0f, 1.0f, 1.0f);
 			glTranslatef(particles[i].x, particles[i].y, particles[i].z);
 
-			GLUquadricObj *q = gluNewQuadric();
-			gluSphere(q, 0.025, 2, 2);
-			gluDeleteQuadric(q);
+			//GLUquadricObj *q = gluNewQuadric();
+			//gluSphere(q, 0.025, 2, 2);
+			//gluDeleteQuadric(q);
+
+			glBegin(GL_QUADS);
+				glVertex3f(-0.025f, 0.0f, -0.025f);
+				glVertex3f(0.025f, 0.0f, -0.025f);
+				glVertex3f(0.025f, 0.0f, 0.025f);
+				glVertex3f(-0.025f, 0.0f, 0.025f);
+			glEnd();
 
 		glPopMatrix();
 	}
