@@ -78,12 +78,12 @@ void Particles::render()
 
 			glDisable(GL_DEPTH_TEST);
 			glEnable(GL_BLEND);
-			glBlendFunc (GL_DST_COLOR, GL_ZERO);
-			glBindTexture (GL_TEXTURE_2D, masks[textureIndex]);
+			glBlendFunc(GL_DST_COLOR, GL_ZERO);
+			glBindTexture(GL_TEXTURE_2D, masks[textureIndex]);
 			glCallList(PARTICLE);
 
-			glBlendFunc (GL_ONE, GL_ONE);
-			glBindTexture (GL_TEXTURE_2D, textures[textureIndex]);
+			glBlendFunc(GL_ONE, GL_ONE);
+			glBindTexture(GL_TEXTURE_2D, textures[textureIndex]);
 			glCallList(PARTICLE);
 			glEnable(GL_DEPTH_TEST);
 			glDisable(GL_BLEND);
