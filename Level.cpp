@@ -32,6 +32,40 @@ void Level::loadFirstLevel()
 	map = PixelBasedFloor("mapa.png", 0.0f, 0.0f, 2.0f);
 
 	// Enemies
+	enemies = std::vector<Enemy>(0);
+
+	// Obstacles
+	obstacles = std::vector<Obstacle>(3);
+	obstacles[0] = Obstacle(7.0, map.getHeightAt(7,7), 7.0, 8.0, 1.0, TREE);
+	obstacles[1] = Obstacle(-7.0, map.getHeightAt(-7,7), 7.0, 8.0, 1.0, TREE);
+	obstacles[2] = Obstacle(7.0, map.getHeightAt(7,-7), -7.0, 8.0, 1.0, TREE);
+
+	// Items
+	items = std::vector<ItemObject>(4);
+	items[0] = ItemObject(true);
+	items[0].setXPosition(0.0f); items[0].setYPosition(map.getHeightAt(0,70)); items[0].setZPosition(70.0f);
+	items[1] = ItemObject(true);
+	items[1].setXPosition(0.0f); items[1].setYPosition(map.getHeightAt(0,-70)); items[1].setZPosition(-70.0f);
+	items[2] = ItemObject(true);
+	items[2].setXPosition(-70.0f); items[2].setYPosition(map.getHeightAt(-70,0)); items[2].setZPosition(0.0f);
+	items[3] = ItemObject(true);
+	items[3].setXPosition(70.0f); items[3].setYPosition(map.getHeightAt(70,0)); items[3].setZPosition(0.0f);
+
+	// Altars
+	altars = std::vector<Altar>(2);
+	altars[0].setXPosition(25.0f); altars[0].setYPosition(map.getHeightAt(25,15)); altars[0].setZPosition(15.0f);
+	altars[1].setXPosition(35.0f); altars[1].setYPosition(map.getHeightAt(35,50)); altars[1].setZPosition(50.0f);
+}
+
+void Level::loadSecondLevel()
+{
+	// Landscape
+	landscape = Landscape(GameData::ICESCAPE_TEXTURE_INDEX);
+
+	// Map
+	map = PixelBasedFloor("mapa2.png", 0.0f, 0.0f, 2.0f);
+
+	// Enemies
 	std::vector<GuardPathState> *v = new std::vector<GuardPathState>(4);
 	v->at(0) = GuardPathState(0.2f, 0.0f, 30);
 	v->at(1) = GuardPathState(0.0f, 0.2f, 30);
@@ -73,16 +107,54 @@ void Level::loadFirstLevel()
 	altars[1].setXPosition(35.0f); altars[1].setYPosition(map.getHeightAt(35,50)); altars[1].setZPosition(50.0f);
 }
 
-void Level::loadSecondLevel()
-{
-	// TODO SEGON NIVELL
-	landscape = Landscape(GameData::ICESCAPE_TEXTURE_INDEX);
-}
-
 void Level::loadThirdLevel()
 {
-	// TODO TERCER NIVELL
+	// Landscape
 	landscape = Landscape(GameData::SPACESCAPE_TEXTURE_INDEX);
+
+	// Map
+	map = PixelBasedFloor("mapa3.png", 0.0f, 0.0f, 2.0f);
+
+	// Enemies
+	std::vector<GuardPathState> *v = new std::vector<GuardPathState>(4);
+	v->at(0) = GuardPathState(0.2f, 0.0f, 30);
+	v->at(1) = GuardPathState(0.0f, 0.2f, 30);
+	v->at(2) = GuardPathState(-0.2f, 0.0f, 30);
+	v->at(3) = GuardPathState(0.0f, -0.2f, 30);
+	std::vector<GuardPathState> *v2 = new std::vector<GuardPathState>(2);
+	v2->at(0) = GuardPathState(0.2f, 0.2f, 20);
+	v2->at(1) = GuardPathState(-0.2f, -0.2f, 20);
+	enemies = std::vector<Enemy>(4);
+	enemies[0] = Enemy(STATIC_PURSUER);
+	enemies[1] = Enemy(RANDOM);
+	enemies[2] = Enemy(PATH);
+	enemies[3] = Enemy(PATH_PURSUER);
+	enemies[0].setXPosition(15.0f);enemies[0].setZPosition(15.0f);enemies[0].setYPosition(map.getHeightAt(15,15));
+	enemies[1].setXPosition(-15.0f);enemies[1].setZPosition(-15.0f);enemies[1].setYPosition(map.getHeightAt(-15,-15));
+	enemies[3].setXPosition(15.0f);enemies[3].setZPosition(-15.0f);enemies[3].setYPosition(map.getHeightAt(15,-15));
+	enemies[3].setGuardState(*v2);
+	enemies[2].setXPosition(-15.0f);enemies[2].setZPosition(15.0f);enemies[2].setYPosition(map.getHeightAt(-15,15));
+	enemies[2].setGuardState(*v);
+
+	// Obstacles
+	obstacles = std::vector<Obstacle>(3);
+	obstacles[0] = Obstacle(7.0, map.getHeightAt(7,7), 7.0, 8.0, 1.0, TREE);
+	obstacles[1] = Obstacle(-7.0, map.getHeightAt(-7,7), 7.0, 8.0, 1.0, TREE);
+	obstacles[2] = Obstacle(7.0, map.getHeightAt(7,-7), -7.0, 8.0, 1.0, TREE);
+
+	// Items
+	items = std::vector<ItemObject>(3);
+	items[0] = ItemObject(false);
+	items[0].setXPosition(10.0f); items[0].setYPosition(map.getHeightAt(10,10)); items[0].setZPosition(10.0f);
+	items[1] = ItemObject(true);
+	items[1].setXPosition(10.0f); items[1].setYPosition(map.getHeightAt(10,-10)); items[1].setZPosition(-10.0f);
+	items[2] = ItemObject(true);
+	items[2].setXPosition(-10.0f); items[2].setYPosition(map.getHeightAt(-10,-10)); items[2].setZPosition(-10.0f);
+
+	// Altars
+	altars = std::vector<Altar>(2);
+	altars[0].setXPosition(25.0f); altars[0].setYPosition(map.getHeightAt(25,15)); altars[0].setZPosition(15.0f);
+	altars[1].setXPosition(35.0f); altars[1].setYPosition(map.getHeightAt(35,50)); altars[1].setZPosition(50.0f);
 }
 
 
