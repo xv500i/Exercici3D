@@ -25,7 +25,8 @@ bool GameData::loadTextures()
 										   "button_help", "button_restart", "button_mainmenu", "cursor", "lantern", "manual", 
 										   "congrats", "button_next_level", "level_completed", "BallTexture", "hecatomb", 
 										   "landscape", "LifeFull", "LifeEmpty", "spacescape", "icescape", "Energy",
-										   "EnergyParticle1", "EnergyParticle2", "EnergyParticle3", "EnergyParticle4"};
+										   "EnergyParticle1", "EnergyParticle2", "EnergyParticle3", "EnergyParticle4",
+										   "EnergyTexture"};
 	for (unsigned int i = 0; i < textures.size(); i++) {
 		bool b = textures[i].load(filenames[i], TEXTURE_EXT);
 		if (!b) return false;

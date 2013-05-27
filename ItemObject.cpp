@@ -43,16 +43,22 @@ void ItemObject::render(GameData &data)
 {
 	if (pickedUp) return;
 	Point3D pos = getPosition();
+
+	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
-		if (type == MEDIKIT) glColor3f(0.0f, 1.0f, 0.0f);
-		else if (type == ENERGY) glColor3f(0.0f, 0.0f, 1.0f);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glBindTexture(GL_TEXTURE_2D, data.getTextureID(GameData::ENERGY_TEXTURE_INDEX));
 		glTranslatef(pos.getX(), pos.getY() + 1.0f, pos.getZ());
+		glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
 		GLUquadricObj *q = gluNewQuadric();
+		gluQuadricOrientation(q, GLU_OUTSIDE);
+		gluQuadricTexture(q, GL_TRUE);
 		gluSphere(q, 0.5, 16, 16);
 		gluDeleteQuadric(q);
 
 		glColor3f(1.0f,1.0f,1.0f);
 	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
 
 	if (type == ENERGY) particles.render(data);
 
