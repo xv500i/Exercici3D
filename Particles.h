@@ -15,14 +15,15 @@ class Particles
 {
 private:
 	const static int PARTICLE = 10;			// Displaylist identifier
-	const static int NUM_PARTICLES = 50;
 
-	Particle particles[NUM_PARTICLES];
+	std::vector<Particle> particles;
 	std::vector<int> textures;
-	std::vector<int> masks;
 
 	/* Particle cylinder */
-	float centerX, initialY, centerZ;
+	int numParticles;
+	float centerX, centerZ;
+	float initialY, finalY;
+	float scale;
 	float radius;
 
 	/* Displaylist creation */
@@ -33,7 +34,7 @@ public:
 	virtual ~Particles(void);
 
 	/* Creation */
-	void createParticleCylinder(float centerX, float centerZ, float initialY, float radius, std::vector<int> textures, std::vector<int> masks);
+	void createParticleCylinder(int numParticles, float centerX, float centerZ, float initialY, float finalY, float radius, float scale, std::vector<int> textures);
 
 	/* Update */
 	void update();
