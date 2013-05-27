@@ -30,8 +30,12 @@ void MobileGameObject::update(Vector3D &inclination, std::vector<GameObject*> &o
 {
 	GameObject::update();
 	this->inclination = inclination;
-	this->inclination.normalize();
-	this->inclination*=0.0f;
+	if (this->inclination.getModule() > 1.0f) {
+		this->inclination.normalize();
+		this->inclination*=0.2f;
+	} else {
+		this->inclination*=0.0f;
+	}
 	// acceleration does not take in account gravity, which is calculated apart!
 	if (acceleration.getModule() > maxAcceleration) {
 		// restrict maximum acceleration
