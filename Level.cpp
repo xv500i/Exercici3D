@@ -33,21 +33,37 @@ void Level::loadFirstLevel()
 	enemies = std::vector<Enemy>(0);
 
 	// Obstacles
-	obstacles = std::vector<Obstacle>(4 + 4);
+	obstacles = std::vector<Obstacle>(4 + 5*8);
 	obstacles[0] = Obstacle(10.0, map.getHeightAt(10,10), 10.0, 11.0, 2.0, TREE);
 	obstacles[1] = Obstacle(-10.0, map.getHeightAt(-10,10), 10.0, 11.0, 2.0, TREE);
 	obstacles[2] = Obstacle(10.0, map.getHeightAt(10,-10), -10.0, 11.0, 2.0, TREE);
 	obstacles[3] = Obstacle(-10.0, map.getHeightAt(10,-10), -10.0, 11.0, 2.0, TREE);
 
-	for(int i = 0; i < 4; i++) {
-		obstacles[4+i] = Obstacle(50.0, map.getHeightAt(50,64+i*4), 64.0+i*4, 11.0, 2.0, TREE); 
+	for(int i = 0; i < 5; i++) {
+		obstacles[4+i] = Obstacle(50.0, map.getHeightAt(50,76-i*4), 76.0-i*4, 11.0, 2.0, TREE); 
 	}
-	for(int i = 0; i < 4; i++);
-	for(int i = 0; i < 4; i++);
-	for(int i = 0; i < 4; i++);
-	for(int i = 0; i < 4; i++);
-	for(int i = 0; i < 4; i++);
-	for(int i = 0; i < 4; i++);
+	for(int i = 0; i < 5; i++){
+		obstacles[9+i] = Obstacle(-50.0, map.getHeightAt(-50,76-i*4), 76.0-i*4, 11.0, 2.0, TREE);
+	}
+	for(int i = 0; i < 5; i++){
+		obstacles[14+i] = Obstacle(-50.0, map.getHeightAt(-50,-76+i*4), -76.0+i*4, 11.0, 2.0, TREE);
+	}
+	for(int i = 0; i < 5; i++){
+		obstacles[19+i] = Obstacle(50.0, map.getHeightAt(50,-76+i*4), -76.0+i*4, 11.0, 2.0, TREE);
+	}
+	for(int i = 0; i < 5; i++) {
+		obstacles[24+i] = Obstacle(76-i*4, map.getHeightAt(76-i*4,50), 50, 11.0, 2.0, TREE); 
+	}
+	for(int i = 0; i < 5; i++){
+		obstacles[29+i] = Obstacle(76-i*4, map.getHeightAt(76-i*4,-50), -50, 11.0, 2.0, TREE);
+	}
+	for(int i = 0; i < 5; i++){
+		obstacles[34+i] = Obstacle(-76+i*4, map.getHeightAt(-76+i*4,-50), -50, 11.0, 2.0, TREE);
+	}
+	for(int i = 0; i < 5; i++){
+		obstacles[39+i] = Obstacle(-76+i*4, map.getHeightAt(-76+i*4,50), 50, 11.0, 2.0, TREE);
+	}
+	
 
 	// Items
 	items = std::vector<ItemObject>(4);
