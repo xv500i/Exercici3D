@@ -252,8 +252,8 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects)
 	float incZ = (finalZ - initialZ);//     2 *   pi    * r
 	float incX = (finalX - initialX);
 	float square =  sqrt(incZ*incZ + incX*incX);
-	rotX += square * 360.0 / (2 * 3.1415f * 1);
-	rotY = atan2(incZ, incX) * 180.0f / 3.1415f;
+	if (square > 0.01) rotX += square * 360.0 / (2 * 3.1415f * 1);
+	if (square > 0.01) rotY = atan2(incZ, incX) * 180.0f / 3.1415f;
 }
 
 void Player::resetRot()

@@ -30,9 +30,9 @@ void MobileGameObject::update(Vector3D &inclination, std::vector<GameObject*> &o
 {
 	GameObject::update();
 	this->inclination = inclination;
-	if (this->inclination.getModule() > 1.0f) {
+	if (this->inclination.getModule() > 4.4f) {
 		this->inclination.normalize();
-		this->inclination*=0.2f;
+		this->inclination*=0.5f;
 	} else {
 		this->inclination*=0.0f;
 	}
