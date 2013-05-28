@@ -27,7 +27,7 @@ Obstacle::Obstacle(float x, float y, float z, float height, float radius, Obstac
 	bc->setHeight(height);
 	bc->setRadius(radius);
 	type = OBSTACLE;
-	bool res = model.load("teleporter", ".jpg");
+	//bool res = model.load("teleporter", ".jpg");
 }
 	
 void Obstacle::render(GameData &data)
