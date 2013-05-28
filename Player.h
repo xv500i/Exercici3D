@@ -36,6 +36,7 @@ private:
 	int ticsExpansion;
 	ExpansionState expansionState;
 	bool jumping;
+	int fusRoDahReuse;
 	
 
 public:
@@ -60,6 +61,7 @@ public:
 	void resetRot();
 	bool jump();
 	void floorReached();
+	bool useFusRoDah();
 
 protected:
 	virtual void tractarColisions(std::vector<GameObject*> &objects);

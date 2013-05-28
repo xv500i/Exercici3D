@@ -25,6 +25,7 @@ Player::Player(void)
 	expansionState = NO_EXPANDED;
 	ticsExpansion = 0;
 	jumping = false;
+	fusRoDahReuse = 0;
 }
 
 Player::~Player(void) {}
@@ -213,7 +214,7 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects)
 {
 	if (ticsInvul > 0) ticsInvul--;
 	if (ticsExpansion > 0) ticsExpansion--;
-
+	if (fusRoDahReuse > 0) fusRoDahReuse--;
 	/* Expansion */
 	switch (expansionState) {
 	case NO_EXPANDED:
@@ -283,4 +284,12 @@ void Player::floorReached()
 	}
 	
 	MobileGameObject::floorReached();
+}
+
+bool Player::useFusRoDah(){
+	if (fusRoDahReuse <= 0) {
+		fusRoDahReuse = 1000;
+		return true;
+	}
+	return false;
 }

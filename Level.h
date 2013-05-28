@@ -26,6 +26,9 @@ private:
 	void loadFirstLevel();
 	void loadSecondLevel();
 	void loadThirdLevel();
+	
+	bool fusRoDahUsed;
+
 
 public:
 	Level(void);
@@ -42,4 +45,6 @@ public:
 
 	/* Level completed */
 	bool isLevelCompleted();
+
+	void useFusRoDah();
 };

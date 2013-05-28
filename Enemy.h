@@ -26,6 +26,8 @@ public:
 	~Enemy(void);
 	void update(Vector3D &inclination, std::vector<GameObject*> &objects, float x, float z);
 	void setGuardState(std::vector<GuardPathState> &gps);
+	void fusRoDah(float x, float z);
+	bool isInFusRoDah();
 
 private:
 	std::vector<GuardPathState> guard;
@@ -34,6 +36,7 @@ private:
 	bool pursue;
 	float detectionDistance;
 	float pursueVelocity;
+	int fusRoDahEffect;
 
 protected:
 	virtual void tractarColisions(std::vector<GameObject*> &objects);

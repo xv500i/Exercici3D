@@ -11,6 +11,7 @@ Level::~Level(void) {}
 /* Level loading */
 void Level::load(int level)
 {
+	fusRoDahUsed = false;
 	switch (level) {
 	case 1: loadFirstLevel(); break;
 	case 2: loadSecondLevel(); break;
@@ -248,7 +249,7 @@ void Level::loadThirdLevel()
 
 /* Update */
 void Level::update(Player &player)
-{
+{	
 	float max_x, min_x, max_z, min_z;
 	max_x = map.getDistanceBetweenPixels() * map.getPixelsHeigth() / 2;
 
@@ -293,9 +294,16 @@ void Level::update(Player &player)
 	}
 	// Enemies
 	for (unsigned int i = 0; i < enemies.size(); i++) {
+		if (fusRoDahUsed) {
+			enemies[i].fusRoDah(player.getXPosition(), player.getZPosition());
+		}
 		map.getPerpendicularVector(inclination, enemies[i].getXPosition(), enemies[i].getZPosition());
 		enemies[i].update(inclination, objects, player.getXPosition(), player.getZPosition());
-		enemies[i].setYPosition(map.getHeightAt(enemies[i].getXPosition(), enemies[i].getZPosition()));
+		if (!enemies[i].isInFusRoDah()) enemies[i].setYPosition(map.getHeightAt(enemies[i].getXPosition(), enemies[i].getZPosition()));
+		else {
+			float floor_y = map.getHeightAt(enemies[i].getXPosition(), enemies[i].getZPosition());
+			if (enemies[i].getYPosition() < floor_y) enemies[i].setYPosition(floor_y);
+		}
 		if (enemies[i].getXPosition() > max_x) {
 			enemies[i].setXPosition(max_x);
 		} else if (player.getXPosition() < min_x) {
@@ -322,6 +330,10 @@ void Level::update(Player &player)
 /* Render */
 void Level::render(GameData &data)
 {
+	if (fusRoDahUsed) {
+		data.playSound(GameData::FUS_SOUND_INDEX);
+		fusRoDahUsed = false;
+	}
 	map.render(data);
 	for (unsigned int i = 0; i < enemies.size(); i++) enemies[i].render(data);
 	for (unsigned int i = 0; i < obstacles.size(); i++) obstacles[i].render(data);
@@ -339,4 +351,8 @@ bool Level::isLevelCompleted()
 		if (!altars[i].isActive()) completed = false;
 	}
 	return completed;
+}
+
+void Level::useFusRoDah(){
+	fusRoDahUsed = true;
 }

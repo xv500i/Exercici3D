@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include <random>
+#include "Vector3D.h"
 
 Enemy::Enemy(void)
 	: MobileGameObject()
@@ -70,65 +71,76 @@ void Enemy::update(Vector3D &inclination, std::vector<GameObject*> &objects, flo
 	int p_left = 60;
 	int p_right = 90;
 	int p_back = 100;
+	float fx, fz;
 	int res = rand() % 100;
-	switch (state) {
-	case RANDOM_PATH_STATE:
-		direction = Vector3D(x - getXPosition(), 0.0f, z - getZPosition());
-		if (pursue && direction.getModule() <= detectionDistance) {
-			state = PURSUE_STATE;
-		} else {
-			/* 30% forward, 30% left, 30% right, 10% backwards */
-			if (res < p_forward) {
-				moveForward();
-			} else if (res < p_left) {
-				turnLeft();
-				turnLeft();
-				turnLeft();
-			} else if (res < p_right) {
-				turnRight();
-				turnRight();
-				turnRight();
+	if (fusRoDahEffect > 0) {
+		fx = getXVelocity();
+		fz = getZVelocity();
+	} else {
+		switch (state) {
+		case RANDOM_PATH_STATE:
+			direction = Vector3D(x - getXPosition(), 0.0f, z - getZPosition());
+			if (pursue && direction.getModule() <= detectionDistance) {
+				state = PURSUE_STATE;
 			} else {
-				moveBackwards();
+				/* 30% forward, 30% left, 30% right, 10% backwards */
+				if (res < p_forward) {
+					moveForward();
+				} else if (res < p_left) {
+					turnLeft();
+					turnLeft();
+					turnLeft();
+				} else if (res < p_right) {
+					turnRight();
+					turnRight();
+					turnRight();
+				} else {
+					moveBackwards();
+				}
 			}
-		}
-		break;
-	case PURSUE_STATE:
-		direction = Vector3D(x - getXPosition(), 0.0f, z - getZPosition());
-		/* orient to player */
-		// FIXME
-		/* pursue player */
-		direction.normalize();
-		direction*=pursueVelocity;
-		setXVelocity(direction.getX());
-		setZVelocity(direction.getZ());
-		break;
-	case STATIC_STATE:
-		direction = Vector3D(x - getXPosition(), 0.0f, z - getZPosition());
-		if (pursue && direction.getModule() <= detectionDistance) {
-			state = PURSUE_STATE;
-		}
-		break;
-	case GUARD_STATE:
-		direction = Vector3D(x - getXPosition(), 0.0f, z - getZPosition());
-		if (pursue && direction.getModule() <= detectionDistance) {
-			state = PURSUE_STATE;
-		} else if (guard.size() > 0) {
-			/* guard finished? */
-			if (guard[guardIndex].isFinished()) {
-				guardIndex = (++guardIndex)%guard.size();
-				guard[guardIndex].initialize();
-				/* orient to path */
-				//TODO
-			}
-			guard[guardIndex].update();
-			direction = Vector3D(guard[guardIndex].getVX(), 0.0f, guard[guardIndex].getVZ());
+			break;
+		case PURSUE_STATE:
+			direction = Vector3D(x - getXPosition(), 0.0f, z - getZPosition());
+			/* orient to player */
+			// FIXME
+			/* pursue player */
+			direction.normalize();
+			direction*=pursueVelocity;
 			setXVelocity(direction.getX());
 			setZVelocity(direction.getZ());
+			break;
+		case STATIC_STATE:
+			direction = Vector3D(x - getXPosition(), 0.0f, z - getZPosition());
+			if (pursue && direction.getModule() <= detectionDistance) {
+				state = PURSUE_STATE;
+			}
+			break;
+		case GUARD_STATE:
+			direction = Vector3D(x - getXPosition(), 0.0f, z - getZPosition());
+			if (pursue && direction.getModule() <= detectionDistance) {
+				state = PURSUE_STATE;
+			} else if (guard.size() > 0) {
+				/* guard finished? */
+				if (guard[guardIndex].isFinished()) {
+					guardIndex = (++guardIndex)%guard.size();
+					guard[guardIndex].initialize();
+					/* orient to path */
+					//TODO
+				}
+				guard[guardIndex].update();
+				direction = Vector3D(guard[guardIndex].getVX(), 0.0f, guard[guardIndex].getVZ());
+				setXVelocity(direction.getX());
+				setZVelocity(direction.getZ());
+			}
+			break;
 		}
-		break;
 	}
 	MobileGameObject::update(inclination, objects);
+	if (fusRoDahEffect > 0) {
+		setXVelocity(fx);
+		setZVelocity(fz);
+		fusRoDahEffect--;
+	}
 }
 
 void Enemy::setGuardState(std::vector<GuardPathState> &gps)
@@ -179,4 +191,20 @@ void Enemy::tractarColisions(std::vector<GameObject*> &objects)
 			}
 		}
 	}
+}
+
+void Enemy::fusRoDah(float x, float z){
+	Vector3D vel = Vector3D(x - getXPosition(), 0.0f , z - getZPosition());
+	float module = vel.getModule();
+	vel.normalize();
+	vel *= -1;
+	vel *= 1/module*100.0f;
+	fusRoDahEffect = 50;
+	setXVelocity(vel.getX());
+	setYVelocity(2.0f);
+	setZVelocity(vel.getZ());
+}
+
+bool Enemy::isInFusRoDah(){
+	return fusRoDahEffect > 0;
 }

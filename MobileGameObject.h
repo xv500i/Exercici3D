@@ -22,6 +22,9 @@ public:
 	void setXVelocity(float v);
 	void setZVelocity(float v);
 	void setYVelocity(float v);
+	float getXVelocity();
+	float getZVelocity();
+	float getYVelocity();
 	void sliding(GameObject *go);
 	Vector3D getInclination() const;
 	void setFriction(float f);

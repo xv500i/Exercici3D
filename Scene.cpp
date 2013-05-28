@@ -40,12 +40,17 @@ void Scene::resolveInput(InputHandler &input)
 	if (input.keyIsDown('m')) {
 		DEBUG = !DEBUG;
 	}
+	
+	if (input.keyIsDown('f') && player.useFusRoDah()) {
+		level.useFusRoDah();
+	}
 }
 
 
 /* Update */
 void Scene::update(CameraHandler &camera)
 {
+	
 	// Level (and player)
 	level.update(player);
 

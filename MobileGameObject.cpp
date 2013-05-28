@@ -278,3 +278,15 @@ void MobileGameObject::setGravity(float f){
 void MobileGameObject::setMaxAcceleration(float f){
 	maxAcceleration = f;
 }
+
+float MobileGameObject::getXVelocity(){
+	return velocity.getX();
+}
+	
+float MobileGameObject::getZVelocity(){
+	return velocity.getZ();
+}
+
+float MobileGameObject::getYVelocity(){
+	return velocity.getY();
+}
