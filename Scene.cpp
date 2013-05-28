@@ -101,7 +101,7 @@ void Scene::loadLevel(int levelNumber)
 	case 3:
 		player.setXPosition(0.0f);
 		player.setZPosition(0.0f);
-		player.setFriction(0.85f);
+		player.setFriction(0.90f);
 		player.setGravity(-0.05f);
 		player.setMaxAcceleration(0.05f);
 		break;
