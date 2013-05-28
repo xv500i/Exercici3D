@@ -67,7 +67,7 @@ void Scene::render(GameData &data)
 
 	// Player
 	player.render(data);
-	
+
 	// HUD (It must be the last render)
 	hud.render(data);
 }

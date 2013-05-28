@@ -38,7 +38,8 @@ void Obstacle::render(GameData &data)
 		// FIXME HARDCODED : radius
 
 		// PROVA
-		//model.render(getXPosition(), getYPosition(), getZPosition());
+		/*glTranslatef(getXPosition(), getYPosition(), getZPosition());
+		model.render(0.0f, 0.0f, 0.0f);*/
 
 		glTranslatef(getXPosition(),getYPosition(),getZPosition());
 		GLUquadricObj *q = gluNewQuadric();
