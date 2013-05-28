@@ -38,14 +38,14 @@ void Obstacle::render(GameData &data)
 		// FIXME HARDCODED : radius
 
 		// PROVA
-		model.render(getXPosition(), getYPosition(), getZPosition());
+		//model.render(getXPosition(), getYPosition(), getZPosition());
 
-		/*glTranslatef(getXPosition(),getYPosition(),getZPosition());
+		glTranslatef(getXPosition(),getYPosition(),getZPosition());
 		GLUquadricObj *q = gluNewQuadric();
 		gluSphere(q, 1,16,16);
 
 		gluDeleteQuadric(q);
-		glColor3f(1.0f,1.0f,1.0f);*/
+		glColor3f(1.0f,1.0f,1.0f);
 	glPopMatrix();
 
 	if (DEBUG) renderBoundingCilinder();
