@@ -3,8 +3,6 @@
 
 #include "GameObject.h"
 
-// PROVA
-#include "Model.h"
 
 enum ObstacleType {
 	TREE,
@@ -23,5 +21,4 @@ public:
 
 private:
 	ObstacleType obsType;
-	Model model;
 };

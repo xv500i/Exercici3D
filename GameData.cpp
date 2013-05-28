@@ -52,6 +52,7 @@ bool GameData::loadModels()
 		bool b = models[i].load(filenames[i], extensions[i]);
 		if (!b) return false;
 	}
+	return true;
 }
 
 void GameData::renderModel(int modelIndex, int x, int y, int z)
