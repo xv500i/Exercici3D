@@ -27,6 +27,6 @@ void MediKitObject::update()
 void MediKitObject::render(GameData &data)
 {
 	if (isPickedUp()) return;
-	data.renderModel(GameData::MEDIKIT_MODEL_INDEX, getXPosition(), getYPosition() + 1.0f, getZPosition(), yAngle);
+	data.renderModel(GameData::MEDIKIT_MODEL_INDEX, getXPosition(), getYPosition() + 1.0f, getZPosition(), yAngle, 5.0f);
 	if (DEBUG) renderBoundingCilinder();
 }

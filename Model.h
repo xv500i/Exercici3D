@@ -18,5 +18,5 @@ public:
 	bool load(char *filename, char *ext);
 
 	/* Render */
-	void render(float x, float y, float z, float angleY = 0.0f, float angleX = 0.0f);
+	void render(float x, float y, float z, float angleY = 0.0f, float angleX = 0.0f, float scale = 1.0f);
 };
