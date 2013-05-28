@@ -31,20 +31,5 @@ Obstacle::Obstacle(float x, float y, float z, float height, float radius, Obstac
 	
 void Obstacle::render(GameData &data)
 {
-	//data.renderModel(GameData::COLUMN_MODEL_INDEX, getXPosition(), getYPosition(), getZPosition());
-
-	// TODO BILLBOARD
-	/*glPushMatrix();
-		glColor3f(1.0f,1.0f,1.0f);
-		// FIXME HARDCODED : radius
-
-		glTranslatef(getXPosition(),getYPosition(),getZPosition());
-		GLUquadricObj *q = gluNewQuadric();
-		gluSphere(q, 1,16,16);
-
-		gluDeleteQuadric(q);
-		glColor3f(1.0f,1.0f,1.0f);
-	glPopMatrix();
-
-	if (DEBUG) renderBoundingCilinder();*/
+	data.renderModel(GameData::COLUMN_MODEL_INDEX, getXPosition(), getYPosition(), getZPosition());
 }
