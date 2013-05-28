@@ -6,5 +6,5 @@
 !*.png
 !*.txt
 !*.mp3
-!*.lib
+!MD2Model.lib
 !gl/
