@@ -207,46 +207,47 @@ void Level::loadThirdLevel()
 	map = PixelBasedFloor(GameData::LEVEL3_TEXTURE_INDEX, "mapa3.png", 0.0f, 0.0f, 2.0f);
 
 	// Enemies
-	std::vector<GuardPathState> *v = new std::vector<GuardPathState>(4);
-	v->at(0) = GuardPathState(0.2f, 0.0f, 30);
-	v->at(1) = GuardPathState(0.0f, 0.2f, 30);
-	v->at(2) = GuardPathState(-0.2f, 0.0f, 30);
-	v->at(3) = GuardPathState(0.0f, -0.2f, 30);
-	std::vector<GuardPathState> *v2 = new std::vector<GuardPathState>(2);
-	v2->at(0) = GuardPathState(0.2f, 0.2f, 20);
-	v2->at(1) = GuardPathState(-0.2f, -0.2f, 20);
-	enemies = std::vector<Enemy>(4);
-	enemies[0] = Enemy(STATIC_PURSUER);
-	enemies[1] = Enemy(RANDOM);
-	enemies[2] = Enemy(PATH);
-	enemies[3] = Enemy(PATH_PURSUER);
-	enemies[0].setXPosition(15.0f);enemies[0].setZPosition(15.0f);enemies[0].setYPosition(map.getHeightAt(15,15));
-	enemies[1].setXPosition(-15.0f);enemies[1].setZPosition(-15.0f);enemies[1].setYPosition(map.getHeightAt(-15,-15));
-	enemies[3].setXPosition(15.0f);enemies[3].setZPosition(-15.0f);enemies[3].setYPosition(map.getHeightAt(15,-15));
-	enemies[3].setGuardState(*v2);
-	enemies[2].setXPosition(-15.0f);enemies[2].setZPosition(15.0f);enemies[2].setYPosition(map.getHeightAt(-15,15));
-	enemies[2].setGuardState(*v);
+	enemies = std::vector<Enemy>(0);
 
 	// Obstacles
-	obstacles = std::vector<Obstacle>(3);
-	obstacles[0] = Obstacle(7.0, map.getHeightAt(7,7), 7.0, 8.0, 1.0, TREE);
-	obstacles[1] = Obstacle(-7.0, map.getHeightAt(-7,7), 7.0, 8.0, 1.0, TREE);
-	obstacles[2] = Obstacle(7.0, map.getHeightAt(7,-7), -7.0, 8.0, 1.0, TREE);
+	obstacles = std::vector<Obstacle>(12);
+	for(int i = 0; i < 4; i++) {
+		obstacles[i] = Obstacle(-6.0, map.getHeightAt(-6, -6+i*4), -6+i*4, 11.0, 2.0, TREE);
+		obstacles[i+4] = Obstacle(6.0, map.getHeightAt(6, -6+i*4), -6+i*4, 11.0, 2.0, TREE);
+	}
+	obstacles[8] = Obstacle(-2.0, map.getHeightAt(-2, -6), -6, 11.0, 2.0, TREE);
+	obstacles[9] = Obstacle(2.0, map.getHeightAt(2, 6), 6, 11.0, 2.0, TREE);
+	obstacles[10] = Obstacle(-2.0, map.getHeightAt(-2, 6), 6, 11.0, 2.0, TREE);
+	obstacles[11] = Obstacle(2.0, map.getHeightAt(2, -6), -6, 11.0, 2.0, TREE);
+
 
 	// Items
-	energies = std::vector<EnergyObject>(2);
+	energies = std::vector<EnergyObject>(4);
 	energies[0] = EnergyObject();
-	energies[0].setXPosition(10.0f); energies[0].setYPosition(map.getHeightAt(10,-10)); energies[0].setZPosition(-10.0f);
+	energies[0].setXPosition(115.0f); energies[0].setYPosition(map.getHeightAt(115,-115)); energies[0].setZPosition(-115);
 	energies[1] = EnergyObject();
-	energies[1].setXPosition(-10.0f); energies[1].setYPosition(map.getHeightAt(-10,-10)); energies[1].setZPosition(-10.0f);
-	medikits = std::vector<MediKitObject>(1);
+	energies[1].setXPosition(-115.0f); energies[1].setYPosition(map.getHeightAt(-115,-115)); energies[1].setZPosition(-115);
+	energies[2] = EnergyObject();
+	energies[2].setXPosition(115.0f); energies[2].setYPosition(map.getHeightAt(115,115)); energies[2].setZPosition(115);
+	energies[3] = EnergyObject();
+	energies[3].setXPosition(-115.0f); energies[3].setYPosition(map.getHeightAt(-115,115)); energies[3].setZPosition(115);
+
+	medikits = std::vector<MediKitObject>(4);
 	medikits[0] = MediKitObject();
-	medikits[0].setXPosition(10.0f); medikits[0].setYPosition(map.getHeightAt(10,10)); medikits[0].setZPosition(10.0f);
+	medikits[0].setXPosition(4.0f); medikits[0].setYPosition(map.getHeightAt(4,4)); medikits[0].setZPosition(4.0f);
+	medikits[1] = MediKitObject();
+	medikits[1].setXPosition(4.0f); medikits[1].setYPosition(map.getHeightAt(4,-4)); medikits[1].setZPosition(-4.0f);
+	medikits[2] = MediKitObject();
+	medikits[2].setXPosition(-4.0f); medikits[2].setYPosition(map.getHeightAt(-4,4)); medikits[2].setZPosition(4.0f);
+	medikits[3] = MediKitObject();
+	medikits[3].setXPosition(-4.0f); medikits[3].setYPosition(map.getHeightAt(-4,-4)); medikits[3].setZPosition(-4.0f);
 
 	// Altars
-	altars = std::vector<Altar>(2);
-	altars[0].setXPosition(25.0f); altars[0].setYPosition(map.getHeightAt(25,15)); altars[0].setZPosition(15.0f);
-	altars[1].setXPosition(35.0f); altars[1].setYPosition(map.getHeightAt(35,50)); altars[1].setZPosition(50.0f);
+	altars = std::vector<Altar>(4);
+	altars[0].setXPosition(0.0f); altars[0].setYPosition(map.getHeightAt(0,8)); altars[0].setZPosition(8.0f);
+	altars[1].setXPosition(0.0f); altars[1].setYPosition(map.getHeightAt(0,-8)); altars[1].setZPosition(-8.0f);
+	altars[2].setXPosition(8.0f); altars[2].setYPosition(map.getHeightAt(8,0)); altars[2].setZPosition(0.0f);
+	altars[3].setXPosition(-8.0f); altars[3].setYPosition(map.getHeightAt(-8,0)); altars[3].setZPosition(0.0f);
 }
 
 
@@ -288,15 +289,15 @@ void Level::update(CameraHandler &camera, Player &player)
 		// FLYING FREE	
 	}
 	player.setYPosition(std::max(test, player.getYPosition()));
-	if (player.getXPosition() > max_x) {
-		player.setXPosition(max_x);
-	} else if (player.getXPosition() < min_x) {
-		player.setXPosition(min_x);
+	if (player.getXPosition()+1 > max_x) {
+		player.setXPosition(max_x-1);
+	} else if (player.getXPosition()-1 < min_x) {
+		player.setXPosition(min_x+1);
 	}
-	if (player.getZPosition() > max_z) {
-		player.setZPosition(max_z);
-	} else if (player.getZPosition() < min_z) {
-		player.setZPosition(min_z);
+	if (player.getZPosition()+1 > max_z) {
+		player.setZPosition(max_z-1);
+	} else if (player.getZPosition()-1 < min_z) {
+		player.setZPosition(min_z+1);
 	}
 	// Enemies
 	for (unsigned int i = 0; i < enemies.size(); i++) {
@@ -310,15 +311,15 @@ void Level::update(CameraHandler &camera, Player &player)
 			float floor_y = map.getHeightAt(enemies[i].getXPosition(), enemies[i].getZPosition());
 			if (enemies[i].getYPosition() < floor_y) enemies[i].setYPosition(floor_y);
 		}
-		if (enemies[i].getXPosition() > max_x) {
-			enemies[i].setXPosition(max_x);
-		} else if (player.getXPosition() < min_x) {
-			enemies[i].setXPosition(min_x);
+		if (enemies[i].getXPosition()+1 > max_x) {
+			enemies[i].setXPosition(max_x-1);
+		} else if (player.getXPosition()-1 < min_x) {
+			enemies[i].setXPosition(min_x+1);
 		}
-		if (enemies[i].getZPosition() > max_z) {
-			enemies[i].setZPosition(max_z);
-		} else if (enemies[i].getZPosition() < min_z) {
-			enemies[i].setZPosition(min_z);
+		if (enemies[i].getZPosition()+1 > max_z) {
+			enemies[i].setZPosition(max_z-1);
+		} else if (enemies[i].getZPosition()-1 < min_z) {
+			enemies[i].setZPosition(min_z+1);
 		}
 	}
 
