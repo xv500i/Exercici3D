@@ -8,7 +8,9 @@
 class EnergyObject : public ItemObject
 {
 private:
-	const static float Y_VELOCITY;
+	const static float VELOCITY_Y;
+	const static float MIN_OFFSET_Y;
+	const static float MAX_OFFSET_Y;
 
 	/* Particle aura */
 	Particles aura;

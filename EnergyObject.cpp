@@ -4,7 +4,9 @@
 #include "Globals.h"
 
 
-const float EnergyObject::Y_VELOCITY = 0.1f;
+const float EnergyObject::VELOCITY_Y = 0.05f;
+const float EnergyObject::MIN_OFFSET_Y = 0.0f;
+const float EnergyObject::MAX_OFFSET_Y = 2.0f;
 
 
 EnergyObject::EnergyObject(void) : ItemObject() 
@@ -13,6 +15,10 @@ EnergyObject::EnergyObject(void) : ItemObject()
 	offsetY = 0.0f;
 	goingUp = true;
 	particlesCreated = false;
+
+	// New bounding cylinder
+	BoundingCilinder *bc = getBoundingCilinder();
+	bc->setRadius(0.7f);
 }
 
 EnergyObject::~EnergyObject(void) {}
@@ -36,12 +42,12 @@ void EnergyObject::update(float visionYAngle)
 
 	// Height
 	if (goingUp) {
-		offsetY += Y_VELOCITY;
-		if (offsetY >= 2.0f) goingUp = false;
+		offsetY += VELOCITY_Y;
+		if (offsetY >= MAX_OFFSET_Y) goingUp = false;
 	}
 	else {
-		offsetY -= Y_VELOCITY;
-		if (offsetY <= 0.0f) goingUp = true;
+		offsetY -= VELOCITY_Y;
+		if (offsetY <= MIN_OFFSET_Y) goingUp = true;
 	}
 
 	// Aura particles

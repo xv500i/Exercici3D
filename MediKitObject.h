@@ -7,6 +7,11 @@
 
 class MediKitObject : public ItemObject
 {
+private:
+	const static float INCREMENT_Y_ANGLE;
+
+	float yAngle;
+
 public:
 	MediKitObject(void);
 	virtual ~MediKitObject(void);
