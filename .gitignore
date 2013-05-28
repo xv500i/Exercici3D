@@ -6,4 +6,5 @@
 !*.png
 !*.txt
 !*.mp3
+!*.lib
 !gl/
