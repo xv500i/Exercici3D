@@ -274,3 +274,7 @@ void MobileGameObject::setFriction(float f){
 void MobileGameObject::setGravity(float f){
 	gravity = f;
 }
+
+void MobileGameObject::setMaxAcceleration(float f){
+	maxAcceleration = f;
+}
