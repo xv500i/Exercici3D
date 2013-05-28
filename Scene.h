@@ -9,9 +9,6 @@
 #include "HUD.h"
 #include "Level.h"
 
-// PROVA
-#include "Model.h"
-
 
 class Scene
 {
@@ -21,7 +18,6 @@ private:
 	HUD hud;		/* HUD (player life & items) */
 	Player player;	/* The player */
 	Level level;	/* The level */
-	Model model;
 	
 	int currentLevel;
 	bool isCurrentLevelCompleted;
