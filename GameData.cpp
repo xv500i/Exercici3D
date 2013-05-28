@@ -3,15 +3,12 @@
 
 
 const char* GameData::TEXTURE_EXT = ".png";
-const char* GameData::TILESHEET_EXT = ".png";
-const char* GameData::SPRITE_EXT = ".png";
 const char* GameData::SOUND_EXT = ".mp3";
 
 GameData::GameData(void) 
 {
 	textures = std::vector<Texture>(NUM_TEXTURES);
-	tileSheets = std::vector<TileSheet>(NUM_TILESHEETS);
-	sprites = std::vector<Sprite>(NUM_SPRITES);
+	models = std::vector<Model>(NUM_MODELS);
 	sounds = std::vector<Sound>(NUM_SOUNDS);
 }
 
@@ -45,101 +42,21 @@ void GameData::getTextureSizeInPixels(int textureIndex, int *width, int *height)
 }
 
 
-/* Tile Sheets */
-bool GameData::loadTileSheets()
+/* Models */
+bool GameData::loadModels()
 {
-	/*
-	const char* filenames[NUM_TILESHEETS] = {"Level1Tileset", "Level2Tileset", "Level3Tileset"};
-	for (unsigned int i = 0; i < tileSheets.size(); i++) {
-		bool b = tileSheets[i].load(filenames[i], TILESHEET_EXT);
+	char* filenames[NUM_MODELS] = {"Column"};
+	char* extensions[NUM_MODELS] = {".png"};
+
+	for (int i = 0; i < NUM_MODELS; i++) {
+		bool b = models[i].load(filenames[i], extensions[i]);
 		if (!b) return false;
 	}
-	*/
-	return true;
 }
 
-int GameData::getTileSheetID(int tileSheetIndex)
+void GameData::renderModel(int modelIndex, int x, int y, int z)
 {
-	return tileSheets[tileSheetIndex].getID();
-}
-
-void GameData::getTileSheetSizeInPixels(int tileSheetIndex, int *width, int *height)
-{
-	tileSheets[tileSheetIndex].getSizeInPixels(width, height);
-}
-
-void GameData::getTileSheetTilePosition(int tileSheetIndex, int tileIndex, int *x, int *y)
-{
-	tileSheets[tileSheetIndex].getTilePosition(tileIndex, x, y);
-}
-
-void GameData::getTileSheetTileSizeInPixels(int tileSheetIndex, int *width, int *height)
-{
-	tileSheets[tileSheetIndex].getTileSizeInPixels(width, height);
-}
-
-void GameData::getTileSheetTileOffset(int tileSheetIndex, float *offsetX, float *offsetY)
-{
-	tileSheets[tileSheetIndex].getTileOffset(offsetX, offsetY);
-}
-
-
-/* Sprites */
-bool GameData::loadSprites()
-{
-	/*
-	const char* filenames[NUM_SPRITES] = {"Player1", "Player2", "Fire", "Fire2", "Alien1", "Bullet", "LifeHUD", "SingleShotWeapon", "ThreeShotWeapon", "FiveShotWeapon", "Flamethrower", "FirstAidKit", "WeaponHUD", "Alien2", "Alien3", "Spider1", "Spider2", "Explosion", "boss", "tentacle_piece", "tentacle_base", "tentacle_weapon", "Victory", "DeathWall", "BulletExplosion"};
-	for (unsigned int i = 0; i < sprites.size(); i++) {
-		bool b = sprites[i].load(filenames[i], SPRITE_EXT);
-		if (!b) return false;
-	}
-	*/
-	return true;
-}
-
-int GameData::getSpriteID(int spriteIndex)
-{
-	return sprites[spriteIndex].getID();
-}
-
-void GameData::getSpriteSizeInPixels(int spriteIndex, int *width, int *height)
-{
-	sprites[spriteIndex].getSizeInPixels(width, height);
-}
-
-
-/* Sprite instances */
-int GameData::createSpriteInstance(int spriteIndex)
-{
-	if (spriteIndex >= 0) {
-		SpriteInstance spriteInstance(&sprites[spriteIndex]);
-		// Look for empty spaces in the spriteInstances vector
-		for (unsigned int i = 0; i < spriteInstances.size(); i++) {
-			if (!spriteInstances[i].isInitialized()) {
-				spriteInstances[i] = spriteInstance;
-				return i;
-			}
-		}
-		// If we haven't found any empty space, push back the new sprite instance 
-		spriteInstances.push_back(spriteInstance);
-		return spriteInstances.size() - 1;
-	}
-	else return -1;
-}
-
-void GameData::removeSpriteInstance(int spriteInstanceIndex)
-{
-	if (spriteInstanceIndex == spriteInstances.size() - 1) spriteInstances.pop_back();
-	else {
-		SpriteInstance spriteInstance(NULL);
-		spriteInstances[spriteInstanceIndex] = spriteInstance;
-	}
-}
-
-void GameData::getSpriteFrameInfo(int spriteInstanceIndex, SpriteAction action, bool *finished, float *s, float *t, float *offsetX, float *offsetY, 
-																		        int *width, int *height, int *tx, int *ty, float *angle)
-{
-	spriteInstances[spriteInstanceIndex].getFrameInfo(action, finished, s, t, offsetX, offsetY, width, height, tx, ty, angle);
+	models[modelIndex].render(x, y, z);
 }
 
 
