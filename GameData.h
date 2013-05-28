@@ -90,7 +90,7 @@ public:
 
 	/* Models */
 	bool loadModels();
-	void renderModel(int modelIndex, int x, int y, int z);
+	void renderModel(int modelIndex, float x, float y, float z, float angleY = 0.0f, float angleX = 0.0f);
 
 	/* Sounds */
 	bool loadSounds();

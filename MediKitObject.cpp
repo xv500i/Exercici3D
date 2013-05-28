@@ -1,5 +1,7 @@
 
 #include "MediKitObject.h"
+// DEBUG
+#include "Globals.h"
 
 
 const float MediKitObject::INCREMENT_Y_ANGLE = 5.0f;
@@ -25,5 +27,6 @@ void MediKitObject::update()
 void MediKitObject::render(GameData &data)
 {
 	if (isPickedUp()) return;
-	data.renderModel(GameData::MEDIKIT_MODEL_INDEX, getXPosition(), getYPosition(), getZPosition());
+	data.renderModel(GameData::MEDIKIT_MODEL_INDEX, getXPosition(), getYPosition() + 1.0f, getZPosition(), yAngle);
+	if (DEBUG) renderBoundingCilinder();
 }

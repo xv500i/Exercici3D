@@ -15,7 +15,7 @@ bool Model::load(char *filename, char *ext)
 
 
 /* Render */
-void Model::render(float x, float y, float z)
+void Model::render(float x, float y, float z, float angleY, float angleX)
 {
-	model.render(x, y, z);
+	model.render(x, y, z, angleY, angleX);
 }

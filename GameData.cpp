@@ -55,9 +55,9 @@ bool GameData::loadModels()
 	return true;
 }
 
-void GameData::renderModel(int modelIndex, int x, int y, int z)
+void GameData::renderModel(int modelIndex, float x, float y, float z, float angleY, float angleX)
 {
-	models[modelIndex].render(x, y, z);
+	models[modelIndex].render(x, y, z, angleY, angleX);
 }
 
 
