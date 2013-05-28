@@ -24,7 +24,7 @@ private:
 	const static char* SPRITE_EXT;
 
 	/* Sounds */
-	const static int NUM_SOUNDS = 18;		// TOCHANGE: modificar depenent del numero de sons carregats
+	const static int NUM_SOUNDS = 15;		// TOCHANGE: modificar depenent del numero de sons carregats
 	const static char* SOUND_EXT;
 
 	std::vector<Texture> textures;					/* All loaded textures */
@@ -107,19 +107,16 @@ public:
 	const static int INTRO_THEME_INDEX = 2;
 	const static int GAME_OVER_INDEX = 3;
 	const static int GUN_SOUND_INDEX = 4;
-	const static int FLAMETHROWER_SOUND_INDEX = 5;
+	const static int FUS_SOUND_INDEX = 5;
 	const static int STAGE_CLEAR_INDEX = 6;
 	const static int ENDING_THEME_INDEX = 7;
 	const static int ROAR_INDEX = 8;
 	const static int ENEMY_OUCH_INDEX = 9;
 	const static int PLAYER_OUCH_INDEX = 10;
 	const static int PLAYER_SCREAM_INDEX = 11;
-	const static int EXPLOSION_INDEX = 12;
-	const static int CLANK_INDEX = 13;
+	const static int SPARK_INDEX = 12;
+	const static int JUMP_SOUND_INDEX = 13;
 	const static int SNOW_FIELD_THEME = 14;
-	const static int FUS_RO_DAH_SOUND_EFFECT = 15;
-	const static int JUMP_SOUND_EFFECT = 16;
-	const static int SPARK_SOUND_EFFECT = 17;
 
 
 	GameData(void);
