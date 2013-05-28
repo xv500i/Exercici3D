@@ -146,11 +146,11 @@ void GameData::getSpriteFrameInfo(int spriteInstanceIndex, SpriteAction action, 
 /* Sounds */
 bool GameData::loadSounds()
 {
-	const char* filenames[NUM_SOUNDS] = {"Jungle_Theme", "Boss_Battle", "Title_Theme", "Game_Over", "gun", "flamer", 
+	const char* filenames[NUM_SOUNDS] = {"Jungle_Theme", "Boss_Battle", "Title_Theme", "Game_Over", "gun", "fus", 
 										 "Stage_Clear", "Ending_Theme", "roar", "enemy_hit", "player_hit", "scream", 
-										 "explosion", "clank", "Snow_Field", "fus", "jump", "spark"};
-	const bool loop[NUM_SOUNDS] = {true, true, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false};
-	const float volumes[NUM_SOUNDS] = {1.0f, 1.0f, 1.0f, 1.0f, 0.3f, 0.8f, 1.0f, 1.0f, 0.8f, 1.5f, 1.0f, 1.0f, 2.8f, 1.4f, 1.0f, 1.0f, 1.0f, 1.0f};
+										 "spark", "jump", "Snow_Field"};
+	const bool loop[NUM_SOUNDS] = {true, true, false, false, false, false, false, false, false, false, false, false, false, false, true};
+	const float volumes[NUM_SOUNDS] = {1.0f, 1.0f, 1.0f, 1.0f, 0.3f, 1.0f, 1.0f, 1.0f, 0.8f, 1.5f, 1.0f, 1.0f, 1.5f, 1.0f, 1.0f};
 	for (unsigned int i = 0; i < sounds.size(); i++) {
 		bool b = sounds[i].load(filenames[i], SOUND_EXT, loop[i], volumes[i]);
 		if (!b) return false;
