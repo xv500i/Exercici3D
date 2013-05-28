@@ -3,6 +3,8 @@
 
 #include "GameObject.h"
 
+// PROVA
+#include "Model.h"
 
 enum ObstacleType {
 	TREE,
@@ -17,8 +19,9 @@ public:
 	Obstacle(void);
 	Obstacle(float x, float y, float z, float height, float radius, ObstacleType obsType);
 	~Obstacle(void);
-	void render(GameData &data) const;
+	void render(GameData &data);
 
 private:
 	ObstacleType obsType;
+	Model model;
 };

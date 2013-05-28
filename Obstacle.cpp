@@ -27,21 +27,25 @@ Obstacle::Obstacle(float x, float y, float z, float height, float radius, Obstac
 	bc->setHeight(height);
 	bc->setRadius(radius);
 	type = OBSTACLE;
+	model.load("teleporter", ".jpg");
 }
 	
-void Obstacle::render(GameData &data) const
+void Obstacle::render(GameData &data)
 {
 	// TODO BILLBOARD
 	glPushMatrix();
 		glColor3f(1.0f,1.0f,1.0f);
 		// FIXME HARDCODED : radius
 
-		glTranslatef(getXPosition(),getYPosition(),getZPosition());
+		// PROVA
+		model.render(getXPosition(), getYPosition(), getZPosition());
+
+		/*glTranslatef(getXPosition(),getYPosition(),getZPosition());
 		GLUquadricObj *q = gluNewQuadric();
 		gluSphere(q, 1,16,16);
 
 		gluDeleteQuadric(q);
-		glColor3f(1.0f,1.0f,1.0f);
+		glColor3f(1.0f,1.0f,1.0f);*/
 	glPopMatrix();
 
 	if (DEBUG) renderBoundingCilinder();

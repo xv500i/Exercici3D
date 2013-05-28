@@ -16,7 +16,8 @@
 
 #include <gl/glut.h>
 #include "tools.h"
-#include "BoundingBox.h"
+//#include "BoundingBox.h"
+
 
 struct md2_header
 {
