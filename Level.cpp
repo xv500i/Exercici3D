@@ -184,15 +184,15 @@ void Level::loadSecondLevel()
 	items[2] = ItemObject(true);
 	items[2].setXPosition(-77.0f); items[2].setYPosition(map.getHeightAt(-77,-95)); items[2].setZPosition(-95.0f);
 	items[3] = ItemObject(true);
-	items[3].setXPosition(93.0f); items[3].setYPosition(map.getHeightAt(93,95)); items[3].setZPosition(95.0f);
+	items[3].setXPosition(90.0f); items[3].setYPosition(map.getHeightAt(90,95)); items[3].setZPosition(95.0f);
 	items[4] = ItemObject(true);
 	items[4].setXPosition(0.0f); items[4].setYPosition(map.getHeightAt(0,0)); items[4].setZPosition(0.0f);
 	
 	// Altars
 	altars = std::vector<Altar>(3);
 	altars[0].setXPosition(-77.0f); altars[0].setYPosition(map.getHeightAt(-77,95)); altars[0].setZPosition(95.0f);
-	altars[1].setXPosition(93.0f); altars[1].setYPosition(map.getHeightAt(93,-93)); altars[1].setZPosition(-93.0f);
-	altars[2].setXPosition(77.0f); altars[2].setYPosition(map.getHeightAt(77,-93)); altars[2].setZPosition(-93.0f);
+	altars[1].setXPosition(90.0f); altars[1].setYPosition(map.getHeightAt(90,-93)); altars[1].setZPosition(-93.0f);
+	altars[2].setXPosition(70.0f); altars[2].setYPosition(map.getHeightAt(70,-93)); altars[2].setZPosition(-93.0f);
 }
 
 void Level::loadThirdLevel()
@@ -249,6 +249,13 @@ void Level::loadThirdLevel()
 /* Update */
 void Level::update(Player &player)
 {
+	float max_x, min_x, max_z, min_z;
+	max_x = map.getDistanceBetweenPixels() * map.getPixelsHeigth() / 2;
+
+	// squared maps
+	max_z = max_x;
+	min_z = min_x = - max_x;
+
 	// Vector with all the objects 
 	std::vector<GameObject*> objects = std::vector<GameObject*>();
 	objects.reserve(1 + enemies.size() + obstacles.size() + altars.size() + items.size());
@@ -274,12 +281,31 @@ void Level::update(Player &player)
 		// FLYING FREE	
 	}
 	player.setYPosition(std::max(test, player.getYPosition()));
-
+	if (player.getXPosition() > max_x) {
+		player.setXPosition(max_x);
+	} else if (player.getXPosition() < min_x) {
+		player.setXPosition(min_x);
+	}
+	if (player.getZPosition() > max_z) {
+		player.setZPosition(max_z);
+	} else if (player.getZPosition() < min_z) {
+		player.setZPosition(min_z);
+	}
 	// Enemies
 	for (unsigned int i = 0; i < enemies.size(); i++) {
 		map.getPerpendicularVector(inclination, enemies[i].getXPosition(), enemies[i].getZPosition());
 		enemies[i].update(inclination, objects, player.getXPosition(), player.getZPosition());
 		enemies[i].setYPosition(map.getHeightAt(enemies[i].getXPosition(), enemies[i].getZPosition()));
+		if (enemies[i].getXPosition() > max_x) {
+			enemies[i].setXPosition(max_x);
+		} else if (player.getXPosition() < min_x) {
+			enemies[i].setXPosition(min_x);
+		}
+		if (enemies[i].getZPosition() > max_z) {
+			enemies[i].setZPosition(max_z);
+		} else if (enemies[i].getZPosition() < min_z) {
+			enemies[i].setZPosition(min_z);
+		}
 	}
 
 	// Altars
