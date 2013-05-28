@@ -100,9 +100,9 @@ void Level::loadSecondLevel()
 	enemies[1] = Enemy(STATIC_PURSUER);
 	enemies[1].setXPosition(-85.0f);enemies[1].setZPosition(95.0f);enemies[1].setYPosition(map.getHeightAt(-85,95));
 	enemies[2] = Enemy(STATIC_PURSUER);
-	enemies[2].setXPosition(-70.0f);enemies[2].setZPosition(90.0f);enemies[2].setYPosition(map.getHeightAt(-70,90));
+	enemies[2].setXPosition(-70.0f);enemies[2].setZPosition(-90.0f);enemies[2].setYPosition(map.getHeightAt(-70,-90));
 	enemies[3] = Enemy(STATIC_PURSUER);
-	enemies[3].setXPosition(-70.0f);enemies[3].setZPosition(95.0f);enemies[3].setYPosition(map.getHeightAt(-70,95));
+	enemies[3].setXPosition(-70.0f);enemies[3].setZPosition(-95.0f);enemies[3].setYPosition(map.getHeightAt(-70,-95));
 	
 	std::vector<GuardPathState> *v = new std::vector<GuardPathState>(2);
 	enemies[4] = Enemy(PATH);
