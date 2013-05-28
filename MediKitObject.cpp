@@ -24,5 +24,6 @@ void MediKitObject::update()
 /* Render */
 void MediKitObject::render(GameData &data)
 {
+	if (isPickedUp()) return;
 	data.renderModel(GameData::MEDIKIT_MODEL_INDEX, getXPosition(), getYPosition(), getZPosition());
 }
