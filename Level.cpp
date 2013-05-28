@@ -85,7 +85,7 @@ void Level::loadFirstLevel()
 }
 
 void Level::loadSecondLevel()
-{
+{	
 	// Landscape
 	landscape = Landscape(GameData::ICESCAPE_TEXTURE_INDEX);
 
@@ -114,10 +114,13 @@ void Level::loadSecondLevel()
 	enemies[2].setGuardState(*v);
 
 	// Obstacles
-	obstacles = std::vector<Obstacle>(3);
-	obstacles[0] = Obstacle(7.0, map.getHeightAt(7,7), 7.0, 8.0, 1.0, TREE);
-	obstacles[1] = Obstacle(-7.0, map.getHeightAt(-7,7), 7.0, 8.0, 1.0, TREE);
-	obstacles[2] = Obstacle(7.0, map.getHeightAt(7,-7), -7.0, 8.0, 1.0, TREE);
+	obstacles = std::vector<Obstacle>(45*2);
+	for(int i = 0; i < 45; i++) {
+		obstacles[i] = Obstacle(-85.0, map.getHeightAt(-85, 96-i*4), 96-i*4, 11.0, 2.0, TREE); 
+	}
+	for(int i = 0; i < 45; i++) {
+		obstacles[i+45] = Obstacle(-70.0, map.getHeightAt(-70, -96+i*4), -96+i*4, 11.0, 2.0, TREE); 
+	}
 
 	// Items
 	items = std::vector<ItemObject>(3);
