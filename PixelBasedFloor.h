@@ -8,8 +8,8 @@
 class PixelBasedFloor
 {
 public:
-	PixelBasedFloor(void);
-	PixelBasedFloor(char *filename, float centerX, float centerZ, float distanceBetweenPixels = 2.0f, float maxHeight = 10.0f, float minHeigth = 0.0f);
+	PixelBasedFloor();
+	PixelBasedFloor(int texId, char *filename, float centerX, float centerZ, float distanceBetweenPixels = 2.0f, float maxHeight = 10.0f, float minHeigth = 0.0f);
 	~PixelBasedFloor(void);
 	void render(GameData &data) const;
 	int getPixelsWidth() const;
@@ -24,5 +24,6 @@ private:
 	float minHeigth;
 	float centerX;
 	float centerZ;
+	int textureId;
 };
 

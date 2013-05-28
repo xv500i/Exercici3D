@@ -7,12 +7,12 @@
 #include <windows.h>
 
 
-PixelBasedFloor::PixelBasedFloor(void)
+PixelBasedFloor::PixelBasedFloor()
 {
 }
 
-PixelBasedFloor::PixelBasedFloor(char *filename, float centerX, float centerZ, float distanceBetweenPixels, float maxHeight, float minHeigth)
-	: centerX(centerX), centerZ(centerZ), distanceBetweenPixels(distanceBetweenPixels), maxHeight(maxHeight), minHeigth(minHeigth)
+PixelBasedFloor::PixelBasedFloor(int texId, char *filename, float centerX, float centerZ, float distanceBetweenPixels, float maxHeight, float minHeigth)
+	: textureId(texId), centerX(centerX), centerZ(centerZ), distanceBetweenPixels(distanceBetweenPixels), maxHeight(maxHeight), minHeigth(minHeigth)
 {
 	Texture *tex = new Texture();
 	tex->getMapPixelsHeight(filename, points, GL_RGBA);
@@ -33,14 +33,14 @@ void PixelBasedFloor::render(GameData &data) const
 	// Texture coordinates
 	int texWidth, texHeight;
 	float s, t;
-	data.getTextureSizeInPixels(GameData::LEVEL1_TEXTURE_INDEX, &texWidth, &texHeight);
+	data.getTextureSizeInPixels(textureId, &texWidth, &texHeight);
 	float offsetS = 1.0f/(float)getPixelsWidth();
 	float offsetT = 1.0f/(float)getPixelsHeigth();
 	
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
 		glColor3f(1.0f, 1.0f, 1.0f);
-		glBindTexture(GL_TEXTURE_2D, data.getTextureID(GameData::LEVEL1_TEXTURE_INDEX));
+		glBindTexture(GL_TEXTURE_2D, data.getTextureID(textureId));
 		glRotatef(90.0, 0.0f, 1.0f, 0.0f);
 		glScalef(-1.0f, 1.0f, 1.0f);
 		glBegin(GL_QUADS);
