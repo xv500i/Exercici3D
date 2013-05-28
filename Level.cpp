@@ -28,7 +28,7 @@ void Level::loadFirstLevel()
 	landscape = Landscape(GameData::LANDSCAPE_TEXTURE_INDEX);
 
 	// Map
-	map = PixelBasedFloor("mapa.png", 0.0f, 0.0f, 2.0f);
+	map = PixelBasedFloor(GameData::LEVEL1_TEXTURE_INDEX ,"mapa.png", 0.0f, 0.0f, 2.0f);
 
 	// Enemies
 	enemies = std::vector<Enemy>(0);
@@ -91,7 +91,7 @@ void Level::loadSecondLevel()
 	landscape = Landscape(GameData::ICESCAPE_TEXTURE_INDEX);
 
 	// Map
-	map = PixelBasedFloor("mapa2.png", 0.0f, 0.0f, 2.0f);
+	map = PixelBasedFloor(GameData::LEVEL1_TEXTURE_INDEX, "mapa2.png", 0.0f, 0.0f, 2.0f);
 
 	// Enemies
 	enemies = std::vector<Enemy>(12);
@@ -202,7 +202,7 @@ void Level::loadThirdLevel()
 	landscape = Landscape(GameData::SPACESCAPE_TEXTURE_INDEX);
 
 	// Map
-	map = PixelBasedFloor("mapa3.png", 0.0f, 0.0f, 2.0f);
+	map = PixelBasedFloor(GameData::LEVEL1_TEXTURE_INDEX, "mapa3.png", 0.0f, 0.0f, 2.0f);
 
 	// Enemies
 	std::vector<GuardPathState> *v = new std::vector<GuardPathState>(4);
