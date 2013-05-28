@@ -93,48 +93,106 @@ void Level::loadSecondLevel()
 	map = PixelBasedFloor("mapa2.png", 0.0f, 0.0f, 2.0f);
 
 	// Enemies
-	std::vector<GuardPathState> *v = new std::vector<GuardPathState>(4);
-	v->at(0) = GuardPathState(0.2f, 0.0f, 30);
-	v->at(1) = GuardPathState(0.0f, 0.2f, 30);
-	v->at(2) = GuardPathState(-0.2f, 0.0f, 30);
-	v->at(3) = GuardPathState(0.0f, -0.2f, 30);
-	std::vector<GuardPathState> *v2 = new std::vector<GuardPathState>(2);
-	v2->at(0) = GuardPathState(0.2f, 0.2f, 20);
-	v2->at(1) = GuardPathState(-0.2f, -0.2f, 20);
-	enemies = std::vector<Enemy>(4);
+	enemies = std::vector<Enemy>(12);
+	
 	enemies[0] = Enemy(STATIC_PURSUER);
-	enemies[1] = Enemy(RANDOM);
-	enemies[2] = Enemy(PATH);
-	enemies[3] = Enemy(PATH_PURSUER);
-	enemies[0].setXPosition(15.0f);enemies[0].setZPosition(15.0f);enemies[0].setYPosition(map.getHeightAt(15,15));
-	enemies[1].setXPosition(-15.0f);enemies[1].setZPosition(-15.0f);enemies[1].setYPosition(map.getHeightAt(-15,-15));
-	enemies[3].setXPosition(15.0f);enemies[3].setZPosition(-15.0f);enemies[3].setYPosition(map.getHeightAt(15,-15));
-	enemies[3].setGuardState(*v2);
-	enemies[2].setXPosition(-15.0f);enemies[2].setZPosition(15.0f);enemies[2].setYPosition(map.getHeightAt(-15,15));
-	enemies[2].setGuardState(*v);
+	enemies[0].setXPosition(-85.0f);enemies[0].setZPosition(90.0f);enemies[0].setYPosition(map.getHeightAt(-85,90));
+	enemies[1] = Enemy(STATIC_PURSUER);
+	enemies[1].setXPosition(-85.0f);enemies[1].setZPosition(95.0f);enemies[1].setYPosition(map.getHeightAt(-85,95));
+	enemies[2] = Enemy(STATIC_PURSUER);
+	enemies[2].setXPosition(-70.0f);enemies[2].setZPosition(90.0f);enemies[2].setYPosition(map.getHeightAt(-70,90));
+	enemies[3] = Enemy(STATIC_PURSUER);
+	enemies[3].setXPosition(-70.0f);enemies[3].setZPosition(95.0f);enemies[3].setYPosition(map.getHeightAt(-70,95));
+	
+	std::vector<GuardPathState> *v = new std::vector<GuardPathState>(2);
+	enemies[4] = Enemy(PATH);
+	enemies[4].setXPosition(-77.0f);enemies[4].setZPosition(45.0f);enemies[4].setYPosition(map.getHeightAt(-77,45));
+	v->at(0) = GuardPathState(0.0f, -0.15f, 700);
+	v->at(1) = GuardPathState(0.0f, 0.15f, 700);
+	enemies[4].setGuardState(*v);
 
+	v = new std::vector<GuardPathState>(2);
+	enemies[5] = Enemy(PATH_PURSUER);
+	enemies[5].setXPosition(-55.0f);enemies[5].setZPosition(95.0f);enemies[5].setYPosition(map.getHeightAt(-55,95));
+	v->at(0) = GuardPathState(0.0f, -0.3f, 600);
+	v->at(1) = GuardPathState(0.0f, 0.3f, 600);
+	enemies[5].setGuardState(*v);
+
+	
+	enemies[6] = Enemy(RANDOM);
+	enemies[6].setXPosition(-0.0f);enemies[6].setZPosition(20.0f);enemies[6].setYPosition(map.getHeightAt(0,20));
+	enemies[7] = Enemy(RANDOM);
+	enemies[7].setXPosition(20.0f);enemies[7].setZPosition(0.0f);enemies[7].setYPosition(map.getHeightAt(20,0));
+	enemies[8] = Enemy(RANDOM);
+	enemies[8].setXPosition(0.0f);enemies[8].setZPosition(-20.0f);enemies[8].setYPosition(map.getHeightAt(0,-20));
+	enemies[9] = Enemy(RANDOM);
+	enemies[9].setXPosition(-20.0f);enemies[9].setZPosition(0.0f);enemies[9].setYPosition(map.getHeightAt(-20,0));
+
+	v = new std::vector<GuardPathState>(2);
+	enemies[10] = Enemy(PATH_PURSUER);
+	enemies[10].setXPosition(90.0f);enemies[10].setZPosition(50.0f);enemies[10].setYPosition(map.getHeightAt(90,50));
+	v->at(0) = GuardPathState(0.0f, 0.1f, 300);
+	v->at(1) = GuardPathState(0.0f, -0.1f, 300);
+	enemies[10].setGuardState(*v);
+
+	v = new std::vector<GuardPathState>(2);
+	enemies[11] = Enemy(PATH_PURSUER);
+	enemies[11].setXPosition(90.0f);enemies[11].setZPosition(-50.0f);enemies[11].setYPosition(map.getHeightAt(90,-50));
+	v->at(0) = GuardPathState(0.0f, -0.1f, 300);
+	v->at(1) = GuardPathState(0.0f, 0.1f, 300);
+	enemies[11].setGuardState(*v);
+	
 	// Obstacles
-	obstacles = std::vector<Obstacle>(45*2);
+	obstacles = std::vector<Obstacle>(45*2+15*2+5+10);
+	
 	for(int i = 0; i < 45; i++) {
-		obstacles[i] = Obstacle(-85.0, map.getHeightAt(-85, 96-i*4), 96-i*4, 11.0, 2.0, TREE); 
+		obstacles[i] = Obstacle(-85.0, map.getHeightAt(-85, -96+i*4), -96+i*4, 11.0, 2.0, TREE); 
 	}
 	for(int i = 0; i < 45; i++) {
-		obstacles[i+45] = Obstacle(-70.0, map.getHeightAt(-70, -96+i*4), -96+i*4, 11.0, 2.0, TREE); 
+		obstacles[i+45] = Obstacle(-70.0, map.getHeightAt(-70, 96-i*4), 96-i*4, 11.0, 2.0, TREE); 
 	}
+	for(int i = 0; i < 15; i++) {
+		obstacles[i+90] = Obstacle(80.0, map.getHeightAt(80, 98-i*2), 98-i*2, 5.0, 1.0, BARREL); 
+	}
+	for(int i = 0; i < 15; i++) {
+		obstacles[i+105] = Obstacle(80.0, map.getHeightAt(80, -98+i*2), -98+i*2, 5.0, 1.0, BARREL); 
+	}
+	// 120
+	obstacles[120] = Obstacle(80.0, map.getHeightAt(80, 66), 66, 11.0, 2.0, TREE);
+	obstacles[121] = Obstacle(80.0, map.getHeightAt(80, -66), -66, 11.0, 2.0, TREE);
+	obstacles[122] = Obstacle(10.0, map.getHeightAt(10, -50), -50, 11.0, 2.0, TREE);
+	obstacles[123] = Obstacle(-50.0, map.getHeightAt(-50, 20), 20, 11.0, 2.0, TREE);
+	obstacles[124] = Obstacle(15.0, map.getHeightAt(15, 88), 88, 11.0, 2.0, TREE);
+	obstacles[125] = Obstacle(2.0, map.getHeightAt(2, 0), 0, 5.0, 1.0, BARREL);
+	obstacles[126] = Obstacle(-5.0, map.getHeightAt(-5, 1), 1, 5.0, 1.0, BARREL);
+	obstacles[127] = Obstacle(6.0, map.getHeightAt(6, -3), -3, 5.0, 1.0, BARREL);
+	obstacles[128] = Obstacle(-10.0, map.getHeightAt(-10, 5), 5, 5.0, 1.0, BARREL);
+	obstacles[129] = Obstacle(8.0, map.getHeightAt(8, -5), -5, 5.0, 1.0, BARREL);
+	obstacles[130] = Obstacle(0.0, map.getHeightAt(0, -2), -2, 5.0, 1.0, BARREL);
+	obstacles[131] = Obstacle(-1.0, map.getHeightAt(0, 10), 10, 5.0, 1.0, BARREL);
+	obstacles[132] = Obstacle(-2.0, map.getHeightAt(0, -8), -8, 5.0, 1.0, BARREL);
+	obstacles[133] = Obstacle(3.0, map.getHeightAt(0, 7), 7, 5.0, 1.0, BARREL);
+	obstacles[134] = Obstacle(5.0, map.getHeightAt(0, -5), -5, 5.0, 1.0, BARREL);
+	
 
 	// Items
-	items = std::vector<ItemObject>(3);
+	items = std::vector<ItemObject>(5);
 	items[0] = ItemObject(false);
-	items[0].setXPosition(10.0f); items[0].setYPosition(map.getHeightAt(10,10)); items[0].setZPosition(10.0f);
-	items[1] = ItemObject(true);
-	items[1].setXPosition(10.0f); items[1].setYPosition(map.getHeightAt(10,-10)); items[1].setZPosition(-10.0f);
+	items[0].setXPosition(-73.0f); items[0].setYPosition(map.getHeightAt(-73,-90)); items[0].setZPosition(-90.0f);
+	items[1] = ItemObject(false);
+	items[1].setXPosition(0.0f); items[1].setYPosition(map.getHeightAt(0,90)); items[1].setZPosition(90.0f);
 	items[2] = ItemObject(true);
-	items[2].setXPosition(-10.0f); items[2].setYPosition(map.getHeightAt(-10,-10)); items[2].setZPosition(-10.0f);
-
+	items[2].setXPosition(-77.0f); items[2].setYPosition(map.getHeightAt(-77,-95)); items[2].setZPosition(-95.0f);
+	items[3] = ItemObject(true);
+	items[3].setXPosition(93.0f); items[3].setYPosition(map.getHeightAt(93,95)); items[3].setZPosition(95.0f);
+	items[4] = ItemObject(true);
+	items[4].setXPosition(0.0f); items[4].setYPosition(map.getHeightAt(0,0)); items[4].setZPosition(0.0f);
+	
 	// Altars
-	altars = std::vector<Altar>(2);
-	altars[0].setXPosition(25.0f); altars[0].setYPosition(map.getHeightAt(25,15)); altars[0].setZPosition(15.0f);
-	altars[1].setXPosition(35.0f); altars[1].setYPosition(map.getHeightAt(35,50)); altars[1].setZPosition(50.0f);
+	altars = std::vector<Altar>(3);
+	altars[0].setXPosition(-77.0f); altars[0].setYPosition(map.getHeightAt(-77,95)); altars[0].setZPosition(95.0f);
+	altars[1].setXPosition(93.0f); altars[1].setYPosition(map.getHeightAt(93,-93)); altars[1].setZPosition(-93.0f);
+	altars[2].setXPosition(77.0f); altars[2].setYPosition(map.getHeightAt(77,-93)); altars[2].setZPosition(-93.0f);
 }
 
 void Level::loadThirdLevel()

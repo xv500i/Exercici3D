@@ -266,3 +266,11 @@ Vector3D MobileGameObject::getInclination() const
 {
 	return inclination;
 }
+
+void MobileGameObject::setFriction(float f){
+	friction = f;
+}
+
+void MobileGameObject::setGravity(float f){
+	gravity = f;
+}

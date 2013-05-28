@@ -24,6 +24,8 @@ public:
 	void setYVelocity(float v);
 	void sliding(GameObject *go);
 	Vector3D getInclination() const;
+	void setFriction(float f);
+	void setGravity(float f);
 	
 private:
 	virtual void tractarColisions(std::vector<GameObject*> &objects);
