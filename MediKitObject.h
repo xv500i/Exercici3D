@@ -11,6 +11,7 @@ private:
 	const static float INCREMENT_Y_ANGLE;
 
 	float yAngle;
+	bool yPositionUpdated;
 
 public:
 	MediKitObject(void);

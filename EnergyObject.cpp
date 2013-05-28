@@ -18,7 +18,7 @@ EnergyObject::EnergyObject(void) : ItemObject()
 
 	// New bounding cylinder
 	BoundingCilinder *bc = getBoundingCilinder();
-	bc->setRadius(0.7f);
+	bc->setRadius(0.8f);
 }
 
 EnergyObject::~EnergyObject(void) {}
@@ -72,7 +72,7 @@ void EnergyObject::render(GameData &data)
 		GLUquadricObj *q = gluNewQuadric();
 		gluQuadricOrientation(q, GLU_OUTSIDE);
 		gluQuadricTexture(q, GL_TRUE);
-		gluSphere(q, 0.5, 16, 16);
+		gluSphere(q, 0.7, 16, 16);
 		gluDeleteQuadric(q);
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);

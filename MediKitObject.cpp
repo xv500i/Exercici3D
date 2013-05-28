@@ -11,6 +11,7 @@ MediKitObject::MediKitObject(void) : ItemObject()
 {
 	type = MEDIKIT;
 	yAngle = 0.0f;
+	yPositionUpdated = false;
 }
 
 MediKitObject::~MediKitObject(void) {}
@@ -20,6 +21,10 @@ MediKitObject::~MediKitObject(void) {}
 void MediKitObject::update()
 {
 	yAngle += INCREMENT_Y_ANGLE;
+	if (!yPositionUpdated) {
+		yPositionUpdated = true;
+		setYPosition(getYPosition() + 1.0f);
+	}
 }
 
 
@@ -27,6 +32,6 @@ void MediKitObject::update()
 void MediKitObject::render(GameData &data)
 {
 	if (isPickedUp()) return;
-	data.renderModel(GameData::MEDIKIT_MODEL_INDEX, getXPosition(), getYPosition() + 1.0f, getZPosition(), yAngle, 5.0f);
+	data.renderModel(GameData::MEDIKIT_MODEL_INDEX, getXPosition(), getYPosition(), getZPosition(), yAngle, 0.0f, 2.0f);
 	if (DEBUG) renderBoundingCilinder();
 }
