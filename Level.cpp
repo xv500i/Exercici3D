@@ -1,6 +1,8 @@
 
 #include "Level.h"
 #include <cmath>
+#include "EnergyObject.h"
+#include "MediKitObject.h"
 
 
 Level::Level(void) {}
@@ -68,13 +70,13 @@ void Level::loadFirstLevel()
 
 	// Items
 	items = std::vector<ItemObject>(4);
-	items[0] = ItemObject(true);
+	items[0] = EnergyObject();
 	items[0].setXPosition(0.0f); items[0].setYPosition(map.getHeightAt(0,70)); items[0].setZPosition(70.0f);
-	items[1] = ItemObject(true);
+	items[1] = EnergyObject();
 	items[1].setXPosition(0.0f); items[1].setYPosition(map.getHeightAt(0,-70)); items[1].setZPosition(-70.0f);
-	items[2] = ItemObject(true);
+	items[2] = EnergyObject();
 	items[2].setXPosition(-70.0f); items[2].setYPosition(map.getHeightAt(-70,0)); items[2].setZPosition(0.0f);
-	items[3] = ItemObject(true);
+	items[3] = EnergyObject();
 	items[3].setXPosition(70.0f); items[3].setYPosition(map.getHeightAt(70,0)); items[3].setZPosition(0.0f);
 
 	// Altars
@@ -178,15 +180,15 @@ void Level::loadSecondLevel()
 
 	// Items
 	items = std::vector<ItemObject>(5);
-	items[0] = ItemObject(false);
+	items[0] = MediKitObject();
 	items[0].setXPosition(-73.0f); items[0].setYPosition(map.getHeightAt(-73,-90)); items[0].setZPosition(-90.0f);
-	items[1] = ItemObject(false);
+	items[1] = MediKitObject();
 	items[1].setXPosition(0.0f); items[1].setYPosition(map.getHeightAt(0,90)); items[1].setZPosition(90.0f);
-	items[2] = ItemObject(true);
+	items[2] = EnergyObject();
 	items[2].setXPosition(-77.0f); items[2].setYPosition(map.getHeightAt(-77,-95)); items[2].setZPosition(-95.0f);
-	items[3] = ItemObject(true);
+	items[3] = EnergyObject();
 	items[3].setXPosition(90.0f); items[3].setYPosition(map.getHeightAt(90,95)); items[3].setZPosition(95.0f);
-	items[4] = ItemObject(true);
+	items[4] = EnergyObject();
 	items[4].setXPosition(0.0f); items[4].setYPosition(map.getHeightAt(0,0)); items[4].setZPosition(0.0f);
 	
 	// Altars
@@ -233,11 +235,11 @@ void Level::loadThirdLevel()
 
 	// Items
 	items = std::vector<ItemObject>(3);
-	items[0] = ItemObject(false);
+	items[0] = MediKitObject();
 	items[0].setXPosition(10.0f); items[0].setYPosition(map.getHeightAt(10,10)); items[0].setZPosition(10.0f);
-	items[1] = ItemObject(true);
+	items[1] = EnergyObject();
 	items[1].setXPosition(10.0f); items[1].setYPosition(map.getHeightAt(10,-10)); items[1].setZPosition(-10.0f);
-	items[2] = ItemObject(true);
+	items[2] = EnergyObject();
 	items[2].setXPosition(-10.0f); items[2].setYPosition(map.getHeightAt(-10,-10)); items[2].setZPosition(-10.0f);
 
 	// Altars
@@ -248,7 +250,7 @@ void Level::loadThirdLevel()
 
 
 /* Update */
-void Level::update(Player &player)
+void Level::update(CameraHandler &camera, Player &player)
 {	
 	float max_x, min_x, max_z, min_z;
 	max_x = map.getDistanceBetweenPixels() * map.getPixelsHeigth() / 2;
@@ -320,7 +322,16 @@ void Level::update(Player &player)
 	for (unsigned int i = 0; i < altars.size(); i++) altars[i].update();
 
 	// Items
-	for (unsigned int i = 0; i < items.size(); i++) items[i].update();
+	/*for (unsigned int i = 0; i < items.size(); i++) {
+		if (items[i].getType() == ENERGY) {
+			EnergyObject* aux = (EnergyObject*)&items[i];
+			aux->update(camera.getActiveCameraYAngle());
+		}
+		else if (items[i].getType() == MEDIKIT) {
+			MediKitObject* aux = (MediKitObject*)&items[i];
+			aux->update();
+		}
+	}*/
 
 	// Landscape
 	landscape.update();
@@ -338,7 +349,16 @@ void Level::render(GameData &data)
 	for (unsigned int i = 0; i < enemies.size(); i++) enemies[i].render(data);
 	for (unsigned int i = 0; i < obstacles.size(); i++) obstacles[i].render(data);
 	for (unsigned int i = 0; i < altars.size(); i++) altars[i].render(data);
-	for (unsigned int i = 0; i < items.size(); i++) items[i].render(data);
+	/*for (unsigned int i = 0; i < items.size(); i++) {
+		if (items[i].getType() == ENERGY) {
+			EnergyObject* aux = (EnergyObject*)&items[i];
+			aux->render(data);
+		}
+		else if (items[i].getType() == MEDIKIT) {
+			MediKitObject* aux = (MediKitObject*)&items[i];
+			aux->render(data);
+		}
+	}*/
 	landscape.render(data);
 }
 

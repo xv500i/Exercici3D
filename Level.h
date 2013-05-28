@@ -10,6 +10,7 @@
 #include "ItemObject.h"
 #include "Landscape.h"
 #include "GameData.h"
+#include "CameraHandler.h"
 
 
 class Level
@@ -38,7 +39,7 @@ public:
 	void load(int level);
 
 	/* Update */
-	void update(Player &player);
+	void update(CameraHandler &camera, Player &player);
 
 	/* Render */
 	void render(GameData &data);

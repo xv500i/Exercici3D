@@ -37,6 +37,12 @@ void Camera::getUpVector(float &upX, float &upY, float &upZ)
 	upZ = this->upZ;
 }
 
+float Camera::getXZDirection()
+{
+	// TODO: Implementar
+	return 0.0f;
+}
+
 
 /* Setters */
 void Camera::setEyePosition(float newEyeX, float newEyeY, float newEyeZ)

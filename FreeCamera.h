@@ -19,4 +19,7 @@ public:
 
 	/* Rotating */
 	void rotate(float angle);
+
+	/* Getters */
+	float getXZDirection();
 };

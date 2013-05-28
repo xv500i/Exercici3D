@@ -20,6 +20,7 @@ public:
 	void getEyePosition(float &eyeX, float &eyeY, float &eyeZ);
 	void getReferencePoint(float &centerX, float &centerY, float &centerZ);
 	void getUpVector(float &upX, float &upY, float &upZ);
+	float getXZDirection();
 
 	/* Setters */
 	void setEyePosition(float newEyeX, float newEyeY, float newEyeZ);

@@ -45,3 +45,10 @@ void FreeCamera::rotate(float angle)
 
 	setReferencePoint(centerX, centerY, centerZ);
 }
+
+
+/* Getters */
+float FreeCamera::getXZDirection()
+{
+	return xzAngle;
+}

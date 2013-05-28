@@ -58,6 +58,7 @@ public:
 
 	/* Get active camera */
 	CameraType getActiveCamera();
+	float getActiveCameraYAngle();
 
 	/* Set active camera */
 	void setActiveCamera(CameraType newActiveCamera);

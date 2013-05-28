@@ -25,6 +25,7 @@ private:
 	float initialY, finalY;
 	float scale;
 	float radius;
+	float yAngle;
 
 	/* Displaylist creation */
 	void createParticle();
@@ -37,7 +38,7 @@ public:
 	void createParticleCylinder(int numParticles, float centerX, float centerZ, float initialY, float finalY, float radius, float scale, std::vector<int> textures);
 
 	/* Update */
-	void update();
+	void update(float yAngle);
 
 	/* Render */
 	void render(GameData &data);

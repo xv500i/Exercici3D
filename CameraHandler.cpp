@@ -97,6 +97,21 @@ CameraType CameraHandler::getActiveCamera()
 	return activeCamera;
 }
 
+float CameraHandler::getActiveCameraYAngle()
+{
+	switch (activeCamera) {
+	case THIRD_PERSON:	return thirdPersonCamera.getXZDirection();
+	case FREE:			return freeCamera.getXZDirection();
+	// TODO: HARDCODED
+	case STATIC1:		return 180.0f;
+	case STATIC2:		return 270.0f;
+	case STATIC3:		return 0.0f;
+	case STATIC4:		return 90.0f;
+	default: break;
+	}
+	return 0.0f;
+}
+
 
 /* Set active camera */
 void CameraHandler::setActiveCamera(CameraType newActiveCamera)

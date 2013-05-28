@@ -27,6 +27,14 @@ void ThirdPersonCamera::update()
 	setEyePosition(eyeX, eyeY, eyeZ);
 }
 
+
+/* Getters */
+float ThirdPersonCamera::getXZDirection()
+{
+	return xzAngle;
+}
+
+
 /* Setters */
 void ThirdPersonCamera::setXZDirection(float newXZAngle)
 {

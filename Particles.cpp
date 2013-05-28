@@ -48,7 +48,7 @@ void Particles::createParticleCylinder(int numParticles, float centerX, float ce
 
 
 /* Update */
-void Particles::update()
+void Particles::update(float yAngle)
 {
 	for (int i = 0; i < numParticles; i++) {
 		// Move the particle
@@ -63,6 +63,8 @@ void Particles::update()
 			particles[i].y = initialY;
 			particles[i].z = centerZ + radius*sin(radiusAngle);
 		}
+
+		this->yAngle = yAngle;
 	}
 }
 
@@ -78,6 +80,7 @@ void Particles::render(GameData &data)
 		glPushMatrix();
 			glColor3f(1.0f, 1.0f, 1.0f);
 			glTranslatef(particles[i].x, particles[i].y, particles[i].z);
+			glRotatef(yAngle, 0.0f, 1.0f, 0.0f);
 			glScalef(scale, scale, scale);
 
 			glBindTexture(GL_TEXTURE_2D, data.getTextureID(textures[textureIndex]));

@@ -7,4 +7,5 @@
 !*.txt
 !*.mp3
 !MD2Model.lib
+!models/*
 !gl/

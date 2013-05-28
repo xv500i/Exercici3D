@@ -50,9 +50,8 @@ void Scene::resolveInput(InputHandler &input)
 /* Update */
 void Scene::update(CameraHandler &camera)
 {
-	
 	// Level (and player)
-	level.update(player);
+	level.update(camera, player);
 
 	// Third person camera
 	Point3D playerPos = player.getPosition();

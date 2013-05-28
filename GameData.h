@@ -15,7 +15,7 @@ private:
 	const static char* TEXTURE_EXT;
 	
 	/* Models */
-	const static int NUM_MODELS = 1;		// TOCHANGE: modificar depenent del numero de models carregats
+	const static int NUM_MODELS = 2;		// TOCHANGE: modificar depenent del numero de models carregats
 
 	/* Sounds */
 	const static int NUM_SOUNDS = 15;		// TOCHANGE: modificar depenent del numero de sons carregats
@@ -60,6 +60,7 @@ public:
 	
 	/* Model indexes */			// TOCHANGE: afegir indexs de tots els models carregats
 	const static int COLUMN_MODEL_INDEX = 0;
+	const static int MEDIKIT_MODEL_INDEX = 1;
 
 	/* Sounds indexes */		// TOCHANGE: afegir indexs de tots els sounds carregats
 	const static int JUNGLE_THEME_INDEX = 0;

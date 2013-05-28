@@ -19,6 +19,9 @@ public:
 
 	/* Update */
 	void update();
+	
+	/* Getters */
+	float getXZDirection();
 
 	/* Setters */
 	void setXZDirection(float newXZAngle);
