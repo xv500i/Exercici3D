@@ -31,8 +31,6 @@ bool Game::init()
 
 	// Data loading
 	if (!data.loadTextures()) return false;
-	if (!data.loadTileSheets()) return false;
-	if (!data.loadSprites()) return false;
 	if (!data.loadSounds()) return false;
 
 	// Scene initialization
