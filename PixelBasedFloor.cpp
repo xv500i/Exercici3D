@@ -40,7 +40,7 @@ void PixelBasedFloor::render(GameData &data) const
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
 		glColor3f(1.0f, 1.0f, 1.0f);
-		glBindTexture(GL_TEXTURE_2D, data.getTextureID(GameData::LEVEL1_TEXTURE_INDEX));
+		glBindTexture(GL_TEXTURE_2D, data.getTextureID(textureId));
 		glRotatef(90.0, 0.0f, 1.0f, 0.0f);
 		glScalef(-1.0f, 1.0f, 1.0f);
 		glBegin(GL_QUADS);
