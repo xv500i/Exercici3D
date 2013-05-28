@@ -17,6 +17,7 @@ bool Scene::init(int screenWidth, int screenHeight)
 	currentLevel = 1;
 	isCurrentLevelCompleted = false;
 	hud.load(screenWidth, screenHeight, Player::MAX_LIFE);
+	model.load("teleporter", ".jpg");
 	return true;
 }
 
@@ -67,6 +68,8 @@ void Scene::update(CameraHandler &camera)
 /* Render */
 void Scene::render(GameData &data)
 {
+	model.render(0.0f, 0.0f, 0.0f);
+
 	// Level
 	level.render(data);
 
