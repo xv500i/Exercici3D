@@ -83,6 +83,29 @@ void Scene::loadLevel(int levelNumber)
 {
 	player = Player();
 	level.load(levelNumber);
+	switch(levelNumber) {
+	case 1:
+		player.setXPosition(0.0f);
+		player.setZPosition(0.0f);
+		player.setFriction(0.90f);
+		player.setGravity(-0.25f);
+		player.setMaxAcceleration(0.1f);
+		break;
+	case 2:
+		player.setXPosition(-93.0f);
+		player.setZPosition(-93.0f);
+		player.setFriction(0.98f);
+		player.setGravity(-0.25f);
+		player.setMaxAcceleration(0.05f);
+		break;
+	case 3:
+		player.setXPosition(0.0f);
+		player.setZPosition(0.0f);
+		player.setFriction(0.85f);
+		player.setGravity(-0.05f);
+		player.setMaxAcceleration(0.05f);
+		break;
+	}
 	isCurrentLevelCompleted = false;
 	currentLevel = levelNumber;
 }
