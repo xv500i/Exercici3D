@@ -80,7 +80,7 @@ void Particles::render(GameData &data)
 		glPushMatrix();
 			glColor3f(1.0f, 1.0f, 1.0f);
 			glTranslatef(particles[i].x, particles[i].y, particles[i].z);
-			glRotatef(yAngle, 0.0f, 1.0f, 0.0f);
+			glRotatef(-yAngle, 0.0f, 1.0f, 0.0f);
 			glScalef(scale, scale, scale);
 
 			glBindTexture(GL_TEXTURE_2D, data.getTextureID(textures[textureIndex]));
