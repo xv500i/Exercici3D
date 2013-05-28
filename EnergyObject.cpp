@@ -12,6 +12,7 @@ EnergyObject::EnergyObject(void) : ItemObject()
 	type = ENERGY;
 	offsetY = 0.0f;
 	goingUp = true;
+	particlesCreated = false;
 }
 
 EnergyObject::~EnergyObject(void) {}
