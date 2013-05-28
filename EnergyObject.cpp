@@ -43,10 +43,12 @@ void EnergyObject::update(float visionYAngle)
 	// Height
 	if (goingUp) {
 		offsetY += VELOCITY_Y;
+		setYPosition(getYPosition() + VELOCITY_Y);
 		if (offsetY >= MAX_OFFSET_Y) goingUp = false;
 	}
 	else {
 		offsetY -= VELOCITY_Y;
+		setYPosition(getYPosition() - VELOCITY_Y);
 		if (offsetY <= MIN_OFFSET_Y) goingUp = true;
 	}
 
@@ -65,7 +67,7 @@ void EnergyObject::render(GameData &data)
 	glPushMatrix();
 		glColor3f(1.0f, 1.0f, 1.0f);
 		glBindTexture(GL_TEXTURE_2D, data.getTextureID(GameData::ENERGY_TEXTURE_INDEX));
-		glTranslatef(pos.getX(), pos.getY() + 1.0f + offsetY, pos.getZ());
+		glTranslatef(pos.getX(), pos.getY() + 1.0f, pos.getZ());
 		glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
 		GLUquadricObj *q = gluNewQuadric();
 		gluQuadricOrientation(q, GLU_OUTSIDE);
