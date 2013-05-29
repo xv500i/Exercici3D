@@ -299,6 +299,9 @@ void Level::update(CameraHandler &camera, Player &player)
 	} else if (player.getZPosition()-1 < min_z) {
 		player.setZPosition(min_z+1);
 	}
+
+	if (fusRoDahUsed) player.fusRoDah();
+
 	// Enemies
 	for (unsigned int i = 0; i < enemies.size(); i++) {
 		if (fusRoDahUsed) {

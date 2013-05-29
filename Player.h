@@ -44,6 +44,7 @@ private:
 	ExpansionState expansionState;
 	bool jumping;
 	int fusRoDahReuse;
+	bool fusRoDahUsed;
 	
 
 public:
@@ -69,6 +70,7 @@ public:
 	bool jump();
 	void floorReached();
 	bool useFusRoDah();
+	void fusRoDah();
 
 protected:
 	virtual void tractarColisions(std::vector<GameObject*> &objects);

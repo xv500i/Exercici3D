@@ -25,8 +25,9 @@ Player::Player(void)
 	expansionState = NO_EXPANDED;
 	ticsExpansion = 0;
 	jumping = false;
-	particlesCreated = false;
+	particlesCreated = true;
 	fusRoDahReuse = 0;
+	fusRoDahUsed = false;
 }
 
 Player::~Player(void) {}
@@ -225,7 +226,7 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects, fl
 		textures[3] = GameData::ENERGY_PARTICLE_4_INDEX;
 
 		// Particle creation 
-		particles.createParticleExpansion(500, getXPosition(), getYPosition() + 10.0f, getZPosition(), 10.0f, 0.1f, textures);
+		particles.createParticleExpansion(500, getXPosition(), getYPosition(), getZPosition(), 10.0f, 0.1f, textures);
 		particlesCreated = true;
 	}
 
@@ -305,10 +306,15 @@ void Player::floorReached()
 	MobileGameObject::floorReached();
 }
 
-bool Player::useFusRoDah(){
+bool Player::useFusRoDah() {
 	if (fusRoDahReuse <= 0) {
 		fusRoDahReuse = 1000;
 		return true;
 	}
 	return false;
+}
+
+void Player::fusRoDah()
+{
+	particlesCreated = false;
 }
