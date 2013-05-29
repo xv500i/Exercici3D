@@ -108,11 +108,12 @@ void Particles::updateParticleExpansion(float yAngle)
 		particles[i].y = particles[i].y + particles[i].vy;
 		particles[i].z = particles[i].z + particles[i].vz;
 
-		// Restart the particle
+		// Remove the particle
 		if (distance3D(particles[i].x, particles[i].y, particles[i].z, centerX, centerY, centerZ) > distance) {
-			particles[i].x = centerX;
-			particles[i].y = centerY;
-			particles[i].z = centerZ;
+			// TODO: DESACTIVAR, NO ENVIAR A LA MERDA
+			particles[i].x = 100.0f;
+			particles[i].y = 100.0f;
+			particles[i].z = 100.0f;
 		}
 	}
 }
