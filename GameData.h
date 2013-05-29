@@ -11,7 +11,7 @@ class GameData
 {
 private:
 	/* Textures */
-	const static int NUM_TEXTURES = 30;		// TOCHANGE: modificar depenent del numero de textures carregades
+	const static int NUM_TEXTURES = 34;		// TOCHANGE: modificar depenent del numero de textures carregades
 	const static char* TEXTURE_EXT;
 	
 	/* Models */
@@ -57,6 +57,10 @@ public:
 	const static int ENERGY_TEXTURE_INDEX = 27;
 	const static int LEVEL2_TEXTURE_INDEX = 28;
 	const static int LEVEL3_TEXTURE_INDEX = 29;
+	const static int FUSRODAH_PARTICLE_1_INDEX = 30;
+	const static int FUSRODAH_PARTICLE_2_INDEX = 31;
+	const static int FUSRODAH_PARTICLE_3_INDEX = 32;
+	const static int FUSRODAH_PARTICLE_4_INDEX = 33;
 	
 	/* Model indexes */			// TOCHANGE: afegir indexs de tots els models carregats
 	const static int COLUMN_MODEL_INDEX = 0;
