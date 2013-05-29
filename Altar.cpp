@@ -23,13 +23,13 @@ void Altar::update(float visionYAngle)
 	if (!particlesCreated && active) {
 		// Texture preparation
 		std::vector<int> textures = std::vector<int>(4);
-		textures[0] = GameData::ENERGY_PARTICLE_1_INDEX;
-		textures[1] = GameData::ENERGY_PARTICLE_2_INDEX;
-		textures[2] = GameData::ENERGY_PARTICLE_3_INDEX;
-		textures[3] = GameData::ENERGY_PARTICLE_4_INDEX;
+		textures[0] = GameData::ALTAR_PARTICLE_1_INDEX;
+		textures[1] = GameData::ALTAR_PARTICLE_2_INDEX;
+		textures[2] = GameData::ALTAR_PARTICLE_3_INDEX;
+		textures[3] = GameData::ALTAR_PARTICLE_4_INDEX;
 
 		// Particle creation 
-		aura.createParticleCylinder(500, getXPosition(), getZPosition(), getYPosition(), getYPosition() + 9.0f, 2.25f, 0.1f, textures);
+		aura.createParticleCylinder(1000, getXPosition(), getZPosition(), getYPosition(), getYPosition() + 9.0f, 2.25f, 0.1f, textures);
 		particlesCreated = true;
 	}
 	if (active) aura.updateParticleCylinder(visionYAngle);

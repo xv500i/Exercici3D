@@ -24,7 +24,8 @@ bool GameData::loadTextures()
 										   "landscape", "LifeFull", "LifeEmpty", "spacescape", "icescape", "Energy",
 										   "EnergyParticle1", "EnergyParticle2", "EnergyParticle3", "EnergyParticle4",
 										   "EnergyTexture", "gel", "space", "FusRoDahParticle1", "FusRoDahParticle2",
-										   "FusRoDahParticle3", "FusRoDahParticle4"};
+										   "FusRoDahParticle3", "FusRoDahParticle4", "AltarParticle1", "AltarParticle2",
+										   "AltarParticle3", "AltarParticle4"};
 	for (unsigned int i = 0; i < textures.size(); i++) {
 		bool b = textures[i].load(filenames[i], TEXTURE_EXT);
 		if (!b) return false;
