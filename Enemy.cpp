@@ -196,9 +196,10 @@ void Enemy::tractarColisions(std::vector<GameObject*> &objects)
 void Enemy::fusRoDah(float x, float z){
 	Vector3D vel = Vector3D(x - getXPosition(), 0.0f , z - getZPosition());
 	float module = vel.getModule();
+	if (vel.getModule() > 50.f) return;
 	vel.normalize();
 	vel *= -1;
-	vel *= 1/module*100.0f;
+	vel *= 1/module*20.0f;
 	fusRoDahEffect = 50;
 	setXVelocity(vel.getX());
 	setYVelocity(2.0f);

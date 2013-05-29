@@ -293,11 +293,11 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects, fl
 	else if (fusRoDahState == EXPANSION) particles.updateParticleExpansion(visionYAngle);
 	if (fusRoDahState != UNACTIVE) {
 		ticsFusRoDah++;
-		if (ticsFusRoDah == 10) {
+		if (ticsFusRoDah == 20) {
 			fusRoDahState = EXPANSION;
 			particlesCreated = false;
 		}
-		else if (ticsFusRoDah == 50) {
+		else if (ticsFusRoDah == 100) {
 			fusRoDahState = UNACTIVE;
 		}
 	}
