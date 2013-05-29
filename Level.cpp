@@ -277,7 +277,7 @@ void Level::update(CameraHandler &camera, Player &player)
 
 	Vector3D inclination;
 	map.getPerpendicularVector(inclination, player.getXPosition(), player.getZPosition());
-	player.update(inclination, objects);
+	player.update(inclination, objects, camera.getActiveCameraYAngle());
 	float test = map.getHeightAt(player.getXPosition(), player.getZPosition());
 	// FIXME I'M FAMOUS
 	if (test >= player.getYPosition() ) {

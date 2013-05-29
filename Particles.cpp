@@ -3,6 +3,7 @@
 #include <gl/glut.h>
 #include <random>
 #include <time.h>
+#include "Utility.h"
 
 
 Particles::Particles(void) 
@@ -46,10 +47,41 @@ void Particles::createParticleCylinder(int numParticles, float centerX, float ce
 	}
 }
 
+void Particles::createParticleExpansion(int numParticles, float centerX, float centerY, float centerZ, float distance, float scale, std::vector<int> textures)
+{
+	// Random seed
+	srand((unsigned)time(0));
+
+	// Parameters
+	this->numParticles = numParticles;
+	this->centerX = centerX;
+	this->centerY = centerY;
+	this->centerZ = centerZ;
+	this->distance = distance;
+	this->scale = scale;
+	this->textures = textures;
+	particles = std::vector<Particle>(numParticles);
+
+	for (int i = 0; i < numParticles; i++) {
+		// Particles starting position: center
+		float radiusAngle = rand()%360;
+		particles[i].x = centerX;
+		particles[i].y = centerY;
+		particles[i].z = centerZ;
+
+		// Particles movement: random
+		particles[i].vx = (float)(rand()%100 - 50)/100.0f;
+		particles[i].vz = (float)(rand()%100 - 50)/100.0f;
+		particles[i].vy = (float)(rand()%100 - 50)/100.0f;
+	}
+}
+
 
 /* Update */
-void Particles::update(float yAngle)
+void Particles::updateParticleCylinder(float yAngle)
 {
+	this->yAngle = yAngle;
+
 	for (int i = 0; i < numParticles; i++) {
 		// Move the particle
 		particles[i].x = particles[i].x + particles[i].vx;
@@ -63,14 +95,31 @@ void Particles::update(float yAngle)
 			particles[i].y = initialY;
 			particles[i].z = centerZ + radius*sin(radiusAngle);
 		}
+	}
+}
 
-		this->yAngle = yAngle;
+void Particles::updateParticleExpansion(float yAngle)
+{
+	this->yAngle = yAngle;
+
+	for (int i = 0; i < numParticles; i++) {
+		// Move the particle
+		particles[i].x = particles[i].x + particles[i].vx;
+		particles[i].y = particles[i].y + particles[i].vy;
+		particles[i].z = particles[i].z + particles[i].vz;
+
+		// Restart the particle
+		if (distance3D(particles[i].x, particles[i].y, particles[i].z, centerX, centerY, centerZ) > distance) {
+			particles[i].x = centerX;
+			particles[i].y = centerY;
+			particles[i].z = centerZ;
+		}
 	}
 }
 
 
 /* Render */
-void Particles::render(GameData &data)
+void Particles::render(GameData &data) const
 {
 	glEnable(GL_TEXTURE_2D);
 	for (int i = 0; i < numParticles; i++) {

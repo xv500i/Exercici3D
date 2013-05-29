@@ -53,7 +53,7 @@ void EnergyObject::update(float visionYAngle)
 	}
 
 	// Aura particles
-	aura.update(visionYAngle);
+	aura.updateParticleCylinder(visionYAngle);
 }
 
 

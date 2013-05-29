@@ -19,10 +19,11 @@ private:
 	std::vector<Particle> particles;
 	std::vector<int> textures;
 
-	/* Particle cylinder */
+	/* Particle parameters */
 	int numParticles;
-	float centerX, centerZ;
+	float centerX, centerY, centerZ;
 	float initialY, finalY;
+	float distance;
 	float scale;
 	float radius;
 	float yAngle;
@@ -36,10 +37,12 @@ public:
 
 	/* Creation */
 	void createParticleCylinder(int numParticles, float centerX, float centerZ, float initialY, float finalY, float radius, float scale, std::vector<int> textures);
+	void createParticleExpansion(int numParticles, float centerX, float centerY, float centerZ, float distance, float scale, std::vector<int> textures);
 
 	/* Update */
-	void update(float yAngle);
+	void updateParticleCylinder(float yAngle);
+	void updateParticleExpansion(float yAngle);
 
 	/* Render */
-	void render(GameData &data);
+	void render(GameData &data) const;
 };

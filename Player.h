@@ -3,6 +3,8 @@
 
 #include "MobileGameObject.h"
 #include "GameData.h"
+#include "Particles.h"
+
 
 enum ExpansionState {
 	EXPANDING_VERTICAL,
@@ -11,6 +13,7 @@ enum ExpansionState {
 	UNEXPANDING_HORIZONTAL,
 	NO_EXPANDED
 };
+
 
 class Player : public MobileGameObject
 {
@@ -33,6 +36,10 @@ private:
 	/* Player energy */
 	int energy;
 
+	/* Fus Ro Dah particles */
+	Particles particles;
+	bool particlesCreated;
+
 	int ticsExpansion;
 	ExpansionState expansionState;
 	bool jumping;
@@ -46,7 +53,7 @@ public:
 	~Player(void);
 
 	/* Update */
-	void update(Vector3D &inclination, std::vector<GameObject*> &objects);
+	void update(Vector3D &inclination, std::vector<GameObject*> &objects, float visionYAngle);
 
 	/* Render */
 	void render(GameData &data) const;

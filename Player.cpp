@@ -25,6 +25,7 @@ Player::Player(void)
 	expansionState = NO_EXPANDED;
 	ticsExpansion = 0;
 	jumping = false;
+	particlesCreated = false;
 	fusRoDahReuse = 0;
 }
 
@@ -100,6 +101,8 @@ void Player::render(GameData &data) const
 		}
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
+
+	particles.render(data);
 
 	glColor3f(1.0f,1.0f,1.0f);
 	if (DEBUG) {
@@ -210,8 +213,22 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 	}
 }
 
-void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects)
+void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects, float visionYAngle)
 {
+	// Create the particles
+	if (!particlesCreated) {
+		// Texture preparation
+		std::vector<int> textures = std::vector<int>(4);
+		textures[0] = GameData::ENERGY_PARTICLE_1_INDEX;
+		textures[1] = GameData::ENERGY_PARTICLE_2_INDEX;
+		textures[2] = GameData::ENERGY_PARTICLE_3_INDEX;
+		textures[3] = GameData::ENERGY_PARTICLE_4_INDEX;
+
+		// Particle creation 
+		particles.createParticleExpansion(500, getXPosition(), getYPosition() + 10.0f, getZPosition(), 10.0f, 0.1f, textures);
+		particlesCreated = true;
+	}
+
 	if (ticsInvul > 0) ticsInvul--;
 	if (ticsExpansion > 0) ticsExpansion--;
 	if (fusRoDahReuse > 0) fusRoDahReuse--;
@@ -255,6 +272,8 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects)
 	float square =  sqrt(incZ*incZ + incX*incX);
 	if (square > 0.01) rotX += square * 360.0 / (2 * 3.1415f * 1);
 	if (square > 0.01) rotY = atan2(incZ, incX) * 180.0f / 3.1415f;
+
+	particles.updateParticleExpansion(visionYAngle);
 }
 
 void Player::resetRot()
