@@ -27,7 +27,6 @@ Player::Player(void)
 	jumping = false;
 	particlesCreated = true;
 	fusRoDahReuse = 0;
-	fusRoDahUsed = false;
 }
 
 Player::~Player(void) {}

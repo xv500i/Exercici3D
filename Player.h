@@ -44,7 +44,6 @@ private:
 	ExpansionState expansionState;
 	bool jumping;
 	int fusRoDahReuse;
-	bool fusRoDahUsed;
 	
 
 public:
