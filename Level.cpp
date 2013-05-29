@@ -210,7 +210,7 @@ void Level::loadThirdLevel()
 	enemies = std::vector<Enemy>(0);
 
 	// Obstacles
-	obstacles = std::vector<Obstacle>(12);
+	obstacles = std::vector<Obstacle>(12+5+8*4+8*4);
 	for(int i = 0; i < 4; i++) {
 		obstacles[i] = Obstacle(-6.0, map.getHeightAt(-6, -6+i*4), -6+i*4, COLUMN);
 		obstacles[i+4] = Obstacle(6.0, map.getHeightAt(6, -6+i*4), -6+i*4, COLUMN);
@@ -220,6 +220,90 @@ void Level::loadThirdLevel()
 	obstacles[10] = Obstacle(-2.0, map.getHeightAt(-2, 6), 6, COLUMN);
 	obstacles[11] = Obstacle(2.0, map.getHeightAt(2, -6), -6, COLUMN);
 
+	// + - 
+	obstacles[12] = Obstacle(80, map.getHeightAt(80, -80), -80, BARREL);
+	obstacles[13] = Obstacle(75.0, map.getHeightAt(75, -90), -90, BARREL);
+	obstacles[14] = Obstacle(66.0, map.getHeightAt(66, -75), -75, BARREL);
+	obstacles[15] = Obstacle(70.0, map.getHeightAt(70, -73), -73, BARREL);
+	obstacles[16] = Obstacle(100, map.getHeightAt(100, -85), -85, BARREL);
+	obstacles[17] = Obstacle(105.0, map.getHeightAt(105, -99), -99, BARREL);
+	obstacles[18] = Obstacle(65.0, map.getHeightAt(65, -100), -100, BARREL);
+	obstacles[19] = Obstacle(73.0, map.getHeightAt(73, -95), -95, BARREL);
+	obstacles[20] = Obstacle(115.0, map.getHeightAt(115, -110), -110, BARREL);
+	obstacles[21] = Obstacle(115.0 - 2.4, map.getHeightAt(115 - 2.4, -110), -110, BARREL);
+	obstacles[22] = Obstacle(115.0 - 2.4, map.getHeightAt(115 - 2.4, -110 - 2.4), -110 - 2.4, BARREL);
+	obstacles[23] = Obstacle(115.0, map.getHeightAt(115, -110 - 2.4), -110 - 2.4, BARREL);
+	obstacles[24] = Obstacle(114.0f, map.getHeightAt(115.0f - 1.2, -110.0f - 1.2) + 2.5, -110.0f - 1.2, BARREL);
+
+	// + +
+	obstacles[25] = Obstacle(109, map.getHeightAt(109, 40), 40, BARREL);
+	obstacles[26] = Obstacle(35.0, map.getHeightAt(35, 50), 50, BARREL);
+	obstacles[27] = Obstacle(26.0, map.getHeightAt(26, 35), 35, BARREL);
+	obstacles[28] = Obstacle(100.0, map.getHeightAt(100, 33), 33, BARREL);
+	obstacles[29] = Obstacle(60, map.getHeightAt(60, 45), 45, BARREL);
+	obstacles[30] = Obstacle(65.0, map.getHeightAt(65, 59), 59, BARREL);
+	obstacles[31] = Obstacle(25.0, map.getHeightAt(25, 50), 50, BARREL);
+	obstacles[32] = Obstacle(33.0, map.getHeightAt(33, 85), 85, BARREL);
+
+	// - -
+	obstacles[33] = Obstacle(-80, map.getHeightAt(-80, -80), -80, BARREL);
+	obstacles[34] = Obstacle(-75.0, map.getHeightAt(-75, -90), -90, BARREL);
+	obstacles[35] = Obstacle(-66.0, map.getHeightAt(-66, -75), -75, BARREL);
+	obstacles[36] = Obstacle(-70.0, map.getHeightAt(-70, -73), -73, BARREL);
+	obstacles[37] = Obstacle(-100, map.getHeightAt(-100, -85), -85, BARREL);
+	obstacles[38] = Obstacle(-105.0, map.getHeightAt(-105, -99), -99, BARREL);
+	obstacles[39] = Obstacle(-65.0, map.getHeightAt(-65, -100), -100, BARREL);
+	obstacles[40] = Obstacle(-73.0, map.getHeightAt(-73, -95), -95, BARREL);
+
+	// - +
+	obstacles[41] = Obstacle(-80, map.getHeightAt(-80, 80), 80, BARREL);
+	obstacles[42] = Obstacle(-75.0, map.getHeightAt(-75, 90), 90, BARREL);
+	obstacles[43] = Obstacle(-66.0, map.getHeightAt(-66, 75), 75, BARREL);
+	obstacles[44] = Obstacle(-70.0, map.getHeightAt(-70, 73), 73, BARREL);
+	obstacles[45] = Obstacle(-100, map.getHeightAt(-100, 85), 85, BARREL);
+	obstacles[46] = Obstacle(-105.0, map.getHeightAt(-105, 99), 99, BARREL);
+	obstacles[47] = Obstacle(-65.0, map.getHeightAt(-65, 100), 100, BARREL);
+	obstacles[48] = Obstacle(-73.0, map.getHeightAt(-73, 95), 95, BARREL);
+
+	// + - 
+	obstacles[49] = Obstacle(40, map.getHeightAt(40, -40), -40, COLUMN);
+	obstacles[50] = Obstacle(35.0, map.getHeightAt(35, -50), -50, COLUMN);
+	obstacles[51] = Obstacle(27.0, map.getHeightAt(27, -107), -107, COLUMN);
+	obstacles[52] = Obstacle(30.0, map.getHeightAt(30, -33), -33, COLUMN);
+	obstacles[53] = Obstacle(60, map.getHeightAt(60, -45), -45, COLUMN);
+	obstacles[54] = Obstacle(75.0, map.getHeightAt(75, -89), -89, COLUMN);
+	obstacles[55] = Obstacle(65.0, map.getHeightAt(65, -60), -60, COLUMN);
+	obstacles[56] = Obstacle(73.0, map.getHeightAt(73, -55), -55, COLUMN);
+
+	// + +
+	obstacles[57] = Obstacle(80, map.getHeightAt(80, 80), 80, COLUMN);
+	obstacles[58] = Obstacle(75.0, map.getHeightAt(75, 90), 90, COLUMN);
+	obstacles[59] = Obstacle(66.0, map.getHeightAt(66, 75), 75, COLUMN);
+	obstacles[60] = Obstacle(70.0, map.getHeightAt(70, 73), 73, COLUMN);
+	obstacles[61] = Obstacle(100, map.getHeightAt(100, 85), 85, COLUMN);
+	obstacles[62] = Obstacle(105.0, map.getHeightAt(105, 99), 99, COLUMN);
+	obstacles[63] = Obstacle(65.0, map.getHeightAt(65, 100), 100, COLUMN);
+	obstacles[64] = Obstacle(73.0, map.getHeightAt(73, 95), 95, COLUMN);
+
+	// - -
+	obstacles[65] = Obstacle(-75, map.getHeightAt(-75, -87), -87, COLUMN);
+	obstacles[66] = Obstacle(-35.0, map.getHeightAt(-35, -92), -92, COLUMN);
+	obstacles[67] = Obstacle(-66.0, map.getHeightAt(-66, -65), -65, COLUMN);
+	obstacles[68] = Obstacle(-78.0, map.getHeightAt(-78, -63), -63, COLUMN);
+	obstacles[69] = Obstacle(-110, map.getHeightAt(-110, -85), -85, COLUMN);
+	obstacles[70] = Obstacle(-105.0, map.getHeightAt(-105, -50), -50, COLUMN);
+	obstacles[71] = Obstacle(-65.0, map.getHeightAt(-65, -110), -110, COLUMN);
+	obstacles[72] = Obstacle(-23.0, map.getHeightAt(-23, -45), -45, COLUMN);
+
+	// - +
+	obstacles[73] = Obstacle(-80, map.getHeightAt(-80, 40), 40, COLUMN);
+	obstacles[74] = Obstacle(-35.0, map.getHeightAt(-35, 50), 50, COLUMN);
+	obstacles[75] = Obstacle(-46.0, map.getHeightAt(-46, 95), 95, COLUMN);
+	obstacles[76] = Obstacle(-100.0, map.getHeightAt(-100, 33), 33, COLUMN);
+	obstacles[77] = Obstacle(-60, map.getHeightAt(-60, 45), 45, COLUMN);
+	obstacles[78] = Obstacle(-65.0, map.getHeightAt(-65, 59), 59, COLUMN);
+	obstacles[79] = Obstacle(-25.0, map.getHeightAt(-25, 60), 60, COLUMN);
+	obstacles[80] = Obstacle(-33.0, map.getHeightAt(-33, 85), 85, COLUMN);
 
 	// Items
 	energies = std::vector<EnergyObject>(4);
@@ -244,10 +328,10 @@ void Level::loadThirdLevel()
 
 	// Altars
 	altars = std::vector<Altar>(4);
-	altars[0].setXPosition(0.0f); altars[0].setYPosition(map.getHeightAt(0,8)); altars[0].setZPosition(8.0f);
-	altars[1].setXPosition(0.0f); altars[1].setYPosition(map.getHeightAt(0,-8)); altars[1].setZPosition(-8.0f);
-	altars[2].setXPosition(8.0f); altars[2].setYPosition(map.getHeightAt(8,0)); altars[2].setZPosition(0.0f);
-	altars[3].setXPosition(-8.0f); altars[3].setYPosition(map.getHeightAt(-8,0)); altars[3].setZPosition(0.0f);
+	altars[0].setXPosition(0.0f); altars[0].setYPosition(map.getHeightAt(0,20)); altars[0].setZPosition(20.0f);
+	altars[1].setXPosition(0.0f); altars[1].setYPosition(map.getHeightAt(0,-20)); altars[1].setZPosition(-20.0f);
+	altars[2].setXPosition(20.0f); altars[2].setYPosition(map.getHeightAt(20,0)); altars[2].setZPosition(0.0f);
+	altars[3].setXPosition(-20.0f); altars[3].setYPosition(map.getHeightAt(-20,0)); altars[3].setZPosition(0.0f);
 }
 
 
