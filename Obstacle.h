@@ -5,7 +5,7 @@
 
 
 enum ObstacleType {
-	TREE,
+	COLUMN,
 	BARREL
 };
 
@@ -15,7 +15,7 @@ class Obstacle :
 {
 public:
 	Obstacle(void);
-	Obstacle(float x, float y, float z, float height, float radius, ObstacleType obsType);
+	Obstacle(float x, float y, float z, ObstacleType obsType);
 	~Obstacle(void);
 	void render(GameData &data);
 

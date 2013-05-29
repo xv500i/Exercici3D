@@ -17,19 +17,29 @@ Obstacle::~Obstacle(void)
 
 }
 
-Obstacle::Obstacle(float x, float y, float z, float height, float radius, ObstacleType obsType)
+Obstacle::Obstacle(float x, float y, float z, ObstacleType obsType)
 	: GameObject(), obsType(obsType)
 {
+	type = OBSTACLE;
 	setXPosition(x);
 	setYPosition(y);
 	setZPosition(z);
 	BoundingCilinder *bc = getBoundingCilinder();
-	bc->setHeight(height);
-	bc->setRadius(radius);
-	type = OBSTACLE;
+	if (obsType == COLUMN) {
+		bc->setHeight(12.5f);
+		bc->setRadius(2.0f);
+	}
+	else if (obsType == BARREL) {
+		bc->setHeight(2.5f);
+		bc->setRadius(1.2f);
+	}
 }
 	
 void Obstacle::render(GameData &data)
 {
-	data.renderModel(GameData::COLUMN_MODEL_INDEX, getXPosition(), getYPosition(), getZPosition());
+	if (obsType == COLUMN) 
+		data.renderModel(GameData::COLUMN_MODEL_INDEX, getXPosition(), getYPosition(), getZPosition(), 0.0f, 0.0f, 2.0f);
+	else if (obsType == BARREL)
+		data.renderModel(GameData::BARREL_MODEL_INDEX, getXPosition(), getYPosition(), getZPosition(), 0.0f, 0.0f, 2.0f);
+	if (DEBUG) renderBoundingCilinder();
 }

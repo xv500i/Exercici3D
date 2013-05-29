@@ -35,34 +35,34 @@ void Level::loadFirstLevel()
 
 	// Obstacles
 	obstacles = std::vector<Obstacle>(4 + 5*8);
-	obstacles[0] = Obstacle(10.0, map.getHeightAt(10,10), 10.0, 11.0, 2.0, TREE);
-	obstacles[1] = Obstacle(-10.0, map.getHeightAt(-10,10), 10.0, 11.0, 2.0, TREE);
-	obstacles[2] = Obstacle(10.0, map.getHeightAt(10,-10), -10.0, 11.0, 2.0, TREE);
-	obstacles[3] = Obstacle(-10.0, map.getHeightAt(10,-10), -10.0, 11.0, 2.0, TREE);
+	obstacles[0] = Obstacle(10.0, map.getHeightAt(10,10), 10.0, COLUMN);
+	obstacles[1] = Obstacle(-10.0, map.getHeightAt(-10,10), 10.0, COLUMN);
+	obstacles[2] = Obstacle(10.0, map.getHeightAt(10,-10), -10.0, COLUMN);
+	obstacles[3] = Obstacle(-10.0, map.getHeightAt(10,-10), -10.0, COLUMN);
 
 	for(int i = 0; i < 5; i++) {
-		obstacles[4+i] = Obstacle(50.0, map.getHeightAt(50,76-i*4), 76.0-i*4, 11.0, 2.0, TREE); 
+		obstacles[4+i] = Obstacle(50.0, map.getHeightAt(50,76-i*4), 76.0-i*4, COLUMN); 
 	}
 	for(int i = 0; i < 5; i++){
-		obstacles[9+i] = Obstacle(-50.0, map.getHeightAt(-50,76-i*4), 76.0-i*4, 11.0, 2.0, TREE);
+		obstacles[9+i] = Obstacle(-50.0, map.getHeightAt(-50,76-i*4), 76.0-i*4, COLUMN);
 	}
 	for(int i = 0; i < 5; i++){
-		obstacles[14+i] = Obstacle(-50.0, map.getHeightAt(-50,-76+i*4), -76.0+i*4, 11.0, 2.0, TREE);
+		obstacles[14+i] = Obstacle(-50.0, map.getHeightAt(-50,-76+i*4), -76.0+i*4, COLUMN);
 	}
 	for(int i = 0; i < 5; i++){
-		obstacles[19+i] = Obstacle(50.0, map.getHeightAt(50,-76+i*4), -76.0+i*4, 11.0, 2.0, TREE);
+		obstacles[19+i] = Obstacle(50.0, map.getHeightAt(50,-76+i*4), -76.0+i*4, COLUMN);
 	}
 	for(int i = 0; i < 5; i++) {
-		obstacles[24+i] = Obstacle(76-i*4, map.getHeightAt(76-i*4,50), 50, 11.0, 2.0, TREE); 
+		obstacles[24+i] = Obstacle(76-i*4, map.getHeightAt(76-i*4,50), 50, COLUMN); 
 	}
 	for(int i = 0; i < 5; i++){
-		obstacles[29+i] = Obstacle(76-i*4, map.getHeightAt(76-i*4,-50), -50, 11.0, 2.0, TREE);
+		obstacles[29+i] = Obstacle(76-i*4, map.getHeightAt(76-i*4,-50), -50, COLUMN);
 	}
 	for(int i = 0; i < 5; i++){
-		obstacles[34+i] = Obstacle(-76+i*4, map.getHeightAt(-76+i*4,-50), -50, 11.0, 2.0, TREE);
+		obstacles[34+i] = Obstacle(-76+i*4, map.getHeightAt(-76+i*4,-50), -50, COLUMN);
 	}
 	for(int i = 0; i < 5; i++){
-		obstacles[39+i] = Obstacle(-76+i*4, map.getHeightAt(-76+i*4,50), 50, 11.0, 2.0, TREE);
+		obstacles[39+i] = Obstacle(-76+i*4, map.getHeightAt(-76+i*4,50), 50, COLUMN);
 	}
 	
 
@@ -148,33 +148,33 @@ void Level::loadSecondLevel()
 	obstacles = std::vector<Obstacle>(45*2+15*2+5+10);
 	
 	for(int i = 0; i < 45; i++) {
-		obstacles[i] = Obstacle(-85.0, map.getHeightAt(-85, -96+i*4), -96+i*4, 11.0, 2.0, TREE); 
+		obstacles[i] = Obstacle(-85.0, map.getHeightAt(-85, -96+i*4), -96+i*4, COLUMN); 
 	}
 	for(int i = 0; i < 45; i++) {
-		obstacles[i+45] = Obstacle(-70.0, map.getHeightAt(-70, 96-i*4), 96-i*4, 11.0, 2.0, TREE); 
+		obstacles[i+45] = Obstacle(-70.0, map.getHeightAt(-70, 96-i*4), 96-i*4, COLUMN); 
 	}
 	for(int i = 0; i < 15; i++) {
-		obstacles[i+90] = Obstacle(80.0, map.getHeightAt(80, 98-i*2), 98-i*2, 5.0, 1.0, BARREL); 
+		obstacles[i+90] = Obstacle(80.0, map.getHeightAt(80, 98-i*2), 98-i*2, BARREL); 
 	}
 	for(int i = 0; i < 15; i++) {
-		obstacles[i+105] = Obstacle(80.0, map.getHeightAt(80, -98+i*2), -98+i*2, 5.0, 1.0, BARREL); 
+		obstacles[i+105] = Obstacle(80.0, map.getHeightAt(80, -98+i*2), -98+i*2, BARREL); 
 	}
 	// 120
-	obstacles[120] = Obstacle(80.0, map.getHeightAt(80, 66), 66, 11.0, 2.0, TREE);
-	obstacles[121] = Obstacle(80.0, map.getHeightAt(80, -66), -66, 11.0, 2.0, TREE);
-	obstacles[122] = Obstacle(10.0, map.getHeightAt(10, -50), -50, 11.0, 2.0, TREE);
-	obstacles[123] = Obstacle(-50.0, map.getHeightAt(-50, 20), 20, 11.0, 2.0, TREE);
-	obstacles[124] = Obstacle(15.0, map.getHeightAt(15, 88), 88, 11.0, 2.0, TREE);
-	obstacles[125] = Obstacle(2.0, map.getHeightAt(2, 0), 0, 5.0, 1.0, BARREL);
-	obstacles[126] = Obstacle(-5.0, map.getHeightAt(-5, 1), 1, 5.0, 1.0, BARREL);
-	obstacles[127] = Obstacle(6.0, map.getHeightAt(6, -3), -3, 5.0, 1.0, BARREL);
-	obstacles[128] = Obstacle(-10.0, map.getHeightAt(-10, 5), 5, 5.0, 1.0, BARREL);
-	obstacles[129] = Obstacle(8.0, map.getHeightAt(8, -5), -5, 5.0, 1.0, BARREL);
-	obstacles[130] = Obstacle(0.0, map.getHeightAt(0, -2), -2, 5.0, 1.0, BARREL);
-	obstacles[131] = Obstacle(-1.0, map.getHeightAt(0, 10), 10, 5.0, 1.0, BARREL);
-	obstacles[132] = Obstacle(-2.0, map.getHeightAt(0, -8), -8, 5.0, 1.0, BARREL);
-	obstacles[133] = Obstacle(3.0, map.getHeightAt(0, 7), 7, 5.0, 1.0, BARREL);
-	obstacles[134] = Obstacle(5.0, map.getHeightAt(0, -5), -5, 5.0, 1.0, BARREL);
+	obstacles[120] = Obstacle(80.0, map.getHeightAt(80, 66), 66, COLUMN);
+	obstacles[121] = Obstacle(80.0, map.getHeightAt(80, -66), -66, COLUMN);
+	obstacles[122] = Obstacle(10.0, map.getHeightAt(10, -50), -50, COLUMN);
+	obstacles[123] = Obstacle(-50.0, map.getHeightAt(-50, 20), 20, COLUMN);
+	obstacles[124] = Obstacle(15.0, map.getHeightAt(15, 88), 88, COLUMN);
+	obstacles[125] = Obstacle(2.0, map.getHeightAt(2, 0), 0, BARREL);
+	obstacles[126] = Obstacle(-5.0, map.getHeightAt(-5, 1), 1, BARREL);
+	obstacles[127] = Obstacle(6.0, map.getHeightAt(6, -3), -3, BARREL);
+	obstacles[128] = Obstacle(-10.0, map.getHeightAt(-10, 5), 5, BARREL);
+	obstacles[129] = Obstacle(8.0, map.getHeightAt(8, -5), -5, BARREL);
+	obstacles[130] = Obstacle(0.0, map.getHeightAt(0, -2), -2, BARREL);
+	obstacles[131] = Obstacle(-1.0, map.getHeightAt(0, 10), 10, BARREL);
+	obstacles[132] = Obstacle(-2.0, map.getHeightAt(0, -8), -8, BARREL);
+	obstacles[133] = Obstacle(3.0, map.getHeightAt(0, 7), 7, BARREL);
+	obstacles[134] = Obstacle(5.0, map.getHeightAt(0, -5), -5, BARREL);
 	
 
 	// Items
@@ -212,13 +212,13 @@ void Level::loadThirdLevel()
 	// Obstacles
 	obstacles = std::vector<Obstacle>(12);
 	for(int i = 0; i < 4; i++) {
-		obstacles[i] = Obstacle(-6.0, map.getHeightAt(-6, -6+i*4), -6+i*4, 11.0, 2.0, TREE);
-		obstacles[i+4] = Obstacle(6.0, map.getHeightAt(6, -6+i*4), -6+i*4, 11.0, 2.0, TREE);
+		obstacles[i] = Obstacle(-6.0, map.getHeightAt(-6, -6+i*4), -6+i*4, COLUMN);
+		obstacles[i+4] = Obstacle(6.0, map.getHeightAt(6, -6+i*4), -6+i*4, COLUMN);
 	}
-	obstacles[8] = Obstacle(-2.0, map.getHeightAt(-2, -6), -6, 11.0, 2.0, TREE);
-	obstacles[9] = Obstacle(2.0, map.getHeightAt(2, 6), 6, 11.0, 2.0, TREE);
-	obstacles[10] = Obstacle(-2.0, map.getHeightAt(-2, 6), 6, 11.0, 2.0, TREE);
-	obstacles[11] = Obstacle(2.0, map.getHeightAt(2, -6), -6, 11.0, 2.0, TREE);
+	obstacles[8] = Obstacle(-2.0, map.getHeightAt(-2, -6), -6, COLUMN);
+	obstacles[9] = Obstacle(2.0, map.getHeightAt(2, 6), 6, COLUMN);
+	obstacles[10] = Obstacle(-2.0, map.getHeightAt(-2, 6), 6, COLUMN);
+	obstacles[11] = Obstacle(2.0, map.getHeightAt(2, -6), -6, COLUMN);
 
 
 	// Items
