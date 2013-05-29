@@ -31,7 +31,7 @@ private:
 	void loadThirdLevel();
 	
 	bool fusRoDahUsed;
-
+	bool fusRoDahExpanded;
 
 public:
 	Level(void);

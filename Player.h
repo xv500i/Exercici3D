@@ -78,6 +78,7 @@ public:
 	bool jump();
 	void floorReached();
 	bool useFusRoDah();
+	bool isNotUsingFusRoDah();
 	bool isFusRoDahExpanding();
 	void fusRoDah();
 

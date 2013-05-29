@@ -12,6 +12,7 @@ Level::~Level(void) {}
 void Level::load(int level)
 {
 	fusRoDahUsed = false;
+	fusRoDahExpanded = false;
 	switch (level) {
 	case 1: loadFirstLevel(); break;
 	case 2: loadSecondLevel(); break;
@@ -384,11 +385,12 @@ void Level::update(CameraHandler &camera, Player &player)
 		player.setZPosition(min_z+1);
 	}
 
-	if (fusRoDahUsed) player.fusRoDah();
+	if (fusRoDahUsed && player.isNotUsingFusRoDah()) player.fusRoDah();
+	fusRoDahExpanded = player.isFusRoDahExpanding();
 
 	// Enemies
 	for (unsigned int i = 0; i < enemies.size(); i++) {
-		if (fusRoDahUsed) {
+		if (fusRoDahUsed && fusRoDahExpanded) {
 			enemies[i].fusRoDah(player.getXPosition(), player.getZPosition());
 		}
 		map.getPerpendicularVector(inclination, enemies[i].getXPosition(), enemies[i].getZPosition());
@@ -426,7 +428,9 @@ void Level::update(CameraHandler &camera, Player &player)
 void Level::render(GameData &data)
 {
 	if (fusRoDahUsed) {
-		data.playSound(GameData::FUS_SOUND_INDEX);
+		if (!data.isSoundPlaying(GameData::FUS_SOUND_INDEX)) data.playSound(GameData::FUS_SOUND_INDEX);
+	}
+	if (fusRoDahExpanded) {
 		fusRoDahUsed = false;
 	}
 	map.render(data);

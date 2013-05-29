@@ -289,7 +289,6 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects, fl
 	if (square > 0.01) rotX += square * 360.0 / (2 * 3.1415f * 1);
 	if (square > 0.01) rotY = atan2(incZ, incX) * 180.0f / 3.1415f;
 
-	//particles.updateParticleExpansion(visionYAngle);
 	if (fusRoDahState == CHARGING) particles.updateParticleCharging(visionYAngle);
 	else if (fusRoDahState == EXPANSION) particles.updateParticleExpansion(visionYAngle);
 	if (fusRoDahState != UNACTIVE) {
@@ -298,8 +297,8 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects, fl
 			fusRoDahState = EXPANSION;
 			particlesCreated = false;
 		}
-		else if (ticsFusRoDah == 20) {
-			// TODO ELIMINAR
+		else if (ticsFusRoDah == 50) {
+			fusRoDahState = UNACTIVE;
 		}
 	}
 }
@@ -349,6 +348,11 @@ void Player::fusRoDah()
 	particlesCreated = false;
 }
 
+
+bool Player::isNotUsingFusRoDah()
+{
+	return fusRoDahState == UNACTIVE;
+}
 
 bool Player::isFusRoDahExpanding()
 {

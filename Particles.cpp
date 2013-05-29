@@ -74,9 +74,9 @@ void Particles::createParticleExpansion(int numParticles, float centerX, float c
 		particles[i].z = centerZ;
 
 		// Particles movement: random
-		particles[i].vx = (float)(rand()%200 - 100)/50.0f;
-		particles[i].vz = (float)(rand()%200 - 100)/50.0f;
-		particles[i].vy = (float)(rand()%200 - 100)/100.0f;
+		particles[i].vx = (float)(rand()%200 - 100)/25.0f;
+		particles[i].vz = (float)(rand()%200 - 100)/25.0f;
+		particles[i].vy = (float)(rand()%200 - 100)/50.0f;
 	}
 }
 
