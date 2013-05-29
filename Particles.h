@@ -8,6 +8,7 @@
 struct Particle {
 	float x, y, z;		/* Particle initial position */
 	float vx, vy, vz;	/* Particle velocity */
+	bool active;		
 };
 
 
@@ -38,10 +39,12 @@ public:
 	/* Creation */
 	void createParticleCylinder(int numParticles, float centerX, float centerZ, float initialY, float finalY, float radius, float scale, std::vector<int> textures);
 	void createParticleExpansion(int numParticles, float centerX, float centerY, float centerZ, float distance, float scale, std::vector<int> textures);
+	void createParticleCharging(int numParticles, float centerX, float centerY, float centerZ, float radius, float scale, std::vector<int> textures);
 
 	/* Update */
 	void updateParticleCylinder(float yAngle);
 	void updateParticleExpansion(float yAngle);
+	void updateParticleCharging(float yAngle);
 
 	/* Render */
 	void render(GameData &data) const;

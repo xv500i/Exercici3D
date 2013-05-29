@@ -14,6 +14,12 @@ enum ExpansionState {
 	NO_EXPANDED
 };
 
+enum FusRoDahState {
+	UNACTIVE,
+	CHARGING,
+	EXPANSION
+};
+
 
 class Player : public MobileGameObject
 {
@@ -39,11 +45,14 @@ private:
 	/* Fus Ro Dah particles */
 	Particles particles;
 	bool particlesCreated;
+	FusRoDahState fusRoDahState;
+	int ticsFusRoDah;
+	int fusRoDahReuse;
 
+	/* Jump */
 	int ticsExpansion;
 	ExpansionState expansionState;
 	bool jumping;
-	int fusRoDahReuse;
 	
 
 public:
@@ -69,6 +78,7 @@ public:
 	bool jump();
 	void floorReached();
 	bool useFusRoDah();
+	bool isFusRoDahExpanding();
 	void fusRoDah();
 
 protected:

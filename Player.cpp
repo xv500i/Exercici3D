@@ -27,6 +27,8 @@ Player::Player(void)
 	jumping = false;
 	particlesCreated = true;
 	fusRoDahReuse = 0;
+	fusRoDahState = UNACTIVE;
+	ticsFusRoDah = 0;
 }
 
 Player::~Player(void) {}
@@ -216,7 +218,7 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects, float visionYAngle)
 {
 	// Create the particles
-	if (!particlesCreated) {
+	if (!particlesCreated && fusRoDahState == CHARGING) {
 		// Texture preparation
 		std::vector<int> textures = std::vector<int>(4);
 		textures[0] = GameData::ENERGY_PARTICLE_1_INDEX;
@@ -225,7 +227,21 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects, fl
 		textures[3] = GameData::ENERGY_PARTICLE_4_INDEX;
 
 		// Particle creation 
-		particles.createParticleExpansion(500, getXPosition(), getYPosition(), getZPosition(), 10.0f, 0.1f, textures);
+		//particles.createParticleExpansion(500, getXPosition(), getYPosition() + 1.0f, getZPosition(), 10.0f, 0.1f, textures);
+		particles.createParticleCharging(500, getXPosition(), getYPosition() + 1.0f, getZPosition(), 5.0f, 0.1f, textures);
+		particlesCreated = true;
+	}
+	else if (!particlesCreated && fusRoDahState == EXPANSION) {
+		// Texture preparation
+		std::vector<int> textures = std::vector<int>(4);
+		textures[0] = GameData::ENERGY_PARTICLE_1_INDEX;
+		textures[1] = GameData::ENERGY_PARTICLE_2_INDEX;
+		textures[2] = GameData::ENERGY_PARTICLE_3_INDEX;
+		textures[3] = GameData::ENERGY_PARTICLE_4_INDEX;
+
+		// Particle creation 
+		particles.createParticleExpansion(500, getXPosition(), getYPosition() + 1.0f, getZPosition(), 10.0f, 0.1f, textures);
+		//particles.createParticleCharging(500, getXPosition(), getYPosition() + 1.0f, getZPosition(), 5.0f, 0.1f, textures);
 		particlesCreated = true;
 	}
 
@@ -273,7 +289,19 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects, fl
 	if (square > 0.01) rotX += square * 360.0 / (2 * 3.1415f * 1);
 	if (square > 0.01) rotY = atan2(incZ, incX) * 180.0f / 3.1415f;
 
-	particles.updateParticleExpansion(visionYAngle);
+	//particles.updateParticleExpansion(visionYAngle);
+	if (fusRoDahState == CHARGING) particles.updateParticleCharging(visionYAngle);
+	else if (fusRoDahState == EXPANSION) particles.updateParticleExpansion(visionYAngle);
+	if (fusRoDahState != UNACTIVE) {
+		ticsFusRoDah++;
+		if (ticsFusRoDah == 10) {
+			fusRoDahState = EXPANSION;
+			particlesCreated = false;
+		}
+		else if (ticsFusRoDah == 20) {
+			// TODO ELIMINAR
+		}
+	}
 }
 
 void Player::resetRot()
@@ -307,7 +335,8 @@ void Player::floorReached()
 
 bool Player::useFusRoDah() {
 	if (fusRoDahReuse <= 0) {
-		fusRoDahReuse = 1000;
+		// TODO CHANGE
+		fusRoDahReuse = 10;
 		return true;
 	}
 	return false;
@@ -315,5 +344,13 @@ bool Player::useFusRoDah() {
 
 void Player::fusRoDah()
 {
+	fusRoDahState = CHARGING;
+	ticsFusRoDah = 0;
 	particlesCreated = false;
+}
+
+
+bool Player::isFusRoDahExpanding()
+{
+	return fusRoDahState == EXPANSION;
 }
