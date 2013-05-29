@@ -130,7 +130,7 @@ void Particles::updateParticleCylinder(float yAngle)
 		particles[i].z = particles[i].z + particles[i].vz;
 
 		// Restart the particle
-		if (particles[i].y > finalY) {
+		if (particles[i].y > finalY && rand()%10 == 0) {
 			float radiusAngle = rand()%360;
 			particles[i].x = centerX + radius*cos(radiusAngle);
 			particles[i].y = initialY;

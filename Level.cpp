@@ -451,7 +451,7 @@ void Level::update(CameraHandler &camera, Player &player)
 	}
 
 	// Altars
-	for (unsigned int i = 0; i < altars.size(); i++) altars[i].update();
+	for (unsigned int i = 0; i < altars.size(); i++) altars[i].update(camera.getActiveCameraYAngle());
 
 	// Items
 	for (unsigned int i = 0; i < energies.size(); i++) energies[i].update(camera.getActiveCameraYAngle());
