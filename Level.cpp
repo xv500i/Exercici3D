@@ -208,8 +208,46 @@ void Level::loadThirdLevel()
 	map = PixelBasedFloor(GameData::LEVEL3_TEXTURE_INDEX, "mapa3.png", 0.0f, 0.0f, 2.0f);
 
 	// Enemies
-	enemies = std::vector<Enemy>(0);
+	enemies = std::vector<Enemy>(8 + 4 + 4);
+	// - -
+	enemies[0] = Enemy(STATIC_PURSUER);
+	enemies[0].setXPosition(-100.0f);enemies[0].setZPosition(-110.0f);enemies[0].setYPosition(map.getHeightAt(-100,-110));
+	enemies[1] = Enemy(STATIC_PURSUER);
+	enemies[1].setXPosition(-110.0f);enemies[1].setZPosition(-100.0f);enemies[1].setYPosition(map.getHeightAt(-110,-100));
+	// + -
+	enemies[2] = Enemy(STATIC_PURSUER);
+	enemies[2].setXPosition(110.0f);enemies[2].setZPosition(-100.0f);enemies[2].setYPosition(map.getHeightAt(110,-100));
+	enemies[3] = Enemy(STATIC_PURSUER);
+	enemies[3].setXPosition(100.0f);enemies[3].setZPosition(-110.0f);enemies[3].setYPosition(map.getHeightAt(100,-110));
+	// - +
+	enemies[4] = Enemy(STATIC_PURSUER);
+	enemies[4].setXPosition(-110.0f);enemies[4].setZPosition(100.0f);enemies[4].setYPosition(map.getHeightAt(-110,100));
+	enemies[5] = Enemy(STATIC_PURSUER);
+	enemies[5].setXPosition(-100.0f);enemies[5].setZPosition(110.0f);enemies[5].setYPosition(map.getHeightAt(-100,110));
+	// + +
+	enemies[6] = Enemy(STATIC_PURSUER);
+	enemies[6].setXPosition(110.0f);enemies[6].setZPosition(100.0f);enemies[6].setYPosition(map.getHeightAt(110,100));
+	enemies[7] = Enemy(STATIC_PURSUER);
+	enemies[7].setXPosition(100.0f);enemies[7].setZPosition(110.0f);enemies[7].setYPosition(map.getHeightAt(100,110));
 
+	enemies[8] = Enemy(RANDOM);
+	enemies[8].setXPosition(0.0f);enemies[8].setZPosition(60.0f);enemies[8].setYPosition(map.getHeightAt(0,60));
+	enemies[9] = Enemy(RANDOM);
+	enemies[9].setXPosition(60.0f);enemies[9].setZPosition(0.0f);enemies[9].setYPosition(map.getHeightAt(60,0));
+	enemies[10] = Enemy(RANDOM);
+	enemies[10].setXPosition(0.0f);enemies[10].setZPosition(-60.0f);enemies[10].setYPosition(map.getHeightAt(0,-60));
+	enemies[11] = Enemy(RANDOM);
+	enemies[11].setXPosition(-60.0f);enemies[11].setZPosition(0.0f);enemies[11].setYPosition(map.getHeightAt(-60,0));
+
+	enemies[12] = Enemy(RANDOM);
+	enemies[12].setXPosition(80.0f);enemies[12].setZPosition(80.0f);enemies[12].setYPosition(map.getHeightAt(80,80));
+	enemies[13] = Enemy(RANDOM);
+	enemies[13].setXPosition(80.0f);enemies[13].setZPosition(-80.0f);enemies[13].setYPosition(map.getHeightAt(80,-80));
+	enemies[14] = Enemy(RANDOM);
+	enemies[14].setXPosition(-80.0f);enemies[14].setZPosition(-80.0f);enemies[14].setYPosition(map.getHeightAt(-80,-80));
+	enemies[15] = Enemy(RANDOM);
+	enemies[15].setXPosition(-80.0f);enemies[15].setZPosition(80.0f);enemies[15].setYPosition(map.getHeightAt(-80,80));
+	
 	// Obstacles
 	obstacles = std::vector<Obstacle>(12+5+8*4+8*4);
 	for(int i = 0; i < 4; i++) {
@@ -222,7 +260,7 @@ void Level::loadThirdLevel()
 	obstacles[11] = Obstacle(2.0, map.getHeightAt(2, -6), -6, COLUMN);
 
 	// + - 
-	obstacles[12] = Obstacle(80, map.getHeightAt(80, -80), -80, BARREL);
+	obstacles[12] = Obstacle(90, map.getHeightAt(90, -90), -90, BARREL);
 	obstacles[13] = Obstacle(75.0, map.getHeightAt(75, -90), -90, BARREL);
 	obstacles[14] = Obstacle(66.0, map.getHeightAt(66, -75), -75, BARREL);
 	obstacles[15] = Obstacle(70.0, map.getHeightAt(70, -73), -73, BARREL);
@@ -247,7 +285,7 @@ void Level::loadThirdLevel()
 	obstacles[32] = Obstacle(33.0, map.getHeightAt(33, 85), 85, BARREL);
 
 	// - -
-	obstacles[33] = Obstacle(-80, map.getHeightAt(-80, -80), -80, BARREL);
+	obstacles[33] = Obstacle(-90, map.getHeightAt(-90, -90), -90, BARREL);
 	obstacles[34] = Obstacle(-75.0, map.getHeightAt(-75, -90), -90, BARREL);
 	obstacles[35] = Obstacle(-66.0, map.getHeightAt(-66, -75), -75, BARREL);
 	obstacles[36] = Obstacle(-70.0, map.getHeightAt(-70, -73), -73, BARREL);
@@ -257,7 +295,7 @@ void Level::loadThirdLevel()
 	obstacles[40] = Obstacle(-73.0, map.getHeightAt(-73, -95), -95, BARREL);
 
 	// - +
-	obstacles[41] = Obstacle(-80, map.getHeightAt(-80, 80), 80, BARREL);
+	obstacles[41] = Obstacle(-90, map.getHeightAt(-90, 90), 90, BARREL);
 	obstacles[42] = Obstacle(-75.0, map.getHeightAt(-75, 90), 90, BARREL);
 	obstacles[43] = Obstacle(-66.0, map.getHeightAt(-66, 75), 75, BARREL);
 	obstacles[44] = Obstacle(-70.0, map.getHeightAt(-70, 73), 73, BARREL);
@@ -277,7 +315,7 @@ void Level::loadThirdLevel()
 	obstacles[56] = Obstacle(73.0, map.getHeightAt(73, -55), -55, COLUMN);
 
 	// + +
-	obstacles[57] = Obstacle(80, map.getHeightAt(80, 80), 80, COLUMN);
+	obstacles[57] = Obstacle(90, map.getHeightAt(90, 90), 90, COLUMN);
 	obstacles[58] = Obstacle(75.0, map.getHeightAt(75, 90), 90, COLUMN);
 	obstacles[59] = Obstacle(66.0, map.getHeightAt(66, 75), 75, COLUMN);
 	obstacles[60] = Obstacle(70.0, map.getHeightAt(70, 73), 73, COLUMN);
@@ -297,7 +335,7 @@ void Level::loadThirdLevel()
 	obstacles[72] = Obstacle(-23.0, map.getHeightAt(-23, -45), -45, COLUMN);
 
 	// - +
-	obstacles[73] = Obstacle(-80, map.getHeightAt(-80, 40), 40, COLUMN);
+	obstacles[73] = Obstacle(-90, map.getHeightAt(-90, 40), 40, COLUMN);
 	obstacles[74] = Obstacle(-35.0, map.getHeightAt(-35, 50), 50, COLUMN);
 	obstacles[75] = Obstacle(-46.0, map.getHeightAt(-46, 95), 95, COLUMN);
 	obstacles[76] = Obstacle(-100.0, map.getHeightAt(-100, 33), 33, COLUMN);

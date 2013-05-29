@@ -53,6 +53,8 @@ private:
 	int ticsExpansion;
 	ExpansionState expansionState;
 	bool jumping;
+	bool jumpingSound;
+	bool soundPlayed;
 	
 
 public:
@@ -65,7 +67,7 @@ public:
 	void update(Vector3D &inclination, std::vector<GameObject*> &objects, float visionYAngle);
 
 	/* Render */
-	void render(GameData &data) const;
+	void render(GameData &data);
 
 	/* Player health */
 	int getLife();

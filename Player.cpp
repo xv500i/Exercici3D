@@ -29,12 +29,17 @@ Player::Player(void)
 	fusRoDahReuse = 0;
 	fusRoDahState = UNACTIVE;
 	ticsFusRoDah = 0;
+	jumpingSound = false;
 }
 
 Player::~Player(void) {}
 
-void Player::render(GameData &data) const 
+void Player::render(GameData &data) 
 {
+	if (jumpingSound) {
+		data.playSound(GameData::JUMP_SOUND_INDEX);
+		jumpingSound = false;
+	}
 	if (ticsInvul%6 > 2) return;
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
@@ -315,6 +320,7 @@ bool Player::jump()
 	bool jumped = MobileGameObject::jump();
 	if (jumped) {
 		jumping = true;
+		jumpingSound = true;
 		expansionState = EXPANDING_VERTICAL;
 		ticsExpansion = MAX_TICS_EXPANSION_VERTICAL;
 	}
