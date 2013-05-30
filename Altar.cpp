@@ -10,7 +10,7 @@ Altar::Altar(void) : GameObject()
 	active = false;
 	particlesCreated = false;
 	BoundingCilinder *bc = getBoundingCilinder();
-	bc->setHeight(5.0f);
+	bc->setHeight(5.5f);
 	bc->setRadius(1.3f);
 }
 
@@ -39,7 +39,7 @@ void Altar::update(float visionYAngle)
 /* Render */
 void Altar::render(GameData &data)
 {
-	data.renderModel(GameData::ALTAR_MODEL_INDEX, getXPosition(), getYPosition(), getZPosition(), getYAngle(), 0.0f, 1.25f);
+	data.renderModel(GameData::ALTAR_MODEL_INDEX, getXPosition(), getYPosition() + 1.0f, getZPosition(), getYAngle(), 0.0f, 1.25f);
 	if (active) aura.render(data);
 	if (DEBUG) renderBoundingCilinder();
 }

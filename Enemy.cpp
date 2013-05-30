@@ -1,6 +1,10 @@
+
 #include "Enemy.h"
 #include <random>
 #include "Vector3D.h"
+// DEBUG
+#include "Globals.h"
+
 
 Enemy::Enemy(void)
 	: MobileGameObject()
@@ -208,4 +212,11 @@ void Enemy::fusRoDah(float x, float z){
 
 bool Enemy::isInFusRoDah(){
 	return fusRoDahEffect > 0;
+}
+
+
+void Enemy::render(GameData &data)
+{
+	data.renderModel(GameData::RED_ORC_MODEL_INDEX, getXPosition(), getYPosition() + 2.2f, getZPosition(), getYAngle(), 0.0f, 1.5f);
+	if (DEBUG) renderBoundingCilinder();
 }
