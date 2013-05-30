@@ -9,6 +9,7 @@ Altar::Altar(void) : GameObject()
 	type = ALTAR;
 	active = false;
 	particlesCreated = false;
+	ticsActive = 0;
 	BoundingCilinder *bc = getBoundingCilinder();
 	bc->setHeight(5.5f);
 	bc->setRadius(1.3f);
@@ -32,7 +33,10 @@ void Altar::update(float visionYAngle)
 		aura.createParticleCylinder(1000, getXPosition(), getZPosition(), getYPosition(), getYPosition() + 9.0f, 2.25f, 0.1f, textures);
 		particlesCreated = true;
 	}
-	if (active) aura.updateParticleCylinder(visionYAngle);
+	if (active) {
+		ticsActive++;
+		aura.updateParticleCylinder(visionYAngle);
+	}
 }
 
 
@@ -54,4 +58,9 @@ void Altar::activate()
 bool Altar::isActive()
 {
 	return active;
+}
+
+bool Altar::isActiveAndFinished()
+{
+	return active && ticsActive >= 50;
 }

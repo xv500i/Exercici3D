@@ -9,11 +9,14 @@ class Altar :
 	public GameObject
 {
 private:
+	const static int TICS_ACTIVE_LIMIT = 50;
+
 	bool active;
 
 	/* Particle aura */
 	Particles aura;
 	bool particlesCreated;
+	int ticsActive;
 
 public:
 	Altar(void);
@@ -28,4 +31,5 @@ public:
 	/* Altar activation */
 	void activate();
 	bool isActive();
+	bool isActiveAndFinished();
 };
