@@ -177,6 +177,7 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 				MobileGameObject *mgo;
 				ItemObject *io;
 				Altar *altar;
+				float altura;
 				switch (go->getType()) {	
 				case ENEMY:
 					// Player HIT
@@ -191,7 +192,14 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 					jump();
 					break;
 				case OBSTACLE:
-					sliding(go);
+					
+					altura = go->getBoundingCilinder()->getHeight() + go->getYPosition();
+					if (altura > getYPosition() && altura - 1.0f < getYPosition()) {
+						floorReached();
+						jump();
+					} else {
+						sliding(go);
+					}
 					break;
 				case ENERGY:
 					energy++;
