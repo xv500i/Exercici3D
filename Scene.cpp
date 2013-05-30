@@ -25,12 +25,35 @@ bool Scene::init(int screenWidth, int screenHeight)
 void Scene::resolveInput(InputHandler &input)
 {
 	// PLAYER INPUT --> TODO: anar en diagonal
-	if (input.keyIsDown(input.getKey(MOVE_FORWARD)))	   player.moveForward();
-	else if (input.keyIsDown(input.getKey(MOVE_BACKWARD))) player.moveBackwards();
-	if (input.keyIsDown(input.getKey(MOVE_LEFT)))		   player.moveLeft();
-	else if (input.keyIsDown(input.getKey(MOVE_RIGHT)))	   player.moveRight();
+	if (input.keyIsDown(input.getKey(MOVE_FORWARD))){
+		if (input.keyIsDown(input.getKey(MOVE_LEFT))){
+			player.moveForwardLeft();
+		} else if (input.keyIsDown(input.getKey(MOVE_RIGHT))) {
+			player.moveForwardRight();
+		} else {
+			player.moveForward();
+		}
+	} else if (input.keyIsDown(input.getKey(MOVE_BACKWARD))) {
+		if (input.keyIsDown(input.getKey(MOVE_LEFT))){
+			player.moveBackwardLeft();
+		} else if (input.keyIsDown(input.getKey(MOVE_RIGHT))) {
+			player.moveBackwardRight();
+		} else {
+			player.moveBackwards();
+		}
+	} else {
+		if (input.keyIsDown(input.getKey(MOVE_LEFT))){
+			player.moveLeft();
+		} else if (input.keyIsDown(input.getKey(MOVE_RIGHT))) {
+			player.moveRight();
+		} else {
+			// nothing
+		}
+	}
 	if (input.keyIsDown(input.getKey(ROTATE_LEFT)))		   player.turnLeft();
 	else if (input.keyIsDown(input.getKey(ROTATE_RIGHT)))  player.turnRight();
+
+
 	if (input.keyIsDown(input.getKey(JUMP)))			   player.jump();
 
 	// Next level (automatic)
