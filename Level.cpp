@@ -486,7 +486,7 @@ bool Level::isLevelCompleted()
 {
 	bool completed = true;
 	for (unsigned int i = 0; i < altars.size(); i++) {
-		if (!altars[i].isActive()) completed = false;
+		if (!altars[i].isActiveAndFinished()) completed = false;
 	}
 	return completed;
 }

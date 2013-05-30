@@ -9,7 +9,7 @@ class Altar :
 	public GameObject
 {
 private:
-	const static int TICS_ACTIVE_LIMIT = 50;
+	const static int TICS_ACTIVE_LIMIT = 75;
 
 	bool active;
 

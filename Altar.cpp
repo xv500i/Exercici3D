@@ -62,5 +62,5 @@ bool Altar::isActive()
 
 bool Altar::isActiveAndFinished()
 {
-	return active && ticsActive >= 50;
+	return active && ticsActive >= TICS_ACTIVE_LIMIT;
 }
