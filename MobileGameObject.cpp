@@ -128,6 +128,30 @@ void MobileGameObject::moveRight()
 	acceleration.setZ( maxAcceleration*sin((getYAngle() + 90.0f) * 3.1415f / 180.0f) );
 }
 
+void MobileGameObject::moveForwardLeft()
+{
+	acceleration.setX( maxAcceleration*cos((getYAngle() - 45.0f) * 3.1415f / 180.0f) );
+	acceleration.setZ( maxAcceleration*sin((getYAngle() - 45.0f) * 3.1415f / 180.0f) );
+}
+
+void MobileGameObject::moveForwardRight()
+{
+	acceleration.setX( maxAcceleration*cos((getYAngle() + 45.0f) * 3.1415f / 180.0f) );
+	acceleration.setZ( maxAcceleration*sin((getYAngle() + 45.0f) * 3.1415f / 180.0f) );
+}
+	
+void MobileGameObject::moveBackwardLeft()
+{
+	acceleration.setX( maxAcceleration*cos((getYAngle() - 135.0f) * 3.1415f / 180.0f) );
+	acceleration.setZ( maxAcceleration*sin((getYAngle() - 135.0f) * 3.1415f / 180.0f) );
+}
+	
+void MobileGameObject::moveBackwardRight()
+{
+	acceleration.setX( maxAcceleration*cos((getYAngle() + 135.0f) * 3.1415f / 180.0f) );
+	acceleration.setZ( maxAcceleration*sin((getYAngle() + 135.0f) * 3.1415f / 180.0f) );
+}
+
 bool MobileGameObject::jump()
 {
 	bool hasJumped = footOnGround;

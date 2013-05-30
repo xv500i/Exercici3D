@@ -56,6 +56,7 @@ private:
 	bool jumpingSound;
 	bool soundPlayed;
 	
+	
 
 public:
 	const static int MAX_LIFE = 3;

@@ -13,6 +13,10 @@ public:
 	void moveBackwards();
 	void moveLeft();
 	void moveRight();
+	void moveForwardLeft();
+	void moveForwardRight();
+	void moveBackwardLeft();
+	void moveBackwardRight();
 	void turnLeft();
 	void turnRight();
 	bool jump();
