@@ -1,4 +1,4 @@
 
 #include "Globals.h"
 
-bool DEBUG = true;
+bool DEBUG = false;
