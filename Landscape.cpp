@@ -4,7 +4,10 @@
 
 Landscape::Landscape() {}
 
-Landscape::Landscape(int textureIndex) : rotation(0.0f), textureIndex(textureIndex) {}
+Landscape::Landscape(int textureIndex) : rotation(0.0f), textureIndex(textureIndex) 
+{
+	createLandscape();
+}
 
 Landscape::~Landscape(void) {}
 
@@ -26,12 +29,20 @@ void Landscape::render(GameData &data)
 		//glTranslatef(getXPosition(),getYPosition() + 1.0f,getZPosition());
 		glRotatef(rotation, 0.0f, 1.0f, 0.0f);
 		glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+		glCallList(LANDSCAPE);
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+}
 
+
+/* Displaylist creation */
+void Landscape::createLandscape()
+{
+	glNewList(LANDSCAPE, GL_COMPILE);
 		GLUquadricObj *q = gluNewQuadric();
 		gluQuadricOrientation(q, GLU_OUTSIDE);
 		gluQuadricTexture(q, GL_TRUE);
 		gluSphere(q, 240.0f, 16, 16);
 		gluDeleteQuadric(q);
-	glPopMatrix();
-	glDisable(GL_TEXTURE_2D);
+	glEndList();
 }

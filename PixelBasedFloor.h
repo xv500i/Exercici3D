@@ -30,6 +30,7 @@ private:
 	int textureId;
 	bool floorCreated;
 
+	/* Displaylist creation */
 	void createFloor(GameData &data);
 };
 

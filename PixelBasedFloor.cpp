@@ -98,7 +98,7 @@ void PixelBasedFloor::getPerpendicularVector(Vector3D &v, float x, float z)
 }
 
 
-/* Floor */
+/* Displaylist creation */
 void PixelBasedFloor::createFloor(GameData &data)
 {
 	// Map coordinates

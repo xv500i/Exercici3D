@@ -7,8 +7,13 @@
 class Landscape
 {
 private:
+	const static int LANDSCAPE = 30;	// Displaylist identifier
+
 	float rotation;
 	int textureIndex;
+
+	/* Displaylist creation */
+	void createLandscape();
 
 public:
 	Landscape();
