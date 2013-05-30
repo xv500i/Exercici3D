@@ -440,7 +440,7 @@ void Level::update(CameraHandler &camera, Player &player)
 		}
 		if (enemies[i].getXPosition()+1 > max_x) {
 			enemies[i].setXPosition(max_x-1);
-		} else if (player.getXPosition()-1 < min_x) {
+		} else if (enemies[i].getXPosition()-1 < min_x) {
 			enemies[i].setXPosition(min_x+1);
 		}
 		if (enemies[i].getZPosition()+1 > max_z) {
