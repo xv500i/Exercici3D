@@ -9,9 +9,6 @@
 Particles::Particles(void) 
 {
 	createParticle();
-	offsetX = 0.0f;
-	offsetY = 0.0f;
-	offsetZ = 0.0f;
 }
 
 Particles::~Particles(void) {}
@@ -145,9 +142,9 @@ void Particles::updateParticleCylinder(float yAngle)
 void Particles::updateParticleExpansion(float yAngle, float offsetX, float offsetY, float offsetZ)
 {
 	this->yAngle = yAngle;
-	this->offsetX = offsetX;
-	this->offsetY = offsetY;
-	this->offsetZ = offsetZ;
+	centerX += offsetX;
+	centerY += offsetY;
+	centerZ += offsetZ;
 	
 	for (int i = 0; i < numParticles; i++) {
 		// Move the particle
@@ -165,9 +162,9 @@ void Particles::updateParticleExpansion(float yAngle, float offsetX, float offse
 void Particles::updateParticleCharging(float yAngle, float offsetX, float offsetY, float offsetZ) 
 {
 	this->yAngle = yAngle;
-	this->offsetX = offsetX;
-	this->offsetY = offsetY;
-	this->offsetZ = offsetZ;
+	centerX += offsetX;
+	centerY += offsetY;
+	centerZ += offsetZ;
 
 	for (int i = 0; i < numParticles; i++) {
 		// Move the particle

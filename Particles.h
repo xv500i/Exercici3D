@@ -24,7 +24,6 @@ private:
 	int numParticles;
 	float centerX, centerY, centerZ;
 	float initialY, finalY;
-	float offsetX, offsetY, offsetZ;
 	float distance;
 	float scale;
 	float radius;
