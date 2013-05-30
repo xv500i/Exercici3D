@@ -47,8 +47,8 @@ void GameData::getTextureSizeInPixels(int textureIndex, int *width, int *height)
 /* Models */
 bool GameData::loadModels()
 {
-	char* filenames[NUM_MODELS] = {"Column", "Medikit", "Barrel", "Altar"};
-	char* extensions[NUM_MODELS] = {".png", ".jpg", ".png", ".jpg"};
+	char* filenames[NUM_MODELS] = {"Column", "Medikit", "Barrel", "Altar", "GreenOrc", "RedOrc"};
+	char* extensions[NUM_MODELS] = {".png", ".jpg", ".png", ".jpg", ".jpg", ".jpg"};
 
 	for (int i = 0; i < NUM_MODELS; i++) {
 		bool b = models[i].load(filenames[i], extensions[i]);

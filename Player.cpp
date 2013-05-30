@@ -232,7 +232,6 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects, fl
 		textures[3] = GameData::FUSRODAH_PARTICLE_4_INDEX;
 
 		// Particle creation 
-		//particles.createParticleExpansion(500, getXPosition(), getYPosition() + 1.0f, getZPosition(), 10.0f, 0.1f, textures);
 		particles.createParticleCharging(500, getXPosition(), getYPosition() + 1.0f, getZPosition(), 5.0f, 0.1f, textures);
 		particlesCreated = true;
 	}
@@ -246,7 +245,6 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects, fl
 
 		// Particle creation 
 		particles.createParticleExpansion(500, getXPosition(), getYPosition() + 1.0f, getZPosition(), 10.0f, 0.25f, textures);
-		//particles.createParticleCharging(500, getXPosition(), getYPosition() + 1.0f, getZPosition(), 5.0f, 0.1f, textures);
 		particlesCreated = true;
 	}
 
