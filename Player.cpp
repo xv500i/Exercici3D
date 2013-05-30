@@ -291,17 +291,20 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects, fl
 
 	float initialX = getXPosition();
 	float initialZ = getZPosition();
+	float initialY = getYPosition();
 	MobileGameObject::update(inclination, objects);
 	float finalX = getXPosition();
 	float finalZ = getZPosition();
+	float finalY = getYPosition();
 	float incZ = (finalZ - initialZ);//     2 *   pi    * r
 	float incX = (finalX - initialX);
+	float incY = (finalY - initialY);
 	float square =  sqrt(incZ*incZ + incX*incX);
 	if (square > 0.01) rotX += square * 360.0 / (2 * 3.1415f * 1);
 	if (square > 0.01) rotY = atan2(incZ, incX) * 180.0f / 3.1415f;
 
-	if (fusRoDahState == CHARGING) particles.updateParticleCharging(visionYAngle);
-	else if (fusRoDahState == EXPANSION) particles.updateParticleExpansion(visionYAngle);
+	if (fusRoDahState == CHARGING) particles.updateParticleCharging(visionYAngle, incX, incY, incZ);
+	else if (fusRoDahState == EXPANSION) particles.updateParticleExpansion(visionYAngle, incX, incY, incZ);
 	if (fusRoDahState != UNACTIVE) {
 		ticsFusRoDah++;
 		if (ticsFusRoDah == 20) {
