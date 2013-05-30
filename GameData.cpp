@@ -23,7 +23,9 @@ bool GameData::loadTextures()
 										   "congrats", "button_next_level", "level_completed", "BallTexture", "hecatomb", 
 										   "landscape", "LifeFull", "LifeEmpty", "spacescape", "icescape", "Energy",
 										   "EnergyParticle1", "EnergyParticle2", "EnergyParticle3", "EnergyParticle4",
-										   "EnergyTexture", "gel", "space"};
+										   "EnergyTexture", "gel", "space", "FusRoDahParticle1", "FusRoDahParticle2",
+										   "FusRoDahParticle3", "FusRoDahParticle4", "AltarParticle1", "AltarParticle2",
+										   "AltarParticle3", "AltarParticle4"};
 	for (unsigned int i = 0; i < textures.size(); i++) {
 		bool b = textures[i].load(filenames[i], TEXTURE_EXT);
 		if (!b) return false;
@@ -45,8 +47,8 @@ void GameData::getTextureSizeInPixels(int textureIndex, int *width, int *height)
 /* Models */
 bool GameData::loadModels()
 {
-	char* filenames[NUM_MODELS] = {"Column", "Medikit", "Barrel"};
-	char* extensions[NUM_MODELS] = {".png", ".jpg", ".png"};
+	char* filenames[NUM_MODELS] = {"Column", "Medikit", "Barrel", "Altar", "GreenOrc", "RedOrc"};
+	char* extensions[NUM_MODELS] = {".png", ".jpg", ".png", ".jpg", ".jpg", ".jpg"};
 
 	for (int i = 0; i < NUM_MODELS; i++) {
 		bool b = models[i].load(filenames[i], extensions[i]);
@@ -55,9 +57,19 @@ bool GameData::loadModels()
 	return true;
 }
 
-void GameData::renderModel(int modelIndex, float x, float y, float z, float angleY, float angleX, float scale)
+void GameData::setModelAnimation(int modelIndex, int animationState)
 {
-	models[modelIndex].render(x, y, z, angleY, angleX, scale);
+	models[modelIndex].setAnimation(animationState);
+}
+
+int GameData::getModelAnimationFrame(int modelIndex, int animationState, int tics)
+{
+	return models[modelIndex].getAnimationFrame(animationState, tics);
+}
+
+void GameData::renderModel(int modelIndex, float x, float y, float z, float angleY, float angleX, float scale, int frame)
+{
+	models[modelIndex].render(x, y, z, angleY, angleX, scale, frame);
 }
 
 

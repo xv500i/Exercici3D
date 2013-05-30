@@ -38,6 +38,8 @@ public:
 
 	bool load(char *filename, char *extension);
 	void setAnimation(int anim_state);
+	int getAnimationStartFrame(int anim_state);
+	int getAnimationEndFrame(int anim_state);
 	void setColor(float r, float g, float b);
 
 	/* Render */

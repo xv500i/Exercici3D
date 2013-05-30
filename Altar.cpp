@@ -8,43 +8,39 @@ Altar::Altar(void) : GameObject()
 {
 	type = ALTAR;
 	active = false;
+	particlesCreated = false;
 	BoundingCilinder *bc = getBoundingCilinder();
-	bc->setHeight(6.0f);
+	bc->setHeight(5.5f);
+	bc->setRadius(1.3f);
 }
 
 Altar::~Altar(void) {}
 
 
+/* Update */
+void Altar::update(float visionYAngle)
+{
+	if (!particlesCreated && active) {
+		// Texture preparation
+		std::vector<int> textures = std::vector<int>(4);
+		textures[0] = GameData::ALTAR_PARTICLE_1_INDEX;
+		textures[1] = GameData::ALTAR_PARTICLE_2_INDEX;
+		textures[2] = GameData::ALTAR_PARTICLE_3_INDEX;
+		textures[3] = GameData::ALTAR_PARTICLE_4_INDEX;
+
+		// Particle creation 
+		aura.createParticleCylinder(1000, getXPosition(), getZPosition(), getYPosition(), getYPosition() + 9.0f, 2.25f, 0.1f, textures);
+		particlesCreated = true;
+	}
+	if (active) aura.updateParticleCylinder(visionYAngle);
+}
+
+
 /* Render */
 void Altar::render(GameData &data)
 {
-	Point3D pos = getPosition();
-	glPushMatrix();
-		GLUquadricObj *q1 = gluNewQuadric();
-		GLUquadricObj *q2 = gluNewQuadric();
-		GLUquadricObj *q3 = gluNewQuadric();
-
-		glTranslatef(pos.getX(), pos.getY() + 1.0f, pos.getZ());
-		if (active) glColor3f(1.0f, 1.0f, 0.0f);
-		else glColor3f(1.0f, 0.0f, 0.0f);
-		gluSphere(q1, 1, 16, 16);
-		gluDeleteQuadric(q1);
-
-		glTranslatef(0.0f, 2.0f, 0.0f);
-		if (active) glColor3f(1.0f, 1.0f, 0.0f);
-		else glColor3f(0.0f, 1.0f, 0.0f);
-		gluSphere(q2, 1, 16, 16);
-		gluDeleteQuadric(q2);
-
-		glTranslatef(0.0f, 2.0f, 0.0f);
-		if (active) glColor3f(1.0f, 1.0f, 0.0f);
-		else glColor3f(0.0f, 0.0f, 1.0f);
-		gluSphere(q3, 1, 16, 16);
-		gluDeleteQuadric(q3);
-
-		glColor3f(1.0f, 1.0f, 1.0f);
-	glPopMatrix();
-
+	data.renderModel(GameData::ALTAR_MODEL_INDEX, getXPosition(), getYPosition() + 1.0f, getZPosition(), getYAngle(), 0.0f, 1.25f);
+	if (active) aura.render(data);
 	if (DEBUG) renderBoundingCilinder();
 }
 

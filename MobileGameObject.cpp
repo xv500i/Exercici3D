@@ -151,7 +151,6 @@ void MobileGameObject::render(GameData &data) const
 		} else {
 			glColor3f(1.0f,0.0f,0.0f);
 		}
-		// FIXME HARDCODED : radius
 		glTranslatef(getXPosition(),getYPosition() + 1.0f,getZPosition());
 		glRotatef(-getYAngle(), 0.0f, 1.0f, 0.0f);
 		GLUquadricObj *q = gluNewQuadric();

@@ -11,11 +11,11 @@ class GameData
 {
 private:
 	/* Textures */
-	const static int NUM_TEXTURES = 30;		// TOCHANGE: modificar depenent del numero de textures carregades
+	const static int NUM_TEXTURES = 38;		// TOCHANGE: modificar depenent del numero de textures carregades
 	const static char* TEXTURE_EXT;
 	
 	/* Models */
-	const static int NUM_MODELS = 3;		// TOCHANGE: modificar depenent del numero de models carregats
+	const static int NUM_MODELS = 6;		// TOCHANGE: modificar depenent del numero de models carregats
 
 	/* Sounds */
 	const static int NUM_SOUNDS = 15;		// TOCHANGE: modificar depenent del numero de sons carregats
@@ -57,11 +57,22 @@ public:
 	const static int ENERGY_TEXTURE_INDEX = 27;
 	const static int LEVEL2_TEXTURE_INDEX = 28;
 	const static int LEVEL3_TEXTURE_INDEX = 29;
+	const static int FUSRODAH_PARTICLE_1_INDEX = 30;
+	const static int FUSRODAH_PARTICLE_2_INDEX = 31;
+	const static int FUSRODAH_PARTICLE_3_INDEX = 32;
+	const static int FUSRODAH_PARTICLE_4_INDEX = 33;
+	const static int ALTAR_PARTICLE_1_INDEX = 34;
+	const static int ALTAR_PARTICLE_2_INDEX = 35;
+	const static int ALTAR_PARTICLE_3_INDEX = 36;
+	const static int ALTAR_PARTICLE_4_INDEX = 37;
 	
 	/* Model indexes */			// TOCHANGE: afegir indexs de tots els models carregats
 	const static int COLUMN_MODEL_INDEX = 0;
 	const static int MEDIKIT_MODEL_INDEX = 1;
 	const static int BARREL_MODEL_INDEX = 2;
+	const static int ALTAR_MODEL_INDEX = 3;
+	const static int GREEN_ORC_MODEL_INDEX = 4;
+	const static int RED_ORC_MODEL_INDEX = 5;
 
 	/* Sounds indexes */		// TOCHANGE: afegir indexs de tots els sounds carregats
 	const static int JUNGLE_THEME_INDEX = 0;
@@ -91,7 +102,9 @@ public:
 
 	/* Models */
 	bool loadModels();
-	void renderModel(int modelIndex, float x, float y, float z, float angleY = 0.0f, float angleX = 0.0f, float scale = 1.0f);
+	void setModelAnimation(int modelIndex, int animationState);
+	int getModelAnimationFrame(int modelIndex, int animationState, int tics);
+	void renderModel(int modelIndex, float x, float y, float z, float angleY = 0.0f, float angleX = 0.0f, float scale = 1.0f, int frame = 0);
 
 	/* Sounds */
 	bool loadSounds();

@@ -2,6 +2,7 @@
 #pragma once
 
 #include "GameObject.h"
+#include "Particles.h"
 
 
 class Altar :
@@ -10,9 +11,16 @@ class Altar :
 private:
 	bool active;
 
+	/* Particle aura */
+	Particles aura;
+	bool particlesCreated;
+
 public:
 	Altar(void);
 	virtual ~Altar(void);
+
+	/* Update */
+	void update(float visionYAngle);
 
 	/* Render */
 	void render(GameData &data);

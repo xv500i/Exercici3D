@@ -57,7 +57,6 @@ void GameObject::render(GameData &data) const
 {
 	glPushMatrix();
 		glColor3f(1.0f,1.0f,1.0f);
-		// FIXME HARDCODED : radius
 
 		glTranslatef(pos.getX(),pos.getY() + 1.0f,pos.getZ());
 		glRotatef(-yAngle, 0.0f, 1.0f, 0.0f);

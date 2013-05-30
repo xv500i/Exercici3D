@@ -226,27 +226,25 @@ void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects, fl
 	if (!particlesCreated && fusRoDahState == CHARGING) {
 		// Texture preparation
 		std::vector<int> textures = std::vector<int>(4);
-		textures[0] = GameData::ENERGY_PARTICLE_1_INDEX;
-		textures[1] = GameData::ENERGY_PARTICLE_2_INDEX;
-		textures[2] = GameData::ENERGY_PARTICLE_3_INDEX;
-		textures[3] = GameData::ENERGY_PARTICLE_4_INDEX;
+		textures[0] = GameData::FUSRODAH_PARTICLE_1_INDEX;
+		textures[1] = GameData::FUSRODAH_PARTICLE_2_INDEX;
+		textures[2] = GameData::FUSRODAH_PARTICLE_3_INDEX;
+		textures[3] = GameData::FUSRODAH_PARTICLE_4_INDEX;
 
 		// Particle creation 
-		//particles.createParticleExpansion(500, getXPosition(), getYPosition() + 1.0f, getZPosition(), 10.0f, 0.1f, textures);
 		particles.createParticleCharging(500, getXPosition(), getYPosition() + 1.0f, getZPosition(), 5.0f, 0.1f, textures);
 		particlesCreated = true;
 	}
 	else if (!particlesCreated && fusRoDahState == EXPANSION) {
 		// Texture preparation
 		std::vector<int> textures = std::vector<int>(4);
-		textures[0] = GameData::ENERGY_PARTICLE_1_INDEX;
-		textures[1] = GameData::ENERGY_PARTICLE_2_INDEX;
-		textures[2] = GameData::ENERGY_PARTICLE_3_INDEX;
-		textures[3] = GameData::ENERGY_PARTICLE_4_INDEX;
+		textures[0] = GameData::FUSRODAH_PARTICLE_1_INDEX;
+		textures[1] = GameData::FUSRODAH_PARTICLE_2_INDEX;
+		textures[2] = GameData::FUSRODAH_PARTICLE_3_INDEX;
+		textures[3] = GameData::FUSRODAH_PARTICLE_4_INDEX;
 
 		// Particle creation 
-		particles.createParticleExpansion(500, getXPosition(), getYPosition() + 1.0f, getZPosition(), 10.0f, 0.1f, textures);
-		//particles.createParticleCharging(500, getXPosition(), getYPosition() + 1.0f, getZPosition(), 5.0f, 0.1f, textures);
+		particles.createParticleExpansion(500, getXPosition(), getYPosition() + 1.0f, getZPosition(), 10.0f, 0.25f, textures);
 		particlesCreated = true;
 	}
 
@@ -340,7 +338,7 @@ void Player::floorReached()
 
 bool Player::useFusRoDah() {
 	if (fusRoDahReuse <= 0) {
-		// TODO CHANGE
+		// TODO CHANGE --> FUSRODAH TEST
 		fusRoDahReuse = 10;
 		return true;
 	}

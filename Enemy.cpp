@@ -1,6 +1,10 @@
+
 #include "Enemy.h"
 #include <random>
 #include "Vector3D.h"
+// DEBUG
+#include "Globals.h"
+
 
 Enemy::Enemy(void)
 	: MobileGameObject()
@@ -13,11 +17,17 @@ Enemy::Enemy(void)
 	detectionDistance = 15.0f;
 	pursueVelocity = 0.25f;
 	type = ENEMY;
+	animationTics = 0;
 }
 
 Enemy::Enemy(EnemyType et)
 	: MobileGameObject()
 {
+	BoundingCilinder *bc = getBoundingCilinder();
+	bc->setHeight(4.5f);
+	bc->setRadius(1.3f);
+	animationTics = 0;
+
 	type = ENEMY;
 	switch (et) {
 	case STATIC_PURSUER:
@@ -102,7 +112,7 @@ void Enemy::update(Vector3D &inclination, std::vector<GameObject*> &objects, flo
 		case PURSUE_STATE:
 			direction = Vector3D(x - getXPosition(), 0.0f, z - getZPosition());
 			/* orient to player */
-			// FIXME
+			// TODO URGENT!!! ALEX SOMS
 			/* pursue player */
 			direction.normalize();
 			direction*=pursueVelocity;
@@ -125,7 +135,7 @@ void Enemy::update(Vector3D &inclination, std::vector<GameObject*> &objects, flo
 					guardIndex = (++guardIndex)%guard.size();
 					guard[guardIndex].initialize();
 					/* orient to path */
-					//TODO
+					// TODO URGENT!!! ALEX SOMS
 				}
 				guard[guardIndex].update();
 				direction = Vector3D(guard[guardIndex].getVX(), 0.0f, guard[guardIndex].getVZ());
@@ -141,6 +151,9 @@ void Enemy::update(Vector3D &inclination, std::vector<GameObject*> &objects, flo
 		setZVelocity(fz);
 		fusRoDahEffect--;
 	}
+
+	// Tics animation
+	animationTics++;
 }
 
 void Enemy::setGuardState(std::vector<GuardPathState> &gps)
@@ -172,7 +185,6 @@ void Enemy::tractarColisions(std::vector<GameObject*> &objects)
 				
 					break;
 				case PLAYER:
-					// TODO restar vida i fer invulnerable el player
 					// sliding
 					sliding(go);
 					mgo = (MobileGameObject *) (go);
@@ -183,7 +195,6 @@ void Enemy::tractarColisions(std::vector<GameObject*> &objects)
 					sliding(go);
 					break;
 				case ENERGY:	
-					// TODO recollir i fer desapareixer
 					break;
 				case MEDIKIT:
 					break;
@@ -208,4 +219,13 @@ void Enemy::fusRoDah(float x, float z){
 
 bool Enemy::isInFusRoDah(){
 	return fusRoDahEffect > 0;
+}
+
+
+void Enemy::render(GameData &data)
+{
+	data.setModelAnimation(GameData::RED_ORC_MODEL_INDEX, ANIM_RUN);
+	int frame = data.getModelAnimationFrame(GameData::RED_ORC_MODEL_INDEX, ANIM_RUN, animationTics);
+	data.renderModel(GameData::RED_ORC_MODEL_INDEX, getXPosition(), getYPosition() + 2.2f, getZPosition(), getYAngle(), 0.0f, 1.5f, frame);
+	if (DEBUG) renderBoundingCilinder();
 }

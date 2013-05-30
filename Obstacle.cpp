@@ -38,8 +38,8 @@ Obstacle::Obstacle(float x, float y, float z, ObstacleType obsType)
 void Obstacle::render(GameData &data)
 {
 	if (obsType == COLUMN) 
-		data.renderModel(GameData::COLUMN_MODEL_INDEX, getXPosition(), getYPosition(), getZPosition(), 0.0f, 0.0f, 2.0f);
+		data.renderModel(GameData::COLUMN_MODEL_INDEX, getXPosition(), getYPosition(), getZPosition(), getYAngle(), 0.0f, 2.0f);
 	else if (obsType == BARREL)
-		data.renderModel(GameData::BARREL_MODEL_INDEX, getXPosition(), getYPosition(), getZPosition(), 0.0f, 0.0f, 2.0f);
+		data.renderModel(GameData::BARREL_MODEL_INDEX, getXPosition(), getYPosition(), getZPosition(), getYAngle(), 0.0f, 2.0f);
 	if (DEBUG) renderBoundingCilinder();
 }
