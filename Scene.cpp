@@ -111,6 +111,7 @@ void Scene::loadLevel(int levelNumber)
 	level.load(levelNumber);
 	switch(levelNumber) {
 	case 1:
+		hud.showInstructions();
 		player.setXPosition(0.0f);
 		player.setZPosition(0.0f);
 		player.setFriction(0.90f);

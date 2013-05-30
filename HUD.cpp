@@ -79,6 +79,7 @@ void HUD::render(GameData &data)
 	for (unsigned int i = 0; i < playerEnergy.size(); i++) {
 		playerEnergy[i].render(data);
 	}
+	if (showInstr) instructions.render(data);
 }
 
 
