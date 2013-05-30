@@ -75,6 +75,9 @@ Enemy::~Enemy(void)
 
 void Enemy::update(Vector3D &inclination, std::vector<GameObject*> &objects, float x, float z)
 {
+	// Tics animation
+	animationTics++;
+
 	/* IA */
 	Vector3D direction;
 	int p_forward = 30;
@@ -123,6 +126,8 @@ void Enemy::update(Vector3D &inclination, std::vector<GameObject*> &objects, flo
 			direction = Vector3D(x - getXPosition(), 0.0f, z - getZPosition());
 			if (pursue && direction.getModule() <= detectionDistance) {
 				state = PURSUE_STATE;
+				// ANIMATION
+				animationTics = 0;
 			}
 			break;
 		case GUARD_STATE:
@@ -151,9 +156,6 @@ void Enemy::update(Vector3D &inclination, std::vector<GameObject*> &objects, flo
 		setZVelocity(fz);
 		fusRoDahEffect--;
 	}
-
-	// Tics animation
-	animationTics++;
 }
 
 void Enemy::setGuardState(std::vector<GuardPathState> &gps)
@@ -224,8 +226,15 @@ bool Enemy::isInFusRoDah(){
 
 void Enemy::render(GameData &data)
 {
-	data.setModelAnimation(GameData::RED_ORC_MODEL_INDEX, ANIM_RUN);
-	int frame = data.getModelAnimationFrame(GameData::RED_ORC_MODEL_INDEX, ANIM_RUN, animationTics/3);
+	int frame;
+	if (state == STATIC_STATE) {
+		data.setModelAnimation(GameData::RED_ORC_MODEL_INDEX, ANIM_STAND);
+		frame = data.getModelAnimationFrame(GameData::RED_ORC_MODEL_INDEX, ANIM_STAND, animationTics/3);
+	}
+	else {
+		data.setModelAnimation(GameData::RED_ORC_MODEL_INDEX, ANIM_RUN);
+		frame = data.getModelAnimationFrame(GameData::RED_ORC_MODEL_INDEX, ANIM_RUN, animationTics/3);
+	}
 	data.renderModel(GameData::RED_ORC_MODEL_INDEX, getXPosition(), getYPosition() + 2.2f, getZPosition(), getYAngle(), 0.0f, 1.5f, frame);
 	if (DEBUG) renderBoundingCilinder();
 }
