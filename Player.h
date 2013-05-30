@@ -29,7 +29,7 @@ private:
 	static int MAX_TICS_EXPANSION_HORIZONTAL;
 	static int MAX_TICS_UNEXPANSION_VERTICAL;
 	static int MAX_TICS_UNEXPANSION_HORIZONTAL;
-
+	static int MAX_TICS_DYING;
 
 	float rotX;
 	float rotZ;
@@ -38,7 +38,7 @@ private:
 	/* Player health */
 	int life;
 	int ticsInvul;
-
+	int ticksDying;
 	/* Player energy */
 	int energy;
 
@@ -60,7 +60,7 @@ private:
 
 public:
 	const static int MAX_LIFE = 3;
-
+	
 	Player(void);
 	~Player(void);
 

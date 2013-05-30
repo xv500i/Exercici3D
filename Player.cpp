@@ -13,6 +13,8 @@ int Player::MAX_TICS_EXPANSION_HORIZONTAL = 3;
 int Player::MAX_TICS_UNEXPANSION_VERTICAL = 2;
 int Player::MAX_TICS_UNEXPANSION_HORIZONTAL = 2;
 
+int Player::MAX_TICS_DYING = 100;
+
 Player::Player(void)
 {
 	type = PLAYER;
@@ -30,6 +32,7 @@ Player::Player(void)
 	fusRoDahState = UNACTIVE;
 	ticsFusRoDah = 0;
 	jumpingSound = false;
+	ticksDying = 0;
 }
 
 Player::~Player(void) {}
@@ -45,8 +48,13 @@ void Player::render(GameData &data)
 	glPushMatrix();
 		glColor3f(1.0f, 1.0f, 1.0f);
 		glBindTexture(GL_TEXTURE_2D, data.getTextureID(GameData::PLAYER_TEXTURE_INDEX));
+		
 		glTranslatef(getXPosition(), getYPosition() + 1.0f, getZPosition());
-
+		if (life == 0) {
+			float aux = MAX_TICS_DYING - ticksDying;
+			float xafat = aux / MAX_TICS_DYING;
+			glScalef(1.0f, xafat, 1.0f);
+		}
 		float scaleOffsetVertical = 0.4;
 		float scaleOffsetHorizontal = 0.2;
 		float init = ticsExpansion;
@@ -156,7 +164,7 @@ int Player::getLife()
 
 bool Player::isDead()
 {
-	return life == 0;
+	return life == 0 && ticksDying >= MAX_TICS_DYING;
 }
 
 
@@ -189,7 +197,7 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 					sliding(go);
 					mgo = (MobileGameObject *) (go);
 					mgo->sliding(this);
-					jump();
+					if (life > 0) jump();
 					break;
 				case OBSTACLE:
 					
@@ -230,6 +238,9 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 
 void Player::update(Vector3D &inclination, std::vector<GameObject*> &objects, float visionYAngle)
 {
+	if (life == 0 && ticksDying < MAX_TICS_DYING) {
+		ticksDying++;
+	}
 	// Create the particles
 	if (!particlesCreated && fusRoDahState == CHARGING) {
 		// Texture preparation
