@@ -192,6 +192,12 @@ void Player::tractarColisions(std::vector<GameObject*> &objects)
 					break;
 				case OBSTACLE:
 					sliding(go);
+					
+					if (go->getYPosition() < getYPosition()) {
+						
+					} else {
+						sliding(go);
+					}
 					break;
 				case ENERGY:
 					energy++;
