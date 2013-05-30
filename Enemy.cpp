@@ -17,6 +17,7 @@ Enemy::Enemy(void)
 	detectionDistance = 15.0f;
 	pursueVelocity = 0.25f;
 	type = ENEMY;
+	animationTics = 0;
 }
 
 Enemy::Enemy(EnemyType et)
@@ -25,6 +26,7 @@ Enemy::Enemy(EnemyType et)
 	BoundingCilinder *bc = getBoundingCilinder();
 	bc->setHeight(4.5f);
 	bc->setRadius(1.3f);
+	animationTics = 0;
 
 	type = ENEMY;
 	switch (et) {
@@ -149,6 +151,9 @@ void Enemy::update(Vector3D &inclination, std::vector<GameObject*> &objects, flo
 		setZVelocity(fz);
 		fusRoDahEffect--;
 	}
+
+	// Tics animation
+	animationTics++;
 }
 
 void Enemy::setGuardState(std::vector<GuardPathState> &gps)
@@ -219,6 +224,8 @@ bool Enemy::isInFusRoDah(){
 
 void Enemy::render(GameData &data)
 {
-	data.renderModel(GameData::RED_ORC_MODEL_INDEX, getXPosition(), getYPosition() + 2.2f, getZPosition(), getYAngle(), 0.0f, 1.5f);
+	data.setModelAnimation(GameData::RED_ORC_MODEL_INDEX, ANIM_RUN);
+	int frame = data.getModelAnimationFrame(GameData::RED_ORC_MODEL_INDEX, ANIM_RUN, animationTics);
+	data.renderModel(GameData::RED_ORC_MODEL_INDEX, getXPosition(), getYPosition() + 2.2f, getZPosition(), getYAngle(), 0.0f, 1.5f, frame);
 	if (DEBUG) renderBoundingCilinder();
 }

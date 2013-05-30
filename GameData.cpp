@@ -57,9 +57,19 @@ bool GameData::loadModels()
 	return true;
 }
 
-void GameData::renderModel(int modelIndex, float x, float y, float z, float angleY, float angleX, float scale)
+void GameData::setModelAnimation(int modelIndex, int animationState)
 {
-	models[modelIndex].render(x, y, z, angleY, angleX, scale);
+	models[modelIndex].setAnimation(animationState);
+}
+
+int GameData::getModelAnimationFrame(int modelIndex, int animationState, int tics)
+{
+	return models[modelIndex].getAnimationFrame(animationState, tics);
+}
+
+void GameData::renderModel(int modelIndex, float x, float y, float z, float angleY, float angleX, float scale, int frame)
+{
+	models[modelIndex].render(x, y, z, angleY, angleX, scale, frame);
 }
 
 

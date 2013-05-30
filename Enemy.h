@@ -48,6 +48,8 @@ private:
 	float pursueVelocity;
 	int fusRoDahEffect;
 
+	int animationTics;
+
 protected:
 	virtual void tractarColisions(std::vector<GameObject*> &objects);
 };

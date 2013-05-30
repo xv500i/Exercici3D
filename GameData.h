@@ -102,7 +102,9 @@ public:
 
 	/* Models */
 	bool loadModels();
-	void renderModel(int modelIndex, float x, float y, float z, float angleY = 0.0f, float angleX = 0.0f, float scale = 1.0f);
+	void setModelAnimation(int modelIndex, int animationState);
+	int getModelAnimationFrame(int modelIndex, int animationState, int tics);
+	void renderModel(int modelIndex, float x, float y, float z, float angleY = 0.0f, float angleX = 0.0f, float scale = 1.0f, int frame = 0);
 
 	/* Sounds */
 	bool loadSounds();
