@@ -4,6 +4,7 @@
 #include "Vector3D.h"
 // DEBUG
 #include "Globals.h"
+#include <cmath>
 
 
 Enemy::Enemy(void)
@@ -150,12 +151,22 @@ void Enemy::update(Vector3D &inclination, std::vector<GameObject*> &objects, flo
 			break;
 		}
 	}
+
+	if (fusRoDahEffect <= 0) { 
+		// set Y angle
+		float velX = getXVelocity();
+		float velZ = getZVelocity();
+		float newAngle = atan2(velZ, velX) * 180.0f / 3.1415f + 180.0f;
+		setYAngle(newAngle);
+	}
 	MobileGameObject::update(inclination, objects);
 	if (fusRoDahEffect > 0) {
 		setXVelocity(fx);
 		setZVelocity(fz);
 		fusRoDahEffect--;
 	}
+	
+
 }
 
 void Enemy::setGuardState(std::vector<GuardPathState> &gps)
@@ -236,5 +247,27 @@ void Enemy::render(GameData &data)
 		frame = data.getModelAnimationFrame(GameData::RED_ORC_MODEL_INDEX, ANIM_RUN, animationTics/3);
 	}
 	data.renderModel(GameData::RED_ORC_MODEL_INDEX, getXPosition(), getYPosition() + 2.2f, getZPosition(), getYAngle(), 0.0f, 1.5f, frame);
-	if (DEBUG) renderBoundingCilinder();
+	if (DEBUG) {
+		glPushMatrix();
+			glTranslatef(getXPosition(), getYPosition(), getZPosition());
+			glRotatef(-getYAngle(), 0.0f, 1.0f, 0.0f);
+			glLineWidth(3.0f);
+			glBegin(GL_LINES);
+				glColor3f(1.0f, 0.0f, 0.0f);
+				glVertex3f(5.0f, 0.0f, 0.0f);
+				glVertex3f(0.0f, 0.0f, 0.0f);
+
+				glColor3f(0.0f, 1.0f, 0.0f);
+				glVertex3f(0.0f, 5.0f, 0.0f);
+				glVertex3f(0.0f, 0.0f, 0.0f);
+
+				glColor3f(0.0f, 0.0f, 1.0f);
+				glVertex3f(0.0f, 0.0f, 5.0f);
+				glVertex3f(0.0f, 0.0f, 0.0f);
+
+				glColor3f(1.0f, 1.0f, 1.0f);
+			glEnd();
+		glPopMatrix();
+		renderBoundingCilinder();
+	}
 }
