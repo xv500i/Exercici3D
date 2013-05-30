@@ -240,11 +240,11 @@ void Enemy::render(GameData &data)
 	int frame;
 	if (state == STATIC_STATE) {
 		data.setModelAnimation(GameData::RED_ORC_MODEL_INDEX, ANIM_STAND);
-		frame = data.getModelAnimationFrame(GameData::RED_ORC_MODEL_INDEX, ANIM_STAND, animationTics/3);
+		frame = data.getModelAnimationFrame(GameData::RED_ORC_MODEL_INDEX, ANIM_STAND, animationTics/4);
 	}
 	else {
 		data.setModelAnimation(GameData::RED_ORC_MODEL_INDEX, ANIM_RUN);
-		frame = data.getModelAnimationFrame(GameData::RED_ORC_MODEL_INDEX, ANIM_RUN, animationTics/3);
+		frame = data.getModelAnimationFrame(GameData::RED_ORC_MODEL_INDEX, ANIM_RUN, animationTics/4);
 	}
 	data.renderModel(GameData::RED_ORC_MODEL_INDEX, getXPosition(), getYPosition() + 2.2f, getZPosition(), getYAngle(), 0.0f, 1.5f, frame);
 	if (DEBUG) {
