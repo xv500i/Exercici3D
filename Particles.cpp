@@ -9,6 +9,9 @@
 Particles::Particles(void) 
 {
 	createParticle();
+	offsetX = 0.0f;
+	offsetY = 0.0f;
+	offsetZ = 0.0f;
 }
 
 Particles::~Particles(void) {}
@@ -139,15 +142,18 @@ void Particles::updateParticleCylinder(float yAngle)
 	}
 }
 
-void Particles::updateParticleExpansion(float yAngle)
+void Particles::updateParticleExpansion(float yAngle, float offsetX, float offsetY, float offsetZ)
 {
 	this->yAngle = yAngle;
+	this->offsetX = offsetX;
+	this->offsetY = offsetY;
+	this->offsetZ = offsetZ;
 	
 	for (int i = 0; i < numParticles; i++) {
 		// Move the particle
-		particles[i].x = particles[i].x + particles[i].vx;
-		particles[i].y = particles[i].y + particles[i].vy;
-		particles[i].z = particles[i].z + particles[i].vz;
+		particles[i].x = particles[i].x + particles[i].vx + offsetX;
+		particles[i].y = particles[i].y + particles[i].vy + offsetY;
+		particles[i].z = particles[i].z + particles[i].vz + offsetZ;
 
 		// Remove the particle
 		if (distance3D(particles[i].x, particles[i].y, particles[i].z, centerX, centerY, centerZ) > distance) {
@@ -156,15 +162,18 @@ void Particles::updateParticleExpansion(float yAngle)
 	}
 }
 
-void Particles::updateParticleCharging(float yAngle) 
+void Particles::updateParticleCharging(float yAngle, float offsetX, float offsetY, float offsetZ) 
 {
 	this->yAngle = yAngle;
+	this->offsetX = offsetX;
+	this->offsetY = offsetY;
+	this->offsetZ = offsetZ;
 
 	for (int i = 0; i < numParticles; i++) {
 		// Move the particle
-		particles[i].x = particles[i].x + particles[i].vx;
-		particles[i].y = particles[i].y + particles[i].vy;
-		particles[i].z = particles[i].z + particles[i].vz;
+		particles[i].x = particles[i].x + particles[i].vx + offsetX;
+		particles[i].y = particles[i].y + particles[i].vy + offsetY;
+		particles[i].z = particles[i].z + particles[i].vz + offsetZ;
 
 		// Remove the particle
 		if (distance3D(particles[i].x, particles[i].y, particles[i].z, centerX, centerY, centerZ) < 1.0f) {

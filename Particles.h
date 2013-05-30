@@ -24,6 +24,7 @@ private:
 	int numParticles;
 	float centerX, centerY, centerZ;
 	float initialY, finalY;
+	float offsetX, offsetY, offsetZ;
 	float distance;
 	float scale;
 	float radius;
@@ -43,8 +44,8 @@ public:
 
 	/* Update */
 	void updateParticleCylinder(float yAngle);
-	void updateParticleExpansion(float yAngle);
-	void updateParticleCharging(float yAngle);
+	void updateParticleExpansion(float yAngle, float offsetX, float offsetY, float offsetZ);
+	void updateParticleCharging(float yAngle, float offsetX, float offsetY, float offsetZ);
 
 	/* Render */
 	void render(GameData &data) const;
