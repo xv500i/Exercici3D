@@ -225,7 +225,7 @@ bool Enemy::isInFusRoDah(){
 void Enemy::render(GameData &data)
 {
 	data.setModelAnimation(GameData::RED_ORC_MODEL_INDEX, ANIM_RUN);
-	int frame = data.getModelAnimationFrame(GameData::RED_ORC_MODEL_INDEX, ANIM_RUN, animationTics);
+	int frame = data.getModelAnimationFrame(GameData::RED_ORC_MODEL_INDEX, ANIM_RUN, animationTics/3);
 	data.renderModel(GameData::RED_ORC_MODEL_INDEX, getXPosition(), getYPosition() + 2.2f, getZPosition(), getYAngle(), 0.0f, 1.5f, frame);
 	if (DEBUG) renderBoundingCilinder();
 }
