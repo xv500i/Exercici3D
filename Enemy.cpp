@@ -22,6 +22,10 @@ Enemy::Enemy(void)
 Enemy::Enemy(EnemyType et)
 	: MobileGameObject()
 {
+	BoundingCilinder *bc = getBoundingCilinder();
+	bc->setHeight(4.5f);
+	bc->setRadius(1.3f);
+
 	type = ENEMY;
 	switch (et) {
 	case STATIC_PURSUER:
