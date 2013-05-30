@@ -37,9 +37,8 @@ void Scene::resolveInput(InputHandler &input)
 	if (input.keyIsDown('n')) isCurrentLevelCompleted = true;
 
 	// Enable/disable debug mode
-	if (input.keyIsDown('m')) {
-		DEBUG = !DEBUG;
-	}
+	if (input.keyIsDown(',')) DEBUG = true;
+	else if (input.keyIsDown('.')) DEBUG = false;
 	
 	if (input.keyIsDown('f') && player.useFusRoDah()) {
 		level.useFusRoDah();
