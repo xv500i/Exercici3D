@@ -12,6 +12,7 @@ private:
 	const static int TICS_ACTIVE_LIMIT = 60;
 
 	bool active;
+	bool playSpark;
 
 	/* Particle aura */
 	Particles aura;

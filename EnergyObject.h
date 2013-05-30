@@ -19,6 +19,7 @@ private:
 	/* Y position */
 	float offsetY;
 	bool goingUp;
+	bool playSpark;
 
 public:
 	EnergyObject(void);

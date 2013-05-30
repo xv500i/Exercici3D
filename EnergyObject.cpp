@@ -19,6 +19,7 @@ EnergyObject::EnergyObject(void) : ItemObject()
 	// New bounding cylinder
 	BoundingCilinder *bc = getBoundingCilinder();
 	bc->setRadius(0.8f);
+	playSpark = false;
 }
 
 EnergyObject::~EnergyObject(void) {}
@@ -27,6 +28,7 @@ EnergyObject::~EnergyObject(void) {}
 /* Update */
 void EnergyObject::update(float visionYAngle)
 {
+	
 	if (!particlesCreated) {
 		// Texture preparation
 		std::vector<int> textures = std::vector<int>(4);
@@ -60,6 +62,10 @@ void EnergyObject::update(float visionYAngle)
 /* Render */
 void EnergyObject::render(GameData &data)
 {
+	if (isPickedUp() && !playSpark) {
+		playSpark = true;
+		data.playSound(GameData::SPARK_INDEX);
+	}
 	if (isPickedUp()) return;
 	Point3D pos = getPosition();
 
