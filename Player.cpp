@@ -338,7 +338,7 @@ void Player::floorReached()
 
 bool Player::useFusRoDah() {
 	if (fusRoDahReuse <= 0) {
-		// TODO CHANGE
+		// TODO CHANGE --> FUSRODAH TEST
 		fusRoDahReuse = 10;
 		return true;
 	}

@@ -110,7 +110,7 @@ void Enemy::update(Vector3D &inclination, std::vector<GameObject*> &objects, flo
 		case PURSUE_STATE:
 			direction = Vector3D(x - getXPosition(), 0.0f, z - getZPosition());
 			/* orient to player */
-			// FIXME
+			// TODO URGENT!!! ALEX SOMS
 			/* pursue player */
 			direction.normalize();
 			direction*=pursueVelocity;
@@ -133,7 +133,7 @@ void Enemy::update(Vector3D &inclination, std::vector<GameObject*> &objects, flo
 					guardIndex = (++guardIndex)%guard.size();
 					guard[guardIndex].initialize();
 					/* orient to path */
-					//TODO
+					// TODO URGENT!!! ALEX SOMS
 				}
 				guard[guardIndex].update();
 				direction = Vector3D(guard[guardIndex].getVX(), 0.0f, guard[guardIndex].getVZ());
@@ -180,7 +180,6 @@ void Enemy::tractarColisions(std::vector<GameObject*> &objects)
 				
 					break;
 				case PLAYER:
-					// TODO restar vida i fer invulnerable el player
 					// sliding
 					sliding(go);
 					mgo = (MobileGameObject *) (go);
@@ -191,7 +190,6 @@ void Enemy::tractarColisions(std::vector<GameObject*> &objects)
 					sliding(go);
 					break;
 				case ENERGY:	
-					// TODO recollir i fer desapareixer
 					break;
 				case MEDIKIT:
 					break;
