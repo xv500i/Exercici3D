@@ -2,8 +2,8 @@
 #include "CameraHandler.h"
 
 
-const float CameraHandler::STATIC_CAMERA_EYEY = 15.0f;
-const float CameraHandler::STATIC_CAMERA_EYEXZ = 30.0f;
+const float CameraHandler::STATIC_CAMERA_EYEY = 80.0f;
+const float CameraHandler::STATIC_CAMERA_EYEXZ = 180.0f;
 
 
 CameraHandler::CameraHandler(void) : activeCamera(THIRD_PERSON)
