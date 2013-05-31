@@ -383,3 +383,8 @@ bool Player::isFusRoDahExpanding()
 {
 	return fusRoDahState == EXPANSION;
 }
+
+int Player::getTicsFusRoDah()
+{
+	return fusRoDahReuse;
+}

@@ -81,7 +81,7 @@ void Scene::update(CameraHandler &camera)
 	camera.updateThirdPersonCamera(playerPos.getX(), playerPos.getY(), playerPos.getZ(), xzAngle);
 
 	// HUD
-	hud.update(player.getLife(), player.getEnergy());
+	hud.update(player.getLife(), player.getEnergy(), player.getTicsFusRoDah());
 }
 
 

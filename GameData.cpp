@@ -26,7 +26,7 @@ bool GameData::loadTextures()
 										   "EnergyTexture", "gel", "space", "FusRoDahParticle1", "FusRoDahParticle2",
 										   "FusRoDahParticle3", "FusRoDahParticle4", "AltarParticle1", "AltarParticle2",
 										   "AltarParticle3", "AltarParticle4", "InstructionsHUDMove", "InstructionsHUDActions",
-										   "InstructionsHUDWin"};
+										   "InstructionsHUDWin", "FusRoDahHUD"};
 	for (unsigned int i = 0; i < textures.size(); i++) {
 		bool b = textures[i].load(filenames[i], TEXTURE_EXT);
 		if (!b) return false;

@@ -17,6 +17,7 @@ void HUDElement::render(GameData &data)
 {
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
+		glColor3f(1.0f, 1.0f, 1.0f);
 		glBindTexture(GL_TEXTURE_2D, data.getTextureID(textureIndex));
 		glBegin(GL_QUADS);
 			// Top-left
@@ -41,4 +42,23 @@ void HUDElement::render(GameData &data)
 void HUDElement::setTextureIndex(int newTextureIndex)
 {
 	textureIndex = newTextureIndex;
+}
+
+
+/* Getters */
+int HUDElement::getTextureIndex()
+{
+	return textureIndex;
+}
+
+void HUDElement::getPosition(int &x, int &y)
+{
+	x = this->x;
+	y = this->y;
+}
+
+void HUDElement::getSize(int &width, int &height)
+{
+	width = this->width;
+	height = this->height;
 }

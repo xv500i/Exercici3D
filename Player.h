@@ -84,6 +84,7 @@ public:
 	bool isNotUsingFusRoDah();
 	bool isFusRoDahExpanding();
 	void fusRoDah();
+	int getTicsFusRoDah();
 
 protected:
 	virtual void tractarColisions(std::vector<GameObject*> &objects);

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "HUDElement.h"
+#include "FusRoDahHUDElement.h"
 
 
 class HUD
@@ -12,6 +13,8 @@ private:
 	const static int ENERGY_ELEMENT_SIZE = 48;
 	const static int INSTRUCTIONS_ELEMENT_WIDTH = 220;
 	const static int INSTRUCTIONS_ELEMENT_HEIGHT = 120;
+	const static int FUSRODAH_ELEMENT_WIDTH = 240;
+	const static int FUSRODAH_ELEMENT_HEIGHT = 36;
 
 	const static int TICS_CHANGE_INSTRUCTIONS = 200;
 
@@ -25,6 +28,7 @@ private:
 	std::vector<HUDElement> playerLife;
 	std::vector<HUDElement> playerEnergy;
 	HUDElement instructions;
+	FusRoDahHUDElement fusRoDah;
 
 public:
 	HUD(void);
@@ -34,7 +38,7 @@ public:
 	bool load(int screenWidth, int screenHeight, int maxLife);
 
 	/* Updating */
-	void update(int life, int energy);
+	void update(int life, int energy, int ticsFusRoDah);
 
 	/* Rendering */
 	void render(GameData &data);

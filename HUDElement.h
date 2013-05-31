@@ -17,9 +17,14 @@ public:
 	virtual ~HUDElement(void);
 
 	/* Render */
-	void render(GameData &data);
+	virtual void render(GameData &data);
 
 	/* Setters */
 	void setTextureIndex(int newTextureIndex);
+
+	/* Getters */
+	int getTextureIndex();
+	void getPosition(int &x, int &y);
+	void getSize(int &width, int &height);
 };
 

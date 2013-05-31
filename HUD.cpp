@@ -27,12 +27,15 @@ bool HUD::load(int screenWidth, int screenHeight, int maxLife)
 	int x = screenWidth/2 - INSTRUCTIONS_ELEMENT_WIDTH/2;
 	instructions = HUDElement(x, 0, INSTRUCTIONS_ELEMENT_WIDTH, INSTRUCTIONS_ELEMENT_HEIGHT, GameData::INSTRUCTIONS_HUD_MOVE_INDEX);
 	
+	// Fus-Ro-Dah
+	fusRoDah = FusRoDahHUDElement(screenWidth - FUSRODAH_ELEMENT_WIDTH, 0, FUSRODAH_ELEMENT_WIDTH, FUSRODAH_ELEMENT_HEIGHT, GameData::FUSRODAH_HUD_TEXTURE_INDEX);
+
 	return true;
 }
 
 
 /* Updating */
-void HUD::update(int life, int energy)
+void HUD::update(int life, int energy, int ticsFusRoDah)
 {
 	// Player Life
 	for (unsigned int i = 0; i < playerLife.size(); i++) {
@@ -44,7 +47,7 @@ void HUD::update(int life, int energy)
 	// Player energy
 	while ((int)playerEnergy.size() > energy) playerEnergy.pop_back();
 	while ((int)playerEnergy.size() < energy) {
-		HUDElement element = HUDElement(screenWidth - (playerEnergy.size() + 1)*ENERGY_ELEMENT_SIZE, 0, ENERGY_ELEMENT_SIZE, ENERGY_ELEMENT_SIZE, GameData::ENERGY_HUD_TEXTURE_INDEX);
+		HUDElement element = HUDElement(screenWidth - (playerEnergy.size() + 1)*ENERGY_ELEMENT_SIZE, FUSRODAH_ELEMENT_HEIGHT, ENERGY_ELEMENT_SIZE, ENERGY_ELEMENT_SIZE, GameData::ENERGY_HUD_TEXTURE_INDEX);
 		playerEnergy.push_back(element);
 	}
 
@@ -61,6 +64,9 @@ void HUD::update(int life, int energy)
 		}
 		else if (ticsInstr == TICS_CHANGE_INSTRUCTIONS*3) showInstr = false;
 	}
+
+	// Fus-Ro-Dah
+	fusRoDah.update(ticsFusRoDah);
 }
 
 
@@ -79,6 +85,7 @@ void HUD::render(GameData &data)
 	for (unsigned int i = 0; i < playerEnergy.size(); i++) {
 		playerEnergy[i].render(data);
 	}
+	fusRoDah.render(data);
 	if (showInstr) instructions.render(data);
 }
 
