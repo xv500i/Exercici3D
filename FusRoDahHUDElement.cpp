@@ -25,7 +25,7 @@ void FusRoDahHUDElement::render(GameData &data)
 	getSize(width, height);
 	int textureIndex = getTextureIndex();
 
-	float quadCoord = (float)((1000 - fusRoDahTics)*width)/1000.0f;
+	float quadCoord = (float)((1000 - fusRoDahTics)*(width - MARGIN*2))/1000.0f;
 	float texCoord = (float)(1000 - fusRoDahTics)/1000.0f;
 
 	glPushMatrix();
@@ -37,9 +37,9 @@ void FusRoDahHUDElement::render(GameData &data)
 			glTexCoord2f(0.0f, 0.0f);
 			glVertex2f(x + MARGIN, y + MARGIN);
 			glTexCoord2f(texCoord, 0.0f);
-			glVertex2f(x + quadCoord - MARGIN, y + MARGIN);
+			glVertex2f(x + MARGIN + quadCoord, y + MARGIN);
 			glTexCoord2f(texCoord, 1.0f);
-			glVertex2f(x + quadCoord - MARGIN, y + height - MARGIN);
+			glVertex2f(x + MARGIN + quadCoord, y + height - MARGIN);
 			glTexCoord2f(0.0f, 1.0f);
 			glVertex2f(x + MARGIN, y + height - MARGIN);
 		glEnd();
@@ -53,5 +53,6 @@ void FusRoDahHUDElement::render(GameData &data)
 			glVertex2i(x + width, y + height);
 			glVertex2i(x, y + height);
 		glEnd();
+		glColor3f(1.0f, 1.0f, 1.0f);
 	glPopMatrix();
 }

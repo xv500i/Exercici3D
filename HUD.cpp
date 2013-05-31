@@ -47,7 +47,7 @@ void HUD::update(int life, int energy, int ticsFusRoDah)
 	// Player energy
 	while ((int)playerEnergy.size() > energy) playerEnergy.pop_back();
 	while ((int)playerEnergy.size() < energy) {
-		HUDElement element = HUDElement(screenWidth - (playerEnergy.size() + 1)*ENERGY_ELEMENT_SIZE, FUSRODAH_ELEMENT_HEIGHT, ENERGY_ELEMENT_SIZE, ENERGY_ELEMENT_SIZE, GameData::ENERGY_HUD_TEXTURE_INDEX);
+		HUDElement element = HUDElement(screenWidth - (playerEnergy.size() + 1)*ENERGY_ELEMENT_SIZE, FUSRODAH_ELEMENT_HEIGHT + MARGIN_BETWEEN_ELEMENTS, ENERGY_ELEMENT_SIZE, ENERGY_ELEMENT_SIZE, GameData::ENERGY_HUD_TEXTURE_INDEX);
 		playerEnergy.push_back(element);
 	}
 

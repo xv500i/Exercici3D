@@ -15,6 +15,7 @@ private:
 	const static int INSTRUCTIONS_ELEMENT_HEIGHT = 120;
 	const static int FUSRODAH_ELEMENT_WIDTH = 240;
 	const static int FUSRODAH_ELEMENT_HEIGHT = 36;
+	const static int MARGIN_BETWEEN_ELEMENTS = 8;
 
 	const static int TICS_CHANGE_INSTRUCTIONS = 200;
 
